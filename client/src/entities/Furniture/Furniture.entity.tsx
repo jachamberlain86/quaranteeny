@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import './Furniture.styles.css';
+import { handleInteraction } from '../../helpers/elements.helper';
 
 interface FurnitureProps {
   name: string;
@@ -7,7 +8,13 @@ interface FurnitureProps {
 
 const Furniture: FC<FurnitureProps> = ({ name }: FurnitureProps) => {
   return (
-    <button type="button" className="nes-btn is-primary meter-btn">
+    <button
+      type="button"
+      className="nes-btn is-primary meter-btn"
+      onClick={() => {
+        handleInteraction(name);
+      }}
+    >
       {name}
     </button>
   );

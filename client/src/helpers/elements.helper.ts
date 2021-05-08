@@ -10,15 +10,8 @@ function getElementData(element: string): Element {
 }
 
 export const handleInteraction = (element: string): void => {
-  console.log('this called');
   const elementData: Element = getElementData(element);
   elementData.meterImpacts.forEach((meter: MeterChange) => {
-    console.log(meter);
     store.dispatch(changeByAmount(meter));
   });
 };
-
-// : AppThunk => (dispatch) => {
-//
-//   });
-// };

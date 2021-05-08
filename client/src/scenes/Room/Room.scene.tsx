@@ -6,9 +6,9 @@ import Furniture from '../../entities/Furniture/Furniture.entity';
 const Room: FC = () => {
   return (
     <div className="room-container">
-      <Furniture name="Fridge" />
+      <Furniture name="fridge" />
       <Sprite />
-      <Furniture name="Bed" />
+      <Furniture name="bed" />
     </div>
   );
 };
