@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
+import { selectDecayFrequency } from '../time/timeSlice';
 
 export interface MeterState {
   food: number;
@@ -40,6 +41,7 @@ export const decayMeter = (meterObj: {
   amount: number;
 }): AppThunk => (dispatch, getState) => {
   const { name, amount } = meterObj;
+  const decayFrequency = selectDecayFrequency(getState());
   const timer = setInterval(() => {
     const meters = selectMeter(getState());
     const currentValue = meters[name as keyof MeterState];
@@ -49,7 +51,7 @@ export const decayMeter = (meterObj: {
     if (currentValue <= 0) {
       clearInterval(timer);
     }
-  }, 5000);
+  }, decayFrequency);
 };
 
 export default meterSlice.reducer;
