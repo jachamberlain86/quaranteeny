@@ -22,7 +22,7 @@ export function Counter(): React.ReactElement {
     <div>
       <div className={styles.row}>
         <button
-          className={styles.button}
+          className="nes-btn"
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
           type="button"
@@ -31,7 +31,7 @@ export function Counter(): React.ReactElement {
         </button>
         <span className={styles.value}>{count}</span>
         <button
-          className={styles.button}
+          className="nes-btn"
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
           type="button"
@@ -41,27 +41,27 @@ export function Counter(): React.ReactElement {
       </div>
       <div className={styles.row}>
         <input
-          className={styles.textbox}
+          className={`${styles.textbox} nes-input`}
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
         <button
-          className={styles.button}
+          className="nes-btn is-primary"
           onClick={() => dispatch(incrementByAmount(incrementValue))}
           type="button"
         >
           Add Amount
         </button>
         <button
-          className={styles.asyncButton}
+          className="nes-btn"
           onClick={() => dispatch(incrementAsync(incrementValue))}
           type="button"
         >
           Add Async
         </button>
         <button
-          className={styles.button}
+          className="nes-btn"
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
           type="button"
         >
