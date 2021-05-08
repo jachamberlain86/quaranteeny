@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Sprite.styles.css';
 
-export default function Sprite(): React.ReactElement {
+const Sprite: FC = () => {
   return <div className="sprite" />;
-}
+};
+
+export default Sprite;

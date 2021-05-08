@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Furniture.styles.css';
 
 interface FurnitureProps {
   name: string;
 }
 
-const Furniture = ({ name }: FurnitureProps): React.ReactElement => {
+const Furniture: FC<FurnitureProps> = ({ name }: FurnitureProps) => {
   return (
     <button type="button" className="nes-btn is-primary meter-btn">
       {name}

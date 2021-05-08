@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Meter from '../Meter/Meter.component';
 
-export default function MeterArea(): React.ReactElement {
+const MeterArea: FC = () => {
   return (
     <div>
       <Meter />
       <Meter />
     </div>
   );
-}
+};
+
+export default MeterArea;

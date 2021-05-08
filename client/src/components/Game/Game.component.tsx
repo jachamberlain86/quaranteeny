@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Room from '../../scenes/Room/Room.scene';
 import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import './Game.styles.css';
 
-export default function Game(): React.ReactElement {
+const Game: FC = () => {
   return (
     <div className="game">
       <DayCounter />
@@ -12,4 +12,6 @@ export default function Game(): React.ReactElement {
       <MeterArea />
     </div>
   );
-}
+};
+
+export default Game;
