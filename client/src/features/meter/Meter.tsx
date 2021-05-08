@@ -46,7 +46,7 @@ export function Meter(): React.ReactElement {
           }}
           type="button"
         >
-          Add Amount
+          Eat Burger
         </button>
       </div>
     </div>

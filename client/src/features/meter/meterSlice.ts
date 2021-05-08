@@ -23,6 +23,10 @@ export const meterSlice = createSlice({
       action: PayloadAction<{ name: string; amount: number }>
     ) => {
       state[action.payload.name as keyof MeterState] += action.payload.amount;
+      if (state[action.payload.name as keyof MeterState] < 0)
+        state[action.payload.name as keyof MeterState] = 0;
+      if (state[action.payload.name as keyof MeterState] > 100)
+        state[action.payload.name as keyof MeterState] = 100;
     },
   },
 });
