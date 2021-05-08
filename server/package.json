@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "@types/node": "^8.0.29",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
@@ -28,6 +29,6 @@
     "start": "ts-node src/index.ts",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",
-    "format": "prettier --write \"**/*.{js, ts, json, md}"
+    "format": "prettier --write \"./**/*.{js,ts,tsx,json,md}\""
   }
 }
