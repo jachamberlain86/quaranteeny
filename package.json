@@ -1,7 +1,10 @@
 {
   "scripts": {
     "commit": "npx cz",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "cd ./client && npm run lint && cd .. && cd ./server && npm run lint",
+    "lint-fix": "cd ./client && npm run lint-fix && cd ../server && npm run lint-fix",
+    "format": "cd ./client && npm run format && cd ../server && npm run format"
   },
   "dependencies": {},
   "devDependencies": {
