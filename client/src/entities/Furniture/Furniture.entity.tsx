@@ -1,18 +1,16 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './Furniture.styles.css';
 
 interface FurnitureProps {
-  something: string;
+  name: string;
 }
 
-export default function Furniture(props: {
-  something: string;
-}): React.ReactElement {
+const Furniture = ({ name }: FurnitureProps): React.ReactElement => {
   return (
     <button type="button" className="nes-btn is-primary meter-btn">
-      {props.something}
+      {name}
     </button>
   );
-}
+};
 
-// export default Button;
+export default Furniture;
