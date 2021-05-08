@@ -1,0 +1,51 @@
+/* eslint-disable no-param-reassign */
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState, AppThunk } from '../../app/store';
+
+export interface MeterState {
+  food: number;
+  energy: number;
+  money: number;
+}
+
+const initialState: MeterState = {
+  food: 50,
+  energy: 50,
+  money: 50,
+};
+
+export const meterSlice = createSlice({
+  name: 'meter',
+  initialState,
+  reducers: {
+    changeByAmount: (
+      state,
+      action: PayloadAction<{ name: string; amount: number }>
+    ) => {
+      state[action.payload.name as keyof MeterState] += action.payload.amount;
+    },
+  },
+});
+
+export const { changeByAmount } = meterSlice.actions;
+
+export const selectMeter = (state: RootState): MeterState => state.meter;
+
+export const decayMeter = (meterObj: {
+  name: string;
+  amount: number;
+}): AppThunk => (dispatch, getState) => {
+  const { name, amount } = meterObj;
+  const timer = setInterval(() => {
+    const meters = selectMeter(getState());
+    const currentValue = meters[name as keyof MeterState];
+    if (currentValue > 0) {
+      dispatch(changeByAmount({ name, amount }));
+    }
+    if (currentValue <= 0) {
+      clearInterval(timer);
+    }
+  }, 5000);
+};
+
+export default meterSlice.reducer;

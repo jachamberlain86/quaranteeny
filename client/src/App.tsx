@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './image.png';
-import { Counter } from './features/counter/Counter';
+import { Meter } from './features/meter/Meter';
 import './App.css';
 
 function App(): React.ReactElement {
@@ -8,7 +8,7 @@ function App(): React.ReactElement {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        <Meter />
         <p>
           Edit
           <code>src/App.tsx</code>

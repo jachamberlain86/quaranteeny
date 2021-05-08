@@ -9,7 +9,7 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
-  value: 0,
+  value: 50,
   status: 'idle',
 };
 
