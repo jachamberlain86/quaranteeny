@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { changeByAmount, selectMeter, decayMeter } from './meterSlice';
+import { handleInteraction } from '../../helpers/elements.helper';
 import styles from './Meter.module.css';
 
 export function Meter(): React.ReactElement {
@@ -9,12 +10,17 @@ export function Meter(): React.ReactElement {
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
   useEffect(() => {
     dispatch(
       decayMeter({
         name: 'food',
         amount: -5,
+      })
+    );
+    dispatch(
+      decayMeter({
+        name: 'energy',
+        amount: -2,
       })
     );
   }, [dispatch]);
@@ -25,17 +31,19 @@ export function Meter(): React.ReactElement {
         <span className={styles.value}>{food}</span>
       </div>
       <div className={styles.row}>
-        <input
-          className={`${styles.textbox} nes-input`}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
+        <p>Energy</p>
+        <span className={styles.value}>{energy}</span>
+      </div>
+      <div className={styles.row}>
+        <p>Money</p>
+        <span className={styles.value}>{money}</span>
+      </div>
+      <div className={styles.row}>
         <button
           className="nes-btn is-primary"
-          onClick={() =>
-            dispatch(changeByAmount({ name: 'food', amount: incrementValue }))
-          }
+          onClick={() => {
+            handleInteraction('burger');
+          }}
           type="button"
         >
           Add Amount
