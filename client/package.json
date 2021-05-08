@@ -54,6 +54,10 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.2.1"
+    "node-sass": "^4.14.0",
+    "prettier": "2.2.1",
+    "sass": "^1.32.12",
+    "sass-loader": "^10.1.1",
+    "webpack": "^4.44.2"
   }
 }

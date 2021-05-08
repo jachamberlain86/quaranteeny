@@ -1,0 +1,10 @@
+.room-container {
+  width: 70vh;
+  height: 70vh;
+  background-color: rgb(204, 204, 204);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+}

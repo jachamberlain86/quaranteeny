@@ -1,0 +1,14 @@
+.conNum {
+  display: flex;
+  flex-direction: column
+}
+
+.numHeader {
+  display: flex
+}
+
+.numOfDays {
+  background-color: yellow;
+  width: 5rem;
+  height: 5rem
+}
