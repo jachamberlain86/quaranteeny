@@ -1,14 +1,18 @@
 import React, { FC } from 'react';
 import './Room.styles.css';
 import Sprite from '../../entities/Sprite/Sprite.entity';
-import Button from '../../entities/Button/Button.entity';
+import Furniture from '../../entities/Furniture/Furniture.entity';
 
-const Room: FC = () => {
+interface FurnitureProps {
+  something: string;
+}
+
+const Room: FC = (props: FurnitureProps) => {
   return (
     <div className="room-container">
-      <Button />
+      <Furniture something="Fridge" />
       <Sprite />
-      <Button />
+      <Furniture something="Bed" />
     </div>
   );
 };
