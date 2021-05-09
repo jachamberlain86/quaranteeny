@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
-import needsMetersReducer from '../features/needsMeters/needsMetersSlice';
+import metersReducer from '../features/meters/metersSlice';
 import timeReducer from '../features/time/timeSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     time: timeReducer,
-    needsMeters: needsMetersReducer,
+    meters: metersReducer,
   },
 });
 

@@ -1,22 +1,19 @@
 import React, { FC, useEffect } from 'react';
 
 import { useAppSelector } from '../../app/hooks';
-import {
-  selectNeedsMeters,
-  NeedsMetersState,
-} from '../../features/needsMeters/needsMetersSlice';
+import { selectMeters, MetersState } from '../../features/meters/metersSlice';
 import { decayNeedsMeter } from '../../helpers/meters.helper';
 
-import { needsMeters } from '../../data/needsMeters.data';
+import { meters } from '../../data/meters.data';
 
 type MeterProps = {
   meterName: string;
 };
 
 const Meter: FC<MeterProps> = ({ meterName }: MeterProps) => {
-  const meter = needsMeters[meterName];
-  const needsMetersState = useAppSelector(selectNeedsMeters);
-  const meterValue = needsMetersState[meterName as keyof NeedsMetersState];
+  const meter = meters[meterName];
+  const metersState = useAppSelector(selectMeters);
+  const meterValue = metersState[meterName as keyof MetersState];
 
   useEffect(() => {
     decayNeedsMeter({

@@ -1,6 +1,6 @@
 import { MeterChange } from './meterChange.interface';
 
 export interface Entity {
-  timeToComplete: number;
-  meterImpacts: MeterChange[];
+  readonly timeToComplete: number;
+  readonly meterImpacts: MeterChange[];
 }

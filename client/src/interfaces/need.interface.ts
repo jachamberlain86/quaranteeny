@@ -1,5 +1,5 @@
 export interface Need {
-  name: string;
-  decayRate: number;
-  safeSize: number;
+  readonly name: string;
+  readonly decayRate: number;
+  readonly safeSize: number;
 }

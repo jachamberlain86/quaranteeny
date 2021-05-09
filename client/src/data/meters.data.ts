@@ -1,11 +1,11 @@
-import { NeedsMeter } from '../interfaces/needsMeter.interface';
+import { Meter } from '../interfaces/meter.interface';
 import { Need } from '../interfaces/need.interface';
 
 const calcDeficit = (safe: number): number => Math.ceil(safe * 0.5);
 const calcExcess = (safe: number): number => safe + Math.ceil(safe * 0.5);
 const calcMax = (safe: number): number => safe + Math.ceil(safe * 0.5) * 2;
 
-export const needs: Need[] = [
+const needs: Need[] = [
   {
     name: 'hunger',
     decayRate: -10,
@@ -28,8 +28,8 @@ export const needs: Need[] = [
   },
 ];
 
-class NeedsMeters {
-  [key: string]: NeedsMeter;
+class Meters {
+  [key: string]: Meter;
 
   constructor(needsArr: Need[]) {
     needsArr.forEach((need: Need) => {
@@ -44,4 +44,4 @@ class NeedsMeters {
   }
 }
 
-export const needsMeters = new NeedsMeters(needs);
+export const meters = new Meters(needs);

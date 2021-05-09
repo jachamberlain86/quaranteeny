@@ -1,4 +1,4 @@
 export interface MeterChange {
-  name: string;
-  amount: number;
+  readonly name: string;
+  readonly amount: number;
 }
