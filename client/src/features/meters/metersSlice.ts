@@ -8,16 +8,6 @@ export interface MetersState {
   energy: number;
   health: number;
   money: number;
-  fitness: number;
-  mood: number;
-  hygeine: number;
-  comfort: number;
-  connection: number;
-  attention: number;
-  freedom: number;
-  motivation: number;
-  appetite: number;
-  mind: number;
 }
 
 const initialState: MetersState = {
@@ -25,16 +15,6 @@ const initialState: MetersState = {
   energy: 2000,
   health: 1000,
   money: 1000,
-  fitness: 1000,
-  mood: 1000,
-  hygeine: 1000,
-  comfort: 1000,
-  connection: 1000,
-  attention: 1000,
-  freedom: 1000,
-  motivation: 1000,
-  appetite: 1000,
-  mind: 1000,
 };
 
 export const metersSlice = createSlice({

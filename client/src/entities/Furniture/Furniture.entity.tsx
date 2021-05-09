@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import './Furniture.styles.css';
-import { handleInteraction } from '../../helpers/entities.helper';
+import {
+  handleInteraction,
+  setCurrentInteraction,
+} from '../../helpers/entities.helper';
 
 interface FurnitureProps {
   name: string;
@@ -12,7 +15,7 @@ const Furniture: FC<FurnitureProps> = ({ name }: FurnitureProps) => {
       type="button"
       className="nes-btn is-primary meter-btn"
       onClick={() => {
-        handleInteraction(name);
+        if (setCurrentInteraction(name)) handleInteraction(name);
       }}
     >
       {name}

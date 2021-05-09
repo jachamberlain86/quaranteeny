@@ -4,15 +4,23 @@ import { EntityDetails } from '../interfaces/entityDetails.interface';
 
 export const entities: EntityDetails[] = [
   {
-    name: 'fridge',
+    name: 'takeaway',
+    cost: 50,
     timeToComplete: gameMinute * 30,
     meterImpacts: [
       { name: 'hunger', amount: 1000 },
-      { name: 'money', amount: -50 },
+      { name: 'health', amount: -100 },
     ],
   },
   {
+    name: 'salad',
+    cost: 0,
+    timeToComplete: gameMinute * 15,
+    meterImpacts: [{ name: 'hunger', amount: 500 }],
+  },
+  {
     name: 'bed',
+    cost: 0,
     timeToComplete: gameHour * 8,
     meterImpacts: [{ name: 'energy', amount: 2000 }],
   },
@@ -24,6 +32,7 @@ class Entities {
   constructor(entitiesArr: EntityDetails[]) {
     entitiesArr.forEach((entity: EntityDetails) => {
       this[entity.name] = {
+        cost: entity.cost,
         timeToComplete: entity.timeToComplete,
         meterImpacts: entity.meterImpacts,
       };
