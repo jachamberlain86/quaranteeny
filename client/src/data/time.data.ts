@@ -1,6 +1,6 @@
 import { store } from '../app/store';
 
-const baseTime = 1000;
+const baseTime = 60000;
 
 const appStore = store.getState();
 const { gameSpeed } = appStore.time;

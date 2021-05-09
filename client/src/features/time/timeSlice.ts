@@ -7,7 +7,7 @@ export interface TimeState {
 }
 
 const initialState: TimeState = {
-  gameSpeed: 10,
+  gameSpeed: 1000,
 };
 
 export const timeSlice = createSlice({
