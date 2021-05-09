@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import './Furniture.styles.css';
-import { handleInteraction } from '../../helpers/elements.helper';
+import { handleInteraction } from '../../helpers/entities.helper';
 
 interface FurnitureProps {
   name: string;

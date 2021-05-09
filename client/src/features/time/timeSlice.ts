@@ -3,26 +3,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 export interface TimeState {
-  decayFrequency: number;
+  gameSpeed: number;
 }
 
 const initialState: TimeState = {
-  decayFrequency: 5000,
+  gameSpeed: 1,
 };
 
 export const timeSlice = createSlice({
   name: 'time',
   initialState,
   reducers: {
-    changeDecayFrequency: (state, action: PayloadAction<number>) => {
-      state.decayFrequency = action.payload;
+    changeGameSpeed: (state, action: PayloadAction<number>) => {
+      state.gameSpeed = action.payload;
     },
   },
 });
 
-export const { changeDecayFrequency } = timeSlice.actions;
+export const { changeGameSpeed } = timeSlice.actions;
 
-export const selectDecayFrequency = (state: RootState): number =>
-  state.time.decayFrequency;
+export const selectGameSpeed = (state: RootState): number =>
+  state.time.gameSpeed;
 
 export default timeSlice.reducer;

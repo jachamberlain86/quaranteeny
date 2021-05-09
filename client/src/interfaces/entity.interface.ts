@@ -1,6 +1,6 @@
 import { MeterChange } from './meterChange.interface';
 
-export interface Element {
+export interface Entity {
   timeToComplete: number;
   meterImpacts: MeterChange[];
 }

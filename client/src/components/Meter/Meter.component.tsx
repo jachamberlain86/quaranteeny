@@ -1,41 +1,37 @@
 import React, { FC, useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import {
-  selectMeter,
-  decayMeter,
-  MeterState,
-} from '../../features/meter/meterSlice';
+  selectNeedsMeters,
+  NeedsMetersState,
+} from '../../features/needsMeters/needsMetersSlice';
+import { decayNeedsMeter } from '../../helpers/meters.helper';
 
-import { MeterChange } from '../../interfaces/meterChange.interface';
+import { needsMeters } from '../../data/needsMeters.data';
 
 type MeterProps = {
-  meter: MeterChange;
+  meterName: string;
 };
 
-const Meter: FC<MeterProps> = ({ meter }: MeterProps) => {
-  const { name, amount } = meter;
-  const meterState = useAppSelector(selectMeter);
-  const meterValue = meterState[name as keyof MeterState];
-
-  const dispatch = useAppDispatch();
+const Meter: FC<MeterProps> = ({ meterName }: MeterProps) => {
+  const meter = needsMeters[meterName];
+  const needsMetersState = useAppSelector(selectNeedsMeters);
+  const meterValue = needsMetersState[meterName as keyof NeedsMetersState];
 
   useEffect(() => {
-    dispatch(
-      decayMeter({
-        name,
-        amount,
-      })
-    );
-  }, [dispatch, amount, name]);
+    decayNeedsMeter({
+      name: meterName,
+      amount: meter.decayRate,
+    });
+  }, [meter.decayRate, meterName]);
 
   return (
     <div>
-      {name}
+      {meterName} {meterValue}
       <progress
         className="nes-progress is-primary"
         value={meterValue}
-        max="100"
+        max={meter.max}
       />
     </div>
   );
