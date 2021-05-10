@@ -7,6 +7,7 @@ export interface SpriteState {
   interactionProgress: number | null;
   starvationCounter: number;
   sleepDepCounter: number;
+  sickCounter: number;
   conditions: string[];
 }
 
@@ -15,6 +16,7 @@ const initialState: SpriteState = {
   interactionProgress: null,
   starvationCounter: 0,
   sleepDepCounter: 0,
+  sickCounter: 0,
   conditions: [],
 };
 
