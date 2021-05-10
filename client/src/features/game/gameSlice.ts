@@ -11,7 +11,7 @@ export interface GameState {
 
 const initialState: GameState = {
   // gameStatus: 'alive',
-  gameSpeed: 10000,
+  gameSpeed: 100,
   startTime: Date.now(),
   currClockTime: Date.now(),
 };
