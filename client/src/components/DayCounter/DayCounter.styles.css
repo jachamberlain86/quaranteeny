@@ -1,6 +1,7 @@
 .conNum {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .numHeader {
@@ -9,6 +10,6 @@
 
 .numOfDays {
   background-color: yellow;
-  width: 5rem;
-  height: 5rem
+  padding: 0.5rem;
+  text-align: center
 }
