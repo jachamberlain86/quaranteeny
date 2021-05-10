@@ -8,7 +8,7 @@ export const decayNeedsMeter = (change: MeterChange): void => {
   const timer = setInterval(() => {
     const appStore = store.getState();
     const { meters } = appStore;
-    const currentValue = meters[name as keyof MetersState];
+    const currentValue = meters[name as keyof MetersState].value;
     if (currentValue > 0) {
       store.dispatch(changeByAmount(change));
     }
