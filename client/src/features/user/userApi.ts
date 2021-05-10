@@ -6,7 +6,7 @@ const baseUrl = `http://${REACT_APP_SERVER_HOST}:${REACT_APP_SERVER_PORT}`;
 // TODO: Get from local storage / cookies
 const userId = '614ee727-961a-4469-bfc1-c0692f74b911';
 
-export async function fetchUserData(): Promise<MetersState> {
+export async function fetchUserData(): Promise<any> {
   try {
     const res = await fetch(`${baseUrl}/users/${userId}`);
     const data = await res.json();

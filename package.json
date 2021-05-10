@@ -6,7 +6,6 @@
     "lint-fix": "cd ./client && npm run lint-fix && cd ../server && npm run lint-fix",
     "format": "cd ./client && npm run format && cd ../server && npm run format"
   },
-  "dependencies": {},
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cypress": "^7.2.0",
