@@ -2,16 +2,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-export interface TimeState {
+export interface GameState {
   gameSpeed: number;
 }
 
-const initialState: TimeState = {
-  gameSpeed: 1000,
+const initialState: GameState = {
+  gameSpeed: 100,
 };
 
-export const timeSlice = createSlice({
-  name: 'time',
+export const gameSlice = createSlice({
+  name: 'game',
   initialState,
   reducers: {
     changeGameSpeed: (state, action: PayloadAction<number>) => {
@@ -20,9 +20,9 @@ export const timeSlice = createSlice({
   },
 });
 
-export const { changeGameSpeed } = timeSlice.actions;
+export const { changeGameSpeed } = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
-  state.time.gameSpeed;
+  state.game.gameSpeed;
 
-export default timeSlice.reducer;
+export default gameSlice.reducer;
