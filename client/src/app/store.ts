@@ -3,6 +3,7 @@ import counterReducer from '../features/counter/counterSlice';
 import metersReducer from '../features/meters/metersSlice';
 import gameReducer from '../features/game/gameSlice';
 import spriteReducer from '../features/sprite/spriteSlice';
+import userReducer from '../features/user/userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     game: gameReducer,
     sprite: spriteReducer,
     meters: metersReducer,
+    user: userReducer,
   },
 });
 

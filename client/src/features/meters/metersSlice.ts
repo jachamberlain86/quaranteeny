@@ -35,10 +35,16 @@ export const metersSlice = createSlice({
         state[action.payload.name as keyof MetersState] =
           meters[action.payload.name].max;
     },
+    setMeters: (state, action: PayloadAction<MetersState>) => {
+      state.energy = action.payload.energy;
+      state.hunger = action.payload.hunger;
+      state.health = action.payload.health;
+      state.money = action.payload.money;
+    },
   },
 });
 
-export const { changeByAmount } = metersSlice.actions;
+export const { changeByAmount, setMeters } = metersSlice.actions;
 
 export const selectMeters = (state: RootState): MetersState => state.meters;
 

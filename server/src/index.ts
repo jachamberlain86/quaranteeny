@@ -3,6 +3,7 @@ import { createConnection } from 'typeorm';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
+import cors = require('cors');
 import dotenv = require('dotenv');
 // eslint-disable-next-line import/first
 import { Routes } from './routes';
@@ -16,6 +17,7 @@ createConnection()
 
     // create express app
     const app = express();
+    app.use(cors());
     app.use(bodyParser.json());
 
     // register express routes from defined application routes
@@ -51,16 +53,10 @@ createConnection()
     // insert new users for test
     await connection.manager.save(
       connection.manager.create(User, {
-        firstName: 'Timber',
-        lastName: 'Saw',
-        age: 27,
-      })
-    );
-    await connection.manager.save(
-      connection.manager.create(User, {
-        firstName: 'Phantom',
-        lastName: 'Assassin',
-        age: 24,
+        hunger: 400,
+        energy: 450,
+        health: 500,
+        money: 550,
       })
     );
     // eslint-disable-next-line no-console
