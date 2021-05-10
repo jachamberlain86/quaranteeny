@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { meters } from '../../data/meters.data';
+import { MeterChange } from '../../interfaces/meterChange.interface';
 
 export interface MetersState {
   hunger: number;
@@ -21,10 +22,7 @@ export const metersSlice = createSlice({
   name: 'meters',
   initialState,
   reducers: {
-    changeByAmount: (
-      state,
-      action: PayloadAction<{ name: string; amount: number }>
-    ) => {
+    changeByAmount: (state, action: PayloadAction<MeterChange>) => {
       state[action.payload.name as keyof MetersState] += action.payload.amount;
       if (state[action.payload.name as keyof MetersState] < 0)
         state[action.payload.name as keyof MetersState] = 0;

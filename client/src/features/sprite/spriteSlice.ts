@@ -7,7 +7,7 @@ export interface SpriteState {
   interactionProgress: number | null;
   starvationCounter: number;
   sleepDepCounter: number;
-  conditions: [];
+  conditions: string[];
 }
 
 const initialState: SpriteState = {
@@ -22,16 +22,25 @@ export const spriteSlice = createSlice({
   name: 'sprite',
   initialState,
   reducers: {
-    changeInteraction: (
-      state,
-      action: PayloadAction<{ interaction: string | null }>
-    ) => {
-      state.currentInteraction = action.payload.interaction;
+    changeInteraction: (state, action: PayloadAction<string | null>) => {
+      state.currentInteraction = action.payload;
+    },
+    addCondition: (state, action: PayloadAction<string>) => {
+      state.conditions.push(action.payload);
+    },
+    removeCondition: (state, action: PayloadAction<string>) => {
+      state.conditions = state.conditions.filter(
+        (condition) => condition !== action.payload
+      );
     },
   },
 });
 
-export const { changeInteraction } = spriteSlice.actions;
+export const {
+  changeInteraction,
+  addCondition,
+  removeCondition,
+} = spriteSlice.actions;
 
 export const selectSprite = (state: RootState): SpriteState => state.sprite;
 

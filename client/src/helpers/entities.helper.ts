@@ -1,7 +1,11 @@
 import { store } from '../app/store';
 import { changeByAmount } from '../features/meters/metersSlice';
-import { changeInteraction } from '../features/sprite/spriteSlice';
-import { interactableEntities } from '../data/entities.data';
+import {
+  changeInteraction,
+  addCondition,
+  removeCondition,
+} from '../features/sprite/spriteSlice';
+import { entities } from '../data/entities.data';
 import { Entity } from '../interfaces/entity.interface';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { gameMinute } from '../data/time.data';
@@ -10,12 +14,12 @@ export function setCurrentInteraction(newInteraction: string | null): boolean {
   const appStore = store.getState();
   const { currentInteraction } = appStore.sprite;
   if (currentInteraction === newInteraction) return false;
-  store.dispatch(changeInteraction({ interaction: newInteraction }));
+  store.dispatch(changeInteraction(newInteraction));
   return true;
 }
 
 function getEntityData(entity: string): Entity {
-  return interactableEntities[entity];
+  return entities[entity];
 }
 
 function deductCost(cost: number): boolean {
@@ -27,40 +31,63 @@ function deductCost(cost: number): boolean {
   return true;
 }
 
-function triggerIncrementalChange(
-  time: number,
-  meterImpact: MeterChange,
-  entity: string
-): void {
-  let iterations = Math.round(time / 1000);
-  const incrementalValue = Math.round(meterImpact.amount / iterations);
+function triggerRemoveConditions(conditions: string[]): void {
+  conditions.forEach((condition: string) => {
+    store.dispatch(removeCondition(condition));
+  });
+}
+
+function triggerIncrementalChange(entityData: Entity, entity: string): void {
+  const iterations = Math.round(entityData.timeToComplete / 1000);
+  let iterationCount = iterations;
   const timer = setInterval(() => {
     const appStore = store.getState();
     const { currentInteraction } = appStore.sprite;
-    if (currentInteraction !== entity) clearInterval(timer);
-    if (iterations === 0) {
+    if (currentInteraction !== entity) {
       clearInterval(timer);
+      triggerRemoveConditions(entityData.conditions);
+    } else if (iterationCount === 0) {
+      clearInterval(timer);
+      triggerRemoveConditions(entityData.conditions);
       setCurrentInteraction(null);
+    } else {
+      entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
+        const incrementalValue = Math.round(meterImpact.amount / iterations);
+        store.dispatch(
+          changeByAmount({ name: meterImpact.name, amount: incrementalValue })
+        );
+        iterationCount -= 1;
+      });
     }
-    store.dispatch(
-      changeByAmount({ name: meterImpact.name, amount: incrementalValue })
-    );
-    iterations -= 1;
   }, gameMinute);
+}
+
+function triggerAddConditions(conditions: string[]): void {
+  conditions.forEach((condition: string) => {
+    store.dispatch(addCondition(condition));
+  });
+}
+
+function triggerImmediateChange(entityData: Entity): void {
+  entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
+    store.dispatch(changeByAmount(meterImpact));
+  });
+  triggerRemoveConditions(entityData.conditions);
+  setCurrentInteraction(null);
+}
+
+function triggerChangeMeters(entityData: Entity, entity: string): void {
+  if (entityData.timeToComplete === 0) {
+    triggerImmediateChange(entityData);
+  } else {
+    triggerIncrementalChange(entityData, entity);
+  }
 }
 
 export const handleInteraction = (entity: string): void => {
   const entityData: Entity = getEntityData(entity);
   if (deductCost(entityData.cost)) {
-    entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
-      if (entityData.timeToComplete === 0)
-        store.dispatch(changeByAmount(meterImpact));
-      else
-        triggerIncrementalChange(
-          entityData.timeToComplete,
-          meterImpact,
-          entity
-        );
-    });
+    triggerAddConditions(entityData.conditions);
+    triggerChangeMeters(entityData, entity);
   }
 };
