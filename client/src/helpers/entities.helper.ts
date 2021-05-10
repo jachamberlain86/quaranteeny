@@ -1,15 +1,16 @@
 import { store } from '../app/store';
 import { changeByAmount } from '../features/meters/metersSlice';
+import { changeInteraction } from '../features/sprite/spriteSlice';
 import { interactableEntities } from '../data/entities.data';
 import { Entity } from '../interfaces/entity.interface';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { gameMinute } from '../data/time.data';
 
-let currentInteraction = 'none';
-
-export function setCurrentInteraction(entity: string): boolean {
-  if (currentInteraction === entity) return false;
-  currentInteraction = entity;
+export function setCurrentInteraction(newInteraction: string | null): boolean {
+  const appStore = store.getState();
+  const { currentInteraction } = appStore.sprite;
+  if (currentInteraction === newInteraction) return false;
+  store.dispatch(changeInteraction({ interaction: newInteraction }));
   return true;
 }
 
@@ -34,10 +35,12 @@ function triggerIncrementalChange(
   let iterations = Math.round(time / 1000);
   const incrementalValue = Math.round(meterImpact.amount / iterations);
   const timer = setInterval(() => {
+    const appStore = store.getState();
+    const { currentInteraction } = appStore.sprite;
     if (currentInteraction !== entity) clearInterval(timer);
     if (iterations === 0) {
       clearInterval(timer);
-      setCurrentInteraction('none');
+      setCurrentInteraction(null);
     }
     store.dispatch(
       changeByAmount({ name: meterImpact.name, amount: incrementalValue })
