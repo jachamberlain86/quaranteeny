@@ -1,10 +1,12 @@
 import { store } from '../app/store';
 import { selectGameSpeed } from '../features/game/gameSlice';
 
-const baseTime = 60000;
-
 const gameSpeed = selectGameSpeed(store.getState());
 
-export const gameMinute = baseTime / gameSpeed;
-export const gameHour = gameMinute * 60;
-export const gameDay = gameHour * 24;
+export const minute = 60000;
+export const hour = minute * 60;
+export const day = hour * 24;
+
+export const gameMinute = minute / gameSpeed;
+export const gameHour = hour / gameSpeed;
+export const gameDay = day / gameSpeed;

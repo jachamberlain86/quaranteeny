@@ -4,56 +4,69 @@ import {
   MetersState,
   selectMeterValue,
 } from '../features/meters/metersSlice';
+import { selectGameOver } from '../features/game/gameSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { gameMinute } from '../data/time.data';
-import { Meters } from '../data/meters.data';
-import { triggerAddConditions, triggerRemoveConditions } from './sprite.helper';
+import { meters } from '../data/meters.data';
+import {
+  triggerAddConditions,
+  triggerRemoveConditions,
+  setCurrentInteraction,
+} from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
-import { setCurrentInteraction } from './interactions.helper';
 
 export const decayMeter = (change: MeterChange): void => {
   const { name } = change;
   const timer = setInterval(() => {
-    const appStore = store.getState();
-    const { meters } = appStore;
-    const currentValue = meters[name as keyof MetersState].value;
-    if (currentValue > 0) {
-      store.dispatch(changeByAmount(change));
+    const gameOver = selectGameOver(store.getState());
+    if (gameOver) clearInterval(timer);
+    else {
+      const metersStore = store.getState().meters;
+      const currentValue = metersStore[name as keyof MetersState].value;
+      if (currentValue > 0) {
+        store.dispatch(changeByAmount(change));
+      }
+      if (currentValue <= 0) {
+        clearInterval(timer);
+      }
     }
-    if (currentValue <= 0) {
-      clearInterval(timer);
-    }
-  }, gameMinute * 5);
+  }, gameMinute);
 };
 
-export const checkMeterStates = (meters: Meters): void => {
+export const checkMeterStates = (): void => {
   const meterNames = Object.keys(meters);
   meterNames.forEach((meter) => {
     let deficitAdded = false;
     let excessAdded = false;
-    setInterval(() => {
-      const meterValue = selectMeterValue(store.getState().meters, meter);
-      if (meterValue < meters[meter].deficitPoint && deficitAdded === false) {
-        triggerAddConditions(meters[meter].deficitImpacts);
-        deficitAdded = true;
-      } else if (
-        meterValue > meters[meter].excessPoint &&
-        excessAdded === false
-      ) {
-        triggerAddConditions(meters[meter].excessImpacts);
-        excessAdded = true;
-      } else if (
-        meterValue > meters[meter].deficitPoint &&
-        deficitAdded === true
-      ) {
-        triggerRemoveConditions(meters[meter].deficitImpacts);
-        deficitAdded = false;
-      } else if (
-        meterValue < meters[meter].excessPoint &&
-        excessAdded === true
-      ) {
-        triggerRemoveConditions(meters[meter].excessImpacts);
-        excessAdded = false;
+    const timer = setInterval(() => {
+      const gameOver = selectGameOver(store.getState());
+      if (gameOver) clearInterval(timer);
+      else {
+        const meterValue = selectMeterValue(store.getState().meters, meter);
+        if (meterValue < meters[meter].deficitPoint && deficitAdded === false) {
+          triggerAddConditions(meters[meter].deficitImpacts);
+          deficitAdded = true;
+          excessAdded = false;
+        } else if (
+          meterValue > meters[meter].excessPoint &&
+          excessAdded === false
+        ) {
+          triggerAddConditions(meters[meter].excessImpacts);
+          excessAdded = true;
+          deficitAdded = false;
+        } else if (
+          meterValue > meters[meter].deficitPoint &&
+          deficitAdded === true
+        ) {
+          triggerRemoveConditions(meters[meter].deficitImpacts);
+          deficitAdded = false;
+        } else if (
+          meterValue < meters[meter].excessPoint &&
+          excessAdded === true
+        ) {
+          triggerRemoveConditions(meters[meter].excessImpacts);
+          excessAdded = false;
+        }
       }
     }, gameMinute);
   });
@@ -72,23 +85,27 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
   const iterations = Math.round(entityData.timeToComplete / 1000);
   let iterationCount = iterations;
   const timer = setInterval(() => {
-    const appStore = store.getState();
-    const { currentInteraction } = appStore.sprite;
-    if (currentInteraction !== entity) {
-      clearInterval(timer);
-      triggerRemoveConditions(entityData.conditions);
-    } else if (iterationCount === 0) {
-      clearInterval(timer);
-      triggerRemoveConditions(entityData.conditions);
-      setCurrentInteraction(null);
-    } else {
-      entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
-        const incrementalValue = Math.round(meterImpact.amount / iterations);
-        store.dispatch(
-          changeByAmount({ name: meterImpact.name, amount: incrementalValue })
-        );
-        iterationCount -= 1;
-      });
+    const gameOver = selectGameOver(store.getState());
+    if (gameOver) clearInterval(timer);
+    else {
+      const appStore = store.getState();
+      const { currentInteraction } = appStore.sprite;
+      if (currentInteraction !== entity) {
+        clearInterval(timer);
+        triggerRemoveConditions(entityData.conditions);
+      } else if (iterationCount === 0) {
+        clearInterval(timer);
+        triggerRemoveConditions(entityData.conditions);
+        setCurrentInteraction(null);
+      } else {
+        entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
+          const incrementalValue = Math.round(meterImpact.amount / iterations);
+          store.dispatch(
+            changeByAmount({ name: meterImpact.name, amount: incrementalValue })
+          );
+          iterationCount -= 1;
+        });
+      }
     }
   }, gameMinute);
 }

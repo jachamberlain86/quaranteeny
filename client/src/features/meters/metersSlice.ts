@@ -15,24 +15,24 @@ export interface MetersState {
 
 const initialState: MetersState = {
   hunger: {
-    value: 1000,
-    incRate: 100,
-    decRate: 100,
+    value: meters.hunger.initialValue,
+    incRate: meters.hunger.initialIncRate,
+    decRate: meters.hunger.initialDecRate,
   },
   energy: {
-    value: 2000,
-    incRate: 100,
-    decRate: 100,
+    value: meters.energy.initialValue,
+    incRate: meters.energy.initialIncRate,
+    decRate: meters.energy.initialDecRate,
   },
   health: {
-    value: 1000,
-    incRate: 100,
-    decRate: 100,
+    value: meters.health.initialValue,
+    incRate: meters.health.initialIncRate,
+    decRate: meters.health.initialDecRate,
   },
   money: {
-    value: 1000,
-    incRate: 100,
-    decRate: 100,
+    value: meters.money.initialValue,
+    incRate: meters.money.initialIncRate,
+    decRate: meters.money.initialDecRate,
   },
 };
 
