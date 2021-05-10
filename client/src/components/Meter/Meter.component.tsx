@@ -13,7 +13,7 @@ type MeterProps = {
 const Meter: FC<MeterProps> = ({ meterName }: MeterProps) => {
   const meter = meters[meterName];
   const metersState = useAppSelector(selectMeters);
-  const meterValue = metersState[meterName as keyof MetersState];
+  const meterValue = metersState[meterName as keyof MetersState].value;
 
   useEffect(() => {
     decayNeedsMeter({

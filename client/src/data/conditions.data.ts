@@ -4,7 +4,7 @@ import { ConditionDetails } from '../interfaces/conditionDetails.interface';
 export const conditionsData: ConditionDetails[] = [
   {
     name: 'sleeping',
-    modifiers: [{ meter: 'hunger', rate: 0.5 }],
+    modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -50 }],
   },
 ];
 

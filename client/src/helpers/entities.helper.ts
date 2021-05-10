@@ -1,5 +1,9 @@
 import { store } from '../app/store';
-import { changeByAmount } from '../features/meters/metersSlice';
+import {
+  changeByAmount,
+  addModifier,
+  removeModifier,
+} from '../features/meters/metersSlice';
 import {
   changeInteraction,
   addCondition,
@@ -8,7 +12,9 @@ import {
 import { entities } from '../data/entities.data';
 import { Entity } from '../interfaces/entity.interface';
 import { MeterChange } from '../interfaces/meterChange.interface';
+import { MeterModifier } from '../interfaces/meterModifier.interface';
 import { gameMinute } from '../data/time.data';
+import { conditions } from '../data/conditions.data';
 
 export function setCurrentInteraction(newInteraction: string | null): boolean {
   const appStore = store.getState();
@@ -24,16 +30,32 @@ function getEntityData(entity: string): Entity {
 
 function deductCost(cost: number): boolean {
   const appStore = store.getState();
-  const { money } = appStore.meters;
-  if (money < cost) return false;
+  const { value } = appStore.meters.money;
+  if (value < cost) return false;
   const meterImpact = { name: 'money', amount: -cost };
   store.dispatch(changeByAmount(meterImpact));
   return true;
 }
 
-function triggerRemoveConditions(conditions: string[]): void {
-  conditions.forEach((condition: string) => {
+function triggerAddConditions(conditionsArr: string[]): void {
+  conditionsArr.forEach((condition: string) => {
+    store.dispatch(addCondition(condition));
+  });
+  conditionsArr.forEach((condition: string) => {
+    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+      store.dispatch(addModifier(modifier));
+    });
+  });
+}
+
+function triggerRemoveConditions(conditionsArr: string[]): void {
+  conditionsArr.forEach((condition: string) => {
     store.dispatch(removeCondition(condition));
+  });
+  conditionsArr.forEach((condition: string) => {
+    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+      store.dispatch(removeModifier(modifier));
+    });
   });
 }
 
@@ -60,12 +82,6 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
       });
     }
   }, gameMinute);
-}
-
-function triggerAddConditions(conditions: string[]): void {
-  conditions.forEach((condition: string) => {
-    store.dispatch(addCondition(condition));
-  });
 }
 
 function triggerImmediateChange(entityData: Entity): void {

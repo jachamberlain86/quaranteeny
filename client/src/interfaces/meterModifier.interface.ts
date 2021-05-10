@@ -1,4 +1,5 @@
 export interface MeterModifier {
-  meter: string;
-  rate: number;
+  readonly meter: string;
+  readonly incRateModifier: number;
+  readonly decRateModifier: number;
 }
