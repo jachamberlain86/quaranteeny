@@ -10,25 +10,33 @@ const needs: Need[] = [
     name: 'hunger',
     decayRate: -10,
     safeSize: 1000,
+    deficitImpacts: ['starving'],
+    excessImpacts: ['overfed'],
   },
   {
     name: 'energy',
     decayRate: -10,
     safeSize: 2000,
+    deficitImpacts: ['lethargic'],
+    excessImpacts: ['exhausted'],
   },
   {
     name: 'health',
     decayRate: -1,
     safeSize: 500,
+    deficitImpacts: ['unwell'],
+    excessImpacts: ['energised'],
   },
   {
     name: 'money',
     decayRate: 0,
     safeSize: 1000,
+    deficitImpacts: ['broke'],
+    excessImpacts: ['rich'],
   },
 ];
 
-class Meters {
+export class Meters {
   [key: string]: Meter;
 
   constructor(needsArr: Need[]) {
@@ -37,7 +45,9 @@ class Meters {
         decayRate: need.decayRate,
         safeSize: need.safeSize,
         deficitPoint: calcDeficit(need.safeSize),
+        deficitImpacts: need.deficitImpacts,
         excessPoint: calcExcess(need.safeSize),
+        excessImpacts: need.excessImpacts,
         max: calcMax(need.safeSize),
       };
     });

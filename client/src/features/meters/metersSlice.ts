@@ -38,6 +38,9 @@ const initialState: MetersState = {
 
 export const selectMeters = (state: RootState): MetersState => state.meters;
 
+export const selectMeterValue = (state: MetersState, meter: string): number =>
+  state[meter as keyof MetersState].value;
+
 export const selectDecRate = (state: MetersState, meter: string): number =>
   state[meter as keyof MetersState].decRate;
 

@@ -3,7 +3,7 @@ import './Furniture.styles.css';
 import {
   handleInteraction,
   setCurrentInteraction,
-} from '../../helpers/entities.helper';
+} from '../../helpers/interactions.helper';
 
 interface FurnitureProps {
   name: string;

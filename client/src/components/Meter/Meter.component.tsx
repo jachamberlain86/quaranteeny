@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 
 import { useAppSelector } from '../../app/hooks';
 import { selectMeters, MetersState } from '../../features/meters/metersSlice';
-import { decayNeedsMeter } from '../../helpers/meters.helper';
+import { decayMeter } from '../../helpers/meters.helper';
 
 import { meters } from '../../data/meters.data';
 
@@ -16,7 +16,7 @@ const Meter: FC<MeterProps> = ({ meterName }: MeterProps) => {
   const meterValue = metersState[meterName as keyof MetersState].value;
 
   useEffect(() => {
-    decayNeedsMeter({
+    decayMeter({
       name: meterName,
       amount: meter.decayRate,
     });
