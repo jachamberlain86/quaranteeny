@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",
     "format": "prettier --write \"./**/*.{js,ts,tsx,json,md}\""
@@ -19,6 +19,7 @@
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
     "prettier": "2.2.1",
     "ts-node": "3.3.0",
     "typescript": "3.3.3333"

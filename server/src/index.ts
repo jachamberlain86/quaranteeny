@@ -3,11 +3,17 @@ import { createConnection } from 'typeorm';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
+import dotenv = require('dotenv');
+// eslint-disable-next-line import/first
 import { Routes } from './routes';
+// eslint-disable-next-line import/first
 import { User } from './entity/User';
 
 createConnection()
   .then(async (connection) => {
+    dotenv.config();
+    const { PORT } = process.env;
+
     // create express app
     const app = express();
     app.use(bodyParser.json());
@@ -40,7 +46,7 @@ createConnection()
     // ...
 
     // start express server
-    app.listen(3000);
+    app.listen(PORT || 3001);
 
     // insert new users for test
     await connection.manager.save(
@@ -58,9 +64,7 @@ createConnection()
       })
     );
     // eslint-disable-next-line no-console
-    console.log(
-      'Express server has started on port 3000. Open http://localhost:3000/users to see results'
-    );
+    console.log(`Express server listening on http://localhost:${PORT}`);
   })
   // eslint-disable-next-line no-console
   .catch((error) => console.log(error));
