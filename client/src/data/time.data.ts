@@ -1,9 +1,9 @@
 import { store } from '../app/store';
+import { selectGameSpeed } from '../features/game/gameSlice';
 
 const baseTime = 60000;
 
-const appStore = store.getState();
-const { gameSpeed } = appStore.game;
+const gameSpeed = selectGameSpeed(store.getState());
 
 export const gameMinute = baseTime / gameSpeed;
 export const gameHour = gameMinute * 60;
