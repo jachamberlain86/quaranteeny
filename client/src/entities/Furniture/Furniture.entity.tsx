@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './Furniture.styles.css';
 import {
   handleInteraction,
@@ -9,7 +9,7 @@ interface FurnitureProps {
   name: string;
 }
 
-const Furniture: FC<FurnitureProps> = ({ name }: FurnitureProps) => {
+const Furniture = ({ name }: FurnitureProps): JSX.Element => {
   return (
     <button
       type="button"

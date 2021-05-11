@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { MetersState } from '../../features/meters/metersSlice';
 import { calcPercentage } from '../../helpers/game.helper';

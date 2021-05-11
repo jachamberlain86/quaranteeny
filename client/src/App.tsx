@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './App.css';
 import Game from './components/Game/Game.component';
 
-const App: FC = () => {
+const App = (): JSX.Element => {
   return (
     <div className="app-container">
       <Game />

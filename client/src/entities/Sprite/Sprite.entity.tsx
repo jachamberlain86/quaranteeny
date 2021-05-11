@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   checkLoseStates,
   checkConditionsState,
@@ -7,7 +7,7 @@ import { checkMeterStates } from '../../helpers/meters.helper';
 
 import './Sprite.styles.css';
 
-const Sprite: FC = () => {
+const Sprite = (): JSX.Element => {
   useEffect(() => {
     checkMeterStates();
     checkConditionsState();
