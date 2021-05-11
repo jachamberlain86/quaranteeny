@@ -123,8 +123,10 @@ export function updateInteractionProgress(
   current: number,
   total: number
 ): void {
-  let percentageComplete = null;
-  if (current < total) {
+  let percentageComplete;
+  if (current === 0 && total === 0) {
+    percentageComplete = null;
+  } else {
     percentageComplete = 100 - calcPercentage(current, total);
   }
   store.dispatch(setInteractionProgress(percentageComplete));

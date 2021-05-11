@@ -109,7 +109,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
         setCurrentInteraction(null);
-        updateInteractionProgress(iterationCount, iterations);
+        updateInteractionProgress(0, 0);
       } else {
         updateInteractionProgress(iterationCount, iterations);
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
