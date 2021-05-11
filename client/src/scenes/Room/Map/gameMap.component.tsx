@@ -1,38 +1,12 @@
 /* eslint-disable prettier/prettier */
-import React, { FC, useEffect, useContext, useState, useRef } from 'react';
-import { GameMap } from '../../../interfaces/gameMap.interface';
+import React, { FC, useEffect, useState, useRef } from 'react';
 import game from '../../../data/gameMap.data';
-import CanvasContext from '../canvasContext';
 
-const Map: FC = (props) => {
+const Map: FC = () => {
   
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [context, setContext] = useState<CanvasRenderingContext2D|null>(null)
-  const cols = 10; 
-  const layers = [[
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 1, 2, 1, 1, 1, 1, 1, 1, 0,
-    3, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 0, 1, 1, 2, 0,
-    0, 2, 1, 1, 1, 0, 1, 1, 2, 0,
-    0, 2, 1, 1, 1, 0, 1, 1, 1, 0,
-    0, 2, 1, 1, 1, 0, 1, 1, 1, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0  
-  ], [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 4, 0,
-    0, 6, 1, 1, 1, 1, 1, 1, 5, 0,
-    0, 7, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ]]
-  const tileSize = 40;
+  const {cols, layers, tileSize} = game; 
 
   
   useEffect(() => {
@@ -60,7 +34,7 @@ const Map: FC = (props) => {
       }
     }
   }
-  }, [context, layers]);
+  }, [context,]);
 
   return (
     <canvas ref={canvasRef} width="400" height="400"/>
