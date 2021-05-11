@@ -8,7 +8,6 @@ const Room: FC = ({ children }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { cols, layers, tileSize } = game;
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  // const player = useAppSelector((store) => store.character);
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement;
@@ -34,18 +33,6 @@ const Room: FC = ({ children }) => {
       }
     }
   }, [context, layers, cols, tileSize]);
-
-  // useEffect(() => {
-  //   if (context) {
-  //     context.fillStyle = '#999999';
-  //     context.fillRect(
-  //       player.position[0],
-  //       player.position[1],
-  //       player.dimensions[0],
-  //       player.dimensions[1]
-  //     );
-  //   }
-  // }, [context, player]);
 
   return (
     <CanvasContext.Provider value={context}>

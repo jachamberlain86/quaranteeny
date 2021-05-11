@@ -14,7 +14,7 @@ const Player: FC = () => {
   const [keysObject, setKeysObject] = useState(keysInterface);
   const player = useAppSelector((store) => store.character);
   // const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const ctx = useContext(CanvasContext);
+  const ctx = useContext<CanvasRenderingContext2D | null>(CanvasContext);
 
   // useEffect(() => {
   //   const canvas = canvasRef.current as HTMLCanvasElement;
@@ -22,10 +22,10 @@ const Player: FC = () => {
   // }, [context]);
 
   useEffect(() => {
-    window.addEventListener('keydown', function (e) {
+    window.addEventListener('keyup', function (e) {
       console.log(e.key);
     });
-  });
+  }, []);
 
   useEffect(() => {
     if (ctx) {
@@ -37,7 +37,7 @@ const Player: FC = () => {
         player.dimensions[1]
       );
     }
-  }, [ctx]);
+  }, [ctx, player]);
 
   return <div />;
 };
