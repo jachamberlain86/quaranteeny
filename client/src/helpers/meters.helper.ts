@@ -50,19 +50,27 @@ export const decayMeters = (metersObj: Meters): void => {
 export const checkMeterStates = (): void => {
   const meterNames = Object.keys(meters);
   meterNames.forEach((meter) => {
+    let deficitAdded = false;
+    let excessAdded = false;
     const timer = setInterval(() => {
       const gameOver = selectGameOver(store.getState());
       if (gameOver) clearInterval(timer);
       else {
         const meterValue = selectMeterValue(store.getState(), meter);
-        if (meterValue < meters[meter].deficitPoint) {
+        if (meterValue < meters[meter].deficitPoint && !deficitAdded) {
           triggerAddConditions(meters[meter].deficitImpacts);
-        } else if (meterValue > meters[meter].excessPoint) {
+          deficitAdded = true;
+          excessAdded = false;
+        } else if (meterValue > meters[meter].excessPoint && !excessAdded) {
           triggerAddConditions(meters[meter].excessImpacts);
-        } else if (meterValue > meters[meter].deficitPoint) {
+          excessAdded = true;
+          deficitAdded = false;
+        } else if (meterValue > meters[meter].deficitPoint && deficitAdded) {
           triggerRemoveConditions(meters[meter].deficitImpacts);
-        } else if (meterValue < meters[meter].excessPoint) {
+          deficitAdded = false;
+        } else if (meterValue < meters[meter].excessPoint && excessAdded) {
           triggerRemoveConditions(meters[meter].excessImpacts);
+          excessAdded = false;
         }
       }
     }, gameMinute);
@@ -78,7 +86,7 @@ export function deductCost(cost: number): boolean {
 }
 
 function triggerIncrementalChange(entityData: Entity, entity: string): void {
-  const iterations = Math.round(entityData.timeToComplete / 1000);
+  const iterations = Math.ceil(entityData.timeToComplete / 1000);
   let iterationCount = iterations;
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());

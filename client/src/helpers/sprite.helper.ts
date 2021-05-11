@@ -42,7 +42,7 @@ export function triggerAddConditions(conditionsArr: string[]): void {
 export function triggerRemoveConditions(conditionsArr: string[]): void {
   const currentConditions = selectConditions(store.getState());
   conditionsArr.forEach((condition: string) => {
-    if (!currentConditions.includes(condition)) {
+    if (currentConditions.includes(condition)) {
       store.dispatch(removeCondition(condition));
       conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
         store.dispatch(removeModifier(modifier));
@@ -65,7 +65,8 @@ function getEntityData(entity: string): Entity {
 export const handleInteraction = (entity: string): void => {
   const entityData: Entity = getEntityData(entity);
   if (deductCost(entityData.cost)) {
-    triggerAddConditions(entityData.conditions);
+    if (entityData.conditions.length)
+      triggerAddConditions(entityData.conditions);
     triggerChangeMeters(entityData, entity);
   }
 };

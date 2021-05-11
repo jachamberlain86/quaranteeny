@@ -16,7 +16,7 @@ const Mood: FC = () => {
           {moodList &&
             moodList.map(
               (mood): JSX.Element => {
-                return <li>{mood}</li>;
+                return <li key={mood}>{mood}</li>;
               }
             )}
         </ul>
