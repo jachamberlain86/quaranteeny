@@ -8,19 +8,22 @@ const Mood: FC = () => {
   );
   const moodList = [...Array.from(new Set(conditions))];
 
-  return (
-    <div>
-      <h3>I´m feeling a little</h3>
-      <ul className="moodList">
-        {moodList &&
-          moodList.map(
-            (mood): JSX.Element => {
-              return <li>{mood}</li>;
-            }
-          )}
-      </ul>
-    </div>
-  );
+  const renderBoard = (): JSX.Element => {
+    return (
+      <div className="mood-board">
+        <h3>I´m feeling a little</h3>
+        <ul className="moodList">
+          {moodList &&
+            moodList.map(
+              (mood): JSX.Element => {
+                return <li>{mood}</li>;
+              }
+            )}
+        </ul>
+      </div>
+    );
+  };
+  return <div>{conditions.length ? renderBoard() : null}</div>;
 };
 
 export default Mood;
