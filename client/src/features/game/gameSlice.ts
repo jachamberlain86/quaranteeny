@@ -1,17 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
+import { RootState } from '../../app/store';
 
 export interface GameState {
   gameSpeed: number;
   currClockTime: number;
   startTime: number;
+  gameOver: boolean;
 }
 
 const initialState: GameState = {
   gameSpeed: 100,
   startTime: Date.now(),
   currClockTime: Date.now(),
+  gameOver: false,
 };
 
 export const gameSlice = createSlice({
@@ -30,10 +32,17 @@ export const gameSlice = createSlice({
       state.currClockTime =
         action.payload.prevClockTime + diff * action.payload.gameSpeed;
     },
+    setGameOver: (state) => {
+      state.gameOver = !state.gameOver;
+    },
   },
 });
 
-export const { changeGameSpeed, updateClockTime } = gameSlice.actions;
+export const {
+  changeGameSpeed,
+  updateClockTime,
+  setGameOver,
+} = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
   state.game.gameSpeed;
@@ -43,14 +52,7 @@ export const selectStartTime = (state: RootState): number =>
 
 export const selectClockTime = (state: RootState): number =>
   state.game.currClockTime;
-
-export const startClock = (): AppThunk => (dispatch, getState) => {
-  const fiveSeconds = 1000 * 5;
-  const prevClockTime = selectClockTime(getState());
-  const gameSpeed = selectGameSpeed(getState());
-  const clockInterval = setInterval(() => {
-    dispatch(updateClockTime({ gameSpeed, prevClockTime }));
-  }, fiveSeconds);
-};
+export const selectGameOver = (state: RootState): boolean =>
+  state.game.gameOver;
 
 export default gameSlice.reducer;

@@ -1,18 +1,17 @@
 import React, { FC, useEffect } from 'react';
 import './DayCounter.styles.css';
 import moment from 'moment';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import {
   selectClockTime,
   selectStartTime,
-  startClock,
 } from '../../features/game/gameSlice';
+import { startClock } from '../../helpers/game.helper';
 
 const DayCounter: FC = () => {
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(startClock());
-  }, [dispatch]);
+    startClock();
+  }, []);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTime);
 

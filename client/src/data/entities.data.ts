@@ -1,4 +1,5 @@
-import { gameMinute, gameHour } from './time.data';
+import { gameMinute, gameHour } from './gameTime.data';
+import { hour } from './time.data';
 import { Entity } from '../interfaces/entity.interface';
 import { EntityDetails } from '../interfaces/entityDetails.interface';
 
@@ -8,8 +9,8 @@ export const entitiesData: EntityDetails[] = [
     cost: 50,
     timeToComplete: gameMinute * 30,
     meterImpacts: [
-      { name: 'hunger', amount: 1000 },
-      { name: 'health', amount: -100 },
+      { name: 'hunger', amount: hour * 8 },
+      { name: 'health', amount: -hour * 4 },
     ],
     conditions: [],
   },
@@ -17,14 +18,14 @@ export const entitiesData: EntityDetails[] = [
     name: 'salad',
     cost: 0,
     timeToComplete: gameMinute * 15,
-    meterImpacts: [{ name: 'hunger', amount: 500 }],
+    meterImpacts: [{ name: 'hunger', amount: hour * 5 }],
     conditions: [],
   },
   {
     name: 'bed',
     cost: 0,
     timeToComplete: gameHour * 8,
-    meterImpacts: [{ name: 'energy', amount: 2000 }],
+    meterImpacts: [{ name: 'energy', amount: hour * 16 }],
     conditions: ['sleeping'],
   },
 ];
