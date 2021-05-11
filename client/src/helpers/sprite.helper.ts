@@ -20,6 +20,7 @@ import { setGameOver, selectGameOver } from '../features/game/gameSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
 import { MeterModifier } from '../interfaces/meterModifier.interface';
 import { deductCost, triggerChangeMeters } from './meters.helper';
+import { calcPercentage } from './game.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
@@ -101,18 +102,13 @@ export const checkLoseStates = (): void => {
   }, gameHour);
 };
 
-export function calcPercentage(current: number, total: number): number {
-  const progress = current / total;
-  return 100 - Math.round(progress * 100);
-}
-
 export function updateInteractionProgress(
   current: number,
   total: number
 ): void {
-  let percentage = null;
+  let percentageComplete = null;
   if (current < total) {
-    percentage = calcPercentage(current, total);
+    percentageComplete = 100 - calcPercentage(current, total);
   }
-  store.dispatch(setInteractionProgress(percentage));
+  store.dispatch(setInteractionProgress(percentageComplete));
 }

@@ -13,3 +13,8 @@ export const startClock = (): void => {
     store.dispatch(updateClockTime({ gameSpeed, prevClockTime }));
   }, second);
 };
+
+export function calcPercentage(current: number, total: number): number {
+  const percentage = current / total;
+  return Math.round(percentage * 100);
+}
