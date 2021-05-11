@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import _ from 'lodash';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { meters } from '../../data/meters.data';
@@ -83,11 +84,10 @@ export const metersSlice = createSlice({
       if (meter.incRate < 0) meter.incRate = 0;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
-    setMeters: (state, action: PayloadAction<any>) => {
-      state.energy = action.payload.energy.value;
-      state.hunger = action.payload.hunger.value;
-      state.health = action.payload.health.value;
-      state.money = action.payload.money.value;
+    setMeters: (state, action: PayloadAction<MetersState>) => {
+      _.forEach(action.payload, (value, key) => {
+        state[key as keyof MetersState] = value;
+      });
     },
   },
 });

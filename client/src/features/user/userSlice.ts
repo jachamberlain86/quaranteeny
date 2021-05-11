@@ -12,7 +12,7 @@ export const fetchUserDataAsync = createAsyncThunk<
   // The value we return becomes the `fulfilled` action payload
   async ({ dispatch }) => {
     const userData = await fetchUserData();
-    await dispatch(setMeters(userData));
+    if (userData) dispatch(setMeters(userData));
   }
 );
 
