@@ -6,15 +6,16 @@ const Mood: FC = () => {
   const conditions: string[] = useAppSelector(
     (state) => state.sprite.conditions
   );
+  const moodList = [...Array.from(new Set(conditions))];
 
   return (
     <div>
-      <h3>I feel a little</h3>
+      <h3>I´m feeling a little</h3>
       <ul className="moodList">
-        {conditions &&
-          conditions.map(
-            (condition): JSX.Element => {
-              return <li>{condition}</li>;
+        {moodList &&
+          moodList.map(
+            (mood): JSX.Element => {
+              return <li>{mood}</li>;
             }
           )}
       </ul>
