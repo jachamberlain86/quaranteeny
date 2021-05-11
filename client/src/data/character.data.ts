@@ -1,6 +1,6 @@
 import { Character } from '../interfaces/character.interface';
 
-export const character: Character = {
+const character: Character = {
   tileFrom: [1, 1],
   tileTo: [1, 1],
   timeMoved: 0,
@@ -9,3 +9,5 @@ export const character: Character = {
   delayMove: 700,
   direction: 'left',
 };
+
+export default character;

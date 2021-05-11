@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import CanvasContext from './canvasContext';
 import Map from './Map/gameMap.component';
 
 import './Room.styles.css';
