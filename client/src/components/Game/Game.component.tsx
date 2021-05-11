@@ -3,6 +3,7 @@ import Room from '../../scenes/Room/Room.scene';
 import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
+import Player from '../../scenes/Player/player.component';
 import './Game.styles.css';
 
 const Game = (): JSX.Element => {
@@ -13,6 +14,9 @@ const Game = (): JSX.Element => {
         <Mood />
       </div>
       <Room />
+      <Room>
+        <Player />
+      </Room>
       <MeterArea />
     </div>
   );
