@@ -110,7 +110,7 @@ export const conditionsData: ConditionDetails[] = [
     modifiers: [],
   },
   {
-    name: 'anorexic',
+    name: 'food averse',
     modifiers: [],
   },
   {

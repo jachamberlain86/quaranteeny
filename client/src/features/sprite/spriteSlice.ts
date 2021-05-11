@@ -53,6 +53,9 @@ export const spriteSlice = createSlice({
     decreaseSick: (state) => {
       if (state.sickCounter > 0) state.sickCounter -= 1;
     },
+    setInteractionProgress: (state, action: PayloadAction<number | null>) => {
+      state.interactionProgress = action.payload;
+    },
   },
 });
 
@@ -66,17 +69,23 @@ export const {
   decreaseStarvation,
   decreaseSleepDep,
   decreaseSick,
+  setInteractionProgress,
 } = spriteSlice.actions;
 
 export const selectSprite = (state: RootState): SpriteState => state.sprite;
 
-export const selectConditions = (state: SpriteState): string[] =>
-  state.conditions;
+export const selectConditions = (state: RootState): string[] =>
+  state.sprite.conditions;
 
-export const selectStarvation = (state: SpriteState): number =>
-  state.starvationCounter;
-export const selectSleepDep = (state: SpriteState): number =>
-  state.sleepDepCounter;
-export const selectSick = (state: SpriteState): number => state.sickCounter;
+export const selectStarvation = (state: RootState): number =>
+  state.sprite.starvationCounter;
+export const selectSleepDep = (state: RootState): number =>
+  state.sprite.sleepDepCounter;
+export const selectSick = (state: RootState): number =>
+  state.sprite.sickCounter;
+export const selectCurrentInteraction = (state: RootState): string | null =>
+  state.sprite.currentInteraction;
+export const selectInteractionProgress = (state: RootState): number | null =>
+  state.sprite.interactionProgress;
 
 export default spriteSlice.reducer;

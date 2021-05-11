@@ -5,46 +5,51 @@ import { meters } from '../../data/meters.data';
 import { MeterChange } from '../../interfaces/meterChange.interface';
 import { MeterState } from '../../interfaces/meterState.interface';
 import { MeterModifier } from '../../interfaces/meterModifier.interface';
+import { metersStateBuilder } from '../../data/metersStateBuilder.data';
 
 export interface MetersState {
   hunger: MeterState;
   energy: MeterState;
   health: MeterState;
   money: MeterState;
+  fitness: MeterState;
+  mood: MeterState;
+  hygeine: MeterState;
+  comfort: MeterState;
+  connection: MeterState;
+  engagement: MeterState;
+  freedom: MeterState;
+  motivation: MeterState;
+  appetite: MeterState;
+  mind: MeterState;
 }
 
 const initialState: MetersState = {
-  hunger: {
-    value: meters.hunger.initialValue,
-    incRate: meters.hunger.initialIncRate,
-    decRate: meters.hunger.initialDecRate,
-  },
-  energy: {
-    value: meters.energy.initialValue,
-    incRate: meters.energy.initialIncRate,
-    decRate: meters.energy.initialDecRate,
-  },
-  health: {
-    value: meters.health.initialValue,
-    incRate: meters.health.initialIncRate,
-    decRate: meters.health.initialDecRate,
-  },
-  money: {
-    value: meters.money.initialValue,
-    incRate: meters.money.initialIncRate,
-    decRate: meters.money.initialDecRate,
-  },
+  hunger: metersStateBuilder.hunger,
+  energy: metersStateBuilder.energy,
+  health: metersStateBuilder.health,
+  money: metersStateBuilder.money,
+  fitness: metersStateBuilder.fitness,
+  mood: metersStateBuilder.mood,
+  hygeine: metersStateBuilder.hygeine,
+  comfort: metersStateBuilder.comfort,
+  connection: metersStateBuilder.connection,
+  engagement: metersStateBuilder.engagement,
+  freedom: metersStateBuilder.freedom,
+  motivation: metersStateBuilder.motivation,
+  appetite: metersStateBuilder.appetite,
+  mind: metersStateBuilder.mind,
 };
 
 export const selectMeters = (state: RootState): MetersState => state.meters;
 
-export const selectMeterValue = (state: MetersState, meter: string): number =>
-  state[meter as keyof MetersState].value;
+export const selectMeterValue = (state: RootState, meter: string): number =>
+  state.meters[meter as keyof MetersState].value;
 
-export const selectDecRate = (state: MetersState, meter: string): number =>
+const selectDecRate = (state: MetersState, meter: string): number =>
   state[meter as keyof MetersState].decRate;
 
-export const selectIncRate = (state: MetersState, meter: string): number =>
+const selectIncRate = (state: MetersState, meter: string): number =>
   state[meter as keyof MetersState].incRate;
 
 export const metersSlice = createSlice({
@@ -52,8 +57,8 @@ export const metersSlice = createSlice({
   initialState,
   reducers: {
     increaseMeter: (state, action: PayloadAction<MeterChange>) => {
-      const incRate = selectIncRate(state, action.payload.name);
       const meter = state[action.payload.name as keyof MetersState];
+      const incRate = selectIncRate(state, action.payload.name);
       meter.value += Math.round(action.payload.amount * (incRate / 100));
       if (meter.value > meters[action.payload.name].max)
         meter.value = meters[action.payload.name].max;

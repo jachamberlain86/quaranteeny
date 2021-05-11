@@ -1,36 +1,39 @@
 import { store } from '../app/store';
 import {
   changeByAmount,
-  MetersState,
   selectMeterValue,
 } from '../features/meters/metersSlice';
 import { selectGameOver } from '../features/game/gameSlice';
+import { selectCurrentInteraction } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
-import { gameMinute } from '../data/time.data';
-import { meters } from '../data/meters.data';
+import { gameMinute } from '../data/gameTime.data';
+import { decayFreq } from '../data/time.data';
+import { meters, Meters } from '../data/meters.data';
 import {
   triggerAddConditions,
   triggerRemoveConditions,
   setCurrentInteraction,
+  updateInteractionProgress,
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
 
-export const decayMeter = (change: MeterChange): void => {
-  const { name } = change;
-  const timer = setInterval(() => {
-    const gameOver = selectGameOver(store.getState());
-    if (gameOver) clearInterval(timer);
-    else {
-      const metersStore = store.getState().meters;
-      const currentValue = metersStore[name as keyof MetersState].value;
-      if (currentValue > 0) {
-        store.dispatch(changeByAmount(change));
+export const decayMeters = (metersObj: Meters): void => {
+  const keysArr = Object.keys(metersObj);
+  keysArr.forEach((key) => {
+    const meter = metersObj[key];
+    const timer = setInterval(() => {
+      const gameOver = selectGameOver(store.getState());
+      if (gameOver) clearInterval(timer);
+      else {
+        const currentValue = selectMeterValue(store.getState(), key);
+        if (currentValue > 0) {
+          store.dispatch(
+            changeByAmount({ name: key, amount: meter.decayRate })
+          );
+        }
       }
-      if (currentValue <= 0) {
-        clearInterval(timer);
-      }
-    }
-  }, gameMinute);
+    }, gameMinute * decayFreq);
+  });
 };
 
 export const checkMeterStates = (): void => {
@@ -42,7 +45,7 @@ export const checkMeterStates = (): void => {
       const gameOver = selectGameOver(store.getState());
       if (gameOver) clearInterval(timer);
       else {
-        const meterValue = selectMeterValue(store.getState().meters, meter);
+        const meterValue = selectMeterValue(store.getState(), meter);
         if (meterValue < meters[meter].deficitPoint && deficitAdded === false) {
           triggerAddConditions(meters[meter].deficitImpacts);
           deficitAdded = true;
@@ -73,9 +76,8 @@ export const checkMeterStates = (): void => {
 };
 
 export function deductCost(cost: number): boolean {
-  const appStore = store.getState();
-  const { value } = appStore.meters.money;
-  if (value < cost) return false;
+  const money = selectMeterValue(store.getState(), 'money');
+  if (money < cost) return false;
   const meterImpact = { name: 'money', amount: -cost };
   store.dispatch(changeByAmount(meterImpact));
   return true;
@@ -88,8 +90,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
     const gameOver = selectGameOver(store.getState());
     if (gameOver) clearInterval(timer);
     else {
-      const appStore = store.getState();
-      const { currentInteraction } = appStore.sprite;
+      const currentInteraction = selectCurrentInteraction(store.getState());
       if (currentInteraction !== entity) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
@@ -97,7 +98,9 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         setCurrentInteraction(null);
+        updateInteractionProgress(iterationCount, iterations);
       } else {
+        updateInteractionProgress(iterationCount, iterations);
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           const incrementalValue = Math.round(meterImpact.amount / iterations);
           store.dispatch(

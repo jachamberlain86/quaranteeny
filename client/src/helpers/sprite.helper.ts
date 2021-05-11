@@ -4,6 +4,7 @@ import {
   removeCondition,
   changeInteraction,
   selectConditions,
+  selectCurrentInteraction,
   increaseStarvation,
   increaseSleepDep,
   increaseSick,
@@ -13,6 +14,7 @@ import {
   selectStarvation,
   selectSleepDep,
   selectSick,
+  setInteractionProgress,
 } from '../features/sprite/spriteSlice';
 import { setGameOver, selectGameOver } from '../features/game/gameSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
@@ -21,7 +23,7 @@ import { deductCost, triggerChangeMeters } from './meters.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
-import { gameHour } from '../data/time.data';
+import { gameHour } from '../data/gameTime.data';
 
 export function triggerAddConditions(conditionsArr: string[]): void {
   conditionsArr.forEach((condition: string) => {
@@ -42,8 +44,7 @@ export function triggerRemoveConditions(conditionsArr: string[]): void {
 }
 
 export function setCurrentInteraction(newInteraction: string | null): boolean {
-  const appStore = store.getState();
-  const { currentInteraction } = appStore.sprite;
+  const currentInteraction = selectCurrentInteraction(store.getState());
   if (currentInteraction === newInteraction) return false;
   store.dispatch(changeInteraction(newInteraction));
   return true;
@@ -66,7 +67,7 @@ export const checkConditionsState = (): void => {
     const gameOver = selectGameOver(store.getState());
     if (gameOver) clearInterval(timer);
     else {
-      const currentConditions = selectConditions(store.getState().sprite);
+      const currentConditions = selectConditions(store.getState());
       if (currentConditions.includes('exhausted'))
         store.dispatch(increaseSleepDep());
       else store.dispatch(decreaseSleepDep());
@@ -75,7 +76,6 @@ export const checkConditionsState = (): void => {
       else store.dispatch(decreaseStarvation());
       if (currentConditions.includes('unwell')) store.dispatch(increaseSick());
       else store.dispatch(decreaseSick());
-      console.log(currentConditions);
     }
   }, gameHour);
 };
@@ -83,21 +83,12 @@ export const checkConditionsState = (): void => {
 export const checkLoseStates = (): void => {
   let sleepDepAdded = false;
   const timer = setInterval(() => {
-    const starvation = selectStarvation(store.getState().sprite);
-    const sleepDep = selectSleepDep(store.getState().sprite);
-    const sick = selectSick(store.getState().sprite);
-    console.log(
-      'starvation ',
-      starvation,
-      ' sleepDep ',
-      sleepDep,
-      ' sick ',
-      sick
-    );
+    const starvation = selectStarvation(store.getState());
+    const sleepDep = selectSleepDep(store.getState());
+    const sick = selectSick(store.getState());
     if (starvation > 190 || sleepDep > 260 || sick > 160) {
       store.dispatch(setGameOver());
       clearInterval(timer);
-      console.log('You died!');
     }
     if (sleepDep > 72 && sleepDepAdded === false) {
       triggerAddConditions(['hallucinating']);
@@ -109,3 +100,19 @@ export const checkLoseStates = (): void => {
     }
   }, gameHour);
 };
+
+export function calcPercentage(current: number, total: number): number {
+  const progress = current / total;
+  return 100 - Math.round(progress * 100);
+}
+
+export function updateInteractionProgress(
+  current: number,
+  total: number
+): void {
+  let percentage = null;
+  if (current < total) {
+    percentage = calcPercentage(current, total);
+  }
+  store.dispatch(setInteractionProgress(percentage));
+}

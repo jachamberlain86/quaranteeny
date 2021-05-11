@@ -7,6 +7,4 @@ export interface Meter {
   readonly excessImpacts: string[];
   readonly max: number;
   readonly initialValue: number;
-  readonly initialIncRate: number;
-  readonly initialDecRate: number;
 }

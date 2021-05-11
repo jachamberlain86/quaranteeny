@@ -10,10 +10,10 @@ export interface GameState {
 }
 
 const initialState: GameState = {
-  gameSpeed: 1000,
+  gameSpeed: 100,
   startTime: Date.now(),
   currClockTime: Date.now(),
-  gameOver: true,
+  gameOver: false,
 };
 
 export const gameSlice = createSlice({
