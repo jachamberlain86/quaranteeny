@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
+import game from '../../data/gameMap.data';
 
 const initialState: Character = {
   tileFrom: [1, 1],
@@ -21,6 +22,10 @@ const characterSlice = createSlice({
       const [x, y] = action.payload;
       state.tileFrom = [x, y];
       state.tileTo = [x, y];
+      state.position = [
+        game.tileSize * x + (game.tileSize - state.dimensions[0] / 2),
+        game.tileSize * y + (game.tileSize - state.dimensions[1] / 2),
+      ];
     },
   },
 });
