@@ -25,22 +25,29 @@ import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { gameHour } from '../data/gameTime.data';
+import { day } from '../data/time.data';
 
 export function triggerAddConditions(conditionsArr: string[]): void {
+  const currentConditions = selectConditions(store.getState());
   conditionsArr.forEach((condition: string) => {
-    store.dispatch(addCondition(condition));
-    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
-      store.dispatch(addModifier(modifier));
-    });
+    if (!currentConditions.includes(condition)) {
+      store.dispatch(addCondition(condition));
+      conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+        store.dispatch(addModifier(modifier));
+      });
+    }
   });
 }
 
 export function triggerRemoveConditions(conditionsArr: string[]): void {
+  const currentConditions = selectConditions(store.getState());
   conditionsArr.forEach((condition: string) => {
-    store.dispatch(removeCondition(condition));
-    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
-      store.dispatch(removeModifier(modifier));
-    });
+    if (!currentConditions.includes(condition)) {
+      store.dispatch(removeCondition(condition));
+      conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+        store.dispatch(removeModifier(modifier));
+      });
+    }
   });
 }
 
@@ -82,22 +89,31 @@ export const checkConditionsState = (): void => {
 };
 
 export const checkLoseStates = (): void => {
-  let sleepDepAdded = false;
   const timer = setInterval(() => {
     const starvation = selectStarvation(store.getState());
     const sleepDep = selectSleepDep(store.getState());
     const sick = selectSick(store.getState());
-    if (starvation > 190 || sleepDep > 260 || sick > 160) {
+    if (starvation > day * 5 || sleepDep > day * 8 || sick > day * 7) {
       store.dispatch(setGameOver());
       clearInterval(timer);
     }
-    if (sleepDep > 72 && sleepDepAdded === false) {
-      triggerAddConditions(['hallucinating']);
-      sleepDepAdded = true;
+    if (starvation > day * 3) {
+      triggerAddConditions(['emaciated']);
     }
-    if (sleepDep < 72 && sleepDepAdded === true) {
+    if (starvation < day * 3) {
+      triggerRemoveConditions(['emaciated']);
+    }
+    if (sleepDep > day * 3) {
+      triggerAddConditions(['hallucinating']);
+    }
+    if (sleepDep < day * 3) {
       triggerRemoveConditions(['hallucinating']);
-      sleepDepAdded = false;
+    }
+    if (sick > day * 4) {
+      triggerAddConditions(['feverish']);
+    }
+    if (sick < day * 4) {
+      triggerRemoveConditions(['feverish']);
     }
   }, gameHour);
 };

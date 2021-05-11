@@ -1,13 +1,10 @@
 import { Condition } from '../interfaces/condition.interface';
 import { ConditionDetails } from '../interfaces/conditionDetails.interface';
-import { minute } from './time.data';
 
 export const conditionsData: ConditionDetails[] = [
   {
     name: 'sleeping',
-    modifiers: [
-      { meter: 'hunger', incRateModifier: 0, decRateModifier: -(minute / 2) },
-    ],
+    modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -50 }],
   },
   {
     name: 'starving',
@@ -15,6 +12,10 @@ export const conditionsData: ConditionDetails[] = [
   },
   {
     name: 'overfed',
+    modifiers: [],
+  },
+  {
+    name: 'emaciated',
     modifiers: [],
   },
   {
@@ -35,6 +36,10 @@ export const conditionsData: ConditionDetails[] = [
   },
   {
     name: 'hardy',
+    modifiers: [],
+  },
+  {
+    name: 'feverish',
     modifiers: [],
   },
   {

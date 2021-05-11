@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { hour } from '../../data/time.data';
 
 export interface SpriteState {
   currentInteraction: string | null;
@@ -36,22 +37,25 @@ export const spriteSlice = createSlice({
       );
     },
     increaseStarvation: (state) => {
-      state.starvationCounter += 1;
+      state.starvationCounter += hour;
     },
     increaseSleepDep: (state) => {
-      state.sleepDepCounter += 1;
+      state.sleepDepCounter += hour;
     },
     increaseSick: (state) => {
-      state.sickCounter += 1;
+      state.sickCounter += hour;
     },
     decreaseStarvation: (state) => {
-      if (state.starvationCounter > 0) state.starvationCounter -= 1;
+      if (state.starvationCounter > 0) state.starvationCounter -= hour;
+      if (state.starvationCounter < 0) state.starvationCounter = 0;
     },
     decreaseSleepDep: (state) => {
-      if (state.sleepDepCounter > 0) state.sleepDepCounter -= 1;
+      if (state.sleepDepCounter > 0) state.sleepDepCounter -= hour;
+      if (state.sleepDepCounter < 0) state.sleepDepCounter = 0;
     },
     decreaseSick: (state) => {
-      if (state.sickCounter > 0) state.sickCounter -= 1;
+      if (state.sickCounter > 0) state.sickCounter -= hour;
+      if (state.sickCounter < 0) state.sickCounter = 0;
     },
     setInteractionProgress: (state, action: PayloadAction<number | null>) => {
       state.interactionProgress = action.payload;

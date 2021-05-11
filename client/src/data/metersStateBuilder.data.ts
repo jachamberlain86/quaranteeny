@@ -11,6 +11,7 @@ export class MetersStateBuilder {
         value: metersObj[need.name].initialValue,
         incRate: 100,
         decRate: 100,
+        pauseDecay: false,
       };
     });
   }

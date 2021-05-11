@@ -8,8 +8,7 @@ const calcMax = (safe: number): number =>
   safe + calcDeficit(safe) + calcExcess(safe);
 const calcInitialValue = (safe: number): number =>
   Math.round(
-    Math.random() * (calcMax(safe) - calcDeficit(safe) + 1) +
-      calcDeficit(safe) * 1.5
+    Math.random() * (calcMax(safe) - calcDeficit(safe) + 1) + calcDeficit(safe)
   );
 
 export const needs: Need[] = [
