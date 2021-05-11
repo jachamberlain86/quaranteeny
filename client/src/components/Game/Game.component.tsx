@@ -13,7 +13,6 @@ const Game = (): JSX.Element => {
         <DayCounter />
         <Mood />
       </div>
-      <Room />
       <Room>
         <Player />
       </Room>
