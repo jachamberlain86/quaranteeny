@@ -2,7 +2,10 @@ import React, { FC, useEffect, useContext, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Line } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
 import game from '../../data/gameMap.data';
-import { triggerProcessMovement } from '../../helpers/player.helper';
+import {
+  triggerProcessMovement,
+  triggerMove,
+} from '../../helpers/player.helper';
 
 function useKeyPress(targetKey: string): boolean {
   const [keyPressed, setKeyPressed] = useState<boolean>(false);
@@ -32,12 +35,12 @@ const Player: FC = () => {
   const { cols, layers, tileSize } = game;
   const player = useAppSelector((store) => store.character);
 
-  const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
-  const [currentSecond, setCurrentSecond] = useState(0);
-  const [frameCount, setframeCount] = useState(0);
-  const [framesLastSecond, setframesLastSecond] = useState(0);
-  const [lastFrameTime, setlastFrameTime] = useState(0);
-  const [moving, setMoving] = useState(false);
+  // const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
+  // const [currentSecond, setCurrentSecond] = useState(0);
+  // const [frameCount, setframeCount] = useState(0);
+  // const [framesLastSecond, setframesLastSecond] = useState(0);
+  // const [lastFrameTime, setlastFrameTime] = useState(0);
+  // const [moving, setMoving] = useState(false);
 
   const downKey = useKeyPress('ArrowDown');
   const upKey = useKeyPress('ArrowUp');
@@ -50,10 +53,26 @@ const Player: FC = () => {
   // triggerProcessMovement(1, 5, Date.now());
 
   useEffect(() => {
-    console.log(player);
-    if (player.isMoving === false) {
-      if (downKey) {
-        console.log('down');
+    // something for the animation and draw the game
+  });
+
+  useEffect(() => {
+    if (downKey) {
+      if (
+        player?.tileFrom[1] < cols - 1 &&
+        layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] + 1)] === 1
+      ) {
+        console.log('player moves down');
+        triggerMove('down');
+        console.log(player);
+      }
+    }
+    if (upKey) {
+      if (
+        player?.tileFrom[1] > 0 &&
+        layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] - 1)] === 1
+      ) {
+        console.log('player moves up');
       }
     }
   }, [downKey, upKey, leftKey, rightKey, player]);

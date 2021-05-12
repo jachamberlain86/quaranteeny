@@ -1,6 +1,9 @@
-import { processMovement } from '../features/character/characterSlice';
+import { processMovement, move } from '../features/character/characterSlice';
 import { store } from '../app/store';
 
-export function triggerProcessMovement(x: number, y: number, t: number): void {
-  store.dispatch(processMovement({ coordinates: [x, y], time: t }));
+export function triggerProcessMovement(t: number): void {
+  store.dispatch(processMovement({ time: t }));
+}
+export function triggerMove(direction: string): void {
+  store.dispatch(move(direction));
 }

@@ -5,11 +5,11 @@ import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
 const initialState: Character = {
-  tileFrom: [1, 1],
-  tileTo: [1, 1],
+  tileFrom: [2, 2],
+  tileTo: [2, 2],
   timeMoved: 0,
   dimensions: [40, 40],
-  position: [45, 45],
+  position: [150, 150],
   delayMove: 700,
   direction: 'left',
   isMoving: false,
@@ -23,7 +23,6 @@ const characterSlice = createSlice({
   reducers: {
     //
     processMovement(state, action) {
-      const [x, y] = action.payload.coordinates;
       const t = action.payload.time;
       if (
         state.tileFrom[0] === state.tileTo[0] &&
@@ -33,11 +32,11 @@ const characterSlice = createSlice({
       }
 
       if (t - state.timeMoved >= state.delayMove) {
-        state.tileFrom = [x, y];
-        state.tileTo = [x, y];
+        state.tileFrom = [state.tileTo[0], state.tileTo[1]];
+        state.tileTo = [state.tileTo[0], state.tileTo[1]];
         state.position = [
-          tileSize * x + (tileSize - state.dimensions[0] / 2),
-          tileSize * y + (tileSize - state.dimensions[1] / 2),
+          tileSize * state.tileTo[0] + (tileSize - state.dimensions[0] / 2),
+          tileSize * state.tileTo[1] + (tileSize - state.dimensions[1] / 2),
         ];
       } else {
         state.position[0] =
@@ -62,12 +61,18 @@ const characterSlice = createSlice({
       }
       state.isMoving = true;
     },
+    move(state, action) {
+      const direction = action.payload;
+      if (direction === 'down') {
+        state.tileTo[1] += 1;
+      }
+    },
   },
 });
 
 // export const player = (state: RootState): Character => state.character;
 
-export const { processMovement } = characterSlice.actions;
+export const { processMovement, move } = characterSlice.actions;
 export default characterSlice.reducer;
 
 // placeAt(state, action) {
