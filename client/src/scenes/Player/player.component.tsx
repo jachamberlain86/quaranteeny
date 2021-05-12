@@ -1,32 +1,62 @@
 import React, { FC, useEffect, useContext, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Line } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
-import { triggerPlaceAt } from '../../helpers/player.helper';
+import game from '../../data/gameMap.data';
+import { triggerProcessMovement } from '../../helpers/player.helper';
+
+function useKeyPress(targetKey: string): boolean {
+  const [keyPressed, setKeyPressed] = useState<boolean>(false);
+  function downHandler({ key }: { key: any }): void {
+    if (key === targetKey) {
+      setKeyPressed(true);
+    }
+  }
+  function upHandler({ key }: { key: any }): void {
+    if (key === targetKey) {
+      setKeyPressed(false);
+    }
+  }
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler);
+    window.addEventListener('keyup', upHandler);
+
+    return () => {
+      window.removeEventListener('keydown', downHandler);
+      window.removeEventListener('keyup', upHandler);
+    };
+  }, []);
+  return keyPressed;
+}
 
 const Player: FC = () => {
+  const { cols, layers, tileSize } = game;
   const player = useAppSelector((store) => store.character);
+
+  const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
   const [currentSecond, setCurrentSecond] = useState(0);
   const [frameCount, setframeCount] = useState(0);
   const [framesLastSecond, setframesLastSecond] = useState(0);
   const [lastFrameTime, setlastFrameTime] = useState(0);
   const [moving, setMoving] = useState(false);
 
+  const downKey = useKeyPress('ArrowDown');
+  const upKey = useKeyPress('ArrowUp');
+  const leftKey = useKeyPress('ArrowLeft');
+  const rightKey = useKeyPress('ArrowRight');
+
+  function checkIndex(x: number, y: number): number {
+    return y * cols + x;
+  }
+  // triggerProcessMovement(1, 5, Date.now());
+
   useEffect(() => {
-    window.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowDown') {
-        triggerPlaceAt(1, 1, 'left');
+    console.log(player);
+    if (player.isMoving === false) {
+      if (downKey) {
+        console.log('down');
       }
-      if (e.key === 'ArrowUp') {
-        console.log('up');
-      }
-      if (e.key === 'ArrowLeft') {
-        console.log('left');
-      }
-      if (e.key === 'ArrowRight') {
-        console.log('right');
-      }
-    });
-  }, []);
+    }
+  }, [downKey, upKey, leftKey, rightKey, player]);
 
   return (
     <Rect

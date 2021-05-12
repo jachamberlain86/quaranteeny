@@ -8,6 +8,7 @@ const character: Character = {
   position: [45, 45],
   delayMove: 700,
   direction: 'left',
+  isMoving: false,
 };
 
 export default character;

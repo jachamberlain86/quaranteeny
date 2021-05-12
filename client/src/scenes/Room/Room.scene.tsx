@@ -25,16 +25,6 @@ const Room: FC = () => {
 
   const [layerA, setLayerA] = useState<any[] | []>([]);
 
-  const handleClickYellow = (e: any): void => {
-    console.log('clicked this yellow box');
-  };
-  const handleClickPurple = (e: any): void => {
-    console.log('clicked this purple box');
-  };
-  const handleClickOrange = (e: any): void => {
-    console.log('clicked this orange box');
-  };
-
   const makeArray = (): any[] => {
     const newArr = [];
     for (let yAxis = 0; yAxis < cols; yAxis++) {

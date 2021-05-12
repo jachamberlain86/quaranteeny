@@ -6,4 +6,5 @@ export interface Character {
   position: number[];
   delayMove: number;
   direction: string;
+  isMoving: boolean;
 }
