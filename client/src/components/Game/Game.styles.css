@@ -7,7 +7,7 @@
 }
 
 .fadeToGrey {
-  animation: fadeToGrey 3000ms linear 1 normal;
+  animation: fadeToGrey 1000ms linear 1 normal;
 }
 
 .grey {

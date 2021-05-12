@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import './Game.styles.css';
 import Room from '../../scenes/Room/Room.scene';
 import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import Player from '../../scenes/Player/player.component';
-import { store } from '../../app/store';
-import { useAppSelector } from '../../app/hooks';
-import './Game.styles.css';
+import GameOver from '../GameOver/GameOver.component';
 
 const Game = (): JSX.Element => {
-  // const { gameOver } = store.getState().game;
-  // const [gameState, setGameState] = useState(gameOver);
-  // console.log('gameState', gameState);
   const { gameOver } = useAppSelector((state) => state.game);
   // TODO find a better solution to this forbidden non-null assertion
   const gameScreen = useRef<HTMLDivElement>(null!);
@@ -21,7 +18,7 @@ const Game = (): JSX.Element => {
       if (gameScreen && gameOver) {
         gameScreen.current.classList.add('grey');
       }
-    }, 2000);
+    }, 1000);
     return () => {
       clearTimeout(id);
     };
@@ -29,6 +26,7 @@ const Game = (): JSX.Element => {
 
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+      {gameOver && <GameOver />}
       <div>
         <DayCounter />
         <Mood />
