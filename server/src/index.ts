@@ -7,11 +7,9 @@ import cors = require('cors');
 import dotenv = require('dotenv');
 // eslint-disable-next-line import/first
 import { Routes } from './routes';
-// eslint-disable-next-line import/first
-import { User } from './entity/User';
 
 createConnection()
-  .then(async (connection) => {
+  .then(async () => {
     dotenv.config();
     const { PORT } = process.env;
 
@@ -49,16 +47,6 @@ createConnection()
 
     // start express server
     app.listen(PORT || 3001);
-
-    // insert new users for test
-    await connection.manager.save(
-      connection.manager.create(User, {
-        hunger: 400,
-        energy: 450,
-        health: 500,
-        money: 550,
-      })
-    );
     // eslint-disable-next-line no-console
     console.log(`Express server listening on http://localhost:${PORT}`);
   })
