@@ -49,6 +49,7 @@ const GameStart = (): JSX.Element => {
           <form
             className={animate ? 'form slideIn' : 'displayOff'}
             onSubmit={handleSubmit}
+            autoComplete="off"
           >
             <label htmlFor="userName">
               Type your user name
