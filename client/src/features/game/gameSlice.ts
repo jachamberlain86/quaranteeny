@@ -12,7 +12,7 @@ export interface GameState {
 }
 
 const initialState: GameState = {
-  gameSpeed: 10000,
+  gameSpeed: 100,
   startTime: Date.now(),
   currClockTimeInGame: Date.now(),
   currClockTimeReal: Date.now(),
