@@ -1,43 +1,90 @@
-import React, { FC, useEffect, useState, useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-plusplus */
+import { render } from 'react-dom';
+import * as ReactKonva from 'react-konva';
+import { Stage, Layer, Rect } from 'react-konva';
+import React, {
+  FC,
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  MouseEvent,
+} from 'react';
+import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
-import CanvasContext from '../Player/canvasContext';
+import Player from '../Player/player.component';
+
 import './Room.styles.css';
+import Clickables from '../clickables/clickables.component';
 
-const Room: FC = ({ children }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+const Room: FC = () => {
+  const canvasWidth = 800;
+  const canvasHeight = 800;
   const { cols, layers, tileSize } = game;
-  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current as HTMLCanvasElement;
-    setContext(canvas.getContext('2d'));
-  }, [context]);
+  const [layerA, setLayerA] = useState<any[] | []>([]);
 
-  useEffect(() => {
-    if (context) {
-      // eslint-disable-next-line no-plusplus
-      for (let y = 0; y < cols; y++) {
-        // eslint-disable-next-line no-plusplus
-        for (let x = 0; x < cols; x++) {
-          switch (layers[0][y * cols + x]) {
-            case 0:
-              context.fillStyle = '#FF1493';
-              context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-              break;
-            default:
-              context.fillStyle = '#eeeeee';
-              context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-          }
+  const handleClickYellow = (e: any): void => {
+    console.log('clicked this yellow box');
+  };
+  const handleClickPurple = (e: any): void => {
+    console.log('clicked this purple box');
+  };
+  const handleClickOrange = (e: any): void => {
+    console.log('clicked this orange box');
+  };
+
+  const makeArray = (): any[] => {
+    const newArr = [];
+    for (let yAxis = 0; yAxis < cols; yAxis++) {
+      for (let xAxis = 0; xAxis < cols; xAxis++) {
+        switch (layers[0][yAxis * cols + xAxis]) {
+          case 0:
+            newArr.push(
+              <Rect
+                x={xAxis * tileSize}
+                y={yAxis * tileSize}
+                height={tileSize}
+                width={tileSize}
+                fill="blue"
+              />
+            );
+            break;
+          default:
+            newArr.push(
+              <Rect
+                x={xAxis * tileSize}
+                y={yAxis * tileSize}
+                height={tileSize}
+                width={tileSize}
+                fill="pink"
+              />
+            );
         }
       }
     }
-  }, [context, layers, cols, tileSize]);
+    return newArr;
+  };
+
+  useEffect(() => {
+    setLayerA(makeArray());
+  }, []);
 
   return (
-    <CanvasContext.Provider value={context}>
-      <canvas ref={canvasRef} width="400" height="400" />
-      {children}
-    </CanvasContext.Provider>
+    <ReactReduxContext.Consumer>
+      {({ store }) => (
+        <Stage width={canvasWidth} height={canvasHeight}>
+          <Provider store={store}>
+            <Layer>{layerA}</Layer>
+            <Layer>
+              <Player />
+            </Layer>
+            <Clickables />
+          </Provider>
+        </Stage>
+      )}
+    </ReactReduxContext.Consumer>
   );
 };
 

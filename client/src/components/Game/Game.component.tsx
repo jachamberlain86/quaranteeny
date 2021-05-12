@@ -6,7 +6,12 @@ import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import Player from '../../scenes/Player/player.component';
+<<<<<<< HEAD
 import GameOver from '../GameOver/GameOver.component';
+=======
+import './Game.styles.css';
+import CanvasContext from '../../scenes/Player/canvasContext';
+>>>>>>> feat/player_moves
 
 const Game = (): JSX.Element => {
   const { gameOver } = useAppSelector((state) => state.game);
@@ -32,9 +37,6 @@ const Game = (): JSX.Element => {
         <Mood />
       </div>
       <Room />
-      <Room>
-        <Player />
-      </Room>
       <MeterArea />
     </div>
   );
