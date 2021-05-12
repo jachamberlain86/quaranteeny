@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 import { render } from 'react-dom';
 import * as ReactKonva from 'react-konva';
-import { Stage, Layer, Rect, Line, KonvaNodeComponent } from 'react-konva';
+import { Stage, Layer, Rect } from 'react-konva';
 import React, {
   FC,
   useEffect,
@@ -12,12 +12,19 @@ import React, {
   MouseEvent,
 } from 'react';
 import game from '../../data/gameMap.data';
-// import Player from '../Player/player.component';
-// import CanvasContext from '../Player/canvasContext';
+import Player from '../Player/player.component';
+import CanvasContext from '../Player/canvasContext';
 
 import './Room.styles.css';
 
 const Room: FC = () => {
+  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+  // useEffect(() => {
+  //   const canvas = canvasRef.current as HTMLCanvasElement;
+  //   setContext(canvas.getContext('2d'));
+  // }, [context]);
+
   const canvasWidth = 800;
   const canvasHeight = 800;
   const { cols, layers, tileSize } = game;
@@ -52,7 +59,6 @@ const Room: FC = () => {
                 y={yAxis * tileSize}
                 height={tileSize}
                 width={tileSize}
-                fill="green"
               />
             );
         }
@@ -68,7 +74,11 @@ const Room: FC = () => {
   return (
     <Stage width={canvasWidth} height={canvasHeight}>
       <Layer>{layerA}</Layer>
+      <Layer>
+        <Player />
+      </Layer>
     </Stage>
   );
 };
+
 export default Room;

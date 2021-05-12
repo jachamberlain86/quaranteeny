@@ -12,8 +12,8 @@ const keysInterface = {
 
 const Player: FC = () => {
   // const [keysObject, setKeysObject] = useState(keysInterface);
-  const player = useAppSelector((store) => store.character);
-  const context = useContext<CanvasRenderingContext2D | null>(CanvasContext);
+  // const player = useAppSelector((store) => store.character);
+  // const context = useContext<CanvasRenderingContext2D | null>(CanvasContext);
 
   useEffect(() => {
     window.addEventListener('keyup', function (e) {
@@ -21,7 +21,7 @@ const Player: FC = () => {
     });
   }, []);
 
-  return <Rect />;
+  return <Rect x={50} y={50} height={50} width={50} fill="red" />;
 };
 
 export default Player;
