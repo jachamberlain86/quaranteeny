@@ -14,26 +14,25 @@ import React, {
 import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
-import CanvasContext from '../Player/canvasContext';
 
 import './Room.styles.css';
+import Clickables from '../clickables/clickables.component';
 
 const Room: FC = () => {
-  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  // const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  // useEffect(() => {
-  //   const canvas = canvasRef.current as HTMLCanvasElement;
-  //   setContext(canvas.getContext('2d'));
-  // }, [context]);
-
   const canvasWidth = 800;
   const canvasHeight = 800;
   const { cols, layers, tileSize } = game;
 
   const [layerA, setLayerA] = useState<any[] | []>([]);
 
-  const handleClick = (e: any): void => {
-    console.log('clicked this blue box');
+  const handleClickYellow = (e: any): void => {
+    console.log('clicked this yellow box');
+  };
+  const handleClickPurple = (e: any): void => {
+    console.log('clicked this purple box');
+  };
+  const handleClickOrange = (e: any): void => {
+    console.log('clicked this orange box');
   };
 
   const makeArray = (): any[] => {
@@ -49,7 +48,6 @@ const Room: FC = () => {
                 height={tileSize}
                 width={tileSize}
                 fill="blue"
-                onClick={handleClick}
               />
             );
             break;
@@ -60,6 +58,7 @@ const Room: FC = () => {
                 y={yAxis * tileSize}
                 height={tileSize}
                 width={tileSize}
+                fill="pink"
               />
             );
         }
@@ -81,6 +80,7 @@ const Room: FC = () => {
             <Layer>
               <Player />
             </Layer>
+            <Clickables />
           </Provider>
         </Stage>
       )}
