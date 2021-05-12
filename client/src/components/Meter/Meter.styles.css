@@ -1,1 +1,42 @@
 @import '../node_modules/nes.css/css/nes.css';
+
+.borderFlash {
+  animation: borderFlash 1000 linear infinite alternate-reverse;
+}
+
+
+@keyframes flashing {
+  0% {
+    border: 3px solid white
+  }
+  10% {
+    border: 3px solid black
+  }
+  20% {
+    border: 3px solid white
+  }
+  30% {
+    border: 3px solid black
+  }
+  40% {
+    border: 3px solid white
+  }
+  50% {
+    border: 3px solid black
+  }
+  60% {
+    border: 3px solid white
+  }
+  70% {
+    border: 3px solid black
+  }
+  80% {
+    border: 3px solid white
+  }
+  90% {
+    border: 3px solid black
+  }
+  100% {
+    border: 3px solid white
+  }
+}

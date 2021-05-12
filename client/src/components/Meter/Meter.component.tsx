@@ -15,6 +15,15 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
   );
 
   const meterValue = calcPercentage(currentValue, meter.max);
+  const meterColor = (): string => {
+    if (meterValue <= 20) {
+      return 'nes-progress is-error';
+    }
+    if (meterValue > 20 && meterValue < 90) {
+      return 'nes-progress is-primary';
+    }
+    return 'nes-progress is-warning';
+  };
 
   const renderMeter =
     meterName === 'money' ? (
@@ -24,11 +33,7 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
     ) : (
       <div>
         {meterName}: {meterValue}%
-        <progress
-          className="nes-progress is-primary"
-          value={meterValue}
-          max={100}
-        />
+        <progress className={meterColor()} value={meterValue} max={100} />
       </div>
     );
 
