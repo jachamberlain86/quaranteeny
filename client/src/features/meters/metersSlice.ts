@@ -75,10 +75,16 @@ export const metersSlice = createSlice({
     },
     addModifier: (state, action: PayloadAction<MeterModifier>) => {
       const meter = state[action.payload.meter as keyof MetersState];
-      if (action.payload.incRateModifier)
-        meter.incRate += action.payload.incRateModifier;
-      if (action.payload.decRateModifier)
-        meter.decRate += action.payload.decRateModifier;
+      if (action.payload.incRateModifier) {
+        const modifier = action.payload.incRateModifier;
+        meter.incRate =
+          modifier > 0 ? meter.incRate * modifier : meter.incRate / +modifier;
+      }
+      if (action.payload.decRateModifier) {
+        const modifier = action.payload.decRateModifier;
+        meter.decRate =
+          modifier > 0 ? meter.decRate * modifier : meter.decRate / +modifier;
+      }
       if (meter.decRate < 0) meter.decRate = 0;
       if (meter.decRate > 1000) meter.decRate = 1000;
       if (meter.incRate < 0) meter.incRate = 0;
@@ -86,10 +92,17 @@ export const metersSlice = createSlice({
     },
     removeModifier: (state, action: PayloadAction<MeterModifier>) => {
       const meter = state[action.payload.meter as keyof MetersState];
-      if (action.payload.incRateModifier)
-        meter.incRate -= action.payload.incRateModifier;
-      if (action.payload.decRateModifier)
-        meter.decRate -= action.payload.decRateModifier;
+      if (action.payload.incRateModifier) {
+        const modifier = action.payload.incRateModifier;
+        meter.incRate =
+          modifier > 0 ? meter.incRate / modifier : meter.incRate * +modifier;
+      }
+      meter.incRate -= action.payload.incRateModifier;
+      if (action.payload.decRateModifier) {
+        const modifier = action.payload.decRateModifier;
+        meter.decRate =
+          modifier > 0 ? meter.decRate / modifier : meter.decRate * +modifier;
+      }
       if (meter.decRate < 0) meter.decRate = 0;
       if (meter.decRate > 1000) meter.decRate = 1000;
       if (meter.incRate < 0) meter.incRate = 0;

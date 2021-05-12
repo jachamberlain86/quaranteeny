@@ -80,7 +80,7 @@ export const checkConditionsState = (): void => {
       if (currentConditions.includes('exhausted'))
         store.dispatch(increaseSleepDep());
       else store.dispatch(decreaseSleepDep());
-      if (currentConditions.includes('starving'))
+      if (currentConditions.includes('malnourished'))
         store.dispatch(increaseStarvation());
       else store.dispatch(decreaseStarvation());
       if (currentConditions.includes('unwell')) store.dispatch(increaseSick());
@@ -99,16 +99,16 @@ export const checkLoseStates = (): void => {
       clearInterval(timer);
     }
     if (starvation > day * 3) {
-      triggerAddConditions(['emaciated']);
+      triggerAddConditions(['starved']);
     }
     if (starvation < day * 3) {
-      triggerRemoveConditions(['emaciated']);
+      triggerRemoveConditions(['starved']);
     }
     if (sleepDep > day * 3) {
-      triggerAddConditions(['hallucinating']);
+      triggerAddConditions(['strange']);
     }
     if (sleepDep < day * 3) {
-      triggerRemoveConditions(['hallucinating']);
+      triggerRemoveConditions(['strange']);
     }
     if (sick > day * 4) {
       triggerAddConditions(['feverish']);
