@@ -4,7 +4,8 @@ import { RootState } from '../../app/store';
 
 export interface GameState {
   gameSpeed: number;
-  currClockTime: number;
+  currClockTimeInGame: number;
+  currClockTimeReal: number;
   startTime: number;
   gameOver: boolean;
 }
@@ -12,7 +13,8 @@ export interface GameState {
 const initialState: GameState = {
   gameSpeed: 100,
   startTime: Date.now(),
-  currClockTime: Date.now(),
+  currClockTimeInGame: Date.now(),
+  currClockTimeReal: Date.now(),
   gameOver: false,
 };
 
@@ -25,15 +27,26 @@ export const gameSlice = createSlice({
     },
     updateClockTime: (
       state,
-      action: PayloadAction<{ gameSpeed: number; prevClockTime: number }>
+      action: PayloadAction<{
+        currTimeReal: number;
+      }>
     ) => {
-      // `diff` is the time elapsed since last update to the clock
-      const diff = Date.now() - action.payload.prevClockTime;
-      state.currClockTime =
-        action.payload.prevClockTime + diff * action.payload.gameSpeed;
+      state.currClockTimeReal = action.payload.currTimeReal;
+      const timeSinceStartReal = state.currClockTimeReal - state.startTime;
+      const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
+      state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
     },
     setGameOver: (state) => {
       state.gameOver = !state.gameOver;
+    },
+    loadGameStateFromDb: (state, action: PayloadAction<GameState>) => {
+      state.gameOver = action.payload.gameOver;
+      // Changing the game speed seems to break things, I think because
+      // gameTime.data.ts doesn't run again and re-export gameMinute
+      // if the gameSpeed changes.
+      // state.gameSpeed = action.payload.gameSpeed;
+      state.startTime = action.payload.startTime;
+      state.currClockTimeInGame = action.payload.currClockTimeInGame;
     },
   },
 });
@@ -42,6 +55,7 @@ export const {
   changeGameSpeed,
   updateClockTime,
   setGameOver,
+  loadGameStateFromDb,
 } = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
@@ -50,8 +64,10 @@ export const selectGameSpeed = (state: RootState): number =>
 export const selectStartTime = (state: RootState): number =>
   state.game.startTime;
 
-export const selectClockTime = (state: RootState): number =>
-  state.game.currClockTime;
+export const selectClockTimeInGame = (state: RootState): number =>
+  state.game.currClockTimeInGame;
+export const selectClockTimeReal = (state: RootState): number =>
+  state.game.currClockTimeReal;
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;
 
