@@ -9,6 +9,7 @@ import {
   checkLoseStates,
   checkConditionsState,
 } from '../../helpers/sprite.helper';
+import './GameStats.styles.css';
 
 const GameStats: FC = () => {
   const history = useHistory();
@@ -30,29 +31,33 @@ const GameStats: FC = () => {
 
   return (
     <div>
-      <h1>game stats</h1>
       <div className="game-stats-container">
-        <h2>Here´s how you did</h2>
-        <div>
+        <div className="nes-container is-rounded game-stats-title">
+          <h1>game stats</h1>
+        </div>
+        <div className="game-stats-sub-container">
+          <h2>Here´s how you did</h2>
           <h3>time spent</h3>
           <span>too much</span>
-        </div>
-        <div>
+          <h3>seomthing else...</h3>
           <h3>seomthing else...</h3>
         </div>
-        <div>
-          <h3>seomthing else...</h3>
+        <div className="game-stats-btn-container">
+          <button
+            type="button"
+            className="nes-btn is-success"
+            onClick={handleResetGame}
+          >
+            Play again
+          </button>
+          <button
+            type="button"
+            className="nes-btn is-error"
+            onClick={handleExit}
+          >
+            Exit
+          </button>
         </div>
-        <button
-          type="button"
-          className="nes-btn is-success"
-          onClick={handleResetGame}
-        >
-          Play again
-        </button>
-        <button type="button" className="nes-btn is-error" onClick={handleExit}>
-          Exit
-        </button>
       </div>
     </div>
   );

@@ -1,2 +1,36 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
+.game-stats-container{
+  margin: 4rem auto;
+}
+
+.game-stats-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  color: blue;
+  font-size: 1.8rem;
+}
+
+.game-stats-sub-container{
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.game-stats-sub-container > * {
+  margin-bottom: 1rem;
+}
+
+.game-stats-btn-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.game-stats-btn-container button {
+  /* padding: 1rem 1rem; */
+  width: 45%;
+  font-size: 1.5rem;
+}
+
+
