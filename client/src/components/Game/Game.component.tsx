@@ -13,9 +13,7 @@ const Game = (): JSX.Element => {
         <DayCounter />
         <Mood />
       </div>
-      <Room>
-        <Player />
-      </Room>
+      <Room />
       <MeterArea />
     </div>
   );
