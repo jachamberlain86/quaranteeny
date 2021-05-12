@@ -2,13 +2,30 @@ import React, { useState } from 'react';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
 
+// interface UserName {
+//   nameInput: string;
+// }
+
+// const initialState: UserName = {
+//   nameInput: '',
+// };
+
 const GameStart = (): JSX.Element => {
   const [animate, setAnimate] = useState(false);
+  const [nameInput, setNameInput] = useState('');
   const history = useHistory();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    history.push('/start');
+    // todo store userName in store
+    setTimeout(() => {
+      history.push('/start');
+    }, 500);
+  };
+
+  const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
+    const input = e.currentTarget.value;
+    setNameInput(input);
   };
 
   return (
@@ -52,6 +69,8 @@ const GameStart = (): JSX.Element => {
                 id="userName"
                 placeholder="Type here..."
                 className="nes-input"
+                value={nameInput}
+                onChange={handleInput}
                 // className={animate ? 'nes-input slideIn' : 'displayOff'}
               />
             </label>
