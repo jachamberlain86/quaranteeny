@@ -7,6 +7,7 @@ const MeterArea = (): JSX.Element => {
   useEffect(() => {
     decayMeters(meters);
   }, []);
+
   return (
     <div>
       <Meter meterName="hunger" />

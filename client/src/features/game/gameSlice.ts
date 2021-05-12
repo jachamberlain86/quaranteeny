@@ -52,6 +52,7 @@ export const selectStartTime = (state: RootState): number =>
 
 export const selectClockTime = (state: RootState): number =>
   state.game.currClockTime;
+
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;
 
