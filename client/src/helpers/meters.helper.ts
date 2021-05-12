@@ -9,7 +9,7 @@ import { selectGameOver } from '../features/game/gameSlice';
 import { selectCurrentInteraction } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { gameMinute } from '../data/gameTime.data';
-import { decayFreq } from '../data/time.data';
+import { updateInterval } from '../data/time.data';
 import { meters, Meters } from '../data/meters.data';
 import {
   triggerAddConditions,
@@ -27,6 +27,8 @@ function triggerPauseDecayToggle(meter: string): void {
   store.dispatch(togglePauseDecay(meter));
 }
 
+// On game init, all meters will state to decay at their defined decay rate. At faster game speeds, calls to decay the meter are reduced by updateInterval. Meters decay by greater amounts when there are greater intervals between function calls.
+
 export const decayMeters = (metersObj: Meters): void => {
   const keysArr = Object.keys(metersObj);
   keysArr.forEach((key) => {
@@ -39,13 +41,18 @@ export const decayMeters = (metersObj: Meters): void => {
         const currentValue = selectMeterValue(store.getState(), key);
         if (currentValue > 0) {
           store.dispatch(
-            changeByAmount({ name: key, amount: meter.decayRate })
+            changeByAmount({
+              name: key,
+              amount: meter.decayRate * updateInterval,
+            })
           );
         }
       }
-    }, gameMinute * decayFreq);
+    }, gameMinute * updateInterval);
   });
 };
+
+// Used to watch meters falling in an out of danger zones, adding and removing relevant conditions when necessary.
 
 export const checkMeterStates = (): void => {
   const meterNames = Object.keys(meters);
@@ -73,7 +80,7 @@ export const checkMeterStates = (): void => {
           excessAdded = false;
         }
       }
-    }, gameMinute);
+    }, gameMinute * updateInterval);
   });
 };
 
@@ -85,8 +92,12 @@ export function deductCost(cost: number): boolean {
   return true;
 }
 
+// Called when interacting with an interactable entity that does not have an immediate effect. Works out number of iterations based on intervals between function calls. Pauses meter decay for each meter on activation and unpauses if cancelled or complete. Also calls function to update interaction progress.
+
 function triggerIncrementalChange(entityData: Entity, entity: string): void {
-  const iterations = Math.ceil(entityData.timeToComplete / 1000);
+  const iterations = Math.ceil(
+    entityData.timeToComplete / (gameMinute * updateInterval)
+  );
   let iterationCount = iterations;
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
@@ -123,7 +134,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         });
       }
     }
-  }, gameMinute);
+  }, gameMinute * updateInterval);
 }
 
 function triggerImmediateChange(entityData: Entity): void {

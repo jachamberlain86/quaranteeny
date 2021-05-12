@@ -25,7 +25,9 @@ import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { gameHour } from '../data/gameTime.data';
-import { day } from '../data/time.data';
+import { day, updateInterval } from '../data/time.data';
+
+// Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
 export function triggerAddConditions(conditionsArr: string[]): void {
   const currentConditions = selectConditions(store.getState());
@@ -51,6 +53,8 @@ export function triggerRemoveConditions(conditionsArr: string[]): void {
   });
 }
 
+// Set to null if not interacting with anything or to a string identifying current interaction
+
 export function setCurrentInteraction(newInteraction: string | null): boolean {
   const currentInteraction = selectCurrentInteraction(store.getState());
   if (currentInteraction === newInteraction) return false;
@@ -62,6 +66,8 @@ function getEntityData(entity: string): Entity {
   return entities[entity];
 }
 
+// On a player interacting with an interactable entity, this function is called
+
 export const handleInteraction = (entity: string): void => {
   const entityData: Entity = getEntityData(entity);
   if (deductCost(entityData.cost)) {
@@ -70,6 +76,8 @@ export const handleInteraction = (entity: string): void => {
     triggerChangeMeters(entityData, entity);
   }
 };
+
+// Used to check whether lose state conditions are present in the sprite's conditions array
 
 export const checkConditionsState = (): void => {
   const timer = setInterval(() => {
@@ -86,8 +94,10 @@ export const checkConditionsState = (): void => {
       if (currentConditions.includes('unwell')) store.dispatch(increaseSick());
       else store.dispatch(decreaseSick());
     }
-  }, gameHour);
+  }, gameHour * updateInterval);
 };
+
+// After specific periods of time with certain losing conditions in the sprite's conditions array different states are added and then a gave over is triggered if still unresolved.
 
 export const checkLoseStates = (): void => {
   const timer = setInterval(() => {
@@ -116,7 +126,7 @@ export const checkLoseStates = (): void => {
     if (sick < day * 4) {
       triggerRemoveConditions(['feverish']);
     }
-  }, gameHour);
+  }, gameHour * updateInterval);
 };
 
 export function updateInteractionProgress(

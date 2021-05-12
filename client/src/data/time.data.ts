@@ -9,4 +9,4 @@ export const day = hour * 24;
 
 // Used to set frequency of meter decay and updates
 
-export const decayFreq = 5;
+export const updateInterval = 5;

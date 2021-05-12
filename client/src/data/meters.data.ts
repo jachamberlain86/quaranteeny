@@ -1,12 +1,12 @@
 import { Meter } from '../interfaces/meter.interface';
 import { Need } from '../interfaces/need.interface';
-import { minute, hour, day, decayFreq } from './time.data';
+import { minute, hour, day } from './time.data';
 
 // A reference for unchanging game data in relation to status meters. Generates a meters object based off hard coded meter names, a rate of decay, the size of the meter's safe zone, and arrays containing strings of conditions activated should the player allow meters to fall outside of that safe zone.
 
 // Hunger, Energy, Health, and Money are all visiable to the player through the interface. All remaining meters are hidden. Only the results of their statuses are seen by the player.
 
-// Meter decay rate is set using fixed time variables. This impacts the value by which the meter decays not the frequency. This scales in relation to the decayFreq variable so that meters decay by consistent amounts even if calls to decay meters are reduced depending on game speed.
+// Meter decay rate is set using fixed time variables. This impacts the value by which the meter decays not the frequency.
 
 // Safe size values determine the overall size of a meter. Appropriate deficit and excess zones are calculate automatically. Fixed time variables from time.data.ts are used to set meter sizes to make calculations easier. Setting a meter's safe size to hour * 8 will mean that meter's safe zone will take 8 game hours to deplete if full.
 
@@ -24,21 +24,21 @@ const calcInitialValue = (safe: number): number =>
 export const needs: Need[] = [
   {
     name: 'hunger',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: hour * 8,
     deficitImpacts: ['malnourished'],
     excessImpacts: ['overfed'],
   },
   {
     name: 'energy',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: hour * 16,
     deficitImpacts: ['exhausted'],
     excessImpacts: ['lethargic'],
   },
   {
     name: 'health',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: day * 14,
     deficitImpacts: ['unwell'],
     excessImpacts: ['hardy'],
@@ -52,7 +52,7 @@ export const needs: Need[] = [
   },
   {
     name: 'fitness',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: day * 7,
     deficitImpacts: ['unfit'],
     excessImpacts: ['injured'],
@@ -66,7 +66,7 @@ export const needs: Need[] = [
   },
   {
     name: 'hygeine',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: day * 4,
     deficitImpacts: ['filthy'],
     excessImpacts: ['anal'],
@@ -80,21 +80,21 @@ export const needs: Need[] = [
   },
   {
     name: 'connection',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: day * 7,
     deficitImpacts: ['lonely'],
     excessImpacts: ['dependent'],
   },
   {
     name: 'engagement',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: hour * 6,
     deficitImpacts: ['bored'],
     excessImpacts: ['hooked'],
   },
   {
     name: 'freedom',
-    decayRate: -minute * decayFreq,
+    decayRate: -minute,
     safeSize: day * 14,
     deficitImpacts: ['trapped'],
     excessImpacts: ['wild'],
