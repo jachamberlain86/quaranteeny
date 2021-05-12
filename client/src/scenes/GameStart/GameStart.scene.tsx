@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
-
-// interface UserName {
-//   nameInput: string;
-// }
-
-// const initialState: UserName = {
-//   nameInput: '',
-// };
+import { setUserName } from '../../features/game/gameSlice';
+import { useAppDispatch } from '../../app/hooks';
 
 const GameStart = (): JSX.Element => {
   const [animate, setAnimate] = useState(false);
   const [nameInput, setNameInput] = useState('');
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // todo store userName in store
+    dispatch(setUserName(nameInput));
     setTimeout(() => {
       history.push('/start');
     }, 500);
@@ -46,12 +41,7 @@ const GameStart = (): JSX.Element => {
               setTimeout(() => {
                 const cssStyle = e.target as Element;
                 cssStyle.classList.add('displayOff');
-                // e.target.style.add('display: none');
               }, 600);
-              // CHANGE SCREEN
-              // setTimeout(() => {
-              //   history.push('/start');
-              // }, 500);
             }}
           >
             Start Game
@@ -61,7 +51,6 @@ const GameStart = (): JSX.Element => {
             onSubmit={handleSubmit}
           >
             <label htmlFor="userName">
-              {/* <label htmlFor="userName" className={animate ? '' : 'displayOff'}> */}
               Type your user name
               <input
                 type="text"
@@ -71,14 +60,9 @@ const GameStart = (): JSX.Element => {
                 className="nes-input"
                 value={nameInput}
                 onChange={handleInput}
-                // className={animate ? 'nes-input slideIn' : 'displayOff'}
               />
             </label>
-            <button
-              type="submit"
-              className="nes-btn is-error submit-btn"
-              // className={animate ? 'nes-btn is-error slideIn' : 'displayOff'}
-            >
+            <button type="submit" className="nes-btn is-error submit-btn">
               Play
             </button>
           </form>

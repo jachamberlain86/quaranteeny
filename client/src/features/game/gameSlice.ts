@@ -7,6 +7,7 @@ export interface GameState {
   currClockTime: number;
   startTime: number;
   gameOver: boolean;
+  userName: string;
 }
 
 const initialState: GameState = {
@@ -14,6 +15,7 @@ const initialState: GameState = {
   startTime: Date.now(),
   currClockTime: Date.now(),
   gameOver: false,
+  userName: '',
 };
 
 export const gameSlice = createSlice({
@@ -35,6 +37,9 @@ export const gameSlice = createSlice({
     setGameOver: (state) => {
       state.gameOver = !state.gameOver;
     },
+    setUserName: (state, action: PayloadAction<string>) => {
+      state.userName = action.payload;
+    },
   },
 });
 
@@ -42,6 +47,7 @@ export const {
   changeGameSpeed,
   updateClockTime,
   setGameOver,
+  setUserName,
 } = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
