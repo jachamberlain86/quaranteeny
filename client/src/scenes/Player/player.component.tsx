@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useContext, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Line } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
-import CanvasContext from './canvasContext';
 
 const keysInterface = {
   ArrowDown: false,
@@ -12,16 +11,24 @@ const keysInterface = {
 
 const Player: FC = () => {
   // const [keysObject, setKeysObject] = useState(keysInterface);
-  // const player = useAppSelector((store) => store.character);
+  const player = useAppSelector((store) => store.character);
   // const context = useContext<CanvasRenderingContext2D | null>(CanvasContext);
 
   useEffect(() => {
     window.addEventListener('keyup', function (e) {
-      console.log(e.key);
+      console.log(player);
     });
   }, []);
 
-  return <Rect x={50} y={50} height={50} width={50} fill="red" />;
+  return (
+    <Rect
+      x={player.position[0]}
+      y={player.position[1]}
+      height={player.dimensions[0]}
+      width={player.dimensions[1]}
+      fill="red"
+    />
+  );
 };
 
 export default Player;

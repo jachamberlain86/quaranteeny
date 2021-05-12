@@ -1,6 +1,5 @@
 import React from 'react';
 
-const CanvasContext = React.createContext<CanvasRenderingContext2D | null>(
-  null
-);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CanvasContext = React.createContext<any | null>(null);
 export default CanvasContext;

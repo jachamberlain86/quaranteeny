@@ -11,6 +11,7 @@ import React, {
   useRef,
   MouseEvent,
 } from 'react';
+import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
 import CanvasContext from '../Player/canvasContext';
@@ -72,12 +73,18 @@ const Room: FC = () => {
   }, []);
 
   return (
-    <Stage width={canvasWidth} height={canvasHeight}>
-      <Layer>{layerA}</Layer>
-      <Layer>
-        <Player />
-      </Layer>
-    </Stage>
+    <ReactReduxContext.Consumer>
+      {({ store }) => (
+        <Stage width={canvasWidth} height={canvasHeight}>
+          <Provider store={store}>
+            <Layer>{layerA}</Layer>
+            <Layer>
+              <Player />
+            </Layer>
+          </Provider>
+        </Stage>
+      )}
+    </ReactReduxContext.Consumer>
   );
 };
 

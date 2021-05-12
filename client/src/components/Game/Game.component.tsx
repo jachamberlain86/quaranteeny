@@ -5,6 +5,7 @@ import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import Player from '../../scenes/Player/player.component';
 import './Game.styles.css';
+import CanvasContext from '../../scenes/Player/canvasContext';
 
 const Game = (): JSX.Element => {
   return (
