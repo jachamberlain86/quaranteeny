@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   selectClockTimeInGame,
   selectStartTime,
+  setTimeLasted,
 } from '../../features/game/gameSlice';
 import { startClock } from '../../helpers/game.helper';
 import { selectUserStatus } from '../../features/user/userSlice';
@@ -25,6 +26,7 @@ const DayCounter = (): JSX.Element => {
     if (gameOver) {
       const momentOfDeath = currClockTime;
       setTimeOfDeath(momentOfDeath);
+      dispatch(setTimeLasted(moment(startTime).from(timeOfDeath, true)));
     }
   }, [gameOver]);
 
