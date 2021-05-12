@@ -1,22 +1,70 @@
 import { MetersState } from '../meters/metersSlice';
+import { GameState } from '../game/gameSlice';
+import { SpriteState } from '../sprite/spriteSlice';
 
 const { REACT_APP_SERVER_PORT, REACT_APP_SERVER_HOST } = process.env;
 
 const baseUrl = `http://${REACT_APP_SERVER_HOST}:${REACT_APP_SERVER_PORT}`;
-// TODO: Get from local storage / cookies
-const userId = '614ee727-961a-4469-bfc1-c0692f74b911';
 
-export async function fetchUserData(): Promise<MetersState | null> {
+export async function fetchUserData(): Promise<{
+  id: string;
+  game: GameState;
+  sprite: SpriteState;
+  meters: MetersState;
+} | null> {
   try {
+    const userId = localStorage.getItem('userId');
     const res = await fetch(`${baseUrl}/users/${userId}`);
     const data = await res.json();
-    const { hunger, energy, health, money } = data;
-    return {
-      hunger: { value: hunger, incRate: 100, decRate: 100 },
-      energy: { value: energy, incRate: 100, decRate: 100 },
-      health: { value: health, incRate: 100, decRate: 100 },
-      money: { value: money, incRate: 100, decRate: 100 },
-    };
+    return data;
+  } catch (error) {
+    console.error(error); // eslint-disable-line
+    return null;
+  }
+}
+
+export async function createUserInDb(): Promise<{
+  id: string;
+  game: null;
+  sprite: null;
+  meters: null;
+} | null> {
+  try {
+    const res = await fetch(`${baseUrl}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error); // eslint-disable-line
+    return null;
+  }
+}
+
+export async function updateUserInDb({
+  id,
+  game,
+  sprite,
+  meters,
+}: {
+  id: string;
+  game: GameState;
+  sprite: SpriteState;
+  meters: MetersState;
+}): Promise<{
+  id: string;
+  game: GameState;
+  sprite: SpriteState;
+  meters: MetersState;
+} | null> {
+  try {
+    const res = await fetch(`${baseUrl}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, game, sprite, meters }),
+    });
+    return await res.json();
   } catch (error) {
     console.error(error); // eslint-disable-line
     return null;

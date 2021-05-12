@@ -92,7 +92,7 @@ export const metersSlice = createSlice({
       if (meter.incRate < 0) meter.incRate = 0;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
-    setMeters: (state, action: PayloadAction<MetersState>) => {
+    loadMetersStateFromDb: (state, action: PayloadAction<MetersState>) => {
       _.forEach(action.payload, (value, key) => {
         state[key as keyof MetersState] = value;
       });
@@ -105,7 +105,7 @@ export const {
   decreaseMeter,
   addModifier,
   removeModifier,
-  setMeters,
+  loadMetersStateFromDb,
 } = metersSlice.actions;
 
 export const changeByAmount = (meterChange: MeterChange): AppThunk => (
