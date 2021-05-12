@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useContext, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Line } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
+import { triggerPlaceAt } from '../../helpers/player.helper';
 
 const keysInterface = {
   ArrowDown: false,
@@ -10,15 +11,30 @@ const keysInterface = {
 };
 
 const Player: FC = () => {
-  // const [keysObject, setKeysObject] = useState(keysInterface);
+  const [keysObject, setKeysObject] = useState(keysInterface);
   const player = useAppSelector((store) => store.character);
-  // const context = useContext<CanvasRenderingContext2D | null>(CanvasContext);
+  const [currentSecond, setCurrentSecond] = useState(0);
+  const [frameCount, setframeCount] = useState(0);
+  const [framesLastSecond, setframesLastSecond] = useState(0);
+  const [lastFrameTime, setlastFrameTime] = useState(0);
 
   useEffect(() => {
-    window.addEventListener('keyup', function (e) {
-      console.log(player);
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') {
+        triggerPlaceAt(1, 1, 'left');
+      }
+      if (e.key === 'ArrowUp') {
+        console.log('up');
+      }
+      if (e.key === 'ArrowLeft') {
+        console.log('left');
+      }
+      if (e.key === 'ArrowRight') {
+        console.log('right');
+      }
     });
   }, []);
+  console.log(player);
 
   return (
     <Rect
