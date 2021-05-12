@@ -13,7 +13,7 @@ const GameOver: FC = () => {
         <button
           type="button"
           className="continue-btn nes-btn"
-          onClick={() => history.push('/gameStats')}
+          onClick={() => history.push('/game-stats')}
         >
           Continue
         </button>

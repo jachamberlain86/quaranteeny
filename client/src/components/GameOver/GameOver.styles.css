@@ -1,12 +1,13 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
 :root {
-  --topPosition: 40%;
+  --topPosition: 35%;
+  --squareSize: 35vw
 }
 
 .game-over-container {
-  width: 35vw;
-  height: 35vw;
+  width: var(--squareSize);
+  height: var(--squareSize);
   position: absolute;
   top: var(--topPosition);
   left: var(--topPosition);

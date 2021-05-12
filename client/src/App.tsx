@@ -14,7 +14,7 @@ const App = (): JSX.Element => {
           <Game />
           <GameOverBtn />
         </Route>
-        <Route path="/gameStats">
+        <Route path="/game-stats">
           <GameStats />
         </Route>
         <Route path="/">

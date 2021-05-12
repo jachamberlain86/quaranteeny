@@ -1,14 +1,31 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
-import { setUserName } from '../../features/game/gameSlice';
+import { setUserName, setGameOver } from '../../features/game/gameSlice';
+import { decayMeters, checkMeterStates } from '../../helpers/meters.helper';
+import { meters } from '../../data/meters.data';
+import { startClock } from '../../helpers/game.helper';
+import {
+  checkLoseStates,
+  checkConditionsState,
+} from '../../helpers/sprite.helper';
 
 const GameStats: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const handleExit = (): void => {
+    dispatch(setGameOver());
     dispatch(setUserName(''));
     history.push('/');
+  };
+  const handleResetGame = (): void => {
+    checkLoseStates();
+    checkConditionsState();
+    checkMeterStates();
+    startClock();
+    decayMeters(meters);
+    dispatch(setGameOver());
+    history.push('/start');
   };
 
   return (
@@ -26,7 +43,11 @@ const GameStats: FC = () => {
         <div>
           <h3>seomthing else...</h3>
         </div>
-        <button type="button" className="nes-btn is-success">
+        <button
+          type="button"
+          className="nes-btn is-success"
+          onClick={handleResetGame}
+        >
           Play again
         </button>
         <button type="button" className="nes-btn is-error" onClick={handleExit}>
