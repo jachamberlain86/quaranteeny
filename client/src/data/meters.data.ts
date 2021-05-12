@@ -2,10 +2,9 @@ import { Meter } from '../interfaces/meter.interface';
 import { Need } from '../interfaces/need.interface';
 import { minute, hour, day, decayFreq } from './time.data';
 
-const calcDeficit = (safe: number): number => Math.ceil(safe * 0.5);
+const calcDeficit = (safe: number): number => Math.ceil(safe / 2);
 const calcExcess = (safe: number): number => safe + calcDeficit(safe);
-const calcMax = (safe: number): number =>
-  safe + calcDeficit(safe) + calcExcess(safe);
+const calcMax = (safe: number): number => calcDeficit(safe) + calcExcess(safe);
 const calcInitialValue = (safe: number): number =>
   Math.round(
     Math.random() * (calcExcess(safe) - calcDeficit(safe) + 1) +

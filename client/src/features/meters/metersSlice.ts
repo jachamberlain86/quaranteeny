@@ -53,6 +53,9 @@ const selectDecRate = (state: MetersState, meter: string): number =>
 const selectIncRate = (state: MetersState, meter: string): number =>
   state[meter as keyof MetersState].incRate;
 
+export const selectPauseDecay = (state: RootState, meter: string): boolean =>
+  state.meters[meter as keyof MetersState].pauseDecay;
+
 export const metersSlice = createSlice({
   name: 'meters',
   initialState,
@@ -97,6 +100,10 @@ export const metersSlice = createSlice({
         state[key as keyof MetersState] = value;
       });
     },
+    togglePauseDecay: (state, action: PayloadAction<string>) => {
+      const meter = state[action.payload as keyof MetersState];
+      meter.pauseDecay = !meter.pauseDecay;
+    },
   },
 });
 
@@ -106,6 +113,7 @@ export const {
   addModifier,
   removeModifier,
   loadMetersStateFromDb,
+  togglePauseDecay,
 } = metersSlice.actions;
 
 export const changeByAmount = (meterChange: MeterChange): AppThunk => (

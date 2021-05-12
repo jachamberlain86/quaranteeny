@@ -5,3 +5,20 @@
   width: 100%;
   height: 100%
 }
+
+.fadeToGrey {
+  animation: fadeToGrey 1000ms linear 1 normal;
+}
+
+.grey {
+  filter: grayscale(100%);
+}
+
+@keyframes fadeToGrey {
+  0% {
+    filter: grayscale(0%);
+  }
+  100% {
+    filter: grayscale(100%);
+  }
+}

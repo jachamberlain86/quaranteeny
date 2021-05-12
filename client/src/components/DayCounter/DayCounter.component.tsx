@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './DayCounter.styles.css';
 import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -9,7 +9,7 @@ import {
 import { startClock } from '../../helpers/game.helper';
 import { selectUserStatus } from '../../features/user/userSlice';
 
-const DayCounter: FC = () => {
+const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
   useEffect(() => {

@@ -1,37 +1,22 @@
-import React, { FC, useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
-import { useAppDispatch, useAppSelector } from './app/hooks';
-import {
-  fetchUserDataAsync,
-  createUserInDbAsync,
-  setUserId,
-  selectUserStatus,
-  startUpdatesToDb,
-} from './features/user/userSlice';
+import GameStart from './scenes/GameStart/GameStart.scene';
+import GameOverBtn from './components/GameOverBtn/GameOverBtn.component';
 
-const App: FC = () => {
-  const dispatch = useAppDispatch();
-  const userLoadingStatus = useAppSelector(selectUserStatus);
-
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      dispatch(setUserId(userId));
-      dispatch(fetchUserDataAsync({ dispatch }));
-    } else {
-      dispatch(createUserInDbAsync({ dispatch }));
-    }
-  }, [dispatch]);
-  useEffect(() => {
-    if (userLoadingStatus === 'userLoaded') {
-      dispatch(startUpdatesToDb());
-    }
-  }, [dispatch, userLoadingStatus]);
-
+const App = (): JSX.Element => {
   return (
     <div className="app-container">
-      <Game />
+      <Switch>
+        <Route path="/start">
+          <Game />
+          <GameOverBtn />
+        </Route>
+        <Route path="/">
+          <GameStart />
+        </Route>
+      </Switch>
     </div>
   );
 };

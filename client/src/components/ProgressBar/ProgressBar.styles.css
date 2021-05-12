@@ -1,0 +1,7 @@
+@import '../../../node_modules/nes.css/css/nes.css';
+
+.interaction-progress .nes-progress {
+  height: 20px;
+  max-width: 70%;
+  margin: 1rem auto;
+}

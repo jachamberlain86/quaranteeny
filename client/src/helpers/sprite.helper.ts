@@ -20,26 +20,34 @@ import { setGameOver, selectGameOver } from '../features/game/gameSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
 import { MeterModifier } from '../interfaces/meterModifier.interface';
 import { deductCost, triggerChangeMeters } from './meters.helper';
+import { calcPercentage } from './game.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { gameHour } from '../data/gameTime.data';
+import { day } from '../data/time.data';
 
 export function triggerAddConditions(conditionsArr: string[]): void {
+  const currentConditions = selectConditions(store.getState());
   conditionsArr.forEach((condition: string) => {
-    store.dispatch(addCondition(condition));
-    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
-      store.dispatch(addModifier(modifier));
-    });
+    if (!currentConditions.includes(condition)) {
+      store.dispatch(addCondition(condition));
+      conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+        store.dispatch(addModifier(modifier));
+      });
+    }
   });
 }
 
 export function triggerRemoveConditions(conditionsArr: string[]): void {
+  const currentConditions = selectConditions(store.getState());
   conditionsArr.forEach((condition: string) => {
-    store.dispatch(removeCondition(condition));
-    conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
-      store.dispatch(removeModifier(modifier));
-    });
+    if (currentConditions.includes(condition)) {
+      store.dispatch(removeCondition(condition));
+      conditions[condition].modifiers.forEach((modifier: MeterModifier) => {
+        store.dispatch(removeModifier(modifier));
+      });
+    }
   });
 }
 
@@ -57,7 +65,8 @@ function getEntityData(entity: string): Entity {
 export const handleInteraction = (entity: string): void => {
   const entityData: Entity = getEntityData(entity);
   if (deductCost(entityData.cost)) {
-    triggerAddConditions(entityData.conditions);
+    if (entityData.conditions.length)
+      triggerAddConditions(entityData.conditions);
     triggerChangeMeters(entityData, entity);
   }
 };
@@ -81,38 +90,44 @@ export const checkConditionsState = (): void => {
 };
 
 export const checkLoseStates = (): void => {
-  let sleepDepAdded = false;
   const timer = setInterval(() => {
     const starvation = selectStarvation(store.getState());
     const sleepDep = selectSleepDep(store.getState());
     const sick = selectSick(store.getState());
-    if (starvation > 190 || sleepDep > 260 || sick > 160) {
+    if (starvation > day * 5 || sleepDep > day * 8 || sick > day * 7) {
       store.dispatch(setGameOver());
       clearInterval(timer);
     }
-    if (sleepDep > 72 && sleepDepAdded === false) {
-      triggerAddConditions(['hallucinating']);
-      sleepDepAdded = true;
+    if (starvation > day * 3) {
+      triggerAddConditions(['emaciated']);
     }
-    if (sleepDep < 72 && sleepDepAdded === true) {
+    if (starvation < day * 3) {
+      triggerRemoveConditions(['emaciated']);
+    }
+    if (sleepDep > day * 3) {
+      triggerAddConditions(['hallucinating']);
+    }
+    if (sleepDep < day * 3) {
       triggerRemoveConditions(['hallucinating']);
-      sleepDepAdded = false;
+    }
+    if (sick > day * 4) {
+      triggerAddConditions(['feverish']);
+    }
+    if (sick < day * 4) {
+      triggerRemoveConditions(['feverish']);
     }
   }, gameHour);
 };
-
-export function calcPercentage(current: number, total: number): number {
-  const progress = current / total;
-  return 100 - Math.round(progress * 100);
-}
 
 export function updateInteractionProgress(
   current: number,
   total: number
 ): void {
-  let percentage = null;
-  if (current < total) {
-    percentage = calcPercentage(current, total);
+  let percentageComplete;
+  if (current === 0 && total === 0) {
+    percentageComplete = null;
+  } else {
+    percentageComplete = 100 - calcPercentage(current, total);
   }
-  store.dispatch(setInteractionProgress(percentage));
+  store.dispatch(setInteractionProgress(percentageComplete));
 }
