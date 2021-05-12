@@ -27,7 +27,6 @@ const Player: FC = () => {
       }
     });
   }, []);
-  console.log(player);
 
   return (
     <Rect

@@ -20,7 +20,7 @@ const characterSlice = createSlice({
   reducers: {
     placeAt(state, action) {
       const [x, y] = action.payload.coordinates;
-      console.log('coming from placeAt', x, y);
+      // console.log('coming from placeAt', x, y);
       // state.tileFrom = [x, y];
       // state.tileTo = [x, y];
       state.position = [
