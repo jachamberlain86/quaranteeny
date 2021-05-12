@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setUserName, setGameOver } from '../../features/game/gameSlice';
 import { decayMeters, checkMeterStates } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
@@ -14,6 +14,7 @@ import './GameStats.styles.css';
 const GameStats: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const { timeLasted } = useAppSelector((state) => state.game);
 
   const resetGamePlay = (): void => {
     checkLoseStates();
@@ -40,11 +41,14 @@ const GameStats: FC = () => {
           <h1>game stats</h1>
         </div>
         <div className="game-stats-sub-container">
-          <h2>Here´s how you did</h2>
-          <h3>time spent</h3>
-          <span>too much</span>
-          <h3>seomthing else...</h3>
-          <h3>seomthing else...</h3>
+          {timeLasted && <h2>Your character survived for {timeLasted}</h2>}
+          <h3>List of top times</h3>
+          <ol className="nes-list is-circle score-list">
+            <li>best score</li>
+            <li>2nd best score</li>
+            <li>etc...</li>
+          </ol>
+          <p>Had enough, or are you ready to beat the quarantine?</p>
         </div>
         <div className="game-stats-btn-container">
           <button
