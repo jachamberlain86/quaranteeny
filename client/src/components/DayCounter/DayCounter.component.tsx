@@ -12,6 +12,7 @@ import { selectUserStatus } from '../../features/user/userSlice';
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
+  const gameOverState = useAppSelector((state) => state.game);
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
       startClock();

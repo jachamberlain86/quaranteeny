@@ -14,18 +14,22 @@ import './GameStats.styles.css';
 const GameStats: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const handleExit = (): void => {
-    dispatch(setGameOver());
-    dispatch(setUserName(''));
-    history.push('/');
-  };
-  const handleResetGame = (): void => {
+
+  const resetGamePlay = (): void => {
     checkLoseStates();
     checkConditionsState();
     checkMeterStates();
     startClock();
     decayMeters(meters);
     dispatch(setGameOver());
+  };
+  const handleExit = (): void => {
+    resetGamePlay();
+    dispatch(setUserName(''));
+    history.push('/');
+  };
+  const handleResetGame = (): void => {
+    resetGamePlay();
     history.push('/start');
   };
 

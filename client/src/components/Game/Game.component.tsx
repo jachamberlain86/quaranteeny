@@ -19,7 +19,9 @@ import {
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
-
+  const { gameOver } = useAppSelector((state) => state.game);
+  const gameScreen = useRef<HTMLDivElement | null>(null);
+  const currentGameScreen = gameScreen.current as HTMLDivElement;
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -35,10 +37,6 @@ const Game = (): JSX.Element => {
     }
   }, [dispatch, userLoadingStatus]);
 
-  const { gameOver } = useAppSelector((state) => state.game);
-  // TODO find a better solution to this forbidden non-null assertion
-  const gameScreen = useRef<HTMLDivElement | null>(null);
-  const currentGameScreen = gameScreen.current as HTMLDivElement;
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {
       if (currentGameScreen && gameOver) {
