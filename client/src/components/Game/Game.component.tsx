@@ -16,6 +16,14 @@ import {
   startUpdatesToDb,
 } from '../../features/user/userSlice';
 
+import {
+  checkLoseStates,
+  checkConditionsState,
+} from '../../helpers/sprite.helper';
+import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
+
+import { meters } from '../../data/meters.data';
+
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
@@ -32,6 +40,10 @@ const Game = (): JSX.Element => {
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
       dispatch(startUpdatesToDb());
+      checkMeterStates();
+      checkConditionsState();
+      checkLoseStates();
+      decayMeters(meters);
     }
   }, [dispatch, userLoadingStatus]);
 
