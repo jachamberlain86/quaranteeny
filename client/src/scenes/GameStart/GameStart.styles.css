@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   width: 100vw;
   height: 100vh;
   text-align: center;
@@ -46,9 +45,6 @@
 }
 
 .form {
-  /* position: absolute;
-  top: 100%;
-  left: 0%; */
   transform: translateX(0);
 }
 
@@ -102,11 +98,9 @@
 
 @keyframes slideOut {
   0% {
-    /* transform: translateX(0); */
     left: 25%;
   }
   100% {
-    /* transform: translateX(-100vw); */
     left: -200%;
   }
 }

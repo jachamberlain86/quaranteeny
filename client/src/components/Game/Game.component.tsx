@@ -37,12 +37,12 @@ const Game = (): JSX.Element => {
 
   const { gameOver } = useAppSelector((state) => state.game);
   // TODO find a better solution to this forbidden non-null assertion
-  const gameScreen = useRef<HTMLDivElement>(null!);
+  const gameScreen = useRef<HTMLDivElement | null>(null);
+  const currentGameScreen = gameScreen.current as HTMLDivElement;
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {
-      if (!gameScreen) return;
-      if (gameScreen && gameOver) {
-        gameScreen.current.classList.add('grey');
+      if (currentGameScreen && gameOver) {
+        currentGameScreen.classList.add('grey');
       }
     }, 1000);
     return () => {
