@@ -13,6 +13,10 @@ export class UserController {
     return this.userRepository.findOne(request.params.id);
   }
 
+  async update(request: Request): Promise<User> {
+    return this.userRepository.save(request.body);
+  }
+
   async save(request: Request): Promise<User> {
     return this.userRepository.save(request.body);
   }

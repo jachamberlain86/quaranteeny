@@ -19,9 +19,10 @@ const characterSlice = createSlice({
   initialState,
   reducers: {
     placeAt(state, action) {
-      const [x, y] = action.payload;
-      state.tileFrom = [x, y];
-      state.tileTo = [x, y];
+      const [x, y] = action.payload.coordinates;
+      // console.log('coming from placeAt', x, y);
+      // state.tileFrom = [x, y];
+      // state.tileTo = [x, y];
       state.position = [
         game.tileSize * x + (game.tileSize - state.dimensions[0] / 2),
         game.tileSize * y + (game.tileSize - state.dimensions[1] / 2),

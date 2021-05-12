@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import _ from 'lodash';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { meters } from '../../data/meters.data';
@@ -107,6 +108,11 @@ export const metersSlice = createSlice({
       if (meter.incRate < 0) meter.incRate = 0;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
+    loadMetersStateFromDb: (state, action: PayloadAction<MetersState>) => {
+      _.forEach(action.payload, (value, key) => {
+        state[key as keyof MetersState] = value;
+      });
+    },
     togglePauseDecay: (state, action: PayloadAction<string>) => {
       const meter = state[action.payload as keyof MetersState];
       meter.pauseDecay = !meter.pauseDecay;
@@ -119,6 +125,7 @@ export const {
   decreaseMeter,
   addModifier,
   removeModifier,
+  loadMetersStateFromDb,
   togglePauseDecay,
 } = metersSlice.actions;
 

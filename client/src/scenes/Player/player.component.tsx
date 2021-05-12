@@ -1,45 +1,42 @@
 import React, { FC, useEffect, useContext, useRef, useState } from 'react';
-import CanvasContext from './canvasContext';
+import { Stage, Layer, Rect, Line } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
-
-const keysInterface = {
-  ArrowDown: false,
-  ArrowUp: false,
-  ArrowLeft: false,
-  ArrowRight: false,
-};
+import { triggerPlaceAt } from '../../helpers/player.helper';
 
 const Player: FC = () => {
-  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [keysObject, setKeysObject] = useState(keysInterface);
   const player = useAppSelector((store) => store.character);
-  // const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const ctx = useContext<CanvasRenderingContext2D | null>(CanvasContext);
-
-  // useEffect(() => {
-  //   const canvas = canvasRef.current as HTMLCanvasElement;
-  //   setContext(canvas.getContext('2d'));
-  // }, [context]);
+  const [currentSecond, setCurrentSecond] = useState(0);
+  const [frameCount, setframeCount] = useState(0);
+  const [framesLastSecond, setframesLastSecond] = useState(0);
+  const [lastFrameTime, setlastFrameTime] = useState(0);
+  const [moving, setMoving] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('keyup', function (e) {
-      console.log(e.key);
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') {
+        triggerPlaceAt(1, 1, 'left');
+      }
+      if (e.key === 'ArrowUp') {
+        console.log('up');
+      }
+      if (e.key === 'ArrowLeft') {
+        console.log('left');
+      }
+      if (e.key === 'ArrowRight') {
+        console.log('right');
+      }
     });
   }, []);
 
-  useEffect(() => {
-    if (ctx) {
-      ctx.fillStyle = '#999999';
-      ctx.fillRect(
-        player.position[0],
-        player.position[1],
-        player.dimensions[0],
-        player.dimensions[1]
-      );
-    }
-  }, [ctx, player]);
-
-  return <div />;
+  return (
+    <Rect
+      x={player.position[0]}
+      y={player.position[1]}
+      height={player.dimensions[0]}
+      width={player.dimensions[1]}
+      fill="red"
+    />
+  );
 };
 
 export default Player;
