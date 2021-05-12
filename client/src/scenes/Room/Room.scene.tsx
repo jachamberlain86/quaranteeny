@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
-=======
 import React, { FC, useEffect, useState, useRef } from 'react';
 // import { useAppSelector } from '../../app/hooks';
 import game from '../../data/gameMap.data';
 import CanvasContext from '../Player/canvasContext';
->>>>>>> room_ts
 import './Room.styles.css';
 
-<<<<<<< HEAD
-const Room = (): JSX.Element => {
-=======
 const Room: FC = ({ children }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { cols, layers, tileSize } = game;
@@ -41,7 +34,6 @@ const Room: FC = ({ children }) => {
     }
   }, [context, layers, cols, tileSize]);
 
->>>>>>> room_ts
   return (
     <CanvasContext.Provider value={context}>
       <canvas ref={canvasRef} width="400" height="400" />
