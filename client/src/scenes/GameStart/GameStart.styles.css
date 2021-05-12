@@ -1,0 +1,121 @@
+@import '../../../node_modules/nes.css/css/nes.css';
+
+.game-start-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background:url('https://i.imgur.com/vG36Qiz.png');
+  background-size: 40px 40px;
+  background-position: left;
+  background-repeat: repeat;
+  animation: animate 2000ms steps(8) infinite reverse;
+}
+
+.start-page-container{
+  position: relative;
+  height: 20vh;
+}
+
+.title-row{
+  max-height: 20vh;
+}
+
+.game-start-page h1 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+.game-start-page button {
+  font-size: 2rem;
+  width: 50%;
+  position: absolute;
+  top: 100%;
+  left: 25%
+}
+
+.slideOut{
+  animation: slideOut 600ms ease-in-out 1 normal;
+}
+
+
+.slideIn{
+  animation: slideIn 600ms ease-in-out 1 normal;
+}
+
+.form {
+  /* position: absolute;
+  top: 100%;
+  left: 0%; */
+  transform: translateX(0);
+}
+
+.form, .form label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form label {
+  font-size: 1.5rem;
+}
+
+#userName {
+  width: 50%;
+  margin: 1rem auto;
+  padding: .25rem 1rem;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.submit-btn {
+  margin: 0 auto;
+}
+
+.animate {
+/* //todo animate our sprite */
+}
+
+.displayOff {
+  display: none;
+}
+
+@keyframes animate {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+@keyframes dayAndNight {
+  0% {
+    filter: saturate(0.5);
+  }
+  100% {
+    filter: saturate(1.2);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    /* transform: translateX(0); */
+    left: 25%;
+  }
+  100% {
+    /* transform: translateX(-100vw); */
+    left: -200%;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
