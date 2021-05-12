@@ -3,6 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
 import GameStart from './scenes/GameStart/GameStart.scene';
+import GameOverBtn from './components/GameOverBtn/GameOverBtn.component';
 
 const App = (): JSX.Element => {
   return (
@@ -10,6 +11,7 @@ const App = (): JSX.Element => {
       <Switch>
         <Route path="/start">
           <Game />
+          <GameOverBtn />
         </Route>
         <Route path="/">
           <GameStart />
