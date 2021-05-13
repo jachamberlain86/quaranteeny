@@ -61,30 +61,8 @@ const Room = (): JSX.Element => {
     return newArr;
   };
 
-  const makeCharNode = (): JSX.Element => {
-    const charNode: JSX.Element = (
-      <Rect
-        x={40}
-        y={40}
-        height={character.dimensions[0]}
-        width={character.dimensions[1]}
-      />
-    );
-    return charNode;
-  };
-
-  // <Tween
-  //   node={charNode}
-  //   duration={1}
-  //   x={character.pixelLocation[0]}
-  //   y={character.pixelLocation[1]}
-  //   fill="red"
-  // />
-  // );
-
   useEffect(() => {
     setLayerA(makeArray());
-    setLayerB(makeCharNode());
   }, []);
 
   // useEffect(() => {
@@ -103,7 +81,9 @@ const Room = (): JSX.Element => {
         <Stage width={canvasWidth} height={canvasHeight}>
           <Provider store={store}>
             <Layer listening={false}>{layerA}</Layer>
-            {/* <Layer>newTween?</Layer> */}
+            <Layer>
+              <Player />
+            </Layer>
             <Clickables />
           </Provider>
         </Stage>
