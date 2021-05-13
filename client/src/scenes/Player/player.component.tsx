@@ -58,29 +58,38 @@ const Player: FC = () => {
     const sec = Math.floor(Date.now());
     if (sec !== currentSecond) {
       setCurrentSecond(sec);
-      setFramesLastSecond(frameCount);
+      // setFramesLastSecond(frameCount);
       setFrameCount(1);
     } else {
       setFrameCount(frameCount + 1);
     }
-    // if (player) {
-    if (downKey) {
-      if (
-        player?.tileFrom[1] < cols - 1 &&
-        layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] + 1)] === 1
-      ) {
-        console.log('player moves down');
-        triggerMove('down');
-        triggerProcessMovement(currentFrameTime);
-        // console.log(player);
+
+    if (!player.isMoving) {
+      let timer: any = null;
+      if (downKey) {
+        timer = setInterval(() => {
+          if (
+            player?.tileFrom[1] < cols - 1 &&
+            layers[0][
+              checkIndex(player.tileFrom[0], player.tileFrom[1] + 1)
+            ] === 1
+          ) {
+            console.log('player moves down');
+            triggerMove('down');
+            triggerProcessMovement(currentFrameTime);
+          }
+        }, 500);
+      } else {
+        clearInterval(timer);
       }
-    }
-    if (upKey) {
-      if (
-        player?.tileFrom[1] > 0 &&
-        layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] - 1)] === 1
-      ) {
-        console.log('player moves up');
+      if (upKey) {
+        if (
+          player?.tileFrom[1] > 0 &&
+          layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] - 1)] ===
+            1
+        ) {
+          console.log('player moves up');
+        }
       }
     }
 
@@ -90,21 +99,15 @@ const Player: FC = () => {
     ) {
       triggerSetTimeMoved(currentFrameTime);
     }
-    // }
     setLastFrameTime(currentFrameTime);
+    // requestAnimationFrame(drawGame);
   }
 
-  // useEffect(() => {
-  //   requestAnimationFrame(drawGame);
-  // }, [player]);
-
   useEffect(() => {
-    if (player.isMoving) {
-      requestAnimationFrame(drawGame);
-    }
     drawGame();
+
     console.log(player);
-  }, [player.isMoving, downKey, upKey, leftKey, rightKey, player.tileTo]);
+  }, [player.isMoving, downKey, upKey, leftKey, rightKey]);
 
   return (
     <Rect
