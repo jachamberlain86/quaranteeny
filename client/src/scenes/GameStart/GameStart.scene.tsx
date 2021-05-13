@@ -24,7 +24,7 @@ const GameStart = (): JSX.Element => {
   const { userName } = useAppSelector((state) => state.user);
   const { gameOver, gameSpeed } = useAppSelector((state) => state.game);
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
-  const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
+  // const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -60,6 +60,7 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleChooseSpeed = (e: React.FormEvent<HTMLButtonElement>): void => {
+    const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
     const { id } = e.target as Element;
     if (id === 'realTime') {
       dispatch(changeGameSpeed(1));
@@ -85,8 +86,11 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleNewGame = (): void => {
+    // TODO add choice of game speed again
     resetGamePlay();
-    history.push('/start');
+    setAnimate({ name: 'showChooseGameSpeed' });
+    // console.log('clicked');
+    // history.push('/start');
   };
 
   const renderStartBtn = (): JSX.Element => {
@@ -159,7 +163,11 @@ const GameStart = (): JSX.Element => {
           }
         >
           {gameOver ? (
-            <button type="button" className="nes-btn is-error rtn-btn">
+            <button
+              type="button"
+              className="nes-btn is-error rtn-btn"
+              onClick={handleNewGame}
+            >
               New Game
             </button>
           ) : (
@@ -167,7 +175,7 @@ const GameStart = (): JSX.Element => {
               <button
                 type="button"
                 className="nes-btn is-warning rtn-btn"
-                onClick={() => history.push('/start')}
+                onClick={handleNewGame}
               >
                 Continue Game
               </button>
@@ -264,7 +272,9 @@ const GameStart = (): JSX.Element => {
         </div>
         <div className="bottom-row">
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
-          {userName ? renderReturnUser() : renderNewUserForm()}
+          {userName && animate.name === 'showReturnUser'
+            ? renderReturnUser()
+            : renderNewUserForm()}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
           {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>
