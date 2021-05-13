@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { changeGameSpeed } from '../../features/game/gameSlice';
+import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/images/TinyJamesWalk.gif';
 
 interface initialState {
@@ -15,6 +16,7 @@ const initialState = {
 
 const GameStart = (): JSX.Element => {
   const animationSpeed = 400;
+  // TODO change animate variable name
   const [animate, setAnimate] = useState(initialState);
   const [nameInput, setNameInput] = useState('');
   const history = useHistory();
@@ -80,6 +82,11 @@ const GameStart = (): JSX.Element => {
       // currentGameInfoDivRef.classList.add('displayOff');
       history.push('/start');
     }, animationSpeed);
+  };
+
+  const handleNewGame = (): void => {
+    resetGamePlay();
+    history.push('/start');
   };
 
   const renderStartBtn = (): JSX.Element => {
@@ -164,7 +171,11 @@ const GameStart = (): JSX.Element => {
               >
                 Continue Game
               </button>
-              <button type="button" className="nes-btn is-error rtn-btn">
+              <button
+                type="button"
+                className="nes-btn is-error rtn-btn"
+                onClick={handleNewGame}
+              >
                 New Game
               </button>
             </div>
@@ -253,7 +264,7 @@ const GameStart = (): JSX.Element => {
         </div>
         <div className="bottom-row">
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
-          {userName && !gameOver ? renderReturnUser() : renderNewUserForm()}
+          {userName ? renderReturnUser() : renderNewUserForm()}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
           {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>
