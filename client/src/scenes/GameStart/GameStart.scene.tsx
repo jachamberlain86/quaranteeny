@@ -50,7 +50,7 @@ const GameStart = (): JSX.Element => {
     const cssStyle = e.target as Element;
     console.log('cssStyle', cssStyle);
     cssStyle.classList.add('slideOutLeft');
-    if (userId) {
+    if (userName) {
       // TODO finish logic to show return user here
       setTimeout(() => {
         cssStyle.classList.add('displayOff');
@@ -67,11 +67,11 @@ const GameStart = (): JSX.Element => {
   const handleChooseSpeed = (e: React.FormEvent<HTMLButtonElement>): void => {
     const { id } = e.target as Element;
     if (id === 'realTime') {
-      changeGameSpeed(1);
+      dispatch(changeGameSpeed(1));
     } else if (id === 'oneMinIsOneHour') {
-      changeGameSpeed(60);
+      dispatch(changeGameSpeed(60));
     } else if (id === 'oneMinIsOneDay') {
-      changeGameSpeed(1440);
+      dispatch(changeGameSpeed(1440));
     }
     currentChooseSpeedDivRef.classList.add('slideOutLeft');
     setTimeout(() => {
@@ -259,7 +259,7 @@ const GameStart = (): JSX.Element => {
         </div>
         <div className="bottom-row">
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
-          {userId && !gameOver ? renderReturnUser() : renderNewUserForm()}
+          {userName && !gameOver ? renderReturnUser() : renderNewUserForm()}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
           {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>

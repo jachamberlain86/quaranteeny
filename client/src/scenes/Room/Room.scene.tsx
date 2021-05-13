@@ -8,7 +8,6 @@ import useImage from 'use-image';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
 import { img } from '../../assets/library/index';
-
 import './Room.styles.css';
 import Clickables from '../clickables/clickables.component';
 
