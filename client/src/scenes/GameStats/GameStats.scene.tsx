@@ -3,7 +3,10 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { resetGamePlay } from '../../helpers/game.helper';
-import { setGameOver } from '../../features/game/gameSlice';
+import {
+  setGameOver,
+  setActiveCurrentGame,
+} from '../../features/game/gameSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
@@ -17,7 +20,7 @@ const GameStats: FC = () => {
   const handleExit = (): void => {
     resetGamePlay();
     setTimeout(() => {
-      dispatch(setGameOver());
+      dispatch(setActiveCurrentGame());
       history.push('/');
     }, 300);
   };

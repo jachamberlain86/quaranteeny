@@ -3,7 +3,10 @@ import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { changeGameSpeed } from '../../features/game/gameSlice';
+import {
+  changeGameSpeed,
+  setActiveCurrentGame,
+} from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/images/TinyJamesWalk.gif';
 
@@ -22,7 +25,9 @@ const GameStart = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { userName } = useAppSelector((state) => state.user);
-  const { gameOver, gameSpeed } = useAppSelector((state) => state.game);
+  const { activeCurrentGame, gameSpeed } = useAppSelector(
+    (state) => state.game
+  );
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   // const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
@@ -81,6 +86,7 @@ const GameStart = (): JSX.Element => {
     currentGameInfoDivRef.classList.add('slideOutDown');
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
+      dispatch(setActiveCurrentGame());
       history.push('/start');
     }, animationSpeed);
   };
@@ -162,15 +168,7 @@ const GameStart = (): JSX.Element => {
               : 'displayOff'
           }
         >
-          {gameOver ? (
-            <button
-              type="button"
-              className="nes-btn is-error rtn-btn"
-              onClick={handleNewGame}
-            >
-              New Game
-            </button>
-          ) : (
+          {activeCurrentGame ? (
             <div className="return-btn-container">
               <button
                 type="button"
@@ -187,6 +185,14 @@ const GameStart = (): JSX.Element => {
                 New Game
               </button>
             </div>
+          ) : (
+            <button
+              type="button"
+              className="nes-btn is-error rtn-btn"
+              onClick={handleNewGame}
+            >
+              New Game
+            </button>
           )}
         </div>
       </div>
