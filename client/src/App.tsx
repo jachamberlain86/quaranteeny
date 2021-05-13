@@ -18,9 +18,9 @@ const App = (): JSX.Element => {
     const userIdFromStorage = localStorage.getItem('userId');
     if (userIdFromStorage) {
       dispatch(setUserId(userIdFromStorage));
-      // dispatch(fetchUserDataAsync({ dispatch }));
+      dispatch(fetchUserDataAsync({ dispatch }));
     } else {
-      // dispatch(createUserInDbAsync({ dispatch }));
+      dispatch(createUserInDbAsync({ dispatch }));
     }
   }, [dispatch]);
 
