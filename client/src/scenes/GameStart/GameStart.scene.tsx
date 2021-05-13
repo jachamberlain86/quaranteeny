@@ -14,26 +14,26 @@ const initialState = {
 };
 
 const GameStart = (): JSX.Element => {
-  const animationSpeed = 300;
+  const animationSpeed = 400;
   const [animate, setAnimate] = useState(initialState);
   const [nameInput, setNameInput] = useState('');
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const { userId, userName } = useAppSelector((state) => state.user);
+  const { userName } = useAppSelector((state) => state.user);
   const { gameOver, gameSpeed } = useAppSelector((state) => state.game);
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
-  const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
 
+  const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
+    const input = e.currentTarget.value;
+    setNameInput(input.toUpperCase());
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     target.classList.add('slideOutLeft');
     dispatch(setUserName(nameInput));
-    // setTimeout(() => {
-    //   history.push('/start');
-    // }, 500);
     setTimeout(() => {
       setAnimate({ name: 'showChooseGameSpeed' });
       setNameInput('');
@@ -41,17 +41,10 @@ const GameStart = (): JSX.Element => {
     }, animationSpeed);
   };
 
-  const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
-    const input = e.currentTarget.value;
-    setNameInput(input);
-  };
-
   const handleStart = (e: React.FormEvent<HTMLButtonElement>): void => {
     const cssStyle = e.target as Element;
-    console.log('cssStyle', cssStyle);
     cssStyle.classList.add('slideOutLeft');
     if (userName) {
-      // TODO finish logic to show return user here
       setTimeout(() => {
         cssStyle.classList.add('displayOff');
         setAnimate({ name: 'showReturnUser' });
@@ -81,6 +74,7 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleBeginGame = (): void => {
+    const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
     currentGameInfoDivRef.classList.add('slideOutDown');
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
