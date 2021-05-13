@@ -19,7 +19,7 @@ const Room = (): JSX.Element => {
 
   const [layerA, setLayerA] = useState<JSX.Element[]>([]);
 
-  const [image] = useImage('/assets/library/walls/wall-bottom.png');
+  const [image] = useImage(img.wallImgs.wallB);
 
   const makeArray = (): JSX.Element[] => {
     const newArr = [];
