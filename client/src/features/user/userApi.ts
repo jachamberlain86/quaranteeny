@@ -1,6 +1,7 @@
 import { MetersState } from '../meters/metersSlice';
 import { GameState } from '../game/gameSlice';
 import { SpriteState } from '../sprite/spriteSlice';
+import { UserState } from './userSlice';
 
 const { REACT_APP_SERVER_PORT, REACT_APP_SERVER_HOST } = process.env;
 
@@ -47,22 +48,25 @@ export async function updateUserInDb({
   game,
   sprite,
   meters,
+  user,
 }: {
   id: string;
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
+  user: { userName: string; scores: number[] };
 }): Promise<{
   id: string;
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
+  user: { userName: string; scores: number[] };
 } | null> {
   try {
     const res = await fetch(`${baseUrl}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, game, sprite, meters }),
+      body: JSON.stringify({ id, game, sprite, meters, user }),
     });
     return await res.json();
   } catch (error) {

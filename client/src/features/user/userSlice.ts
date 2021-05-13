@@ -66,6 +66,7 @@ export const updateUserInDbAsync = createAsyncThunk<
       game,
       sprite,
       meters,
+      user,
     });
   }
 );
@@ -74,12 +75,14 @@ export interface UserState {
   userId: string;
   status: string;
   userName: string;
+  scores: number[];
 }
 
 const initialState: UserState = {
   userId: '',
   status: 'notLoaded',
   userName: '',
+  scores: [],
 };
 
 export const userSlice = createSlice({
@@ -131,6 +134,7 @@ export const startUpdatesToDb = (): AppThunk => (dispatch, getState) => {
         game,
         sprite,
         meters,
+        user: { userName: user.userName, scores: user.scores },
       });
     }
   }, 5000);
