@@ -5,6 +5,7 @@ import game from '../../data/gameMap.data';
 import {
   triggerProcessMovement,
   triggerMove,
+  triggerSetTimeMoved,
 } from '../../helpers/player.helper';
 
 function useKeyPress(targetKey: string): boolean {
@@ -35,12 +36,12 @@ const Player: FC = () => {
   const { cols, layers, tileSize } = game;
   const player = useAppSelector((store) => store.character);
 
-  // const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
-  // const [currentSecond, setCurrentSecond] = useState(0);
-  // const [frameCount, setframeCount] = useState(0);
-  // const [framesLastSecond, setframesLastSecond] = useState(0);
-  // const [lastFrameTime, setlastFrameTime] = useState(0);
-  // const [moving, setMoving] = useState(false);
+  const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
+  const [currentSecond, setCurrentSecond] = useState(0);
+  const [frameCount, setFrameCount] = useState(0);
+  const [framesLastSecond, setFramesLastSecond] = useState(0);
+  const [lastFrameTime, setLastFrameTime] = useState(0);
+  const [moving, setMoving] = useState(false);
 
   const downKey = useKeyPress('ArrowDown');
   const upKey = useKeyPress('ArrowUp');
@@ -50,13 +51,19 @@ const Player: FC = () => {
   function checkIndex(x: number, y: number): number {
     return y * cols + x;
   }
-  // triggerProcessMovement(1, 5, Date.now());
 
-  useEffect(() => {
-    // something for the animation and draw the game
-  });
+  function drawGame(): any {
+    setCurrentFrameTime(Date.now());
 
-  useEffect(() => {
+    const sec = Math.floor(Date.now());
+    if (sec !== currentSecond) {
+      setCurrentSecond(sec);
+      setFramesLastSecond(frameCount);
+      setFrameCount(1);
+    } else {
+      setFrameCount(frameCount + 1);
+    }
+    // if (player) {
     if (downKey) {
       if (
         player?.tileFrom[1] < cols - 1 &&
@@ -64,7 +71,8 @@ const Player: FC = () => {
       ) {
         console.log('player moves down');
         triggerMove('down');
-        console.log(player);
+        triggerProcessMovement(currentFrameTime);
+        // console.log(player);
       }
     }
     if (upKey) {
@@ -75,7 +83,28 @@ const Player: FC = () => {
         console.log('player moves up');
       }
     }
-  }, [downKey, upKey, leftKey, rightKey, player]);
+
+    if (
+      player.tileFrom[0] !== player.tileTo[0] ||
+      player.tileFrom[1] !== player.tileTo[1]
+    ) {
+      triggerSetTimeMoved(currentFrameTime);
+    }
+    // }
+    setLastFrameTime(currentFrameTime);
+  }
+
+  // useEffect(() => {
+  //   requestAnimationFrame(drawGame);
+  // }, [player]);
+
+  useEffect(() => {
+    if (player.isMoving) {
+      requestAnimationFrame(drawGame);
+    }
+    drawGame();
+    console.log(player);
+  }, [player.isMoving, downKey, upKey, leftKey, rightKey, player.tileTo]);
 
   return (
     <Rect

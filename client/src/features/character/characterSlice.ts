@@ -5,11 +5,11 @@ import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
 const initialState: Character = {
-  tileFrom: [2, 2],
-  tileTo: [2, 2],
+  tileFrom: [1, 1],
+  tileTo: [1, 1],
   timeMoved: 0,
   dimensions: [40, 40],
-  position: [150, 150],
+  position: [45, 45],
   delayMove: 700,
   direction: 'left',
   isMoving: false,
@@ -67,12 +67,16 @@ const characterSlice = createSlice({
         state.tileTo[1] += 1;
       }
     },
+    setTimeMoved(state, action) {
+      const currFrameTime = action.payload;
+      state.timeMoved = currFrameTime;
+    },
   },
 });
 
 // export const player = (state: RootState): Character => state.character;
 
-export const { processMovement, move } = characterSlice.actions;
+export const { processMovement, move, setTimeMoved } = characterSlice.actions;
 export default characterSlice.reducer;
 
 // placeAt(state, action) {
