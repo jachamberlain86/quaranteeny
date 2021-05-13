@@ -63,6 +63,7 @@ const characterSlice = createSlice({
     },
     move(state, action) {
       const direction = action.payload;
+      console.log(direction);
       if (direction === 'down') {
         state.tileTo[1] += 1;
         console.log(state.tileTo);
