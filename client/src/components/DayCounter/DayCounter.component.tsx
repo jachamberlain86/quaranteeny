@@ -36,19 +36,16 @@ const DayCounter = (): JSX.Element => {
   const timeSinceStart = moment(startTime).from(currClockTime, true);
   const date = moment(currClockTime).format('ll');
   const clock = moment(currClockTime).format('h:mm a');
-  const timeLasted = moment(startTime).from(timeOfDeath, true);
-  const dateDied = moment(timeOfDeath).format('ll');
-  const clockStopped = moment(timeOfDeath).format('h:mm a');
   return (
     <div className="conNum">
       <div className="numHeader">
         <p>Survived lockdown for:</p>
       </div>
       <div className="numOfDays">
-        <h2>{gameOver ? timeLasted : timeSinceStart}</h2>
+        <h2>{timeSinceStart}</h2>
       </div>
-      <div className="date"> {gameOver ? dateDied : date} </div>
-      <div className="clock"> {gameOver ? clockStopped : clock} </div>
+      <div className="date"> {date} </div>
+      <div className="clock"> {clock} </div>
     </div>
   );
 };
