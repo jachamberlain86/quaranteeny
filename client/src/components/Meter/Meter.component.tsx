@@ -3,6 +3,7 @@ import { useAppSelector } from '../../app/hooks';
 import { MetersState } from '../../features/meters/metersSlice';
 import { calcPercentage } from '../../helpers/game.helper';
 import { meters } from '../../data/meters.data';
+import './Meter.styles.css';
 
 type MeterProps = {
   meterName: string;
@@ -14,21 +15,38 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
     (state) => state.meters[meterName as keyof MetersState].value
   );
 
+  const meterWarningValue = 20;
+  const meterExcellentValue = 90;
   const meterValue = calcPercentage(currentValue, meter.max);
+  const meterColor = (): string => {
+    if (meterValue <= meterWarningValue) {
+      return 'nes-progress is-error meter';
+    }
+    if (meterValue > meterWarningValue && meterValue < meterExcellentValue) {
+      return 'nes-progress is-primary meter';
+    }
+    return 'nes-progress is-warning meter';
+  };
 
   const renderMeter =
     meterName === 'money' ? (
-      <div>
+      <div className="meter-container meter-text">
         {meterName}: £{currentValue}
       </div>
     ) : (
-      <div>
-        {meterName}: {meterValue}%
-        <progress
-          className="nes-progress is-primary"
-          value={meterValue}
-          max={100}
-        />
+      <div className="meter-container">
+        <div
+          className={
+            meterValue <= meterWarningValue
+              ? 'meter-text-warning meter-text'
+              : 'meter-text'
+          }
+        >
+          {meterName}: {meterValue}%
+        </div>
+        <div className={meterValue <= meterWarningValue ? 'meter-warning' : ''}>
+          <progress className={meterColor()} value={meterValue} max={100} />
+        </div>
       </div>
     );
 
