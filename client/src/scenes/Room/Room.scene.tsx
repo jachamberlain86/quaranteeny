@@ -32,6 +32,7 @@ const Room = (): JSX.Element => {
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
                 image={image}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
               />
@@ -42,6 +43,7 @@ const Room = (): JSX.Element => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="pink"

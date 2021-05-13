@@ -13,6 +13,7 @@ import {
   selectUserStatus,
   startUpdatesToDb,
 } from '../../features/user/userSlice';
+import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
   checkLoseStates,
@@ -44,6 +45,8 @@ const Game = (): JSX.Element => {
       checkConditionsState();
       checkLoseStates();
       decayMeters(meters);
+      window.addEventListener('keydown', downHandler);
+      window.addEventListener('keyup', upHandler);
     }
   }, [dispatch, userLoadingStatus]);
 
