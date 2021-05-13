@@ -15,6 +15,7 @@ import {
   selectUserStatus,
   startUpdatesToDb,
 } from '../../features/user/userSlice';
+import { upHandler, downHandler } from '../../helpers/input.helper';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,8 @@ const Game = (): JSX.Element => {
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
       dispatch(startUpdatesToDb());
+      window.addEventListener('keydown', downHandler);
+      window.addEventListener('keyup', upHandler);
     }
   }, [dispatch, userLoadingStatus]);
 
