@@ -1,25 +1,15 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { resetGameState } from '../../features/game/gameSlice';
-import { resetMeters } from '../../features/meters/metersSlice';
-import { resetSprite } from '../../features/sprite/spriteSlice';
-import { resetCharacter } from '../../features/character/characterSlice';
+import { useAppSelector } from '../../app/hooks';
+import { resetGamePlay } from '../../helpers/game.helper';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
   const { timeLasted } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
 
-  const resetGamePlay = (): void => {
-    dispatch(resetGameState());
-    dispatch(resetMeters());
-    dispatch(resetSprite());
-    dispatch(resetCharacter());
-  };
   const handleExit = (): void => {
     resetGamePlay();
     history.push('/');
