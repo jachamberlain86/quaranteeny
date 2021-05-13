@@ -14,9 +14,9 @@ export interface GameState {
 
 const initialState: GameState = {
   gameSpeed: 100,
-  startTime: Date.now(),
-  currClockTimeInGame: Date.now(),
-  currClockTimeReal: Date.now(),
+  startTime: 0,
+  currClockTimeInGame: 0,
+  currClockTimeReal: 0,
   clockIntervalId: null,
   gameOver: false,
   timeLasted: 0,
@@ -28,6 +28,9 @@ export const gameSlice = createSlice({
   reducers: {
     changeGameSpeed: (state, action: PayloadAction<number>) => {
       state.gameSpeed = action.payload;
+    },
+    setStartTime: (state, action: PayloadAction<number>) => {
+      state.startTime = action.payload;
     },
     updateClockTime: (
       state,
@@ -66,6 +69,7 @@ export const gameSlice = createSlice({
 
 export const {
   changeGameSpeed,
+  setStartTime,
   updateClockTime,
   setClockIntervalId,
   setGameOver,
