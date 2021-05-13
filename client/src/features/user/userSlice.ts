@@ -92,6 +92,9 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    addNewScore: (state, action: PayloadAction<number>) => {
+      state.scores.push(action.payload);
+    },
     loadUserStateFromDb: (state, action: PayloadAction<UserStateInDb>) => {
       state.userName = action.payload.userName;
       state.scores = action.payload.scores;
@@ -126,6 +129,7 @@ export const {
   setUserId,
   setUserName,
   loadUserStateFromDb,
+  addNewScore,
 } = userSlice.actions;
 
 export const selectUser = (state: RootState): string => state.user.userId;
