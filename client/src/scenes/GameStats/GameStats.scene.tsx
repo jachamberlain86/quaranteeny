@@ -15,12 +15,11 @@ const GameStats: FC = () => {
   const { timeLasted } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
 
-  // On exit, the game should still be over,
-  // which is why we call setGameOver() again after resetGamePlay()
   const handleExit = (): void => {
     resetGamePlay();
     setTimeout(() => {
-      dispatch(setActiveCurrentGame());
+      // TODO delete: here for testing purposes
+      // dispatch(setActiveCurrentGame());
       history.push('/');
     }, 300);
   };

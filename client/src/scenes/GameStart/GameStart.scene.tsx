@@ -99,6 +99,10 @@ const GameStart = (): JSX.Element => {
     // history.push('/start');
   };
 
+  const handleContinueGame = (): void => {
+    history.push('/start');
+  };
+
   const renderStartBtn = (): JSX.Element => {
     return (
       <button
@@ -173,7 +177,7 @@ const GameStart = (): JSX.Element => {
               <button
                 type="button"
                 className="nes-btn is-warning rtn-btn"
-                onClick={handleNewGame}
+                onClick={handleContinueGame}
               >
                 Continue Game
               </button>
