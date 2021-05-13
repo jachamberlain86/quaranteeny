@@ -29,10 +29,10 @@
 }
 .start-btn {
   font-size: 2rem;
-  width: 50%;
-  position: absolute;
+  width: 40%;
+  /* position: absolute;
   top: 100%;
-  left: 25%
+  left: 25% */
 }
 
 .return-btn-container{
@@ -51,12 +51,45 @@
 
 .rtn-btn {
   width: 45%;
+  transition: 
+    transform 200ms ease-in-out,
+    box-shadow 200ms ease-in-out;
   /* min-height: 100%; */
 }
 
 .rtn-btn:hover {
   transform: translateY(-5%) scale(1.05);
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.541);
+}
+
+.choose-speed-title{
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: white;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.speed-btn-container{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem auto;
+}
+
+.speed-btn {
+  width: 30%;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  transition: 
+    transform 100ms ease-in-out,
+    box-shadow 100ms ease-in-out;
+}
+
+.speed-btn:hover {
+  transform: translateY(-5%) scale(1.03);
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.603);
 }
 
 .form {
@@ -91,17 +124,24 @@
   /* //todo animate our sprite */
 }
 
-.slideOut{
-  animation: slideOut 600ms ease-in-out 1 normal;
+:root {
+  --slideAnimationSpeed: 400ms;
 }
 
+.slideOut{
+  animation: slideOut var(--slideAnimationSpeed) ease-in-out 1 normal;
+}
 
 .slideIn{
-  animation: slideIn 600ms ease-in-out 1 normal;
+  animation: slideIn var(--slideAnimationSpeed) ease-in-out 1 normal;
 }
 
 .slideInFromLeft{
-  animation: slideInFromLeft 600ms ease-in-out 1 normal;
+  animation: slideInFromLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
+}
+
+.slideOutLeft{
+animation: slideOutLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
 }
 
 .displayOff {
@@ -126,6 +166,7 @@
   }
 }
 
+/* Just for the start button */
 @keyframes slideOut {
   0% {
     left: 25%;
@@ -150,5 +191,14 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
   }
 }
