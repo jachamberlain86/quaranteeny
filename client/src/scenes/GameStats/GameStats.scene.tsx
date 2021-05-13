@@ -29,7 +29,6 @@ const GameStats: FC = () => {
   };
   const handleExit = (): void => {
     resetGamePlay();
-    dispatch(setUserName(''));
     history.push('/');
   };
   const handleResetGame = (): void => {

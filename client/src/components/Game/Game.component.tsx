@@ -15,30 +15,27 @@ import {
   selectUserStatus,
   startUpdatesToDb,
 } from '../../features/user/userSlice';
-
 import {
   checkLoseStates,
   checkConditionsState,
 } from '../../helpers/sprite.helper';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
-
 import { meters } from '../../data/meters.data';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
+  const { userId } = useAppSelector((state) => state.user);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
     if (userId) {
-      dispatch(setUserId(userId));
       dispatch(fetchUserDataAsync({ dispatch }));
     } else {
       dispatch(createUserInDbAsync({ dispatch }));
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
       dispatch(startUpdatesToDb());

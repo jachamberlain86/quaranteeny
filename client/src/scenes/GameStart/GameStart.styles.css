@@ -27,7 +27,7 @@
   font-size: 3.5rem;
   margin-bottom: 2rem;
 }
-.game-start-page button {
+.start-btn {
   font-size: 2rem;
   width: 50%;
   position: absolute;
@@ -35,13 +35,22 @@
   left: 25%
 }
 
-.slideOut{
-  animation: slideOut 600ms ease-in-out 1 normal;
+.return-btn-container{
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin: 0 auto;
+  font-size: 1.8rem;
 }
 
+.rtn-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: white;
+}
 
-.slideIn{
-  animation: slideIn 600ms ease-in-out 1 normal;
+.rtn-btn {
+  width: 45%;
 }
 
 .form {
@@ -71,7 +80,20 @@
 }
 
 .animate {
-/* //todo animate our sprite */
+  /* //todo animate our sprite */
+}
+
+.slideOut{
+  animation: slideOut 600ms ease-in-out 1 normal;
+}
+
+
+.slideIn{
+  animation: slideIn 600ms ease-in-out 1 normal;
+}
+
+.slideInFromLeft{
+  animation: slideInFromLeft 600ms ease-in-out 1 normal;
 }
 
 .displayOff {
@@ -108,6 +130,15 @@
 @keyframes slideIn {
   0% {
     transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100vw);
   }
   100% {
     transform: translateX(0);
