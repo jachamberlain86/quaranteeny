@@ -20,12 +20,12 @@ export const fetchUserDataAsync = createAsyncThunk<
   async ({ dispatch }) => {
     const userData = await fetchUserData();
     if (userData) {
-      const { meters, game, sprite } = userData;
+      const { meters, game, sprite, user } = userData;
       dispatch(loadMetersStateFromDb(meters));
       dispatch(loadGameStateFromDb(game));
       dispatch(loadSpriteStateFromDb(sprite));
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      // dispatch(startUpdatesToDb());
+      dispatch(loadUserStateFromDb(user));
     }
     return userData;
   }
@@ -70,7 +70,10 @@ export const updateUserInDbAsync = createAsyncThunk<
     });
   }
 );
-
+export interface UserStateInDb {
+  userName: string;
+  scores: number[];
+}
 export interface UserState {
   userId: string;
   status: string;
@@ -89,6 +92,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    loadUserStateFromDb: (state, action: PayloadAction<UserStateInDb>) => {
+      state.userName = action.payload.userName;
+      state.scores = action.payload.scores;
+    },
     setUserId: (state, action: PayloadAction<string>) => {
       state.userId = action.payload;
     },
@@ -115,7 +122,11 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserId, setUserName } = userSlice.actions;
+export const {
+  setUserId,
+  setUserName,
+  loadUserStateFromDb,
+} = userSlice.actions;
 
 export const selectUser = (state: RootState): string => state.user.userId;
 export const selectUserStatus = (state: RootState): string => state.user.status;

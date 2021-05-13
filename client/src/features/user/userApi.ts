@@ -1,7 +1,7 @@
 import { MetersState } from '../meters/metersSlice';
 import { GameState } from '../game/gameSlice';
 import { SpriteState } from '../sprite/spriteSlice';
-import { UserState } from './userSlice';
+import { UserStateInDb } from './userSlice';
 
 const { REACT_APP_SERVER_PORT, REACT_APP_SERVER_HOST } = process.env;
 
@@ -12,6 +12,7 @@ export async function fetchUserData(): Promise<{
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
+  user: UserStateInDb;
 } | null> {
   try {
     const userId = localStorage.getItem('userId');
@@ -54,13 +55,13 @@ export async function updateUserInDb({
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
-  user: { userName: string; scores: number[] };
+  user: UserStateInDb;
 }): Promise<{
   id: string;
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
-  user: { userName: string; scores: number[] };
+  user: UserStateInDb;
 } | null> {
   try {
     const res = await fetch(`${baseUrl}/users`, {
