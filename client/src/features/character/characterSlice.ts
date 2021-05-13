@@ -65,6 +65,7 @@ const characterSlice = createSlice({
       const direction = action.payload;
       if (direction === 'down') {
         state.tileTo[1] += 1;
+        console.log(state.tileTo);
       }
     },
     setTimeMoved(state, action) {

@@ -9,6 +9,8 @@ export function triggerProcessMovement(t: number): void {
   store.dispatch(processMovement({ time: t }));
 }
 export function triggerMove(direction: string): void {
+  console.log('this called');
+
   store.dispatch(move(direction));
 }
 

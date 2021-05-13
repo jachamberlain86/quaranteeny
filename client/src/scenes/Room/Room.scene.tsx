@@ -35,6 +35,7 @@ const Room: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="blue"
@@ -46,6 +47,7 @@ const Room: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="pink"

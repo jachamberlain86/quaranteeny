@@ -29,6 +29,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="yellow"
@@ -41,6 +42,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="purple"
@@ -53,6 +55,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="orange"
@@ -65,6 +68,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
               />
