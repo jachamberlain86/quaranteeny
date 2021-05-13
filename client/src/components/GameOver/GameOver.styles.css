@@ -3,12 +3,12 @@
 :root {
   --topPosition: 15%;
   --leftPosition: 35%;
-  --squareSize: 35vw
+  --squareSize: 25vw
 }
 
 .game-over-container {
-  width: var(--squareSize);
-  height: var(--squareSize);
+  /* min-width: var(--squareSize);
+  min-height: var(--squareSize); */
   position: absolute;
   top: var(--topPosition);
   left: var(--leftPosition);
@@ -17,8 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  box-shadow: 0 0 10px 15px black;
+  box-shadow: 0 0 20px 5px black;
   animation: dropDown 600ms ease-in-out 1 normal;
 }
 
@@ -26,8 +25,9 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  text-align: center;
   position: relative;
 }
 
@@ -38,10 +38,7 @@
 }
 
 .continue-btn {
-  position: absolute;
-  bottom: 20%;
-  left: 25%;
-  width: 50%;
+  width: 80%;
   padding: .5rem 1rem;
   font-size: 1.5rem;
 }

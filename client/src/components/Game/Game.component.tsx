@@ -5,40 +5,42 @@ import Room from '../../scenes/Room/Room.scene';
 import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
-import Player from '../../scenes/Player/player.component';
 import GameOver from '../GameOver/GameOver.component';
-import CanvasContext from '../../scenes/Player/canvasContext';
 import {
-  fetchUserDataAsync,
-  createUserInDbAsync,
-  setUserId,
   selectUserStatus,
   startUpdatesToDb,
 } from '../../features/user/userSlice';
+import { upHandler, downHandler } from '../../helpers/input.helper';
+
+import {
+  checkLoseStates,
+  checkConditionsState,
+} from '../../helpers/sprite.helper';
+import { startClock } from '../../helpers/game.helper';
+import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
+import { meters } from '../../data/meters.data';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
-
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      dispatch(setUserId(userId));
-      dispatch(fetchUserDataAsync({ dispatch }));
-    } else {
-      dispatch(createUserInDbAsync({ dispatch }));
-    }
-  }, [dispatch]);
-  useEffect(() => {
-    if (userLoadingStatus === 'userLoaded') {
-      dispatch(startUpdatesToDb());
-    }
-  }, [dispatch, userLoadingStatus]);
-
   const { gameOver } = useAppSelector((state) => state.game);
-  // TODO find a better solution to this forbidden non-null assertion
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
+
+  useEffect(() => {
+    if (userLoadingStatus === 'userLoaded' && !gameOver) {
+      dispatch(startUpdatesToDb());
+      startClock();
+      checkMeterStates();
+      checkConditionsState();
+      checkLoseStates();
+      decayMeters(meters);
+      window.addEventListener('keydown', downHandler);
+      window.addEventListener('keyup', upHandler);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, userLoadingStatus]);
+
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {
       if (currentGameScreen && gameOver) {
@@ -48,6 +50,7 @@ const Game = (): JSX.Element => {
     return () => {
       clearTimeout(id);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
   return (

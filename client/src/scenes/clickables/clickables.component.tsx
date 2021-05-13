@@ -1,25 +1,25 @@
 /* eslint-disable no-plusplus */
-import React, { FC, useEffect, useContext, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Line } from 'react-konva';
-import { useAppSelector } from '../../app/hooks';
+import React, { useEffect, useState } from 'react';
+import { Layer, Rect } from 'react-konva';
+import Konva from 'konva';
 import game from '../../data/gameMap.data';
 
-const Clickables: FC = () => {
+const Clickables = (): JSX.Element => {
   const { cols, layers, tileSize } = game;
 
-  const [layerC, setLayerC] = useState<any[] | []>([]);
+  const [layerC, setLayerC] = useState<JSX.Element[]>([]);
 
-  const handleClickYellow = (e: any): void => {
-    console.log('clicked this yellow box');
+  const handleClickYellow = (e: Konva.KonvaEventObject<MouseEvent>): void => {
+    console.log('clicked this yellow box ', e);
   };
-  const handleClickPurple = (e: any): void => {
-    console.log('clicked this purple box');
+  const handleClickPurple = (e: Konva.KonvaEventObject<MouseEvent>): void => {
+    console.log('clicked this purple box ', e);
   };
-  const handleClickOrange = (e: any): void => {
-    console.log('clicked this orange box');
+  const handleClickOrange = (e: Konva.KonvaEventObject<MouseEvent>): void => {
+    console.log('clicked this orange box ', e);
   };
 
-  const makeArray = (): any[] => {
+  const makeArray = (): JSX.Element[] => {
     const newArr = [];
     for (let yAxis = 0; yAxis < cols; yAxis++) {
       for (let xAxis = 0; xAxis < cols; xAxis++) {
@@ -29,6 +29,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="yellow"
@@ -41,6 +42,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="purple"
@@ -53,6 +55,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
                 fill="orange"
@@ -65,6 +68,7 @@ const Clickables: FC = () => {
               <Rect
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                key={`${xAxis}, ${yAxis}`}
                 height={tileSize}
                 width={tileSize}
               />

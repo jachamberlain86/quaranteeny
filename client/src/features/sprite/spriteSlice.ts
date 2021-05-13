@@ -25,6 +25,7 @@ export const spriteSlice = createSlice({
   name: 'sprite',
   initialState,
   reducers: {
+    resetSprite: () => initialState,
     changeInteraction: (state, action: PayloadAction<string | null>) => {
       state.currentInteraction = action.payload;
     },
@@ -74,6 +75,7 @@ export const spriteSlice = createSlice({
 });
 
 export const {
+  resetSprite,
   changeInteraction,
   addCondition,
   removeCondition,

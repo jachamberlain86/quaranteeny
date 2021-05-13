@@ -1,31 +1,31 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
-import { setUserName, setGameOver } from '../../features/game/gameSlice';
-import { decayMeters, checkMeterStates } from '../../helpers/meters.helper';
-import { meters } from '../../data/meters.data';
-import { startClock } from '../../helpers/game.helper';
-import {
-  checkLoseStates,
-  checkConditionsState,
-} from '../../helpers/sprite.helper';
+import moment from 'moment';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { resetGameState } from '../../features/game/gameSlice';
+import { resetMeters } from '../../features/meters/metersSlice';
+import { resetSprite } from '../../features/sprite/spriteSlice';
+import { resetCharacter } from '../../features/character/characterSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const { timeLasted } = useAppSelector((state) => state.game);
+  const timeLastedPretty = moment.duration(timeLasted).humanize();
+
+  const resetGamePlay = (): void => {
+    dispatch(resetGameState());
+    dispatch(resetMeters());
+    dispatch(resetSprite());
+    dispatch(resetCharacter());
+  };
   const handleExit = (): void => {
-    dispatch(setGameOver());
-    dispatch(setUserName(''));
+    resetGamePlay();
     history.push('/');
   };
   const handleResetGame = (): void => {
-    checkLoseStates();
-    checkConditionsState();
-    checkMeterStates();
-    startClock();
-    decayMeters(meters);
-    dispatch(setGameOver());
+    resetGamePlay();
     history.push('/start');
   };
 
@@ -36,11 +36,16 @@ const GameStats: FC = () => {
           <h1>game stats</h1>
         </div>
         <div className="game-stats-sub-container">
-          <h2>Here´s how you did</h2>
-          <h3>time spent</h3>
-          <span>too much</span>
-          <h3>seomthing else...</h3>
-          <h3>seomthing else...</h3>
+          {timeLastedPretty && (
+            <h2>Your character survived for {timeLastedPretty}</h2>
+          )}
+          <h3>List of top times</h3>
+          <ol className="nes-list is-circle score-list">
+            <li>best score</li>
+            <li>2nd best score</li>
+            <li>etc...</li>
+          </ol>
+          <p>Had enough, or are you ready to beat the quarantine?</p>
         </div>
         <div className="game-stats-btn-container">
           <button

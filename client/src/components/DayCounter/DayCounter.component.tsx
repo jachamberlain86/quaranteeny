@@ -5,20 +5,21 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   selectClockTimeInGame,
   selectStartTime,
+  setTimeLasted,
 } from '../../features/game/gameSlice';
-import { startClock } from '../../helpers/game.helper';
-import { selectUserStatus } from '../../features/user/userSlice';
 
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const userLoadingStatus = useAppSelector(selectUserStatus);
-  useEffect(() => {
-    if (userLoadingStatus === 'userLoaded') {
-      startClock();
-    }
-  }, [dispatch, userLoadingStatus]);
+  const { gameOver } = useAppSelector((state) => state.game);
+  const { userName } = useAppSelector((state) => state.user);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTimeInGame);
+  useEffect(() => {
+    if (gameOver) {
+      dispatch(setTimeLasted(currClockTime - startTime));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameOver]);
 
   const timeSinceStart = moment(startTime).from(currClockTime, true);
   const date = moment(currClockTime).format('ll');
@@ -26,7 +27,11 @@ const DayCounter = (): JSX.Element => {
   return (
     <div className="conNum">
       <div className="numHeader">
-        <p>Survived lockdown for:</p>
+        {userName ? (
+          <p>{userName}, you have survived lockdown for:</p>
+        ) : (
+          <p>You have survived lockdown for:</p>
+        )}
       </div>
       <div className="numOfDays">
         <h2>{timeSinceStart}</h2>

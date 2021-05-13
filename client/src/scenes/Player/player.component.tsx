@@ -1,76 +1,55 @@
-import React, { FC, useEffect, useContext, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Line } from 'react-konva';
+import React, { useEffect, useState } from 'react';
+import { Rect } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
-import { triggerPlaceAt } from '../../helpers/player.helper';
+import { triggerSetTimeMoved } from '../../helpers/player.helper';
+import {
+  selectMovePos,
+  selectCurPos,
+  selectCharacter,
+} from '../../features/character/characterSlice';
+import { store } from '../../app/store';
 
-const Player: FC = () => {
-  const player = useAppSelector((store) => store.character);
-
-  const [currentFrameTime, setCurrentFrameTime] = useState(0);
+const Player = (): JSX.Element => {
+  const [currentFrameTime, setCurrentFrameTime] = useState(Date.now());
   const [currentSecond, setCurrentSecond] = useState(0);
-  const [frameCount, setframeCount] = useState(0);
-  const [framesLastSecond, setframesLastSecond] = useState(0);
-  const [lastFrameTime, setlastFrameTime] = useState(0);
+  const [frameCount, setFrameCount] = useState(0);
+  const [framesLastSecond, setFramesLastSecond] = useState(0);
+  const [lastFrameTime, setLastFrameTime] = useState(0);
   const [moving, setMoving] = useState(false);
 
-    window.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowDown') {
-        triggerPlaceAt(1, 1, 'left');
-  const downKey = useKeyPress('ArrowDown');
-  const leftKey = useKeyPress('ArrowLeft');
-  const rightKey = useKeyPress('ArrowRight');
-
-  function checkIndex(x: number, y: number): number {
-    return y * cols + x;
-  }
+  const movePos = useAppSelector(selectMovePos);
+  const curPos = useAppSelector(selectCurPos);
+  const character = useAppSelector(selectCharacter);
 
   function drawGame(): any {
     setCurrentFrameTime(Date.now());
 
-    const sec = Math.floor(Date.now() / 1000);
+    const sec = Math.floor(Date.now());
     if (sec !== currentSecond) {
       setCurrentSecond(sec);
-      setFramesLastSecond(frameCount);
+      // setFramesLastSecond(frameCount);
       setFrameCount(1);
     } else {
       setFrameCount(frameCount + 1);
     }
 
-    if (!player.isMoving) {
-      const timer: any = null;
-      if (downKey === true) {
-        // timer = setInterval(() => {
-        if (
-          player?.tileFrom[1] < cols - 1 &&
-          layers[0][checkIndex(player.tileFrom[0], player.tileFrom[1] + 1)] ===
-            1
-        ) {
-          console.log('player moves down');
-          console.log(downKey);
-          triggerMove('down');
-          // triggerProcessMovement(currentSecond);
-        }
-        // }, 500);
-        // } else {
-        //   clearInterval(timer);
-      }
-      if (e.key === 'ArrowUp') {
-      }
-      if (e.key === 'ArrowLeft') {
-        console.log('left');
-      }
-      if (e.key === 'ArrowRight') {
-        console.log('right');
-      }
-    });
+    if (curPos[0] !== movePos[0] || curPos[1] !== movePos[1]) {
+      triggerSetTimeMoved(currentFrameTime);
+    }
+    setLastFrameTime(currentFrameTime);
+    // requestAnimationFrame(drawGame);
+  }
+
+  useEffect(() => {
+    drawGame();
   }, []);
 
   return (
     <Rect
-      x={player.position[0]}
-      y={player.position[1]}
-      height={player.dimensions[0]}
-      width={player.dimensions[1]}
+      x={character.position[0]}
+      y={character.position[1]}
+      height={character.dimensions[0]}
+      width={character.dimensions[1]}
       fill="red"
     />
   );

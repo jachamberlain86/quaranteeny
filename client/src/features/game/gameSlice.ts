@@ -6,26 +6,32 @@ export interface GameState {
   gameSpeed: number;
   currClockTimeInGame: number;
   currClockTimeReal: number;
+  clockIntervalId: NodeJS.Timeout | null;
   startTime: number;
   gameOver: boolean;
-  userName: string;
+  timeLasted: number;
 }
 
 const initialState: GameState = {
   gameSpeed: 100,
-  startTime: Date.now(),
-  currClockTimeInGame: Date.now(),
-  currClockTimeReal: Date.now(),
+  startTime: 0,
+  currClockTimeInGame: 0,
+  currClockTimeReal: 0,
+  clockIntervalId: null,
   gameOver: false,
-  userName: '',
+  timeLasted: 0,
 };
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    resetGameState: () => initialState,
     changeGameSpeed: (state, action: PayloadAction<number>) => {
       state.gameSpeed = action.payload;
+    },
+    setStartTime: (state, action: PayloadAction<number>) => {
+      state.startTime = action.payload;
     },
     updateClockTime: (
       state,
@@ -37,6 +43,12 @@ export const gameSlice = createSlice({
       const timeSinceStartReal = state.currClockTimeReal - state.startTime;
       const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
       state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
+    },
+    setClockIntervalId: (
+      state,
+      action: PayloadAction<NodeJS.Timeout | null>
+    ) => {
+      state.clockIntervalId = action.payload;
     },
     setGameOver: (state) => {
       state.gameOver = !state.gameOver;
@@ -50,18 +62,21 @@ export const gameSlice = createSlice({
       state.startTime = action.payload.startTime;
       state.currClockTimeInGame = action.payload.currClockTimeInGame;
     },
-    setUserName: (state, action: PayloadAction<string>) => {
-      state.userName = action.payload;
+    setTimeLasted: (state, action: PayloadAction<number>) => {
+      state.timeLasted = action.payload;
     },
   },
 });
 
 export const {
+  resetGameState,
   changeGameSpeed,
+  setStartTime,
   updateClockTime,
+  setClockIntervalId,
   setGameOver,
   loadGameStateFromDb,
-  setUserName,
+  setTimeLasted,
 } = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
@@ -72,8 +87,14 @@ export const selectStartTime = (state: RootState): number =>
 
 export const selectClockTimeInGame = (state: RootState): number =>
   state.game.currClockTimeInGame;
+
 export const selectClockTimeReal = (state: RootState): number =>
   state.game.currClockTimeReal;
+
+export const selectClockIntervalId = (
+  state: RootState
+): NodeJS.Timeout | null => state.game.clockIntervalId;
+
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;
 

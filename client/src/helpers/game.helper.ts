@@ -1,14 +1,29 @@
 import { store } from '../app/store';
-import { updateClockTime } from '../features/game/gameSlice';
+import {
+  updateClockTime,
+  selectGameOver,
+  selectStartTime,
+  setStartTime,
+} from '../features/game/gameSlice';
 import { second } from '../data/time.data';
 
 export const startClock = (): void => {
-  setInterval(() => {
-    store.dispatch(
-      updateClockTime({
-        currTimeReal: Date.now(),
-      })
-    );
+  const startTime = selectStartTime(store.getState());
+  // Set startTime to now if it's not already set. Otherwise leave it as is
+  // since game is in progress.
+  if (startTime === 0) {
+    store.dispatch(setStartTime(Date.now()));
+  }
+  const clockIntervalId: NodeJS.Timeout = setInterval(() => {
+    const gameOver = selectGameOver(store.getState());
+    if (gameOver) clearInterval(clockIntervalId);
+    else {
+      store.dispatch(
+        updateClockTime({
+          currTimeReal: Date.now(),
+        })
+      );
+    }
   }, second);
 };
 

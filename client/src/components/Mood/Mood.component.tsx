@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './Mood.styles.css';
 import { useAppSelector } from '../../app/hooks';
 
-const Mood: FC = () => {
+const Mood = (): JSX.Element => {
   const conditions: string[] = useAppSelector(
     (state) => state.sprite.conditions
   );

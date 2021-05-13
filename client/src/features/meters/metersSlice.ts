@@ -60,6 +60,7 @@ export const metersSlice = createSlice({
   name: 'meters',
   initialState,
   reducers: {
+    resetMeters: () => initialState,
     increaseMeter: (state, action: PayloadAction<MeterChange>) => {
       const meter = state[action.payload.name as keyof MetersState];
       const incRate = selectIncRate(state, action.payload.name);
@@ -121,6 +122,7 @@ export const metersSlice = createSlice({
 });
 
 export const {
+  resetMeters,
   increaseMeter,
   decreaseMeter,
   addModifier,
