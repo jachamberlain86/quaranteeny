@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { resetGameState } from '../../features/game/gameSlice';
-import { resetMeters } from '../../features/meters/metersSlice';
-import { resetSprite } from '../../features/sprite/spriteSlice';
-import { resetCharacter } from '../../features/character/characterSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { resetGamePlay } from '../../helpers/game.helper';
+import { setGameOver } from '../../features/game/gameSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
@@ -14,15 +12,14 @@ const GameStats: FC = () => {
   const { timeLasted } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
 
-  const resetGamePlay = (): void => {
-    dispatch(resetGameState());
-    dispatch(resetMeters());
-    dispatch(resetSprite());
-    dispatch(resetCharacter());
-  };
+  // On exit, the game should still be over,
+  // which is why we call setGameOver() again after resetGamePlay()
   const handleExit = (): void => {
     resetGamePlay();
-    history.push('/');
+    setTimeout(() => {
+      dispatch(setGameOver());
+      history.push('/');
+    }, 300);
   };
   const handleResetGame = (): void => {
     resetGamePlay();

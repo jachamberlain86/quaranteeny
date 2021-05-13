@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { changeGameSpeed } from '../../features/game/gameSlice';
+import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/images/TinyJamesWalk.gif';
 
 interface initialState {
@@ -14,26 +15,27 @@ const initialState = {
 };
 
 const GameStart = (): JSX.Element => {
-  const animationSpeed = 300;
+  const animationSpeed = 400;
+  // TODO change animate variable name
   const [animate, setAnimate] = useState(initialState);
   const [nameInput, setNameInput] = useState('');
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const { userId, userName } = useAppSelector((state) => state.user);
+  const { userName } = useAppSelector((state) => state.user);
   const { gameOver, gameSpeed } = useAppSelector((state) => state.game);
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
-  const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
 
+  const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
+    const input = e.currentTarget.value;
+    setNameInput(input.toUpperCase());
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     target.classList.add('slideOutLeft');
     dispatch(setUserName(nameInput));
-    // setTimeout(() => {
-    //   history.push('/start');
-    // }, 500);
     setTimeout(() => {
       setAnimate({ name: 'showChooseGameSpeed' });
       setNameInput('');
@@ -41,17 +43,10 @@ const GameStart = (): JSX.Element => {
     }, animationSpeed);
   };
 
-  const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
-    const input = e.currentTarget.value;
-    setNameInput(input);
-  };
-
   const handleStart = (e: React.FormEvent<HTMLButtonElement>): void => {
     const cssStyle = e.target as Element;
-    console.log('cssStyle', cssStyle);
     cssStyle.classList.add('slideOutLeft');
     if (userName) {
-      // TODO finish logic to show return user here
       setTimeout(() => {
         cssStyle.classList.add('displayOff');
         setAnimate({ name: 'showReturnUser' });
@@ -81,11 +76,17 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleBeginGame = (): void => {
+    const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
     currentGameInfoDivRef.classList.add('slideOutDown');
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
       history.push('/start');
     }, animationSpeed);
+  };
+
+  const handleNewGame = (): void => {
+    resetGamePlay();
+    history.push('/start');
   };
 
   const renderStartBtn = (): JSX.Element => {
@@ -170,7 +171,11 @@ const GameStart = (): JSX.Element => {
               >
                 Continue Game
               </button>
-              <button type="button" className="nes-btn is-error rtn-btn">
+              <button
+                type="button"
+                className="nes-btn is-error rtn-btn"
+                onClick={handleNewGame}
+              >
                 New Game
               </button>
             </div>
@@ -259,7 +264,7 @@ const GameStart = (): JSX.Element => {
         </div>
         <div className="bottom-row">
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
-          {userName && !gameOver ? renderReturnUser() : renderNewUserForm()}
+          {userName ? renderReturnUser() : renderNewUserForm()}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
           {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>
