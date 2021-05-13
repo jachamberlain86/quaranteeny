@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setUserName, setGameOver } from '../../features/game/gameSlice';
+import { setGameOver } from '../../features/game/gameSlice';
+import { setUserName } from '../../features/user/userSlice';
 import { decayMeters, checkMeterStates } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import { startClock } from '../../helpers/game.helper';

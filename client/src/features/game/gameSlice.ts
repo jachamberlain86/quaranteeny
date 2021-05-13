@@ -52,9 +52,9 @@ export const gameSlice = createSlice({
       state.startTime = action.payload.startTime;
       state.currClockTimeInGame = action.payload.currClockTimeInGame;
     },
-    setUserName: (state, action: PayloadAction<string>) => {
-      state.userName = action.payload;
-    },
+    // setUserName: (state, action: PayloadAction<string>) => {
+    //   state.userName = action.payload;
+    // },
     setTimeLasted: (state, action: PayloadAction<string>) => {
       state.timeLasted = action.payload;
     },
@@ -66,7 +66,6 @@ export const {
   updateClockTime,
   setGameOver,
   loadGameStateFromDb,
-  setUserName,
   setTimeLasted,
 } = gameSlice.actions;
 
