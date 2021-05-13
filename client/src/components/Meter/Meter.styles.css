@@ -1,42 +1,71 @@
-@import '../node_modules/nes.css/css/nes.css';
+@import '../../../node_modules/nes.css/css/nes.css';
 
-.borderFlash {
-  animation: borderFlash 1000 linear infinite alternate-reverse;
+:root {
+  --nes-yellow: #F7D51E;
+  --nes-red: #E86E54;
+}
+
+.meter-container {
+  margin: .5rem;
+}
+
+.meter{
+  /* padding: .25rem; */
+  padding: .5rem 1rem;
+  width: 90%;
+  margin: .65rem .5rem .5rem .5rem;
+}
+
+.meter-text{
+  padding: .5rem;
+  /* margin-bottom: .5rem; */
+}
+
+.meter-text-warning {
+  color: var(--nes-red);
+}
+
+.meter-warning {
+  color: var(--nes-red);
+  border-style: dashed;
+  border-width: 5px;
+  animation: warning 3000ms ease-in-out infinite;
+  /* animation-iteration-count: infinite; */
 }
 
 
-@keyframes flashing {
+@keyframes warning {
   0% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
   10% {
-    border: 3px solid black
+    border-color: var(--nes-red)
   }
   20% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
   30% {
-    border: 3px solid black
+    border-color: var(--nes-red)
   }
   40% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
   50% {
-    border: 3px solid black
+    border-color: var(--nes-red)
   }
   60% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
   70% {
-    border: 3px solid black
+    border-color: var(--nes-red)
   }
   80% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
   90% {
-    border: 3px solid black
+    border-color: var(--nes-red)
   }
   100% {
-    border: 3px solid white
+    border-color: var(--nes-yellow)
   }
 }
