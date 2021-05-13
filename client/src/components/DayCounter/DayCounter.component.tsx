@@ -6,8 +6,9 @@ import {
   selectClockTimeInGame,
   selectStartTime,
   setTimeLasted,
+  selectClockIntervalId,
 } from '../../features/game/gameSlice';
-import { startClock } from '../../helpers/game.helper';
+import { startClock, stopClock } from '../../helpers/game.helper';
 import { selectUserStatus } from '../../features/user/userSlice';
 
 const DayCounter = (): JSX.Element => {
@@ -15,28 +16,24 @@ const DayCounter = (): JSX.Element => {
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
   const { userName } = useAppSelector((state) => state.user);
-  const [timeOfDeath, setTimeOfDeath] = useState(0);
+  const clockIntervalId = useAppSelector(selectClockIntervalId);
   useEffect(() => {
-    if (userLoadingStatus === 'userLoaded') {
+    if (userLoadingStatus === 'userLoaded' && !gameOver) {
       startClock();
     }
-  }, [dispatch, userLoadingStatus]);
+  }, [dispatch, userLoadingStatus, gameOver]);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTimeInGame);
   useEffect(() => {
     if (gameOver) {
-      const momentOfDeath = currClockTime;
-      setTimeOfDeath(momentOfDeath);
-      dispatch(setTimeLasted(moment(startTime).from(timeOfDeath, true)));
+      stopClock(clockIntervalId);
+      dispatch(setTimeLasted(currClockTime - startTime));
     }
   }, [gameOver]);
 
   const timeSinceStart = moment(startTime).from(currClockTime, true);
   const date = moment(currClockTime).format('ll');
   const clock = moment(currClockTime).format('h:mm a');
-  const timeLasted = moment(startTime).from(timeOfDeath, true);
-  const dateDied = moment(timeOfDeath).format('ll');
-  const clockStopped = moment(timeOfDeath).format('h:mm a');
   return (
     <div className="conNum">
       <div className="numHeader">
@@ -46,11 +43,11 @@ const DayCounter = (): JSX.Element => {
           <p>You have survived lockdown for:</p>
         )}
       </div>
-      <div className="numOfDays" style={{ marginBottom: '1rem' }}>
-        <h2>{gameOver ? timeLasted : timeSinceStart}</h2>
+      <div className="numOfDays">
+        <h2>{timeSinceStart}</h2>
       </div>
-      <div className="date"> {gameOver ? dateDied : date} </div>
-      <div className="clock"> {gameOver ? clockStopped : clock} </div>
+      <div className="date"> {date} </div>
+      <div className="clock"> {clock} </div>
     </div>
   );
 };

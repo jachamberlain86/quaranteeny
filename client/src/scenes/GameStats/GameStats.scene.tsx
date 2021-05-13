@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setGameOver } from '../../features/game/gameSlice';
 import { setUserName } from '../../features/user/userSlice';
@@ -16,6 +17,7 @@ const GameStats: FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { timeLasted } = useAppSelector((state) => state.game);
+  const timeLastedPretty = moment.duration(timeLasted).humanize();
 
   const resetGamePlay = (): void => {
     checkLoseStates();
@@ -42,7 +44,9 @@ const GameStats: FC = () => {
           <h1>game stats</h1>
         </div>
         <div className="game-stats-sub-container">
-          {timeLasted && <h2>Your character survived for {timeLasted}</h2>}
+          {timeLastedPretty && (
+            <h2>Your character survived for {timeLastedPretty}</h2>
+          )}
           <h3>List of top times</h3>
           <ol className="nes-list is-circle score-list">
             <li>best score</li>
