@@ -41,7 +41,7 @@ const GameStart = (): JSX.Element => {
         }, 600);
       }}
     >
-      Start Game
+      Start
     </button>
   );
 
@@ -82,16 +82,24 @@ const GameStart = (): JSX.Element => {
         <div
           className={animate ? 'return-btn-container slideIn' : 'displayOff'}
         >
-          <button
-            type="button"
-            className="nes-btn is-warning rtn-btn"
-            onClick={() => history.push('/start')}
-          >
-            Continue Game
-          </button>
-          <button type="button" className="nes-btn is-error rtn-btn">
-            New Game
-          </button>
+          {gameOver ? (
+            <button type="button" className="nes-btn is-error rtn-btn">
+              New Game
+            </button>
+          ) : (
+            <div className="return-btn-container">
+              <button
+                type="button"
+                className="nes-btn is-warning rtn-btn"
+                onClick={() => history.push('/start')}
+              >
+                Continue Game
+              </button>
+              <button type="button" className="nes-btn is-error rtn-btn">
+                New Game
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
