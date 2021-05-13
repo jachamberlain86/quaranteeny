@@ -26,6 +26,7 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    resetGameState: () => initialState,
     changeGameSpeed: (state, action: PayloadAction<number>) => {
       state.gameSpeed = action.payload;
     },
@@ -68,6 +69,7 @@ export const gameSlice = createSlice({
 });
 
 export const {
+  resetGameState,
   changeGameSpeed,
   setStartTime,
   updateClockTime,

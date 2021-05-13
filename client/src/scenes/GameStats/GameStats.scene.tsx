@@ -2,14 +2,10 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setGameOver } from '../../features/game/gameSlice';
-import { decayMeters, checkMeterStates } from '../../helpers/meters.helper';
-import { meters } from '../../data/meters.data';
-import { startClock } from '../../helpers/game.helper';
-import {
-  checkLoseStates,
-  checkConditionsState,
-} from '../../helpers/sprite.helper';
+import { resetGameState } from '../../features/game/gameSlice';
+import { resetMeters } from '../../features/meters/metersSlice';
+import { resetSprite } from '../../features/sprite/spriteSlice';
+import { resetCharacter } from '../../features/character/characterSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
@@ -19,12 +15,10 @@ const GameStats: FC = () => {
   const timeLastedPretty = moment.duration(timeLasted).humanize();
 
   const resetGamePlay = (): void => {
-    checkLoseStates();
-    checkConditionsState();
-    checkMeterStates();
-    startClock();
-    decayMeters(meters);
-    dispatch(setGameOver());
+    dispatch(resetGameState());
+    dispatch(resetMeters());
+    dispatch(resetSprite());
+    dispatch(resetCharacter());
   };
   const handleExit = (): void => {
     resetGamePlay();

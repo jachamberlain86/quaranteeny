@@ -18,6 +18,7 @@ const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {
+    resetCharacter: () => initialState,
     placeAt(state, action) {
       const [x, y] = action.payload.coordinates;
       // console.log('coming from placeAt', x, y);
@@ -33,5 +34,5 @@ const characterSlice = createSlice({
 
 // export const player = (state: RootState): Character => state.character;
 
-export const { placeAt } = characterSlice.actions;
+export const { placeAt, resetCharacter } = characterSlice.actions;
 export default characterSlice.reducer;
