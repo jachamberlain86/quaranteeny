@@ -6,14 +6,16 @@ import {
   selectClockTimeInGame,
   selectStartTime,
   setTimeLasted,
+  selectClockIntervalId,
 } from '../../features/game/gameSlice';
-import { startClock } from '../../helpers/game.helper';
+import { startClock, stopClock } from '../../helpers/game.helper';
 import { selectUserStatus } from '../../features/user/userSlice';
 
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
+  const clockIntervalId = useAppSelector(selectClockIntervalId);
   const [timeOfDeath, setTimeOfDeath] = useState(0);
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
@@ -24,6 +26,7 @@ const DayCounter = (): JSX.Element => {
   const currClockTime = useAppSelector(selectClockTimeInGame);
   useEffect(() => {
     if (gameOver) {
+      stopClock(clockIntervalId);
       const momentOfDeath = currClockTime;
       setTimeOfDeath(momentOfDeath);
       dispatch(setTimeLasted(moment(startTime).from(timeOfDeath, true)));
