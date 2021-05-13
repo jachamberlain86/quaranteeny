@@ -16,20 +16,17 @@ const DayCounter = (): JSX.Element => {
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
   const clockIntervalId = useAppSelector(selectClockIntervalId);
-  const [timeOfDeath, setTimeOfDeath] = useState(0);
   useEffect(() => {
-    if (userLoadingStatus === 'userLoaded') {
+    if (userLoadingStatus === 'userLoaded' && !gameOver) {
       startClock();
     }
-  }, [dispatch, userLoadingStatus]);
+  }, [dispatch, userLoadingStatus, gameOver]);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTimeInGame);
   useEffect(() => {
     if (gameOver) {
       stopClock(clockIntervalId);
-      const momentOfDeath = currClockTime;
-      setTimeOfDeath(momentOfDeath);
-      dispatch(setTimeLasted(moment(startTime).from(timeOfDeath, true)));
+      dispatch(setTimeLasted(currClockTime - startTime));
     }
   }, [gameOver]);
 
