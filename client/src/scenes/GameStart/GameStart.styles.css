@@ -140,6 +140,10 @@
   animation: slideInFromLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
 }
 
+.slideInFromRight{
+  animation: slideInFromRight var(--slideAnimationSpeed) ease-in-out 1 normal;
+}
+
 .slideOutLeft{
 animation: slideOutLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
 }
@@ -188,6 +192,15 @@ animation: slideOutLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
 @keyframes slideInFromLeft {
   0% {
     transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100vw);
   }
   100% {
     transform: translateX(0);

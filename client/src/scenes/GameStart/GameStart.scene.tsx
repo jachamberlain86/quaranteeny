@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
@@ -20,6 +20,8 @@ const GameStart = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { userId, userName } = useAppSelector((state) => state.user);
   const { gameOver } = useAppSelector((state) => state.game);
+  const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
+  const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -68,9 +70,11 @@ const GameStart = (): JSX.Element => {
     } else if (id === 'oneMinIsOneDay') {
       changeGameSpeed(1440);
     }
+    currentChooseSpeedDivRef.classList.add('slideOutLeft');
     setTimeout(() => {
-      console.log('change screens');
-    });
+      currentChooseSpeedDivRef.classList.add('displayOff');
+      setAnimate({ name: 'showGameInfo' });
+    }, animationSpeed);
   };
 
   const renderStartBtn = (): JSX.Element => {
@@ -167,7 +171,7 @@ const GameStart = (): JSX.Element => {
 
   const renderChooseSpeed = (): JSX.Element => {
     return (
-      <div>
+      <div className="slideInFromRight" ref={chooseSpeedDivRef}>
         <div className="choose-speed-title">
           <h3>Choose game speed</h3>
         </div>
