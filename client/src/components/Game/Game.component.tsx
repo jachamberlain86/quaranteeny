@@ -30,12 +30,13 @@ const Game = (): JSX.Element => {
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
   useEffect(() => {
+    // const userId = localStorage.getItem('userId');
     if (userId) {
       dispatch(fetchUserDataAsync({ dispatch }));
     } else {
       dispatch(createUserInDbAsync({ dispatch }));
     }
-  }, [dispatch, userId]);
+  }, [dispatch]);
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
       dispatch(startUpdatesToDb());
