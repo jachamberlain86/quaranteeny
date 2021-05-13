@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './GameOver.styles.css';
 import { useHistory } from 'react-router-dom';
 
-const GameOver: FC = () => {
+const GameOver = (): JSX.Element => {
   const history = useHistory();
   return (
     <div className="game-over-container">

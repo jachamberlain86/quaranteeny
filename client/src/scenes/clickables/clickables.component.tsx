@@ -1,11 +1,10 @@
 /* eslint-disable no-plusplus */
-import React, { FC, useEffect, useContext, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Line } from 'react-konva';
+import React, { useEffect, useState } from 'react';
+import { Layer, Rect } from 'react-konva';
 import Konva from 'konva';
-import { useAppSelector } from '../../app/hooks';
 import game from '../../data/gameMap.data';
 
-const Clickables: FC = () => {
+const Clickables = (): JSX.Element => {
   const { cols, layers, tileSize } = game;
 
   const [layerC, setLayerC] = useState<JSX.Element[]>([]);

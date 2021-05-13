@@ -1,40 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-plusplus */
-import { render } from 'react-dom';
-import * as ReactKonva from 'react-konva';
-import { Stage, Layer, Rect } from 'react-konva';
-import React, {
-  FC,
-  useEffect,
-  useState,
-  useContext,
-  useRef,
-  MouseEvent,
-} from 'react';
+
+import { Stage, Layer, Rect, Image } from 'react-konva';
+import React, { useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
-import { RectConfig } from 'konva/types/shapes/Rect';
+import useImage from 'use-image';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
+import { img } from '../../assets/library/index';
 
 import './Room.styles.css';
 import Clickables from '../clickables/clickables.component';
 
-const Room: FC = () => {
+const Room = (): JSX.Element => {
   const canvasWidth = 800;
   const canvasHeight = 800;
   const { cols, layers, tileSize } = game;
 
-  const [layerA, setLayerA] = useState<any[] | []>([]);
+  const [layerA, setLayerA] = useState<JSX.Element[]>([]);
 
-  const handleClickYellow = (e: EventTarget): void => {
-    console.log('clicked this yellow box');
-  };
-  const handleClickPurple = (e: any): void => {
-    console.log('clicked this purple box');
-  };
-  const handleClickOrange = (e: any): void => {
-    console.log('clicked this orange box');
-  };
+  const [image] = useImage('/assets/library/walls/wall-bottom.png');
 
   const makeArray = (): JSX.Element[] => {
     const newArr = [];
@@ -43,12 +28,12 @@ const Room: FC = () => {
         switch (layers[0][yAxis * cols + xAxis]) {
           case 0:
             newArr.push(
-              <Rect
+              <Image
                 x={xAxis * tileSize}
                 y={yAxis * tileSize}
+                image={image}
                 height={tileSize}
                 width={tileSize}
-                fill="blue"
               />
             );
             break;

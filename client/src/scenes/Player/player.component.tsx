@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useContext, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Line } from 'react-konva';
+import React, { useEffect, useState } from 'react';
+import { Rect } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
 import { triggerPlaceAt } from '../../helpers/player.helper';
 
-const Player: FC = () => {
+const Player = (): JSX.Element => {
   const player = useAppSelector((store) => store.character);
   const [currentSecond, setCurrentSecond] = useState(0);
   const [frameCount, setframeCount] = useState(0);
@@ -12,7 +12,7 @@ const Player: FC = () => {
   const [moving, setMoving] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('keydown', function (e) {
+    window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') {
         triggerPlaceAt(1, 1, 'left');
       }

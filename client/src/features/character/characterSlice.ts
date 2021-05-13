@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice } from '@reduxjs/toolkit';
 import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
