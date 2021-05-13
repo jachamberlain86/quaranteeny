@@ -13,6 +13,7 @@ import {
   setMoveDir,
   selectMoveDir,
   selectCurPos,
+  selectPixelLocation,
   selectCharacter,
   changeMovePos,
 } from '../features/character/characterSlice';
@@ -47,7 +48,8 @@ function handleMove(key: string): void {
       store.dispatch(changeMovePos());
     }
     const curPos = selectCurPos(store.getState());
-    console.log(curPos);
+    const pixelLocation = selectPixelLocation(store.getState());
+    console.log(curPos, pixelLocation);
   }, 500);
   store.dispatch(setMoveIntId(timer));
 }

@@ -3,7 +3,7 @@ export interface Character {
   movePos: number[];
   timeMoved: number;
   dimensions: number[];
-  position: number[];
+  pixelLocation: number[];
   delayMove: number;
   direction: string;
   isMoving: boolean;

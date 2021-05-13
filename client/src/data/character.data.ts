@@ -5,7 +5,7 @@ const character: Character = {
   movePos: [1, 1],
   timeMoved: 0,
   dimensions: [40, 40],
-  position: [45, 45],
+  pixelLocation: [45, 45],
   delayMove: 700,
   direction: 'left',
   isMoving: false,

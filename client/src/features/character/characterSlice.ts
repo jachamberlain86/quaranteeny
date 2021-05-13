@@ -9,7 +9,7 @@ const initialState: Character = {
   movePos: [1, 1],
   timeMoved: 0,
   dimensions: [40, 40],
-  position: [45, 45],
+  pixelLocation: [40, 40],
   delayMove: 700,
   direction: 'left',
   isMoving: false,
@@ -38,6 +38,8 @@ export const selectCurPos = (state: RootState): number[] =>
   state.character.curPos;
 export const selectMovePos = (state: RootState): number[] =>
   state.character.movePos;
+export const selectPixelLocation = (state: RootState): number[] =>
+  state.character.pixelLocation;
 
 const { tileSize } = game;
 
@@ -68,10 +70,22 @@ const characterSlice = createSlice({
       if (action.payload === 'd') state.moveDir = action.payload;
     },
     changeMovePos(state) {
-      if (state.moveDir === 's') state.curPos[1] += 1;
-      if (state.moveDir === 'w') state.curPos[1] -= 1;
-      if (state.moveDir === 'a') state.curPos[0] -= 1;
-      if (state.moveDir === 'd') state.curPos[0] += 1;
+      if (state.moveDir === 's') {
+        state.curPos[1] += 1;
+        state.pixelLocation[1] = tileSize * state.curPos[1];
+      }
+      if (state.moveDir === 'w') {
+        state.curPos[1] -= 1;
+        state.pixelLocation[1] = tileSize * state.curPos[1];
+      }
+      if (state.moveDir === 'a') {
+        state.curPos[0] -= 1;
+        state.pixelLocation[0] = tileSize * state.curPos[0];
+      }
+      if (state.moveDir === 'd') {
+        state.curPos[0] += 1;
+        state.pixelLocation[0] = tileSize * state.curPos[0];
+      }
     },
     processMovement(state, action) {
       const t = action.payload.time;
@@ -85,30 +99,30 @@ const characterSlice = createSlice({
       if (t - state.timeMoved >= state.delayMove) {
         state.curPos = [state.movePos[0], state.movePos[1]];
         state.curPos = [state.movePos[0], state.movePos[1]];
-        state.position = [
+        state.pixelLocation = [
           tileSize * state.movePos[0] + (tileSize - state.dimensions[0] / 2),
           tileSize * state.movePos[1] + (tileSize - state.dimensions[1] / 2),
         ];
       } else {
-        state.position[0] =
+        state.pixelLocation[0] =
           state.curPos[0] * tileSize + (tileSize - state.dimensions[0]) / 2;
-        state.position[1] =
+        state.pixelLocation[1] =
           state.curPos[1] * tileSize + (tileSize - state.dimensions[1] / 2);
 
         if (state.curPos[0] !== state.movePos[0]) {
           const diff = (tileSize / state.delayMove) * (t - state.timeMoved);
-          state.position[0] +=
+          state.pixelLocation[0] +=
             state.curPos[0] < state.movePos[0] ? 0 - diff : diff;
         }
 
         if (state.curPos[1] !== state.movePos[1]) {
           const diff = (tileSize / state.delayMove) * (t - state.timeMoved);
-          state.position[1] +=
+          state.pixelLocation[1] +=
             state.curPos[1] < state.movePos[1] ? 0 - diff : diff;
         }
 
-        state.position[0] = Math.round(state.position[0]);
-        state.position[1] = Math.round(state.position[1]);
+        state.pixelLocation[0] = Math.round(state.pixelLocation[0]);
+        state.pixelLocation[1] = Math.round(state.pixelLocation[1]);
       }
       state.isMoving = true;
     },
