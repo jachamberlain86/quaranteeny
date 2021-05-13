@@ -73,11 +73,13 @@ export const updateUserInDbAsync = createAsyncThunk<
 export interface UserState {
   userId: string;
   status: string;
+  userName: string;
 }
 
 const initialState: UserState = {
   userId: '',
   status: 'notLoaded',
+  userName: '',
 };
 
 export const userSlice = createSlice({
@@ -86,6 +88,9 @@ export const userSlice = createSlice({
   reducers: {
     setUserId: (state, action: PayloadAction<string>) => {
       state.userId = action.payload;
+    },
+    setUserName: (state, action: PayloadAction<string>) => {
+      state.userName = action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -107,7 +112,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserId } = userSlice.actions;
+export const { setUserId, setUserName } = userSlice.actions;
 
 export const selectUser = (state: RootState): string => state.user.userId;
 export const selectUserStatus = (state: RootState): string => state.user.status;

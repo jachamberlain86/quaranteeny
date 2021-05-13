@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
-import { setUserName } from '../../features/game/gameSlice';
+import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 const GameStart = (): JSX.Element => {

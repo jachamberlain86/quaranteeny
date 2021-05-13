@@ -14,6 +14,7 @@ const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
+  const { userName } = useAppSelector((state) => state.user);
   const [timeOfDeath, setTimeOfDeath] = useState(0);
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded') {
@@ -39,9 +40,13 @@ const DayCounter = (): JSX.Element => {
   return (
     <div className="conNum">
       <div className="numHeader">
-        <p>Survived lockdown for:</p>
+        {userName ? (
+          <p>{userName}, you have survived lockdown for:</p>
+        ) : (
+          <p>You have survived lockdown for:</p>
+        )}
       </div>
-      <div className="numOfDays">
+      <div className="numOfDays" style={{ marginBottom: '1rem' }}>
         <h2>{gameOver ? timeLasted : timeSinceStart}</h2>
       </div>
       <div className="date"> {gameOver ? dateDied : date} </div>
