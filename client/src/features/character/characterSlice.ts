@@ -45,6 +45,7 @@ const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {
+    resetCharacter: () => initialState,
     toggleLeftFired(state) {
       state.leftFired = !state.leftFired;
     },
@@ -119,6 +120,7 @@ const characterSlice = createSlice({
 });
 
 export const {
+  resetCharacter,
   processMovement,
   setTimeMoved,
   toggleLeftFired,
