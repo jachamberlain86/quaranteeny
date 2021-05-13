@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { changeGameSpeed } from '../../features/game/gameSlice';
+import spriteGif from '../../assets/images/TinyJamesWalk.gif';
 
 interface initialState {
   name: string;
@@ -19,9 +20,11 @@ const GameStart = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { userId, userName } = useAppSelector((state) => state.user);
-  const { gameOver } = useAppSelector((state) => state.game);
+  const { gameOver, gameSpeed } = useAppSelector((state) => state.game);
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
+  const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
+  const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -74,6 +77,14 @@ const GameStart = (): JSX.Element => {
     setTimeout(() => {
       currentChooseSpeedDivRef.classList.add('displayOff');
       setAnimate({ name: 'showGameInfo' });
+    }, animationSpeed);
+  };
+
+  const handleBeginGame = (): void => {
+    currentGameInfoDivRef.classList.add('slideOutDown');
+    setTimeout(() => {
+      // currentGameInfoDivRef.classList.add('displayOff');
+      history.push('/start');
     }, animationSpeed);
   };
 
@@ -205,6 +216,41 @@ const GameStart = (): JSX.Element => {
     );
   };
 
+  const renderGameInfo = (): JSX.Element => {
+    return (
+      <div className="slideInFromRight" ref={gameInfoDivRef}>
+        <div className="game-info-title">
+          {userName ? <h3>Let´s start {userName}</h3> : <h3>Let´s start</h3>}
+        </div>
+        <div className="game-info-container">
+          <div className="game-info-sub-container">
+            <div>
+              <p>Time selected:</p>
+              <p>{gameSpeed}</p>
+            </div>
+            <div>
+              <p>Character selected:</p>
+              <img
+                src={spriteGif}
+                alt="tiny james walking"
+                style={{ width: '150px' }}
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="nes-btn is-error start-btn"
+              onClick={handleBeginGame}
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="game-start-page">
       <div className="start-page-container">
@@ -215,6 +261,7 @@ const GameStart = (): JSX.Element => {
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
           {userId && !gameOver ? renderReturnUser() : renderNewUserForm()}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
+          {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>
       </div>
     </div>

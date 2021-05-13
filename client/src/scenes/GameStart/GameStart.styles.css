@@ -120,6 +120,23 @@
   width: 50%;
 }
 
+.game-info-title {
+  margin-bottom: 2rem;
+}
+
+.game-info-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.game-info-sub-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+
 .animate {
   /* //todo animate our sprite */
 }
@@ -146,6 +163,10 @@
 
 .slideOutLeft{
 animation: slideOutLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
+}
+
+.slideOutDown{
+animation: slideOutDown var(--slideAnimationSpeed) ease-in-out 1 normal;
 }
 
 .displayOff {
@@ -213,5 +234,14 @@ animation: slideOutLeft var(--slideAnimationSpeed) ease-in-out 1 normal;
   }
   100% {
     transform: translateX(-100vw);
+  }
+}
+
+@keyframes slideOutDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
   }
 }
