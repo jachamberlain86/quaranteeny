@@ -12,6 +12,7 @@ import React, {
   MouseEvent,
 } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
+import { RectConfig } from 'konva/types/shapes/Rect';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
 
@@ -25,7 +26,7 @@ const Room: FC = () => {
 
   const [layerA, setLayerA] = useState<any[] | []>([]);
 
-  const handleClickYellow = (e: any): void => {
+  const handleClickYellow = (e: EventTarget): void => {
     console.log('clicked this yellow box');
   };
   const handleClickPurple = (e: any): void => {
@@ -35,7 +36,7 @@ const Room: FC = () => {
     console.log('clicked this orange box');
   };
 
-  const makeArray = (): any[] => {
+  const makeArray = (): JSX.Element[] => {
     const newArr = [];
     for (let yAxis = 0; yAxis < cols; yAxis++) {
       for (let xAxis = 0; xAxis < cols; xAxis++) {
