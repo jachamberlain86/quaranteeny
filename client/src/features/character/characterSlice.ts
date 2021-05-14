@@ -87,45 +87,6 @@ const characterSlice = createSlice({
         state.pixelLocation[0] = tileSize * state.curPos[0];
       }
     },
-    processMovement(state, action) {
-      const t = action.payload.time;
-      if (
-        state.curPos[0] === state.movePos[0] &&
-        state.curPos[1] === state.movePos[1]
-      ) {
-        state.isMoving = false;
-      }
-
-      if (t - state.timeMoved >= state.delayMove) {
-        state.curPos = [state.movePos[0], state.movePos[1]];
-        state.curPos = [state.movePos[0], state.movePos[1]];
-        state.pixelLocation = [
-          tileSize * state.movePos[0] + (tileSize - state.dimensions[0] / 2),
-          tileSize * state.movePos[1] + (tileSize - state.dimensions[1] / 2),
-        ];
-      } else {
-        state.pixelLocation[0] =
-          state.curPos[0] * tileSize + (tileSize - state.dimensions[0]) / 2;
-        state.pixelLocation[1] =
-          state.curPos[1] * tileSize + (tileSize - state.dimensions[1] / 2);
-
-        if (state.curPos[0] !== state.movePos[0]) {
-          const diff = (tileSize / state.delayMove) * (t - state.timeMoved);
-          state.pixelLocation[0] +=
-            state.curPos[0] < state.movePos[0] ? 0 - diff : diff;
-        }
-
-        if (state.curPos[1] !== state.movePos[1]) {
-          const diff = (tileSize / state.delayMove) * (t - state.timeMoved);
-          state.pixelLocation[1] +=
-            state.curPos[1] < state.movePos[1] ? 0 - diff : diff;
-        }
-
-        state.pixelLocation[0] = Math.round(state.pixelLocation[0]);
-        state.pixelLocation[1] = Math.round(state.pixelLocation[1]);
-      }
-      state.isMoving = true;
-    },
     setTimeMoved(state, action) {
       const currFrameTime = action.payload;
       state.timeMoved = currFrameTime;
@@ -135,7 +96,6 @@ const characterSlice = createSlice({
 
 export const {
   resetCharacter,
-  processMovement,
   setTimeMoved,
   toggleLeftFired,
   toggleRightFired,
@@ -146,14 +106,3 @@ export const {
   changeMovePos,
 } = characterSlice.actions;
 export default characterSlice.reducer;
-
-// placeAt(state, action) {
-//   const [x, y] = action.payload.coordinates;
-//   // console.log('coming from placeAt', x, y);
-//   state.tileFrom = [x, y];
-//   state.tileTo = [x, y];
-//   state.position = [
-//     game.tileSize * x + (game.tileSize - state.dimensions[0] / 2),
-//     game.tileSize * y + (game.tileSize - state.dimensions[1] / 2),
-//   ];
-// },

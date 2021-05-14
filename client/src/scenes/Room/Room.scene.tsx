@@ -65,16 +65,6 @@ const Room = (): JSX.Element => {
     setLayerA(makeArray());
   }, []);
 
-  // useEffect(() => {
-  //   if (charNode) {
-  //     const newTween = new Konva.Tween({
-  //       node: layerB,
-  //       x: character.pixelLocation[0],
-  //       y: character.pixelLocation[1],
-  //     });
-  //   }
-  // }, [layerB]);
-
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (

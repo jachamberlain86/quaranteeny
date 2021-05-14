@@ -1,3 +1,4 @@
+import Konva from 'konva';
 import { store } from '../app/store';
 import {
   selectLeftFired,
@@ -14,7 +15,6 @@ import {
   selectMoveDir,
   selectCurPos,
   selectPixelLocation,
-  selectCharacter,
   changeMovePos,
 } from '../features/character/characterSlice';
 import game from '../data/gameMap.data';
