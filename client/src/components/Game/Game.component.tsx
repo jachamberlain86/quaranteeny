@@ -6,10 +6,7 @@ import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
-import {
-  selectUserStatus,
-  startUpdatesToDb,
-} from '../../features/user/userSlice';
+import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
@@ -30,7 +27,7 @@ const Game = (): JSX.Element => {
 
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
-      dispatch(startUpdatesToDb());
+      console.log('game started');
       startClock();
       checkMeterStates();
       checkConditionsState();
