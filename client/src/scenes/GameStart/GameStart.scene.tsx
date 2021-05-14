@@ -42,9 +42,7 @@ const GameStart = (): JSX.Element => {
 
   // TODO create an audio player...
   useEffect(() => {
-    musicCuriousIntense.once('load', () => {
-      musicCuriousIntense.play();
-    });
+    musicCuriousIntense.play();
   }, []);
 
   const handleBtnHover = (): void => {

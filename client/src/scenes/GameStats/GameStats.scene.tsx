@@ -19,6 +19,7 @@ const GameStats: FC = () => {
 
   const handleExit = (): void => {
     resetGamePlay();
+    gameStatsMusic.stop();
     setTimeout(() => {
       // TODO delete: here for testing purposes
       // dispatch(setIsCurrentGameActive());
@@ -27,6 +28,7 @@ const GameStats: FC = () => {
   };
   const handlePlayAgain = (): void => {
     resetGamePlay();
+    gameStatsMusic.stop();
     // TODO divide Game start page then push user to choose speed
     history.push('/');
   };
