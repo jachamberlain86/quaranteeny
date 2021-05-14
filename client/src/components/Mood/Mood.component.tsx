@@ -10,7 +10,8 @@ const Mood = (): JSX.Element => {
 
   const renderBoard = (): JSX.Element => {
     return (
-      <div className="mood-board">
+      <div className="nes-balloon from-right mood-board">
+        {/* <div className="mood-board"> */}
         <h3>I´m feeling a little</h3>
         <ul className="moodList">
           {moodList &&

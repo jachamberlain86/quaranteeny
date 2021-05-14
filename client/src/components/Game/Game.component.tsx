@@ -19,6 +19,7 @@ import {
 import { startClock } from '../../helpers/game.helper';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
+import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -59,6 +60,7 @@ const Game = (): JSX.Element => {
       <div>
         <DayCounter />
         <Mood />
+        <GameOverBtn />
       </div>
       <Room />
       <MeterArea />
