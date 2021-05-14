@@ -1,68 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-plusplus */
-import { Stage, Layer, Rect, Image } from 'react-konva';
-import Konva from 'konva';
-// import { Tween } from 'konva';
+import { Stage, Layer } from 'react-konva';
 import React, { useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
-import useImage from 'use-image';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
-import { img } from '../../assets/library/index';
-import { useAppSelector } from '../../app/hooks';
-
-import { selectCharacter } from '../../features/character/characterSlice';
+import { renderLayer } from '../../helpers/game.helper';
 
 import './Room.styles.css';
-import Clickables from '../clickables/clickables.component';
+import Furniture from '../Furniture/Furniture.component';
 
 const Room = (): JSX.Element => {
-  const character = useAppSelector(selectCharacter);
-  const canvasWidth = 800;
-  const canvasHeight = 800;
-  const { cols, layers, tileSize } = game;
+  const { cols, tileSize } = game;
+  const canvasWidth = cols * tileSize;
+  const canvasHeight = cols * tileSize;
 
-  const [layerA, setLayerA] = useState<JSX.Element[]>([]);
-  const [layerB, setLayerB] = useState<JSX.Element | null>(null);
-
-  const [image] = useImage(img.wallImgs.wallB);
-
-  const makeArray = (): JSX.Element[] => {
-    const newArr = [];
-    for (let yAxis = 0; yAxis < cols; yAxis++) {
-      for (let xAxis = 0; xAxis < cols; xAxis++) {
-        switch (layers[0][yAxis * cols + xAxis]) {
-          case 0:
-            newArr.push(
-              <Image
-                x={xAxis * tileSize}
-                y={yAxis * tileSize}
-                image={image}
-                key={`${xAxis}, ${yAxis}`}
-                height={tileSize}
-                width={tileSize}
-              />
-            );
-            break;
-          default:
-            newArr.push(
-              <Rect
-                x={xAxis * tileSize}
-                y={yAxis * tileSize}
-                key={`${xAxis}, ${yAxis}`}
-                height={tileSize}
-                width={tileSize}
-                fill="pink"
-              />
-            );
-        }
-      }
-    }
-    return newArr;
-  };
+  const [layer0, setLayer0] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setLayerA(makeArray());
+    setLayer0(renderLayer(0));
   }, []);
 
   // useEffect(() => {
@@ -80,11 +34,11 @@ const Room = (): JSX.Element => {
       {({ store }) => (
         <Stage width={canvasWidth} height={canvasHeight}>
           <Provider store={store}>
-            <Layer listening={false}>{layerA}</Layer>
+            <Layer listening={false}>{layer0}</Layer>
+            <Furniture />
             <Layer>
               <Player />
             </Layer>
-            <Clickables />
           </Provider>
         </Stage>
       )}
