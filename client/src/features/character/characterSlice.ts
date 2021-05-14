@@ -7,11 +7,9 @@ import game from '../../data/gameMap.data';
 const initialState: Character = {
   curPos: [1, 1],
   movePos: [1, 1],
-  timeMoved: 0,
   dimensions: [40, 40],
   pixelLocation: [40, 40],
-  delayMove: 700,
-  direction: 'left',
+  direction: 'yellow',
   isMoving: false,
   leftFired: false,
   rightFired: false,
@@ -19,6 +17,7 @@ const initialState: Character = {
   downFired: false,
   moveIntId: null,
   moveDir: null,
+  delay: 500,
 };
 
 export const selectCharacter = (state: RootState): Character => state.character;
@@ -40,6 +39,7 @@ export const selectMovePos = (state: RootState): number[] =>
   state.character.movePos;
 export const selectPixelLocation = (state: RootState): number[] =>
   state.character.pixelLocation;
+export const selectDelay = (state: RootState): number => state.character.delay;
 
 const { tileSize } = game;
 
@@ -50,15 +50,19 @@ const characterSlice = createSlice({
     resetCharacter: () => initialState,
     toggleLeftFired(state) {
       state.leftFired = !state.leftFired;
+      state.direction = 'blue';
     },
     toggleRightFired(state) {
       state.rightFired = !state.rightFired;
+      state.direction = 'red';
     },
     toggleUpFired(state) {
       state.upFired = !state.upFired;
+      state.direction = 'green';
     },
     toggleDownFired(state) {
       state.downFired = !state.downFired;
+      state.direction = 'purple';
     },
     setMoveIntId(state, action: PayloadAction<number | null>) {
       state.moveIntId = action.payload;
@@ -87,16 +91,11 @@ const characterSlice = createSlice({
         state.pixelLocation[0] = tileSize * state.curPos[0];
       }
     },
-    setTimeMoved(state, action) {
-      const currFrameTime = action.payload;
-      state.timeMoved = currFrameTime;
-    },
   },
 });
 
 export const {
   resetCharacter,
-  setTimeMoved,
   toggleLeftFired,
   toggleRightFired,
   toggleUpFired,

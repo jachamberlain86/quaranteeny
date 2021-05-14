@@ -16,6 +16,7 @@ import {
   selectCurPos,
   selectPixelLocation,
   changeMovePos,
+  selectDelay,
 } from '../features/character/characterSlice';
 import game from '../data/gameMap.data';
 
@@ -42,6 +43,7 @@ function checkCanMove(newPos: number[]): boolean {
 }
 
 function handleMove(key: string): void {
+  const timerDel = selectDelay(store.getState());
   const timer = window.setInterval(() => {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
@@ -50,7 +52,7 @@ function handleMove(key: string): void {
     const curPos = selectCurPos(store.getState());
     const pixelLocation = selectPixelLocation(store.getState());
     console.log(curPos, pixelLocation);
-  }, 500);
+  }, timerDel);
   store.dispatch(setMoveIntId(timer));
 }
 

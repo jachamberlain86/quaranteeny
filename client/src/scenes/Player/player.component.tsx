@@ -12,17 +12,17 @@ const Player = (): JSX.Element => {
     ref.to({
       x: character.pixelLocation[0],
       y: character.pixelLocation[1],
-      duration: 0.5,
+      duration: character.delay / 1000,
+      fill: character.direction,
     });
+    console.log(character);
   }, [character.pixelLocation]);
 
   return (
     <Rect
       ref={rectRef}
-      draggable
       height={character.dimensions[0]}
       width={character.dimensions[1]}
-      fill="red"
     />
   );
 };
