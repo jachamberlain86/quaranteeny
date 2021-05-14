@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { resetGamePlay } from '../../helpers/game.helper';
+import { selectScores } from '../../features/user/userSlice';
 import {
   setGameOver,
   setIsCurrentGameActive,
@@ -15,6 +16,12 @@ const GameStats: FC = () => {
   const dispatch = useAppDispatch();
   const { timeLasted } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
+  const scores = useAppSelector(selectScores);
+  const sortedScored = scores.slice().sort((a, b) => b - a);
+  const scoresPretty = sortedScored.map((score) =>
+    moment.duration(score).humanize()
+  );
+  const topFiveScores = scoresPretty.slice(0, 4);
 
   const handleExit = (): void => {
     resetGamePlay();
@@ -42,9 +49,10 @@ const GameStats: FC = () => {
           )}
           <h3>List of top times</h3>
           <ol className="nes-list is-circle score-list">
-            <li>best score</li>
-            <li>2nd best score</li>
-            <li>etc...</li>
+            {topFiveScores.map((score, index) => {
+              // eslint-disable-next-line react/no-array-index-key
+              return <li key={index}>{score}</li>;
+            })}
           </ol>
           <p>Had enough, or are you ready to beat the quarantine?</p>
         </div>
