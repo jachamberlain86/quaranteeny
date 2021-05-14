@@ -6,10 +6,7 @@ import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
-import {
-  selectUserStatus,
-  startUpdatesToDb,
-} from '../../features/user/userSlice';
+import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
@@ -32,7 +29,6 @@ const Game = (): JSX.Element => {
     console.log(userLoadingStatus, gameOver);
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
       console.log('game started');
-      dispatch(startUpdatesToDb());
       startClock();
       checkMeterStates();
       checkConditionsState();

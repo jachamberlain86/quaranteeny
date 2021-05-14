@@ -26,6 +26,8 @@ export const fetchUserDataAsync = createAsyncThunk<
       dispatch(loadSpriteStateFromDb(sprite));
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       dispatch(loadUserStateFromDb(user));
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      dispatch(startUpdatesToDb());
     }
     return userData;
   }
@@ -38,12 +40,13 @@ export const createUserInDbAsync = createAsyncThunk<
   'user/createUserInDb',
   // The value we return becomes the `fulfilled` action payload
   async ({ dispatch }) => {
-    const userData = await createUserInDb();
-    if (userData) {
-      const { id } = userData;
+    const id = await createUserInDb();
+    if (id) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       dispatch(setUserId(id));
       localStorage.setItem('userId', id);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      dispatch(startUpdatesToDb());
     }
   }
 );

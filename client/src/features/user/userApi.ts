@@ -25,19 +25,15 @@ export async function fetchUserData(): Promise<{
   }
 }
 
-export async function createUserInDb(): Promise<{
-  id: string;
-  game: null;
-  sprite: null;
-  meters: null;
-} | null> {
+export async function createUserInDb(): Promise<string | null> {
   try {
     const res = await fetch(`${baseUrl}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({}),
     });
-    return await res.json();
+    const { id } = await res.json();
+    return id;
   } catch (error) {
     console.error(error); // eslint-disable-line
     return null;
