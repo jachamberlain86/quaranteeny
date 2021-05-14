@@ -13,13 +13,9 @@ import { second } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
-import {
-  resetCharacter,
-  selectCurPos,
-} from '../features/character/characterSlice';
+import { resetCharacter } from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/library/index';
-
-import { checkIndex } from './input.helper';
+import { handleInteraction, setCurrentInteraction } from './sprite.helper';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
@@ -57,19 +53,23 @@ export function handleClickSprite(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   console.log('That tickles!');
-  console.log('event');
+  console.log(event);
 }
 
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   console.log(event);
-  const curPos = selectCurPos(store.getState());
-  const curIdx = checkIndex(curPos[0], curPos[1]);
-  if (game.layers[1][event.target.index].int) {
-    console.log(`clicked the ${game.layers[1][event.target.index].int}`);
+  const clickedEntity = game.layers[1][event.target.index].int;
+  const clickPosX = event.target.attrs.x;
+  const clickPosY = event.target.attrs.y;
+  if (clickedEntity !== null) {
+    console.log(`clicked the ${clickedEntity}`);
+    if (setCurrentInteraction(clickedEntity)) {
+      handleInteraction(clickedEntity);
+    }
   } else {
-    console.log('clicked something not interactive');
+    console.log(`clicked ${clickPosX}, ${clickPosY}`);
   }
 }
 
