@@ -1,24 +1,9 @@
-<<<<<<< HEAD
 import { Stage, Layer } from 'react-konva';
-=======
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-plusplus */
-import { Stage, Layer, Rect, Image } from 'react-konva';
-import Konva from 'konva';
-// import { Tween } from 'konva';
->>>>>>> animations
 import React, { useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
-<<<<<<< HEAD
 import { renderLayer } from '../../helpers/game.helper';
-=======
-import { img } from '../../assets/library/index';
-import { useAppSelector } from '../../app/hooks';
-
-import { selectCharacter } from '../../features/character/characterSlice';
->>>>>>> animations
 
 import './Room.styles.css';
 import Furniture from '../Furniture/Furniture.component';
