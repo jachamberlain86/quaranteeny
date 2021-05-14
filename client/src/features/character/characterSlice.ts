@@ -1,15 +1,15 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
 const initialState: Character = {
-  curPos: [2, 4],
-  movePos: [2, 4],
+  curPos: [1, 1],
+  movePos: [1, 1],
   timeMoved: 0,
   dimensions: [40, 40],
-  pixelLocation: [40, 160],
+  pixelLocation: [40, 40],
   delayMove: 700,
   direction: 'left',
   isMoving: false,
@@ -145,7 +145,6 @@ export const {
   setMoveDir,
   changeMovePos,
 } = characterSlice.actions;
-
 export default characterSlice.reducer;
 
 // placeAt(state, action) {

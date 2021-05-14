@@ -1,7 +1,6 @@
 import { MetersState } from '../meters/metersSlice';
 import { GameState } from '../game/gameSlice';
 import { SpriteState } from '../sprite/spriteSlice';
-import { UserStateInDb } from './userSlice';
 
 const { REACT_APP_SERVER_PORT, REACT_APP_SERVER_HOST } = process.env;
 
@@ -12,7 +11,6 @@ export async function fetchUserData(): Promise<{
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
-  user: UserStateInDb;
 } | null> {
   try {
     const userId = localStorage.getItem('userId');
@@ -49,25 +47,22 @@ export async function updateUserInDb({
   game,
   sprite,
   meters,
-  user,
 }: {
   id: string;
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
-  user: UserStateInDb;
 }): Promise<{
   id: string;
   game: GameState;
   sprite: SpriteState;
   meters: MetersState;
-  user: UserStateInDb;
 } | null> {
   try {
     const res = await fetch(`${baseUrl}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, game, sprite, meters, user }),
+      body: JSON.stringify({ id, game, sprite, meters }),
     });
     return await res.json();
   } catch (error) {

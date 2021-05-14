@@ -7,7 +7,6 @@ import {
   selectStartTime,
   setTimeLasted,
 } from '../../features/game/gameSlice';
-import { addNewScore } from '../../features/user/userSlice';
 
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -18,7 +17,6 @@ const DayCounter = (): JSX.Element => {
   useEffect(() => {
     if (gameOver) {
       dispatch(setTimeLasted(currClockTime - startTime));
-      dispatch(addNewScore(currClockTime - startTime));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);

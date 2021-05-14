@@ -29,7 +29,7 @@ function calcNewPos(key: string): number[] {
   return curPosCopy;
 }
 
-export function checkIndex(x: number, y: number): number {
+function checkIndex(x: number, y: number): number {
   const { cols } = game;
   return y * cols + x;
 }
@@ -37,9 +37,8 @@ export function checkIndex(x: number, y: number): number {
 function checkCanMove(newPos: number[]): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos[0], newPos[1]);
-  const result = layers[0][mapIndex].walk;
-  console.log(result);
-  return result;
+  if (layers[0][mapIndex] === 1) return true;
+  return false;
 }
 
 function handleMove(key: string): void {
@@ -47,9 +46,6 @@ function handleMove(key: string): void {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
       store.dispatch(changeMovePos());
-      console.log(newPos);
-    } else {
-      console.log("can't move");
     }
     const curPos = selectCurPos(store.getState());
     const pixelLocation = selectPixelLocation(store.getState());

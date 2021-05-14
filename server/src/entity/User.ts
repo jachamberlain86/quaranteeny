@@ -15,12 +15,6 @@ export class User {
   };
 
   @Column({ type: 'simple-json', nullable: true })
-  user: {
-    userName: string;
-    scores: number[];
-  };
-
-  @Column({ type: 'simple-json', nullable: true })
   sprite: {
     currentInteraction: string | null;
     interactionProgress: number | null;
