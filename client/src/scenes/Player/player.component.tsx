@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import Konva from 'konva';
-import { Stage, Layer, Image, Rect } from 'react-konva';
-import { handleClickSprite } from '../../helpers/game.helper';
-
+import React, { useEffect, useRef } from 'react';
+import { Rect } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
-import { triggerSetTimeMoved } from '../../helpers/player.helper';
-import {
-  selectMovePos,
-  selectCurPos,
-  selectCharacter,
-} from '../../features/character/characterSlice';
-import { store } from '../../app/store';
+import { selectCharacter } from '../../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../../assets/library/index';
-import game from '../../data/gameMap.data';
+import { handleClickSprite } from '../../helpers/game.helper';
 
 const Player = (): JSX.Element => {
   const character = useAppSelector(selectCharacter);
-  const { tileSize } = game;
+  const rectRef = useRef<any | null>(null);
 
-  // const makeChar = (): any => {
-  //   const char = (
-  //     <Rect
-  //       x={character.pixelLocation[0]}
-  //       y={character.pixelLocation[1]}
-  //       height={character.dimensions[0]}
-  //       width={character.dimensions[1]}
-  //       fill="red"
-  //     />
-  //   );
-  //   return char;
-  // };
-
-  // useEffect(() => {
-  //   setLayerB(makeChar());
-  // }, []);
-
-  // useEffect(() => {
-  //   window.requestAnimationFrame();
-  // }, []);
+  useEffect(() => {
+    const ref = rectRef.current;
+    ref.to({
+      x: character.pixelLocation[0],
+      y: character.pixelLocation[1],
+      duration: character.delay / 1000,
+      fill: character.direction,
+    });
+    console.log(character);
+  }, [character.pixelLocation]);
 
   const tileKey = imageDirectory.ofdon;
   // console.log(tileKey);
@@ -48,12 +29,9 @@ const Player = (): JSX.Element => {
 
   return (
     <Rect
-      x={character.pixelLocation[0]}
-      y={character.pixelLocation[1]}
-      key={`${character.pixelLocation[0]}, ${character.pixelLocation[1]}`}
-      fill="red"
-      height={tileSize}
-      width={tileSize}
+      ref={rectRef}
+      height={character.dimensions[0]}
+      width={character.dimensions[1]}
       onClick={handleClickSprite}
     />
   );

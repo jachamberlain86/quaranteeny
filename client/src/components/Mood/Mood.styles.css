@@ -1,3 +1,5 @@
+@import '../../../node_modules/nes.css/css/nes.css';
+
 .mood-board {
   background-color: white;
   margin: 1rem;

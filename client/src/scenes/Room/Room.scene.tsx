@@ -19,22 +19,12 @@ const Room = (): JSX.Element => {
     setLayer0(renderLayer(0));
   }, []);
 
-  // useEffect(() => {
-  //   if (charNode) {
-  //     const newTween = new Konva.Tween({
-  //       node: layerB,
-  //       x: character.pixelLocation[0],
-  //       y: character.pixelLocation[1],
-  //     });
-  //   }
-  // }, [layerB]);
-
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
         <Stage width={canvasWidth} height={canvasHeight}>
           <Provider store={store}>
-            <Layer listening={false}>{layer0}</Layer>
+            <Layer>{layer0}</Layer>
             <Furniture />
             <Layer>
               <Player />

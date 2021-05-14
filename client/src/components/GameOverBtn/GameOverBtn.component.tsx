@@ -3,15 +3,16 @@ import './GameOverBtn.styles.css';
 import { useAppDispatch } from '../../app/hooks';
 import {
   setGameOver,
-  setActiveCurrentGame,
+  setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
+// import { setIsCurrentGameActive } from '../../features/user/userSlice';
 
 const GameOverBtn: FC = () => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {
     dispatch(setGameOver());
-    dispatch(setActiveCurrentGame());
+    dispatch(setIsCurrentGameActive());
   };
   return (
     <div>
