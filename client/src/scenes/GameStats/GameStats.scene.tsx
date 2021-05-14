@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -7,6 +7,7 @@ import {
   setGameOver,
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
+import { gameStatsMusic } from '../../audioControllers/gameStatsMusic';
 // import { setIsCurrentGameActive } from '../../features/user/userSlice';
 import './GameStats.styles.css';
 
@@ -30,6 +31,9 @@ const GameStats: FC = () => {
     history.push('/');
   };
 
+  useEffect(() => {
+    gameStatsMusic.play();
+  }, []);
   return (
     <div>
       <div className="game-stats-container">

@@ -11,7 +11,11 @@ const MuteSoundBtn = (): JSX.Element => {
     <button
       type="button"
       onClick={handleMute}
-      className="nes-btn is-disabled mute-sound-btn"
+      className={
+        isMuted
+          ? 'nes-btn mute-sound-btn'
+          : 'nes-btn is-disabled mute-sound-btn'
+      }
     >
       Mute/Unmute
     </button>
