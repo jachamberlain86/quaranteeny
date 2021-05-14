@@ -17,7 +17,7 @@ const initialState: Character = {
   downFired: false,
   moveIntId: null,
   moveDir: null,
-  delay: 500,
+  delay: 100,
 };
 
 export const selectCharacter = (state: RootState): Character => state.character;
