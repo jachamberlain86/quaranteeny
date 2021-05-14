@@ -5,8 +5,9 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { resetGamePlay } from '../../helpers/game.helper';
 import {
   setGameOver,
-  setActiveCurrentGame,
+  setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
+// import { setIsCurrentGameActive } from '../../features/user/userSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
@@ -19,13 +20,14 @@ const GameStats: FC = () => {
     resetGamePlay();
     setTimeout(() => {
       // TODO delete: here for testing purposes
-      // dispatch(setActiveCurrentGame());
+      // dispatch(setIsCurrentGameActive());
       history.push('/');
     }, 300);
   };
-  const handleResetGame = (): void => {
+  const handlePlayAgain = (): void => {
     resetGamePlay();
-    history.push('/start');
+    // TODO divide Game start page then push user to choose speed
+    history.push('/');
   };
 
   return (
@@ -50,7 +52,7 @@ const GameStats: FC = () => {
           <button
             type="button"
             className="nes-btn is-success"
-            onClick={handleResetGame}
+            onClick={handlePlayAgain}
           >
             Play again
           </button>

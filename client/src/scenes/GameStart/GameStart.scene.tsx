@@ -5,7 +5,7 @@ import { setUserName } from '../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   changeGameSpeed,
-  setActiveCurrentGame,
+  setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/images/TinyJamesWalk.gif';
@@ -25,11 +25,10 @@ const GameStart = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { userName } = useAppSelector((state) => state.user);
-  const { activeCurrentGame, gameSpeed } = useAppSelector(
+  const { gameSpeed, gameOver, isCurrentGameActive } = useAppSelector(
     (state) => state.game
   );
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
-  // const currentChooseSpeedDivRef = chooseSpeedDivRef.current as HTMLDivElement;
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -86,7 +85,7 @@ const GameStart = (): JSX.Element => {
     currentGameInfoDivRef.classList.add('slideOutDown');
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
-      dispatch(setActiveCurrentGame());
+      dispatch(setIsCurrentGameActive());
       history.push('/start');
     }, animationSpeed);
   };
@@ -172,7 +171,7 @@ const GameStart = (): JSX.Element => {
               : 'displayOff'
           }
         >
-          {activeCurrentGame ? (
+          {isCurrentGameActive ? (
             <div className="return-btn-container">
               <button
                 type="button"
@@ -282,9 +281,12 @@ const GameStart = (): JSX.Element => {
         </div>
         <div className="bottom-row">
           {animate.name === 'showStartBtn' ? renderStartBtn() : null}
+          {!userName && animate.name === 'showForm'
+            ? renderNewUserForm()
+            : null}
           {userName && animate.name === 'showReturnUser'
             ? renderReturnUser()
-            : renderNewUserForm()}
+            : null}
           {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
           {animate.name === 'showGameInfo' ? renderGameInfo() : null}
         </div>
