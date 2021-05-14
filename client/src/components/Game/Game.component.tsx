@@ -28,7 +28,9 @@ const Game = (): JSX.Element => {
   const currentGameScreen = gameScreen.current as HTMLDivElement;
 
   useEffect(() => {
+    console.log(userLoadingStatus, gameOver);
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
+      console.log('game started');
       dispatch(startUpdatesToDb());
       startClock();
       checkMeterStates();

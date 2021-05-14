@@ -10,6 +10,7 @@ export interface GameState {
   startTime: number;
   gameOver: boolean;
   timeLasted: number;
+  activeCurrentGame: boolean;
 }
 
 const initialState: GameState = {
@@ -20,6 +21,7 @@ const initialState: GameState = {
   clockIntervalId: null,
   gameOver: false,
   timeLasted: 0,
+  activeCurrentGame: false,
 };
 
 export const gameSlice = createSlice({
@@ -65,6 +67,9 @@ export const gameSlice = createSlice({
     setTimeLasted: (state, action: PayloadAction<number>) => {
       state.timeLasted = action.payload;
     },
+    setActiveCurrentGame: (state) => {
+      state.activeCurrentGame = !state.activeCurrentGame;
+    },
   },
 });
 
@@ -77,6 +82,7 @@ export const {
   setGameOver,
   loadGameStateFromDb,
   setTimeLasted,
+  setActiveCurrentGame,
 } = gameSlice.actions;
 
 export const selectGameSpeed = (state: RootState): number =>
