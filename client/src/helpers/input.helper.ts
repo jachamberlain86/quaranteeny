@@ -1,3 +1,4 @@
+import Konva from 'konva';
 import { store } from '../app/store';
 import {
   selectLeftFired,
@@ -13,8 +14,9 @@ import {
   setMoveDir,
   selectMoveDir,
   selectCurPos,
-  selectCharacter,
+  selectPixelLocation,
   changeMovePos,
+  selectDelay,
 } from '../features/character/characterSlice';
 import game from '../data/gameMap.data';
 
@@ -42,6 +44,7 @@ function checkCanMove(newPos: number[]): boolean {
 }
 
 function handleMove(key: string): void {
+  const timerDel = selectDelay(store.getState());
   const timer = window.setInterval(() => {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
@@ -51,8 +54,9 @@ function handleMove(key: string): void {
       console.log("can't move");
     }
     const curPos = selectCurPos(store.getState());
-    console.log(curPos);
-  }, 500);
+    const pixelLocation = selectPixelLocation(store.getState());
+    console.log(curPos, pixelLocation);
+  }, timerDel);
   store.dispatch(setMoveIntId(timer));
 }
 

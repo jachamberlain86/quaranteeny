@@ -1,10 +1,8 @@
 export interface Character {
   curPos: number[];
   movePos: number[];
-  timeMoved: number;
   dimensions: number[];
-  position: number[];
-  delayMove: number;
+  pixelLocation: number[];
   direction: string;
   isMoving: boolean;
   leftFired: boolean;
@@ -13,4 +11,5 @@ export interface Character {
   downFired: boolean;
   moveIntId: number | null;
   moveDir: string | null;
+  delay: number;
 }
