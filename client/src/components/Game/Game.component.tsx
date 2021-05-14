@@ -17,6 +17,18 @@ import { startClock } from '../../helpers/game.helper';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
+import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
+import {
+  musicEightiesSlowFunk,
+  musicChillSong,
+} from '../../audioControllers/soundTracks';
+import {
+  gameOverOne,
+  gameOverTwo,
+  gameOverThree,
+  gameOverFour,
+} from '../../audioControllers/gameOverSounds';
+import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -51,6 +63,18 @@ const Game = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
+  useEffect(() => {
+    musicChillSong.play();
+  }, []);
+  useEffect(() => {
+    if (gameOver) {
+      musicChillSong.stop();
+      gameOverTwo.play();
+      setTimeout(() => {
+        gameOverMusic.play();
+      }, 200);
+    }
+  }, [gameOver]);
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
       {gameOver && <GameOver />}
@@ -58,6 +82,7 @@ const Game = (): JSX.Element => {
         <DayCounter />
         <Mood />
         <GameOverBtn />
+        <MuteSoundBtn />
       </div>
       <Room />
       <MeterArea />

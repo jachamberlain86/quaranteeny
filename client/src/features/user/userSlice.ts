@@ -137,6 +137,7 @@ export const {
 
 export const selectUser = (state: RootState): string => state.user.userId;
 export const selectUserStatus = (state: RootState): string => state.user.status;
+export const selectScores = (state: RootState): number[] => state.user.scores;
 
 export const startUpdatesToDb = (): AppThunk => (dispatch, getState) => {
   setInterval(() => {
