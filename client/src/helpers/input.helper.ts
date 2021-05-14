@@ -1,4 +1,3 @@
-import Konva from 'konva';
 import { store } from '../app/store';
 import {
   selectLeftFired,
@@ -39,7 +38,6 @@ function checkCanMove(newPos: number[]): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos[0], newPos[1]);
   const result = layers[0][mapIndex].walk;
-  console.log(result);
   return result;
 }
 
@@ -49,13 +47,9 @@ function handleMove(key: string): void {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
       store.dispatch(changeMovePos());
-      console.log(newPos);
-    } else {
-      console.log("can't move");
     }
-    const curPos = selectCurPos(store.getState());
-    const pixelLocation = selectPixelLocation(store.getState());
-    console.log(curPos, pixelLocation);
+    selectCurPos(store.getState());
+    selectPixelLocation(store.getState());
   }, timerDel);
   store.dispatch(setMoveIntId(timer));
 }
@@ -70,7 +64,6 @@ function handleStop(): void {
 }
 
 export function downHandler(event: KeyboardEvent): void {
-  console.log(event.key);
   const moveDir = selectMoveDir(store.getState());
   const leftFired = selectLeftFired(store.getState());
   const rightFired = selectRightFired(store.getState());

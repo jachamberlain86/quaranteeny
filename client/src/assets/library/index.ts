@@ -79,7 +79,6 @@ export class ImageDirectory {
     this.bedtr = bedImgs.dresserTR;
 
     this.bepb = bedImgs.posterB;
-    this.bepm = bedImgs.posterM;
     this.bept = bedImgs.posterT;
 
     this.dic = diningImgs.chair;

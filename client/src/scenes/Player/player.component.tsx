@@ -4,10 +4,12 @@ import { useAppSelector } from '../../app/hooks';
 import { selectCharacter } from '../../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../../assets/library/index';
 import { handleClickSprite } from '../../helpers/game.helper';
+import game from '../../data/gameMap.data';
 
 const Player = (): JSX.Element => {
   const character = useAppSelector(selectCharacter);
   const rectRef = useRef<any | null>(null);
+  const { tileSize } = game;
 
   useEffect(() => {
     const ref = rectRef.current;
@@ -30,9 +32,10 @@ const Player = (): JSX.Element => {
   return (
     <Rect
       ref={rectRef}
-      height={character.dimensions[0]}
+      height={character.dimensions[0] * 2}
       width={character.dimensions[1]}
       onClick={handleClickSprite}
+      offset={{ x: 0, y: tileSize }}
     />
   );
   // image={img}

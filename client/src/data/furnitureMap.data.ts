@@ -48,7 +48,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
-  { key: 'bepm', int: null, intPos: [] },
+  { key: 'bepb', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },

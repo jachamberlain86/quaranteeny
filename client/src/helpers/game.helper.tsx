@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from 'react-konva';
 import Konva from 'konva';
-import { KonvaEventListener } from 'konva/types/Node';
 import { store } from '../app/store';
 import {
   updateClockTime,
@@ -24,7 +23,6 @@ import { checkIndex } from './input.helper';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
-  console.log('clock started');
   // Set startTime to now if it's not already set. Otherwise leave it as is
   // since game is in progress.
   if (startTime === 0) {
@@ -59,16 +57,16 @@ export function handleClickSprite(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   console.log('That tickles!');
+  console.log('event');
 }
 
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
+  console.log(event);
   const curPos = selectCurPos(store.getState());
   const curIdx = checkIndex(curPos[0], curPos[1]);
-  if (curIdx === event.target.index) {
-    console.log('clicked the sprite');
-  } else if (game.layers[1][event.target.index].int) {
+  if (game.layers[1][event.target.index].int) {
     console.log(`clicked the ${game.layers[1][event.target.index].int}`);
   } else {
     console.log('clicked something not interactive');

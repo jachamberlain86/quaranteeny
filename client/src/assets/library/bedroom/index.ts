@@ -11,7 +11,6 @@ import dresserBRO from './dresser-bottom-right-open.png';
 import dresserTL from './dresser-top-left.png';
 import dresserTR from './dresser-top-right.png';
 import posterB from './poster-bottom.png';
-import posterM from './poster-mid.png';
 import posterT from './poster-top.png';
 
 export const bedImgs = {
@@ -30,6 +29,5 @@ export const bedImgs = {
   dresserTR,
 
   posterB,
-  posterM,
   posterT,
 };

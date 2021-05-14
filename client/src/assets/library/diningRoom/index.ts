@@ -16,7 +16,7 @@ import chair from './dining-chair.png';
 // import tableWrap from './dining-table-veggie-wrap.png';
 import foodWaste2 from './food-waste-2.png';
 
-import tableL from './dinind-table-left.png';
+import tableL from './dining-table-left.png';
 import tableR from './dining-table-right.png';
 
 export const diningImgs = {

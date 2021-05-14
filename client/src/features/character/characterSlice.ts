@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
@@ -50,28 +50,36 @@ const characterSlice = createSlice({
     resetCharacter: () => initialState,
     toggleLeftFired(state) {
       state.leftFired = !state.leftFired;
-      state.direction = 'blue';
     },
     toggleRightFired(state) {
       state.rightFired = !state.rightFired;
-      state.direction = 'red';
     },
     toggleUpFired(state) {
       state.upFired = !state.upFired;
-      state.direction = 'green';
     },
     toggleDownFired(state) {
       state.downFired = !state.downFired;
-      state.direction = 'purple';
     },
     setMoveIntId(state, action: PayloadAction<number | null>) {
       state.moveIntId = action.payload;
     },
     setMoveDir(state, action: PayloadAction<string | null>) {
-      if (action.payload === 's') state.moveDir = action.payload;
-      if (action.payload === 'w') state.moveDir = action.payload;
-      if (action.payload === 'a') state.moveDir = action.payload;
-      if (action.payload === 'd') state.moveDir = action.payload;
+      if (action.payload === 's') {
+        state.moveDir = action.payload;
+        state.direction = 'blue';
+      }
+      if (action.payload === 'w') {
+        state.moveDir = action.payload;
+        state.direction = 'red';
+      }
+      if (action.payload === 'a') {
+        state.moveDir = action.payload;
+        state.direction = 'green';
+      }
+      if (action.payload === 'd') {
+        state.moveDir = action.payload;
+        state.direction = 'purple';
+      }
     },
     changeMovePos(state) {
       if (state.moveDir === 's') {
