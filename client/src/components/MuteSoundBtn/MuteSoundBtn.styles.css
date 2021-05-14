@@ -1,0 +1,8 @@
+@import '../../../node_modules/nes.css/css/nes.css';
+
+.mute-sound-btn {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  box-shadow: 0 0 5px 10px black;
+}

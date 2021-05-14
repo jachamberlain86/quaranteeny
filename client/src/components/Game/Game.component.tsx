@@ -20,6 +20,7 @@ import { startClock } from '../../helpers/game.helper';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
+import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
 import {
   musicEightiesSlowFunk,
   musicChillSong,
@@ -70,6 +71,7 @@ const Game = (): JSX.Element => {
         <DayCounter />
         <Mood />
         <GameOverBtn />
+        <MuteSoundBtn />
       </div>
       <Room />
       <MeterArea />
