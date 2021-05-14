@@ -17,7 +17,7 @@ export const musicEightiesSlowFunk = new Howl({
   src: [EightiesSlowFunkSong],
   autoplay: false,
   loop: true,
-  volume: 0.2,
+  volume: 0.1,
   // onend() {
   //   console.log('Finished!');
   // },
@@ -27,7 +27,7 @@ export const musicChillSong = new Howl({
   src: [chillSong],
   autoplay: false,
   loop: true,
-  volume: 0.2,
+  volume: 0.1,
   // onend() {
   //   console.log('Finished!');
   // },

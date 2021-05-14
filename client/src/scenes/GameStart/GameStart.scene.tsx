@@ -17,6 +17,7 @@ import {
   btnClickOne,
   whooshOne,
 } from '../../audioControllers/buttonSounds';
+import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 
 interface initialState {
   name: string;
@@ -346,6 +347,7 @@ const GameStart = (): JSX.Element => {
   return (
     <div className="game-start-page">
       <div className="start-page-container">
+        <MuteSoundBtn />
         <div className="title-row">
           <h1>Quarantiny</h1>
         </div>
