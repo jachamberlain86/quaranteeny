@@ -3,7 +3,8 @@
 .game-start-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: space-around; */
+  /* align-items: center; */
   width: 100vw;
   height: 100vh;
   text-align: center;
@@ -16,11 +17,13 @@
 
 .start-page-container{
   position: relative;
-  height: 20vh;
+  /* height: 20vh; */
 }
 
 .title-row{
-  max-height: 20vh;
+  /* max-height: 20vh; */
+  /* height: 30%; */
+  margin: 20% auto 1rem auto;
 }
 
 .game-start-page h1 {

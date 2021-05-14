@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Howler } from 'howler';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
 import { setUserName } from '../../features/user/userSlice';
@@ -9,6 +10,14 @@ import {
 } from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/images/TinyJamesWalk.gif';
+import { musicCuriousIntense } from '../../audioControllers/soundTracks';
+import {
+  btnPressOne,
+  btnPressTwo,
+  btnClickOne,
+  whooshOne,
+} from '../../audioControllers/buttonSounds';
+import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 
 interface initialState {
   name: string;
@@ -31,6 +40,15 @@ const GameStart = (): JSX.Element => {
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
 
+  // TODO create an audio player...
+  useEffect(() => {
+    musicCuriousIntense.play();
+  }, []);
+
+  const handleBtnHover = (): void => {
+    btnClickOne.play();
+  };
+
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
     setNameInput(input.toUpperCase());
@@ -40,6 +58,8 @@ const GameStart = (): JSX.Element => {
     const target = e.target as HTMLFormElement;
     target.classList.add('slideOutLeft');
     dispatch(setUserName(nameInput));
+    whooshOne.play();
+    btnPressOne.play();
     setTimeout(() => {
       setAnimate({ name: 'showChooseGameSpeed' });
       setNameInput('');
@@ -48,6 +68,10 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleStart = (e: React.FormEvent<HTMLButtonElement>): void => {
+    btnPressOne.play();
+    setTimeout(() => {
+      whooshOne.play();
+    }, 125);
     const cssStyle = e.target as Element;
     cssStyle.classList.add('slideOutLeft');
     if (userName) {
@@ -74,6 +98,8 @@ const GameStart = (): JSX.Element => {
       dispatch(changeGameSpeed(1440));
     }
     currentChooseSpeedDivRef.classList.add('slideOutLeft');
+    btnPressOne.play();
+    whooshOne.play();
     setTimeout(() => {
       currentChooseSpeedDivRef.classList.add('displayOff');
       setAnimate({ name: 'showGameInfo' });
@@ -83,8 +109,11 @@ const GameStart = (): JSX.Element => {
   const handleBeginGame = (): void => {
     const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
     currentGameInfoDivRef.classList.add('slideOutDown');
+    btnPressTwo.play();
+    whooshOne.play();
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
+      musicCuriousIntense.stop();
       dispatch(setIsCurrentGameActive());
       history.push('/start');
     }, animationSpeed);
@@ -92,6 +121,9 @@ const GameStart = (): JSX.Element => {
 
   const handleNewGame = (): void => {
     // TODO add choice of game speed again
+    btnPressOne.play();
+    console.log('whooshOne: ', whooshOne.duration());
+    whooshOne.play();
     resetGamePlay();
     setAnimate({ name: 'showChooseGameSpeed' });
     // console.log('clicked');
@@ -99,6 +131,9 @@ const GameStart = (): JSX.Element => {
   };
 
   const handleContinueGame = (): void => {
+    btnPressTwo.play();
+    whooshOne.play();
+    musicCuriousIntense.stop();
     history.push('/start');
   };
 
@@ -177,6 +212,7 @@ const GameStart = (): JSX.Element => {
                 type="button"
                 className="nes-btn is-warning rtn-btn"
                 onClick={handleContinueGame}
+                onMouseEnter={handleBtnHover}
               >
                 Continue Game
               </button>
@@ -184,6 +220,7 @@ const GameStart = (): JSX.Element => {
                 type="button"
                 className="nes-btn is-error rtn-btn"
                 onClick={handleNewGame}
+                onMouseEnter={handleBtnHover}
               >
                 New Game
               </button>
@@ -193,6 +230,7 @@ const GameStart = (): JSX.Element => {
               type="button"
               className="nes-btn is-error rtn-btn"
               onClick={handleNewGame}
+              onMouseEnter={handleBtnHover}
             >
               New Game
             </button>
@@ -214,6 +252,7 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn"
             id="realTime"
             onClick={handleChooseSpeed}
+            onMouseEnter={handleBtnHover}
           >
             Real time
           </button>
@@ -222,6 +261,7 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn is-warning"
             id="oneMinIsOneHour"
             onClick={handleChooseSpeed}
+            onMouseEnter={handleBtnHover}
           >
             1min = 1hour
           </button>
@@ -230,12 +270,41 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn is-error"
             id="oneMinIsOneDay"
             onClick={handleChooseSpeed}
+            onMouseEnter={handleBtnHover}
           >
             1min = 1day
           </button>
         </div>
       </div>
     );
+  };
+
+  const renderModeSelected = (): JSX.Element => {
+    if (gameSpeed === 1) {
+      return (
+        <div>
+          <h4>Easy Mode:</h4>
+          <h5> Real Time</h5>
+        </div>
+      );
+    }
+    if (gameSpeed === 60) {
+      return (
+        <div>
+          <h4>Normal Mode:</h4>
+          <h5>Every second is One minute</h5>
+        </div>
+      );
+    }
+    if (gameSpeed === 1440) {
+      return (
+        <div>
+          <h4>Hard Mode:</h4>
+          <h5>Every second is One hour</h5>
+        </div>
+      );
+    }
+    return <div />;
   };
 
   const renderGameInfo = (): JSX.Element => {
@@ -247,11 +316,11 @@ const GameStart = (): JSX.Element => {
         <div className="game-info-container">
           <div className="game-info-sub-container">
             <div>
-              <p>Time selected:</p>
-              <p>{gameSpeed}</p>
+              <h3>Time selected:</h3>
+              {renderModeSelected()}
             </div>
             <div>
-              <p>Character selected:</p>
+              <h3>Character selected:</h3>
               <img
                 src={spriteGif}
                 alt="tiny james walking"
@@ -276,6 +345,7 @@ const GameStart = (): JSX.Element => {
   return (
     <div className="game-start-page">
       <div className="start-page-container">
+        <MuteSoundBtn />
         <div className="title-row">
           <h1>Quarantiny</h1>
         </div>
