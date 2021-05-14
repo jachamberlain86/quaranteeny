@@ -20,12 +20,12 @@ export const fetchUserDataAsync = createAsyncThunk<
   async ({ dispatch }) => {
     const userData = await fetchUserData();
     if (userData) {
-      const { meters, game, sprite } = userData;
+      const { meters, game, sprite, user } = userData;
       dispatch(loadMetersStateFromDb(meters));
       dispatch(loadGameStateFromDb(game));
       dispatch(loadSpriteStateFromDb(sprite));
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      // dispatch(startUpdatesToDb());
+      dispatch(loadUserStateFromDb(user));
     }
     return userData;
   }
@@ -66,26 +66,39 @@ export const updateUserInDbAsync = createAsyncThunk<
       game,
       sprite,
       meters,
+      user,
     });
   }
 );
-
+export interface UserStateInDb {
+  userName: string;
+  scores: number[];
+}
 export interface UserState {
   userId: string;
   status: string;
   userName: string;
+  scores: number[];
 }
 
 const initialState: UserState = {
   userId: '',
   status: 'notLoaded',
   userName: '',
+  scores: [],
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    addNewScore: (state, action: PayloadAction<number>) => {
+      state.scores.push(action.payload);
+    },
+    loadUserStateFromDb: (state, action: PayloadAction<UserStateInDb>) => {
+      state.userName = action.payload.userName;
+      state.scores = action.payload.scores;
+    },
     setUserId: (state, action: PayloadAction<string>) => {
       state.userId = action.payload;
     },
@@ -112,7 +125,12 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserId, setUserName } = userSlice.actions;
+export const {
+  setUserId,
+  setUserName,
+  loadUserStateFromDb,
+  addNewScore,
+} = userSlice.actions;
 
 export const selectUser = (state: RootState): string => state.user.userId;
 export const selectUserStatus = (state: RootState): string => state.user.status;
@@ -131,6 +149,7 @@ export const startUpdatesToDb = (): AppThunk => (dispatch, getState) => {
         game,
         sprite,
         meters,
+        user: { userName: user.userName, scores: user.scores },
       });
     }
   }, 5000);

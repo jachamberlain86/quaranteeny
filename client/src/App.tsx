@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
 import GameStart from './scenes/GameStart/GameStart.scene';
 import GameStats from './scenes/GameStats/GameStats.scene';
-import GameOverBtn from './components/GameOverBtn/GameOverBtn.component';
 import { useAppDispatch } from './app/hooks';
 import {
   setUserId,
@@ -29,7 +28,6 @@ const App = (): JSX.Element => {
       <Switch>
         <Route path="/start">
           <Game />
-          <GameOverBtn />
         </Route>
         <Route path="/game-stats">
           <GameStats />
