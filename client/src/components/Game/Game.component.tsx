@@ -20,6 +20,10 @@ import { startClock } from '../../helpers/game.helper';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
+import {
+  musicEightiesSlowFunk,
+  musicChillSong,
+} from '../../audioControllers/soundTracks';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -56,6 +60,9 @@ const Game = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
+  useEffect(() => {
+    musicChillSong.play();
+  }, []);
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
       {gameOver && <GameOver />}
