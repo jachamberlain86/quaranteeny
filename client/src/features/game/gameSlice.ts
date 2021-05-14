@@ -34,6 +34,8 @@ export const gameSlice = createSlice({
     },
     setStartTime: (state, action: PayloadAction<number>) => {
       state.startTime = action.payload;
+      state.currClockTimeReal = action.payload;
+      state.currClockTimeInGame = action.payload;
     },
     updateClockTime: (
       state,
