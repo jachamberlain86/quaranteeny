@@ -5,11 +5,11 @@ import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
 const initialState: Character = {
-  curPos: [1, 1],
-  movePos: [1, 1],
+  curPos: [2, 4],
+  movePos: [2, 4],
   timeMoved: 0,
   dimensions: [40, 40],
-  position: [45, 45],
+  position: [40, 160],
   delayMove: 700,
   direction: 'left',
   isMoving: false,
