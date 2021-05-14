@@ -6,7 +6,6 @@ export interface GameState {
   gameSpeed: number;
   currClockTimeInGame: number;
   currClockTimeReal: number;
-  clockIntervalId: NodeJS.Timeout | null;
   startTime: number;
   gameOver: boolean;
   timeLasted: number;
@@ -18,7 +17,6 @@ const initialState: GameState = {
   startTime: 0,
   currClockTimeInGame: 0,
   currClockTimeReal: 0,
-  clockIntervalId: null,
   gameOver: false,
   timeLasted: 0,
   isCurrentGameActive: false,
@@ -48,12 +46,6 @@ export const gameSlice = createSlice({
       const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
       state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
     },
-    setClockIntervalId: (
-      state,
-      action: PayloadAction<NodeJS.Timeout | null>
-    ) => {
-      state.clockIntervalId = action.payload;
-    },
     setGameOver: (state) => {
       state.gameOver = !state.gameOver;
     },
@@ -81,7 +73,6 @@ export const {
   changeGameSpeed,
   setStartTime,
   updateClockTime,
-  setClockIntervalId,
   setGameOver,
   loadGameStateFromDb,
   setTimeLasted,
@@ -99,10 +90,6 @@ export const selectClockTimeInGame = (state: RootState): number =>
 
 export const selectClockTimeReal = (state: RootState): number =>
   state.game.currClockTimeReal;
-
-export const selectClockIntervalId = (
-  state: RootState
-): NodeJS.Timeout | null => state.game.clockIntervalId;
 
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;
