@@ -20,6 +20,8 @@ import {
   cuteWalkOne,
   shuffleWalkOne,
   shuffleWalkShort,
+  collisionOne,
+  collisionTwo,
 } from '../audioControllers/playerSounds';
 import game from '../data/gameMap.data';
 
@@ -51,9 +53,10 @@ function handleMove(key: string): void {
     const newPos = calcNewPos(key);
     console.log(newPos);
     if (checkCanMove(newPos)) {
-      // insert move player sounds...
       shuffleWalkShort.play();
       store.dispatch(changeMovePos());
+    } else {
+      collisionOne.play();
     }
   }, timerDel);
   store.dispatch(setMoveIntId(timer));
