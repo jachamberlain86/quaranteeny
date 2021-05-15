@@ -1,4 +1,4 @@
-import { hour } from './time.data';
+import { hour, day } from './time.data';
 import { Entity } from '../interfaces/entity.interface';
 import { EntityDetails } from '../interfaces/entityDetails.interface';
 import { selectGameTime } from '../features/game/gameSlice';
@@ -15,14 +15,23 @@ const entitiesData: EntityDetails[] = [
     name: 'bed',
     cost: 0,
     hoursToComplete: 8,
-    meterImpacts: [{ name: 'energy', amount: hour * 16 }],
-    conditions: ['unconscious'],
+    meterImpacts: [
+      { name: 'energy', amount: hour * 16 },
+      { name: 'mood', amount: hour },
+      { name: 'comfort', amount: hour },
+      { name: 'motivation', amount: -hour * 6 },
+      { name: 'mind', amount: day },
+    ],
+    conditions: ['asleep'],
   },
   {
     name: 'dresser',
     cost: 0,
-    hoursToComplete: 8,
-    meterImpacts: [{ name: 'energy', amount: hour * 16 }],
+    hoursToComplete: 0,
+    meterImpacts: [
+      { name: 'motivation', amount: hour * 6 },
+      { name: 'freedom', amount: -hour * 6 },
+    ],
     conditions: [],
   },
   {
@@ -30,14 +39,14 @@ const entitiesData: EntityDetails[] = [
     cost: 0,
     hoursToComplete: 8,
     meterImpacts: [{ name: 'energy', amount: hour * 16 }],
-    conditions: [],
+    conditions: ['washing'],
   },
   {
     name: 'bath',
     cost: 0,
     hoursToComplete: 8,
     meterImpacts: [{ name: 'energy', amount: hour * 16 }],
-    conditions: [],
+    conditions: ['washing'],
   },
   {
     name: 'lamp',

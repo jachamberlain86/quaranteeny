@@ -92,7 +92,7 @@ export const checkConditionsState = (): void => {
       if (currentConditions.includes('exhausted'))
         store.dispatch(increaseSleepDep());
       else store.dispatch(decreaseSleepDep());
-      if (currentConditions.includes('malnourished'))
+      if (currentConditions.includes('hungry'))
         store.dispatch(increaseStarvation());
       else store.dispatch(decreaseStarvation());
       if (currentConditions.includes('unwell')) store.dispatch(increaseSick());

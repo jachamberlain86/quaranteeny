@@ -95,6 +95,15 @@ export class ImageDirectory {
     this.dotlc = doorImgs.doorTLC;
     this.dotrc = doorImgs.doorTRC;
     this.dotc = doorImgs.doorTC;
+    this.doblo = doorImgs.doorBLO;
+    this.dobro = doorImgs.doorBRO;
+    this.dobo = doorImgs.doorBO;
+    this.dolo = doorImgs.doorLO;
+    this.domo = doorImgs.doorMO;
+    this.doro = doorImgs.doorRO;
+    this.dotlo = doorImgs.doorTLO;
+    this.dotro = doorImgs.doorTRO;
+    this.doto = doorImgs.doorTO;
 
     this.kifb = kitchenImgs.fridgeB;
     this.kifmc = kitchenImgs.fridgeMC;

@@ -26,7 +26,7 @@ export const needs: Need[] = [
     name: 'hunger',
     decayRate: -minute,
     safeSize: hour * 8,
-    deficitImpacts: ['malnourished'],
+    deficitImpacts: ['hungry'],
     excessImpacts: ['overfed'],
   },
   {
@@ -110,7 +110,7 @@ export const needs: Need[] = [
     name: 'appetite',
     decayRate: 0,
     safeSize: day,
-    deficitImpacts: ['food averse'],
+    deficitImpacts: ['nauseous'],
     excessImpacts: ['greedy'],
   },
   {
