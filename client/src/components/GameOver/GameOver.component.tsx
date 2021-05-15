@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './GameOver.styles.css';
 import { useHistory } from 'react-router-dom';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
-import { btnPressTwo } from '../../audioControllers/buttonSounds';
+import { bleepingGameOver } from '../../audioControllers/gameOverSounds';
+import {
+  btnPressTwo,
+  exitGamePress,
+} from '../../audioControllers/buttonSounds';
 
 const GameOver = (): JSX.Element => {
   const history = useHistory();
@@ -10,9 +14,14 @@ const GameOver = (): JSX.Element => {
     gameOverMusic.stop();
     btnPressTwo.play();
     setTimeout(() => {
+      exitGamePress.play();
+      bleepingGameOver.stop();
       history.push('/game-stats');
     }, 200);
   };
+  useEffect(() => {
+    bleepingGameOver.play();
+  });
   return (
     <div className="game-over-container">
       <div className="nes-container is-dark with-title game-over-tile">
