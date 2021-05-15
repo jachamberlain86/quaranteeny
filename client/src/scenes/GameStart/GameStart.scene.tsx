@@ -129,7 +129,6 @@ const GameStart = (): JSX.Element => {
   const handleNewGame = (): void => {
     // TODO add choice of game speed again
     bleepFiveConfirmation.play();
-    console.log('whooshOne: ', whooshOne.duration());
     whooshOne.play();
     resetGamePlay();
     setAnimate({ name: 'showChooseGameSpeed' });

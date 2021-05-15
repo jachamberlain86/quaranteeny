@@ -38,3 +38,18 @@ export const collisionTwo = new Howl({
   loop: false,
   rate: 1.3,
 });
+
+// Creates an object of multiple sounds that can later be called at random
+// used in inputHelper - collision function: handleMove()
+type HowlObject = Record<string, Howl>;
+
+export const howlCollisionsObj = {} as HowlObject;
+export const collisionArray: string[] = [collision1, collision2];
+collisionArray.forEach((sound) => {
+  howlCollisionsObj[sound] = new Howl({
+    src: [sound],
+    volume: 0.2,
+    loop: false,
+    rate: 1.3,
+  });
+});

@@ -1,3 +1,4 @@
+import { Howl } from 'howler';
 import { store } from '../app/store';
 import {
   selectLeftFired,
@@ -22,6 +23,8 @@ import {
   shuffleWalkShort,
   collisionOne,
   collisionTwo,
+  howlCollisionsObj,
+  collisionArray,
 } from '../audioControllers/playerSounds';
 import game from '../data/gameMap.data';
 
@@ -56,7 +59,9 @@ function handleMove(key: string): void {
       shuffleWalkShort.play();
       store.dispatch(changeMovePos());
     } else {
-      collisionOne.play();
+      const randomCollisionSound =
+        collisionArray[Math.floor(Math.random() * collisionArray.length)];
+      howlCollisionsObj[randomCollisionSound].play();
     }
   }, timerDel);
   store.dispatch(setMoveIntId(timer));
