@@ -9,6 +9,14 @@ import {
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
 import { gameStatsMusic } from '../../audioControllers/gameStatsMusic';
+import {
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
+} from '../GameStart/GameStart.scene';
+import {
+  btnPressOne,
+  bleepFiveConfirmation,
+} from '../../audioControllers/buttonSounds';
 // import { setIsCurrentGameActive } from '../../features/user/userSlice';
 import './GameStats.styles.css';
 
@@ -26,15 +34,15 @@ const GameStats: FC = () => {
 
   const handleExit = (): void => {
     resetGamePlay();
+    btnPressOne.play();
     gameStatsMusic.stop();
     setTimeout(() => {
-      // TODO delete: here for testing purposes
-      // dispatch(setIsCurrentGameActive());
       history.push('/');
     }, 300);
   };
   const handlePlayAgain = (): void => {
     resetGamePlay();
+    bleepFiveConfirmation.play();
     gameStatsMusic.stop();
     // TODO divide Game start page then push user to choose speed
     history.push('/');
@@ -67,6 +75,8 @@ const GameStats: FC = () => {
             type="button"
             className="nes-btn is-success"
             onClick={handlePlayAgain}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
           >
             Play again
           </button>
@@ -74,6 +84,8 @@ const GameStats: FC = () => {
             type="button"
             className="nes-btn is-error"
             onClick={handleExit}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
           >
             Exit
           </button>
