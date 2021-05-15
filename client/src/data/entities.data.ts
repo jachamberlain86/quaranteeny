@@ -16,7 +16,7 @@ const entitiesData: EntityDetails[] = [
     cost: 0,
     hoursToComplete: 8,
     meterImpacts: [{ name: 'energy', amount: hour * 16 }],
-    conditions: ['unconcious'],
+    conditions: ['unconscious'],
   },
   {
     name: 'dresser',

@@ -13,7 +13,7 @@ import { ConditionDetails } from '../interfaces/conditionDetails.interface';
 
 export const conditionsData: ConditionDetails[] = [
   {
-    name: 'unconcious',
+    name: 'unconscious',
     modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
   },
   {

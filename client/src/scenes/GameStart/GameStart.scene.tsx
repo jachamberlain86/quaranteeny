@@ -9,7 +9,7 @@ import {
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
-import spriteGif from '../../assets/images/TinyJamesWalk.gif';
+import spriteGif from '../../assets/oldImages/TinyJamesWalk.gif';
 import { musicCuriousIntense } from '../../audioControllers/soundTracks';
 import {
   btnPressOne,

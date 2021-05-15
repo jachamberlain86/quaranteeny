@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Rect } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
 import { selectCharacter } from '../../features/character/characterSlice';
-import { imageDirectory, ImageDirectory } from '../../assets/library/index';
+import { imageDirectory, ImageDirectory } from '../../assets/images/index';
 import { handleClickSprite } from '../../helpers/game.helper';
 import game from '../../data/gameMap.data';
 
@@ -26,7 +26,7 @@ const Player = (): JSX.Element => {
   // console.log(tileKey);
 
   const img = new window.Image();
-  img.src = imageDirectory[tileKey as keyof ImageDirectory];
+  // img.src = imageDirectory[tileKey as keyof ImageDirectory];
   img.crossOrigin = 'Anonymous';
 
   return (

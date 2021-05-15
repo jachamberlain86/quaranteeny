@@ -14,7 +14,7 @@ import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
 import { resetCharacter } from '../features/character/characterSlice';
-import { imageDirectory, ImageDirectory } from '../assets/library/index';
+import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
 
 export const startClock = (): void => {

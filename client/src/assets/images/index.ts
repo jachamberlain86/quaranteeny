@@ -175,8 +175,6 @@ export class ImageDirectory {
     // this.lrpd = livingImgs.plantDead;
     // this.lrtvon = livingImgs.tvOn;
     // this.ofdon = officeImgs.deskOn;
-
-    this.sps1 = spriteImgs.standing1;
   }
 }
 
