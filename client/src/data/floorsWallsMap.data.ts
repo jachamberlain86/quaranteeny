@@ -1,6 +1,7 @@
 import { FloorTile } from '../interfaces/gameMap.interface';
 
 export const floorMap: FloorTile[] = [
+  // row 1
   { key: 'rtl', walk: false },
   { key: 'rt', walk: false },
   { key: 'rt', walk: false },
@@ -21,6 +22,7 @@ export const floorMap: FloorTile[] = [
   { key: 'rt', walk: false },
   { key: 'rt', walk: false },
   { key: 'rtr', walk: false },
+  // row 2
   { key: 'rl', walk: false },
   { key: 'wtl', walk: false },
   { key: 'wt', walk: false },
@@ -41,6 +43,7 @@ export const floorMap: FloorTile[] = [
   { key: 'wt', walk: false },
   { key: 'wtr', walk: false },
   { key: 'rr', walk: false },
+  // row 3
   { key: 'rl', walk: false },
   { key: 'wl', walk: false },
   { key: 'wm', walk: false },
@@ -61,6 +64,7 @@ export const floorMap: FloorTile[] = [
   { key: 'wm', walk: false },
   { key: 'wr', walk: false },
   { key: 'rr', walk: false },
+  // row 4
   { key: 'rl', walk: false },
   { key: 'wbl', walk: false },
   { key: 'wb', walk: false },
@@ -81,6 +85,7 @@ export const floorMap: FloorTile[] = [
   { key: 'wb', walk: false },
   { key: 'wbr', walk: false },
   { key: 'rr', walk: false },
+  // Row 5
   { key: 'rl', walk: false },
   { key: 'ctl', walk: true },
   { key: 'ct', walk: true },
@@ -101,6 +106,7 @@ export const floorMap: FloorTile[] = [
   { key: 'ti', walk: true },
   { key: 'ti', walk: false },
   { key: 'rr', walk: false },
+  // Row 6
   { key: 'rl', walk: false },
   { key: 'cl', walk: true },
   { key: 'cm', walk: true },
@@ -121,6 +127,7 @@ export const floorMap: FloorTile[] = [
   { key: 'ti', walk: true },
   { key: 'ti', walk: true },
   { key: 'rr', walk: false },
+  // Row 7
   { key: 'rl', walk: false },
   { key: 'cl', walk: true },
   { key: 'cm', walk: true },
@@ -141,6 +148,7 @@ export const floorMap: FloorTile[] = [
   { key: 'ti', walk: true },
   { key: 'ti', walk: true },
   { key: 'rr', walk: false },
+  // Row 8
   { key: 'rbl', walk: false },
   { key: 'rb', walk: false },
   { key: 'rb', walk: false },
@@ -161,6 +169,7 @@ export const floorMap: FloorTile[] = [
   { key: 'rb', walk: false },
   { key: 'rb', walk: false },
   { key: 'rbr', walk: false },
+  // Row 9
   { key: 'rtl', walk: false },
   { key: 'rt', walk: false },
   { key: 'rt', walk: false },
@@ -181,6 +190,7 @@ export const floorMap: FloorTile[] = [
   { key: 'rt', walk: false },
   { key: 'rt', walk: false },
   { key: 'rtr', walk: false },
+  // Row 10
   { key: 'rl', walk: false },
   { key: 'wtl', walk: false },
   { key: 'wt', walk: false },
@@ -201,6 +211,7 @@ export const floorMap: FloorTile[] = [
   { key: 'wt', walk: false },
   { key: 'wtr', walk: false },
   { key: 'rr', walk: false },
+  // Row 11
   { key: 'rl', walk: false },
   { key: 'wl', walk: false },
   { key: 'wm', walk: false },
@@ -221,6 +232,7 @@ export const floorMap: FloorTile[] = [
   { key: 'wm', walk: false },
   { key: 'wr', walk: false },
   { key: 'rr', walk: false },
+  // Row 12
   { key: 'rl', walk: false },
   { key: 'wbl', walk: false },
   { key: 'wb', walk: false },
