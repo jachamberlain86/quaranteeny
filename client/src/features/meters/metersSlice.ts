@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import _ from 'lodash';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { meters } from '../../data/meters.data';
 import { MeterChange } from '../../interfaces/meterChange.interface';
@@ -75,20 +75,27 @@ export const metersSlice = createSlice({
       if (meter.value < 0) meter.value = 0;
     },
     addModifier: (state, action: PayloadAction<MeterModifier>) => {
+      console.log('modifier added');
       const meter = state[action.payload.meter as keyof MetersState];
       if (action.payload.incRateModifier) {
         const modifier = action.payload.incRateModifier;
         meter.incRate =
-          modifier > 0 ? meter.incRate * modifier : meter.incRate / +modifier;
+          modifier > 0
+            ? meter.incRate * modifier
+            : meter.incRate / Math.abs(modifier);
+        console.log(meter.incRate);
       }
       if (action.payload.decRateModifier) {
         const modifier = action.payload.decRateModifier;
         meter.decRate =
-          modifier > 0 ? meter.decRate * modifier : meter.decRate / +modifier;
+          modifier > 0
+            ? meter.decRate * modifier
+            : meter.decRate / Math.abs(modifier);
+        console.log(meter.decRate);
       }
-      if (meter.decRate < 0) meter.decRate = 0;
+      if (meter.decRate <= 0) meter.decRate = 0.1;
       if (meter.decRate > 1000) meter.decRate = 1000;
-      if (meter.incRate < 0) meter.incRate = 0;
+      if (meter.incRate <= 0) meter.incRate = 0.1;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
     removeModifier: (state, action: PayloadAction<MeterModifier>) => {
@@ -96,17 +103,21 @@ export const metersSlice = createSlice({
       if (action.payload.incRateModifier) {
         const modifier = action.payload.incRateModifier;
         meter.incRate =
-          modifier > 0 ? meter.incRate / modifier : meter.incRate * +modifier;
+          modifier > 0
+            ? meter.incRate / modifier
+            : meter.incRate * Math.abs(modifier);
       }
       meter.incRate -= action.payload.incRateModifier;
       if (action.payload.decRateModifier) {
         const modifier = action.payload.decRateModifier;
         meter.decRate =
-          modifier > 0 ? meter.decRate / modifier : meter.decRate * +modifier;
+          modifier > 0
+            ? meter.decRate / modifier
+            : meter.decRate * Math.abs(modifier);
       }
-      if (meter.decRate < 0) meter.decRate = 0;
+      if (meter.decRate <= 0) meter.decRate = 0.1;
       if (meter.decRate > 1000) meter.decRate = 1000;
-      if (meter.incRate < 0) meter.incRate = 0;
+      if (meter.incRate <= 0) meter.incRate = 0.1;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
     loadMetersStateFromDb: (state, action: PayloadAction<MetersState>) => {

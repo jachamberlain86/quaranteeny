@@ -12,6 +12,9 @@ export class User {
     currClockTimeReal: number;
     startTime: number;
     gameOver: boolean;
+    starvationCounter: number;
+    sleepDepCounter: number;
+    sickCounter: number;
   };
 
   @Column({ type: 'simple-json', nullable: true })
@@ -24,9 +27,6 @@ export class User {
   sprite: {
     currentInteraction: string | null;
     interactionProgress: number | null;
-    starvationCounter: number;
-    sleepDepCounter: number;
-    sickCounter: number;
     conditions: string[];
   };
 

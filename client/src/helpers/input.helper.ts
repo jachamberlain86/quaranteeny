@@ -44,6 +44,7 @@ function handleMove(key: string): void {
   const timerDel = selectDelay(store.getState());
   const timer = window.setInterval(() => {
     const newPos = calcNewPos(key);
+    console.log(newPos);
     if (checkCanMove(newPos)) {
       store.dispatch(changeMovePos());
     }
@@ -79,6 +80,7 @@ export function downHandler(event: KeyboardEvent): void {
     }
   }
   if (event.key === 'd' && !rightFired) {
+    console.log('registered right');
     if (moveDir === null) {
       store.dispatch(toggleRightFired());
       store.dispatch(setMoveDir(event.key));

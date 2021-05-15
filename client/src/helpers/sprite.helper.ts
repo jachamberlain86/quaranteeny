@@ -5,6 +5,12 @@ import {
   changeInteraction,
   selectConditions,
   selectCurrentInteraction,
+  setInteractionProgress,
+} from '../features/sprite/spriteSlice';
+import {
+  setGameOver,
+  selectGameOver,
+  selectGameTime,
   increaseStarvation,
   increaseSleepDep,
   increaseSick,
@@ -14,9 +20,7 @@ import {
   selectStarvation,
   selectSleepDep,
   selectSick,
-  setInteractionProgress,
-} from '../features/sprite/spriteSlice';
-import { setGameOver, selectGameOver } from '../features/game/gameSlice';
+} from '../features/game/gameSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
 import { MeterModifier } from '../interfaces/meterModifier.interface';
 import { deductCost, triggerChangeMeters } from './meters.helper';
@@ -24,8 +28,7 @@ import { calcPercentage } from './game.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
-import { gameHour } from '../data/gameTime.data';
-import { day, updateInterval } from '../data/time.data';
+import { day } from '../data/time.data';
 
 // Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
@@ -80,6 +83,7 @@ export const handleInteraction = (entity: string): void => {
 // Used to check whether lose state conditions are present in the sprite's conditions array
 
 export const checkConditionsState = (): void => {
+  const { gameHour, updateInterval } = selectGameTime(store.getState().game);
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
     if (gameOver) clearInterval(timer);
@@ -100,6 +104,7 @@ export const checkConditionsState = (): void => {
 // After specific periods of time with certain losing conditions in the sprite's conditions array different states are added and then a gave over is triggered if still unresolved.
 
 export const checkLoseStates = (): void => {
+  const { gameHour, updateInterval } = selectGameTime(store.getState().game);
   const timer = setInterval(() => {
     const starvation = selectStarvation(store.getState());
     const sleepDep = selectSleepDep(store.getState());

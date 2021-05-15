@@ -15,8 +15,14 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
     (state) => state.meters[meterName as keyof MetersState].value
   );
 
-  const meterWarningValue = 20;
-  const meterExcellentValue = 90;
+  const meterWarningValue = calcPercentage(
+    meters[meterName].deficitPoint,
+    meter.max
+  );
+  const meterExcellentValue = calcPercentage(
+    meters[meterName].excessPoint,
+    meter.max
+  );
   const meterValue = calcPercentage(currentValue, meter.max);
   const meterColor = (): string => {
     if (meterValue <= meterWarningValue) {

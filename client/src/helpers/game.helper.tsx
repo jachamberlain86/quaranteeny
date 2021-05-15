@@ -69,6 +69,7 @@ export function handleClickTile(
       handleInteraction(clickedEntity);
     }
   } else {
+    setCurrentInteraction(null);
     console.log(`clicked ${clickPosX}, ${clickPosY}`);
   }
 }

@@ -5,8 +5,8 @@ import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
 
 const initialState: Character = {
-  curPos: [2, 4],
-  movePos: [2, 4],
+  curPos: [1, 4],
+  movePos: [1, 4],
   dimensions: [40, 40],
   pixelLocation: [40, 160],
   direction: 'yellow',
