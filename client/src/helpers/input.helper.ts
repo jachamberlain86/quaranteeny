@@ -16,6 +16,11 @@ import {
   changeMovePos,
   selectDelay,
 } from '../features/character/characterSlice';
+import {
+  cuteWalkOne,
+  shuffleWalkOne,
+  shuffleWalkShort,
+} from '../audioControllers/playerSounds';
 import game from '../data/gameMap.data';
 
 function calcNewPos(key: string): number[] {
@@ -46,6 +51,8 @@ function handleMove(key: string): void {
     const newPos = calcNewPos(key);
     console.log(newPos);
     if (checkCanMove(newPos)) {
+      // insert move player sounds...
+      shuffleWalkShort.play();
       store.dispatch(changeMovePos());
     }
   }, timerDel);
