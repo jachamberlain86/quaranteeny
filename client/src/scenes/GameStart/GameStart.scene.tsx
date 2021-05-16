@@ -52,10 +52,10 @@ const GameStart = (): JSX.Element => {
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
 
-  // TODO create an audio player...not essential
-  useEffect(() => {
-    musicCuriousIntense.play();
-  }, []);
+  // // TODO create an audio player...not essential
+  // useEffect(() => {
+  //   musicCuriousIntense.play();
+  // }, []);
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
