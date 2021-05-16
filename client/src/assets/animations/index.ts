@@ -1,6 +1,6 @@
-import { calcPixelPos, calcPixelSize } from '../../../helpers/atlas.helper';
-import { AtlasRef } from '../../../interfaces/atlasRef.interface';
-import { AnimationRef } from '../../../interfaces/animationRef.interfact';
+import { calcPixelPos, calcPixelSize } from '../../helpers/atlas.helper';
+import { AtlasRef } from '../../interfaces/atlasRef.interface';
+import { AnimationRef } from '../../interfaces/animationRef.interfact';
 
 import { sleeping } from './sleeping';
 import { watching } from './watching';

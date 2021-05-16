@@ -1,4 +1,4 @@
-import { AtlasRefDetails } from '../../../interfaces/atlasRefDetails.interface';
+import { AtlasRefDetails } from '../../interfaces/atlasRefDetails.interface';
 
 export const idlingD: AtlasRefDetails[] = [
   {

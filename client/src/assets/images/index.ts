@@ -8,7 +8,6 @@ import { kitchenImgs } from './kitchen/index';
 import { livingImgs } from './livingRoom/index';
 import { officeImgs } from './office/index';
 import { wallImgs } from './walls/index';
-import { spriteImgs } from './sprite/index';
 
 export class ImageDirectory {
   [key: string]: string;
