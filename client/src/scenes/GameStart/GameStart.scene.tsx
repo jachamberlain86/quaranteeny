@@ -22,6 +22,7 @@ import {
   bleepSevenHover,
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
+import SoundBar from '../../components/SoundBar/SoundBar.components';
 
 interface initialState {
   name: string;
@@ -364,6 +365,7 @@ const GameStart = (): JSX.Element => {
 
   return (
     <div className="game-start-page">
+      <SoundBar />
       <div className="start-page-container">
         <MuteSoundBtn />
         <div className="title-row">

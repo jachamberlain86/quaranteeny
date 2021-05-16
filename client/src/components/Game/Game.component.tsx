@@ -29,6 +29,7 @@ import {
   gameOverFour,
 } from '../../audioControllers/gameOverSounds';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
+import SoundBar from '../SoundBar/SoundBar.components';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -76,16 +77,19 @@ const Game = (): JSX.Element => {
     }
   }, [gameOver]);
   return (
-    <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
-      {gameOver && <GameOver />}
-      <div>
-        <DayCounter />
-        <Mood />
-        <GameOverBtn />
-        <MuteSoundBtn />
+    <div>
+      <SoundBar />
+      <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+        {gameOver && <GameOver />}
+        <div>
+          <DayCounter />
+          <Mood />
+          <GameOverBtn />
+          <MuteSoundBtn />
+        </div>
+        <Room />
+        <MeterArea />
       </div>
-      <Room />
-      <MeterArea />
     </div>
   );
 };
