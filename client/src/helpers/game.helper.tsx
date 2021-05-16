@@ -20,6 +20,7 @@ import {
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
 import { checkIndex } from './input.helper';
+import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
@@ -75,6 +76,16 @@ export function handleClickTile(
     console.log('That tickles!');
   } else if (clickedEntity !== null) {
     console.log(`clicked the ${clickedEntity}`);
+    // TODO move sound logic to sprite collision logic when in place.
+    // sound file logic
+    // might be more useful in spriteHelper line: 66
+    const houseSoundsArray = Object.entries(houseInteractablesObj);
+    for (let i = 0; i < houseSoundsArray.length; i += 1) {
+      const soundFile = houseSoundsArray[i];
+      if (soundFile[0].includes(clickedEntity)) {
+        soundFile[1].play();
+      }
+    }
     if (setCurrentInteraction(clickedEntity)) {
       handleInteraction(clickedEntity);
     }
@@ -103,7 +114,7 @@ export function renderLayer(layer: number): JSX.Element[] {
             image={img}
             height={tileSize}
             width={tileSize}
-            onClick={handleClickTile}
+            // onClick={handleClickTile}
           />
         );
       } else {
@@ -115,6 +126,7 @@ export function renderLayer(layer: number): JSX.Element[] {
             image={img}
             height={tileSize}
             width={tileSize}
+            onClick={handleClickTile}
           />
         );
       }
