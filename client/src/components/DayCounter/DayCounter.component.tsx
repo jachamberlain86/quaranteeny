@@ -6,8 +6,10 @@ import {
   selectClockTimeInGame,
   selectStartTime,
   setTimeLasted,
+  selectTimeLasted,
 } from '../../features/game/gameSlice';
 import { addNewScore } from '../../features/user/userSlice';
+import { day } from '../../data/time.data';
 
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -15,6 +17,7 @@ const DayCounter = (): JSX.Element => {
   const { userName } = useAppSelector((state) => state.user);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTimeInGame);
+
   useEffect(() => {
     if (gameOver) {
       dispatch(setTimeLasted(currClockTime - startTime));

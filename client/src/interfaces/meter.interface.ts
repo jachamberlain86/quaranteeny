@@ -7,4 +7,5 @@ export interface Meter {
   readonly excessImpacts: string[];
   readonly max: number;
   readonly initialValue: number;
+  readonly pauseDecay: boolean;
 }

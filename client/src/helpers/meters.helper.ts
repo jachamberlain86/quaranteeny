@@ -1,11 +1,19 @@
 import { store } from '../app/store';
 import {
-  changeByAmount,
+  changeValueScaled,
+  changeValueFixed,
   selectMeterValue,
   togglePauseDecay,
   selectPauseDecay,
 } from '../features/meters/metersSlice';
-import { selectGameOver, selectGameTime } from '../features/game/gameSlice';
+import {
+  selectGameOver,
+  selectGameTime,
+  selectStartTime,
+  selectClockTimeInGame,
+  setTimeLasted,
+  selectTimeLasted,
+} from '../features/game/gameSlice';
 import { selectCurrentInteraction } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { meters, Meters } from '../data/meters.data';
@@ -15,6 +23,7 @@ import {
   setCurrentInteraction,
   updateInteractionProgress,
 } from './sprite.helper';
+import { day } from '../data/time.data';
 import { Entity } from '../interfaces/entity.interface';
 
 function checkPauseDecayState(meter: string): boolean {
@@ -25,22 +34,33 @@ function triggerPauseDecayToggle(meter: string): void {
   store.dispatch(togglePauseDecay(meter));
 }
 
+function deductRent(): void {
+  const currentValue = selectMeterValue(store.getState(), 'money');
+  if (currentValue > 0) {
+    store.dispatch(changeValueFixed({ name: 'money', amount: -200 }));
+    console.log('rent deducted');
+  }
+}
+
 // On game init, all meters will state to decay at their defined decay rate. At faster game speeds, calls to decay the meter are reduced by updateInterval. Meters decay by greater amounts when there are greater intervals between function calls.
 
 export const decayMeters = (metersObj: Meters): void => {
-  const { gameMinute, updateInterval } = selectGameTime(store.getState().game);
+  const { gameMinute, gameDay, updateInterval } = selectGameTime(
+    store.getState().game
+  );
+
   const keysArr = Object.keys(metersObj);
   keysArr.forEach((key) => {
     const meter = metersObj[key];
-    const timer = setInterval(() => {
+    const decayTimer = setInterval(() => {
       const gameOver = selectGameOver(store.getState());
       const pausedDecay = checkPauseDecayState(key);
-      if (gameOver) clearInterval(timer);
+      if (gameOver) clearInterval(decayTimer);
       else if (!pausedDecay) {
         const currentValue = selectMeterValue(store.getState(), key);
         if (currentValue > 0) {
           store.dispatch(
-            changeByAmount({
+            changeValueScaled({
               name: key,
               amount: meter.decayRate * updateInterval,
             })
@@ -49,6 +69,13 @@ export const decayMeters = (metersObj: Meters): void => {
       }
     }, gameMinute * updateInterval);
   });
+  const weekTimer = setInterval(() => {
+    const gameOver = selectGameOver(store.getState());
+    if (gameOver) clearInterval(weekTimer);
+    else {
+      deductRent();
+    }
+  }, gameDay * 7);
 };
 
 // Used to watch meters falling in an out of danger zones, adding and removing relevant conditions when necessary.
@@ -88,7 +115,7 @@ export function deductCost(cost: number): boolean {
   const money = selectMeterValue(store.getState(), 'money');
   if (money < cost) return false;
   const meterImpact = { name: 'money', amount: -cost };
-  store.dispatch(changeByAmount(meterImpact));
+  store.dispatch(changeValueFixed(meterImpact));
   return true;
 }
 
@@ -118,7 +145,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
-      } else if (iterationCount === 0) {
+      } else if (iterationCount <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
@@ -132,9 +159,13 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
             triggerPauseDecayToggle(meterImpact.name);
           const incrementalValue = Math.round(meterImpact.amount / iterations);
           store.dispatch(
-            changeByAmount({ name: meterImpact.name, amount: incrementalValue })
+            changeValueScaled({
+              name: meterImpact.name,
+              amount: incrementalValue,
+            })
           );
           iterationCount -= 1;
+          console.log(iterationCount);
         });
       }
     }
@@ -143,7 +174,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
 
 function triggerImmediateChange(entityData: Entity): void {
   entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
-    store.dispatch(changeByAmount(meterImpact));
+    store.dispatch(changeValueScaled(meterImpact));
   });
   triggerRemoveConditions(entityData.conditions);
   setCurrentInteraction(null);

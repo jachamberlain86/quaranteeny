@@ -35,7 +35,7 @@ export const selectGameTime = (state: GameState): GameTime => {
     gameMinute: minute / state.gameSpeed,
     gameHour: hour / state.gameSpeed,
     gameDay: day / state.gameSpeed,
-    updateInterval: 5 * state.gameSpeed.toString().length,
+    updateInterval: 5,
   };
   return gameTime;
 };
@@ -150,6 +150,9 @@ export const selectClockTimeInGame = (state: RootState): number =>
 
 export const selectClockTimeReal = (state: RootState): number =>
   state.game.currClockTimeReal;
+
+export const selectTimeLasted = (state: RootState): number =>
+  state.game.timeLasted;
 
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;

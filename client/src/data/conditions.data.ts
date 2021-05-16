@@ -15,134 +15,212 @@ export const conditionsData: ConditionDetails[] = [
   {
     name: 'asleep',
     modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
+    impacts: [],
   },
   {
     name: 'washing',
     modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
+    impacts: [],
+  },
+  {
+    name: 'changing',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'relaxing',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'working',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'music',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'cleaning',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'cooking',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'snacking',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'watering',
+    modifiers: [],
+    impacts: [],
+  },
+  {
+    name: 'wallowing',
+    modifiers: [],
+    impacts: [],
   },
   {
     name: 'hungry',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'overfed',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'starved',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'lethargic',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'exhausted',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'strange',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'unwell',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'hardy',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'feverish',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'broke',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'rich',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'unfit',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'injured',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'depressed',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'ecstatic',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'filthy',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'anal',
     modifiers: [],
+    impacts: [],
   },
   {
-    name: 'hurt',
+    name: 'achey',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'cosy',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'lonely',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'dependent',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'bored',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'hooked',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'trapped',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'wild',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'apathetic',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'ambitious',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'nauseous',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'greedy',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'unstable',
     modifiers: [],
+    impacts: [],
   },
   {
     name: 'enlightened',
     modifiers: [],
+    impacts: [],
   },
 ];
 
@@ -153,6 +231,7 @@ class Conditions {
     conditionsArr.forEach((condition: ConditionDetails) => {
       this[condition.name] = {
         modifiers: condition.modifiers,
+        impacts: condition.impacts,
       };
     });
   }

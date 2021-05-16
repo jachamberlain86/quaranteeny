@@ -8,8 +8,11 @@ import {
   selectStartTime,
   setStartTime,
   resetGameState,
+  setTimeLasted,
+  selectClockTimeInGame,
+  selectTimeLasted,
 } from '../features/game/gameSlice';
-import { second } from '../data/time.data';
+import { second, day } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
@@ -28,6 +31,7 @@ export const startClock = (): void => {
   // since game is in progress.
   if (startTime === 0) {
     store.dispatch(setStartTime(Date.now()));
+    store.dispatch(setTimeLasted(0));
   }
   const clockIntervalId: NodeJS.Timeout = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
@@ -94,35 +98,38 @@ export function renderLayer(layer: number): JSX.Element[] {
   const layerArr: JSX.Element[] = [];
   for (let yAxis = 0; yAxis < cols; yAxis += 1) {
     for (let xAxis = 0; xAxis < cols; xAxis += 1) {
-      const tileKey = layers[layer][yAxis * cols + xAxis].key;
       const img = new window.Image();
-      img.src = imageAtlas;
-      console.log(imageAtlas);
       img.crossOrigin = 'Anonymous';
-      if (layer === 2) {
-        layerArr.push(
-          <Image
-            x={xAxis * tileSize}
-            y={yAxis * tileSize}
-            key={`${xAxis}, ${yAxis}`}
-            image={img}
-            height={tileSize}
-            width={tileSize}
-            onClick={handleClickTile}
-          />
-        );
-      } else {
-        layerArr.push(
-          <Image
-            x={xAxis * tileSize}
-            y={yAxis * tileSize}
-            key={`${xAxis}, ${yAxis}`}
-            image={img}
-            height={tileSize}
-            width={tileSize}
-          />
-        );
-      }
+      const tileKey = layers[layer][yAxis * cols + xAxis].key;
+      let tile: null | JSX.Element = null;
+      img.onload = () => {
+        if (layer === 2) {
+          tile = (
+            <Image
+              x={xAxis * tileSize}
+              y={yAxis * tileSize}
+              key={`${xAxis}, ${yAxis}`}
+              image={img}
+              height={tileSize}
+              width={tileSize}
+              onClick={handleClickTile}
+            />
+          );
+        } else {
+          tile = (
+            <Image
+              x={xAxis * tileSize}
+              y={yAxis * tileSize}
+              key={`${xAxis}, ${yAxis}`}
+              image={img}
+              height={tileSize}
+              width={tileSize}
+            />
+          );
+        }
+        layerArr.push(tile);
+      };
+      img.src = imageDirectory[tileKey];
     }
   }
   // };
