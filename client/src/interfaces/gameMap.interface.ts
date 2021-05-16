@@ -1,6 +1,6 @@
 export interface GameMap {
   readonly cols: number;
-  readonly layers: [FloorTile[], FurnitureTile[]];
+  readonly layers: [FloorTile[], FurnitureTile[], FurnitureTile[]];
   readonly tileSize: number;
 }
 
@@ -13,4 +13,8 @@ export interface FurnitureTile {
   readonly key: string;
   readonly int: string | null;
   readonly intPos: string[];
+}
+
+export interface FilterTile {
+  readonly key: string;
 }

@@ -1,3 +1,4 @@
+import { Howl } from 'howler';
 import { store } from '../app/store';
 import {
   selectLeftFired,
@@ -16,6 +17,15 @@ import {
   changeMovePos,
   selectDelay,
 } from '../features/character/characterSlice';
+import {
+  cuteWalkOne,
+  shuffleWalkOne,
+  shuffleWalkShort,
+  collisionOne,
+  collisionTwo,
+  howlCollisionsObj,
+  collisionArray,
+} from '../audioControllers/playerSounds';
 import game from '../data/gameMap.data';
 
 function calcNewPos(key: string): number[] {
@@ -46,7 +56,12 @@ function handleMove(key: string): void {
     const newPos = calcNewPos(key);
     console.log(newPos);
     if (checkCanMove(newPos)) {
+      shuffleWalkShort.play();
       store.dispatch(changeMovePos());
+    } else {
+      const randomCollisionSound =
+        collisionArray[Math.floor(Math.random() * collisionArray.length)];
+      howlCollisionsObj[randomCollisionSound].play();
     }
   }, timerDel);
   store.dispatch(setMoveIntId(timer));

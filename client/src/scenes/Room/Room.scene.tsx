@@ -14,9 +14,11 @@ const Room = (): JSX.Element => {
   const canvasHeight = cols * tileSize;
 
   const [layer0, setLayer0] = useState<JSX.Element[]>([]);
+  const [layer2, setLayer2] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     setLayer0(renderLayer(0));
+    setLayer2(renderLayer(2));
   }, []);
 
   return (
@@ -29,6 +31,7 @@ const Room = (): JSX.Element => {
             <Layer>
               <Player />
             </Layer>
+            <Layer>{layer2}</Layer>
           </Provider>
         </Stage>
       )}

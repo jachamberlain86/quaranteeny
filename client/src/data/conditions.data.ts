@@ -13,7 +13,11 @@ import { ConditionDetails } from '../interfaces/conditionDetails.interface';
 
 export const conditionsData: ConditionDetails[] = [
   {
-    name: 'sleeping',
+    name: 'asleep',
+    modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
+  },
+  {
+    name: 'washing',
     modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
   },
   {

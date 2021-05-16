@@ -16,6 +16,10 @@ import {
   btnPressTwo,
   btnClickOne,
   whooshOne,
+  bleepOneHover,
+  bleepTwo,
+  bleepFiveConfirmation,
+  bleepSevenHover,
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 
@@ -24,6 +28,13 @@ interface initialState {
 }
 const initialState = {
   name: 'showStartBtn',
+};
+
+export const handleBtnHoverEnter = (): void => {
+  bleepTwo.play();
+};
+export const handleBtnHoverLeave = (): void => {
+  bleepOneHover.play();
 };
 
 const GameStart = (): JSX.Element => {
@@ -40,14 +51,10 @@ const GameStart = (): JSX.Element => {
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
 
-  // TODO create an audio player...
+  // TODO create an audio player...not essential
   useEffect(() => {
     musicCuriousIntense.play();
   }, []);
-
-  const handleBtnHover = (): void => {
-    btnClickOne.play();
-  };
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
@@ -109,7 +116,7 @@ const GameStart = (): JSX.Element => {
   const handleBeginGame = (): void => {
     const currentGameInfoDivRef = gameInfoDivRef.current as HTMLDivElement;
     currentGameInfoDivRef.classList.add('slideOutDown');
-    btnPressTwo.play();
+    bleepFiveConfirmation.play();
     whooshOne.play();
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
@@ -121,8 +128,7 @@ const GameStart = (): JSX.Element => {
 
   const handleNewGame = (): void => {
     // TODO add choice of game speed again
-    btnPressOne.play();
-    console.log('whooshOne: ', whooshOne.duration());
+    bleepFiveConfirmation.play();
     whooshOne.play();
     resetGamePlay();
     setAnimate({ name: 'showChooseGameSpeed' });
@@ -143,6 +149,12 @@ const GameStart = (): JSX.Element => {
         type="button"
         className="nes-btn is-error start-btn"
         onClick={handleStart}
+        onMouseEnter={() => {
+          bleepTwo.play();
+        }}
+        onMouseLeave={() => {
+          bleepOneHover.play();
+        }}
       >
         Start
       </button>
@@ -212,7 +224,8 @@ const GameStart = (): JSX.Element => {
                 type="button"
                 className="nes-btn is-warning rtn-btn"
                 onClick={handleContinueGame}
-                onMouseEnter={handleBtnHover}
+                onMouseEnter={handleBtnHoverEnter}
+                onMouseLeave={handleBtnHoverLeave}
               >
                 Continue Game
               </button>
@@ -220,7 +233,8 @@ const GameStart = (): JSX.Element => {
                 type="button"
                 className="nes-btn is-error rtn-btn"
                 onClick={handleNewGame}
-                onMouseEnter={handleBtnHover}
+                onMouseEnter={handleBtnHoverEnter}
+                onMouseLeave={handleBtnHoverLeave}
               >
                 New Game
               </button>
@@ -230,7 +244,8 @@ const GameStart = (): JSX.Element => {
               type="button"
               className="nes-btn is-error rtn-btn"
               onClick={handleNewGame}
-              onMouseEnter={handleBtnHover}
+              onMouseEnter={handleBtnHoverEnter}
+              onMouseLeave={handleBtnHoverLeave}
             >
               New Game
             </button>
@@ -252,7 +267,8 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn"
             id="realTime"
             onClick={handleChooseSpeed}
-            onMouseEnter={handleBtnHover}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
           >
             Real time
           </button>
@@ -261,7 +277,8 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn is-warning"
             id="oneMinIsOneHour"
             onClick={handleChooseSpeed}
-            onMouseEnter={handleBtnHover}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
           >
             1min = 1hour
           </button>
@@ -270,7 +287,8 @@ const GameStart = (): JSX.Element => {
             className="nes-btn speed-btn is-error"
             id="oneMinIsOneDay"
             onClick={handleChooseSpeed}
-            onMouseEnter={handleBtnHover}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
           >
             1min = 1day
           </button>
@@ -333,6 +351,8 @@ const GameStart = (): JSX.Element => {
               type="button"
               className="nes-btn is-error start-btn"
               onClick={handleBeginGame}
+              onMouseEnter={handleBtnHoverEnter}
+              onMouseLeave={handleBtnHoverLeave}
             >
               Play
             </button>

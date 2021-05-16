@@ -1,6 +1,7 @@
 import { FurnitureTile } from '../interfaces/gameMap.interface';
 
 export const furniturerMap: FurnitureTile[] = [
+  // Row 0
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -21,6 +22,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 1
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -41,6 +43,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 2
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -61,6 +64,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'babto', int: 'bath', intPos: [] },
   { key: 'babtro', int: 'bath', intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 3
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -81,6 +85,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'babmo', int: 'bath', intPos: [] },
   { key: 'babro', int: 'bath', intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 4
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: ['bed'] },
@@ -89,10 +94,10 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: ['bed', 'dresser'] },
   { key: 'bedblc', int: 'dresser', intPos: ['dresser'] },
   { key: 'bedbrc', int: 'dresser', intPos: ['dresser'] },
-  { key: 'ofb', int: null, intPos: ['dresser'] },
+  { key: 'blk', int: null, intPos: ['dresser'] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
-  { key: 'ofb', int: null, intPos: ['basin'] },
+  { key: 'blk', int: null, intPos: ['basin'] },
   { key: 'basbc', int: 'basin', intPos: ['basin'] },
   { key: 'blk', int: null, intPos: ['basin'] },
   { key: 'blk', int: null, intPos: [] },
@@ -101,6 +106,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'babbo', int: 'bath', intPos: [] },
   { key: 'babbro', int: 'bath', intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 5
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: ['bed'] },
@@ -121,6 +127,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: ['bath'] },
   { key: 'blk', int: null, intPos: ['bath'] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 6
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: ['bed'] },
@@ -139,7 +146,9 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
-  { key: 'ofb', int: null, intPos: [] },
+  { key: 'blk', int: null, intPos: [] },
+  { key: 'blk', int: null, intPos: [] },
+  // Row 7
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -160,6 +169,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 8
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -180,6 +190,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 9
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -200,7 +211,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
-  { key: 'blk', int: null, intPos: [] },
+  // Row 10
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -221,6 +232,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'kift', int: 'fridge', intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 11
   { key: 'blk', int: null, intPos: [] },
   { key: 'lrltl', int: 'lamp', intPos: [] },
   { key: 'lrltr', int: 'lamp', intPos: [] },
@@ -241,6 +253,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'kiotoff', int: 'oven', intPos: [] },
   { key: 'kifmc', int: 'fridge', intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 12
   { key: 'blk', int: null, intPos: [] },
   { key: 'lrlbl', int: 'lamp', intPos: ['lamp'] },
   { key: 'lrlbr', int: 'lamp', intPos: ['lamp', 'bookcase'] },
@@ -261,6 +274,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'kiob', int: 'oven', intPos: ['oven', 'fridge'] },
   { key: 'kifb', int: 'fridge', intPos: ['oven', 'fridge'] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 13
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: ['lamp'] },
   { key: 'blk', int: null, intPos: ['lamp', 'bookcase'] },
@@ -281,6 +295,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: ['oven', 'fridge'] },
   { key: 'blk', int: null, intPos: ['oven', 'fridge'] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 14
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -301,6 +316,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 15
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -321,6 +337,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 16
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -341,6 +358,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 17
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -361,6 +379,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 18
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
@@ -381,6 +400,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
+  // Row 19
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },
   { key: 'blk', int: null, intPos: [] },

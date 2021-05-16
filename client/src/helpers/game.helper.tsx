@@ -13,9 +13,13 @@ import { second } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
-import { resetCharacter } from '../features/character/characterSlice';
+import {
+  resetCharacter,
+  selectCurPos,
+} from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
+import { checkIndex } from './input.helper';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
@@ -49,21 +53,27 @@ export function calcPercentage(current: number, total: number): number {
   return Math.round(percentage * 100);
 }
 
-export function handleClickSprite(
-  event: Konva.KonvaEventObject<MouseEvent>
-): void {
-  console.log('That tickles!');
-  console.log(event);
-}
+// export function handleClickSprite(
+//   event: Konva.KonvaEventObject<MouseEvent>
+// ): void {
+//   console.log('That tickles!');
+//   console.log(event);
+// }
 
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   console.log(event);
-  const clickedEntity = game.layers[1][event.target.index].int;
+  const clickedIdx = event.target.index;
+  const clickedEntity = game.layers[1][clickedIdx].int;
   const clickPosX = event.target.attrs.x;
   const clickPosY = event.target.attrs.y;
-  if (clickedEntity !== null) {
+  const curPos = selectCurPos(store.getState());
+  const curIdxLegs = checkIndex(curPos[0], curPos[1]);
+  const curIdxHead = checkIndex(curPos[0], curPos[1] - 1);
+  if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
+    console.log('That tickles!');
+  } else if (clickedEntity !== null) {
     console.log(`clicked the ${clickedEntity}`);
     if (setCurrentInteraction(clickedEntity)) {
       handleInteraction(clickedEntity);
@@ -84,7 +94,7 @@ export function renderLayer(layer: number): JSX.Element[] {
       const img = new window.Image();
       img.src = imageDirectory[tileKey as keyof ImageDirectory];
       img.crossOrigin = 'Anonymous';
-      if (layer === 1) {
+      if (layer === 2) {
         layerArr.push(
           <Image
             x={xAxis * tileSize}
