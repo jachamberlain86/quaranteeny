@@ -157,7 +157,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           if (!pausedMeters.includes(meterImpact.name))
             triggerPauseDecayToggle(meterImpact.name);
-          const incrementalValue = Math.round(meterImpact.amount / iterations);
+          const incrementalValue = Math.ceil(meterImpact.amount / iterations);
           store.dispatch(
             changeValueScaled({
               name: meterImpact.name,

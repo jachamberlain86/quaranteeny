@@ -1,6 +1,6 @@
 import clock from './clock.png';
 import chair from './desk-chair.png';
-import bin from './litter-bin.png';
+import bin from './bin.png';
 
 import chairL from './desk-chair-left.png';
 import chairR from './desk-chair-right.png';

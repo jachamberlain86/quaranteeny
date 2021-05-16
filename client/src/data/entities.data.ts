@@ -17,7 +17,7 @@ const entitiesData: EntityDetails[] = [
     hoursToComplete: 8,
     meterImpacts: [
       { name: 'energy', amount: hour * 16 },
-      { name: 'comfort', amount: hour },
+      { name: 'comfort', amount: hour * 6 },
       { name: 'motivation', amount: -hour * 6 },
       { name: 'mind', amount: hour * 16 },
     ],
@@ -26,7 +26,7 @@ const entitiesData: EntityDetails[] = [
   {
     name: 'dresser',
     cost: 0,
-    hoursToComplete: 0,
+    hoursToComplete: 0.1,
     meterImpacts: [],
     conditions: ['changing'],
   },
@@ -34,7 +34,10 @@ const entitiesData: EntityDetails[] = [
     name: 'basin',
     cost: 0,
     hoursToComplete: 0.25,
-    meterImpacts: [{ name: 'hygeine', amount: hour * 4 }],
+    meterImpacts: [
+      { name: 'hygeine', amount: hour * 4 },
+      { name: 'energy', amount: hour * 2 },
+    ],
     conditions: ['washing'],
   },
   {
