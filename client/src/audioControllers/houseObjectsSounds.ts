@@ -1,17 +1,18 @@
 import { Howl } from 'howler';
-import sink from '../assets/audio/sound-efx/house-objects/sink.mp3';
+import sink from '../assets/audio/sound-efx/house-objects/sink-basin.mp3';
 import oven from '../assets/audio/sound-efx/house-objects/oven.mp3';
-import radio from '../assets/audio/sound-efx/house-objects/radio.mp3';
-import computer from '../assets/audio/sound-efx/house-objects/computer.mp3';
-import tvHbo from '../assets/audio/sound-efx/house-objects/tv-hbo.mp3';
+import jukebox from '../assets/audio/sound-efx/house-objects/jukebox.mp3';
+import desk from '../assets/audio/sound-efx/house-objects/desk.mp3';
+import sofa from '../assets/audio/sound-efx/house-objects/sofa-hbo.mp3';
 import tvNetflix from '../assets/audio/sound-efx/house-objects/tv-netflix.mp3';
 
 export const houseInteractables: string[] = [
   sink,
   oven,
-  radio,
-  computer,
-  tvHbo,
+  jukebox,
+  desk,
+  // should be tvHbo but the TV is activated with the word 'sofa'
+  sofa,
   tvNetflix,
 ];
 

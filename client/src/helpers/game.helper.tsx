@@ -16,6 +16,7 @@ import { resetSprite } from '../features/sprite/spriteSlice';
 import { resetCharacter } from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
+import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
@@ -59,12 +60,22 @@ export function handleClickSprite(
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
-  console.log(event);
+  console.log('im an event:', event);
   const clickedEntity = game.layers[1][event.target.index].int;
   const clickPosX = event.target.attrs.x;
   const clickPosY = event.target.attrs.y;
   if (clickedEntity !== null) {
     console.log(`clicked the ${clickedEntity}`);
+    // TODO move sound logic to sprite collision logic when in place.
+    // sound file logic
+    // might be more useful in spriteHelper line: 66
+    const houseSoundsArray = Object.entries(houseInteractablesObj);
+    for (let i = 0; i < houseSoundsArray.length; i += 1) {
+      const soundFile = houseSoundsArray[i];
+      if (soundFile[0].includes(clickedEntity)) {
+        soundFile[1].play();
+      }
+    }
     if (setCurrentInteraction(clickedEntity)) {
       handleInteraction(clickedEntity);
     }
@@ -93,7 +104,7 @@ export function renderLayer(layer: number): JSX.Element[] {
             image={img}
             height={tileSize}
             width={tileSize}
-            onClick={handleClickTile}
+            // onClick={handleClickTile}
           />
         );
       } else {
@@ -105,6 +116,7 @@ export function renderLayer(layer: number): JSX.Element[] {
             image={img}
             height={tileSize}
             width={tileSize}
+            onClick={handleClickTile}
           />
         );
       }
