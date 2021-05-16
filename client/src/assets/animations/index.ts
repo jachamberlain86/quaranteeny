@@ -121,7 +121,7 @@ const animations: AnimationRef[] = [
   },
 ];
 
-export class AnimationImgs {
+export class AnimationDirectory {
   [key: string]: AtlasRef[];
 
   constructor(animationsArr: AnimationRef[]) {
@@ -141,4 +141,4 @@ export class AnimationImgs {
   }
 }
 
-export const animationImgs = new AnimationImgs(animations);
+export const animationDirectory = new AnimationDirectory(animations);
