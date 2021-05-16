@@ -20,6 +20,7 @@ import {
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
 import { checkIndex } from './input.helper';
+import imageAtlas from '../assets/tiles/atlas/quarantiny-tile-atlas.png';
 
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
@@ -87,12 +88,16 @@ export function handleClickTile(
 export function renderLayer(layer: number): JSX.Element[] {
   const { cols, layers, tileSize } = game;
 
+  // const imageObj = new window.Image();
+  // imageObj.onload = () => {
+
   const layerArr: JSX.Element[] = [];
   for (let yAxis = 0; yAxis < cols; yAxis += 1) {
     for (let xAxis = 0; xAxis < cols; xAxis += 1) {
       const tileKey = layers[layer][yAxis * cols + xAxis].key;
       const img = new window.Image();
-      img.src = imageDirectory[tileKey as keyof ImageDirectory];
+      img.src = imageAtlas;
+      console.log(imageAtlas);
       img.crossOrigin = 'Anonymous';
       if (layer === 2) {
         layerArr.push(
@@ -120,5 +125,7 @@ export function renderLayer(layer: number): JSX.Element[] {
       }
     }
   }
+  // };
+
   return layerArr;
 }

@@ -1,5 +1,5 @@
 import { Stage, Layer } from 'react-konva';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';

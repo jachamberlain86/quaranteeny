@@ -1,30 +1,23 @@
 import { AtlasRefDetails } from '../../interfaces/atlasRefDetails.interface';
 
-export const music: AtlasRefDetails[] = [
+export const untidy: AtlasRefDetails[] = [
   {
-    key: 'music1',
+    key: 'dining-table-food',
+    x: 11,
+    y: 0,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'kitchen-food',
     x: 16,
     y: 0,
     width: 1,
     height: 1,
   },
   {
-    key: 'music2',
-    x: 17,
-    y: 0,
-    width: 1,
-    height: 1,
-  },
-  {
-    key: 'music3',
-    x: 18,
-    y: 0,
-    width: 1,
-    height: 1,
-  },
-  {
-    key: 'music4',
-    x: 19,
+    key: 'dirty-plates',
+    x: 15,
     y: 0,
     width: 1,
     height: 1,

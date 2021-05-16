@@ -1,0 +1,126 @@
+import { AtlasRefDetails } from '../../interfaces/atlasRefDetails.interface';
+
+export const kitchen: AtlasRefDetails[] = [
+  {
+    key: 'fridge',
+    x: 19,
+    y: 0,
+    width: 1,
+    height: 3,
+  },
+  {
+    key: 'fridge-middle-closed',
+    x: 19,
+    y: 1,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'fridge-top',
+    x: 19,
+    y: 0,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'fridge-bottom',
+    x: 19,
+    y: 2,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'cabinet-1',
+    x: 15,
+    y: 1,
+    width: 1,
+    height: 2,
+  },
+  {
+    key: 'cabinet-1-top',
+    x: 15,
+    y: 1,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'cabinet-1-bottom-closed',
+    x: 15,
+    y: 2,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'cabinet-2',
+    x: 17,
+    y: 1,
+    width: 1,
+    height: 2,
+  },
+  {
+    key: 'cabinet-2-top',
+    x: 17,
+    y: 1,
+    width: 1,
+    height: 1,
+  },
+
+  {
+    key: 'cabinet-2-bottom-closed',
+    x: 17,
+    y: 2,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'sink',
+    x: 16,
+    y: 1,
+    width: 1,
+    height: 2,
+  },
+  {
+    key: 'sink-top',
+    x: 16,
+    y: 1,
+    width: 1,
+    height: 1,
+  },
+
+  {
+    key: 'sink-bottom-closed',
+    x: 16,
+    y: 2,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'utensils',
+    x: 17,
+    y: 0,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'oven',
+    x: 18,
+    y: 1,
+    width: 1,
+    height: 2,
+  },
+  {
+    key: 'oven-bottom',
+    x: 18,
+    y: 2,
+    width: 1,
+    height: 1,
+  },
+
+  {
+    key: 'oven-top-off',
+    x: 18,
+    y: 1,
+    width: 1,
+    height: 1,
+  },
+];

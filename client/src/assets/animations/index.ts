@@ -19,12 +19,13 @@ import {
 import { ring } from './ring';
 import { bubbles } from './bubbles';
 import { music } from './music';
+import { plant } from './plant';
 
 const blank = [
   {
     key: 'blank',
     x: 19,
-    y: 0,
+    y: 3,
     width: 1,
     height: 1,
   },
@@ -114,6 +115,10 @@ const animations: AnimationRef[] = [
   {
     name: 'music',
     frames: music,
+  },
+  {
+    name: 'plant',
+    frames: plant,
   },
   {
     name: 'blank',
