@@ -13,6 +13,7 @@ import { upHandler, downHandler } from '../../helpers/input.helper';
 import {
   checkLoseStates,
   checkConditionsState,
+  resumeInProgressInteraction,
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
 import {
@@ -47,6 +48,7 @@ const Game = (): JSX.Element => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
       console.log('game started');
       startClock();
+      resumeInProgressInteraction();
       checkMeterStates();
       checkConditionsState();
       checkLoseStates();

@@ -14,7 +14,12 @@ import {
   setTimeLasted,
   selectTimeLasted,
 } from '../features/game/gameSlice';
-import { selectCurrentInteraction } from '../features/sprite/spriteSlice';
+import {
+  selectCurrentInteraction,
+  selectInteractionChangesRemaining,
+  setInteractionChangesRemaining,
+  decrementInteractionChangesRemaining,
+} from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { meters, Meters } from '../data/meters.data';
 import {
@@ -121,17 +126,28 @@ export function deductCost(cost: number): boolean {
 
 // Called when interacting with an interactable entity that does not have an immediate effect. Works out number of iterations based on intervals between function calls. Pauses meter decay for each meter on activation and unpauses if cancelled or complete. Also calls function to update interaction progress.
 
-function triggerIncrementalChange(entityData: Entity, entity: string): void {
+export function triggerIncrementalChange(
+  entityData: Entity,
+  entity: string
+): void {
   const { gameMinute, gameHour, updateInterval } = selectGameTime(
     store.getState().game
   );
   const iterations = Math.ceil(
     (entityData.hoursToComplete * gameHour) / (gameMinute * updateInterval)
   );
-  console.log('iterations', iterations);
-  let iterationsLeft = iterations;
+  // This is to check if the interaction is already in progress
+  const interactionChangesRemainingInitial = selectInteractionChangesRemaining(
+    store.getState()
+  );
+  if (interactionChangesRemainingInitial === 0) {
+    store.dispatch(setInteractionChangesRemaining(iterations));
+  }
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
+    const interactionChangesRemaining = selectInteractionChangesRemaining(
+      store.getState()
+    );
     const pausedMeters: string[] = [];
     entityData.meterImpacts.forEach((impactObj): void => {
       if (checkPauseDecayState(impactObj.name))
@@ -146,14 +162,14 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
-      } else if (iterationsLeft <= 0) {
+      } else if (interactionChangesRemaining <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
         setCurrentInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
-        updateInteractionProgress(iterationsLeft, iterations);
+        updateInteractionProgress(interactionChangesRemaining, iterations);
 
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           if (!pausedMeters.includes(meterImpact.name))
@@ -166,8 +182,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
             })
           );
         });
-        iterationsLeft -= 1;
-        console.log('iterationsLeft', iterationsLeft);
+        store.dispatch(decrementInteractionChangesRemaining());
       }
     }
   }, gameMinute * updateInterval);
