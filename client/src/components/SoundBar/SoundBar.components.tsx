@@ -1,17 +1,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import './SoundBar.styles.css';
 import { Howl, Howler } from 'howler';
 import { playListObject } from '../../audioControllers/soundBarTracks';
 
 const initialState = {} as Howl;
 
+export const testContext = {
+  test: 'does this work',
+};
+
 const SoundBar = (): JSX.Element => {
   const [currentSong, setCurrentSong] = useState(initialState);
   const [isSongMuted, setIsSongMuted] = useState(false);
   const [songIndex, setSongIndex] = useState(0);
-  // console.log('songIndex', songIndex);
-  // console.log('currentSong', currentSong);
   // regExp (strips static media)(finds songtitle)(strips numbers and extension)
   const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
   const playListArr = Object.entries(playListObject);
@@ -26,9 +28,10 @@ const SoundBar = (): JSX.Element => {
   });
   const findTitleOfCurrentSong = (song: Howl): string | null => {
     for (let i = 0; i < playListArr.length; i += 1) {
-      const trackInfo = playListArr[i];
-      if (trackInfo[1] === song) {
-        const songTitle = trackInfo[0].match(regExp);
+      const howlSong = playListArr[i][1];
+      const songPathString = playListArr[i][0];
+      if (howlSong === song) {
+        const songTitle = songPathString.match(regExp);
         if (songTitle) return songTitle[0];
         return null;
       }
@@ -84,34 +87,35 @@ const SoundBar = (): JSX.Element => {
     setCurrentSong(playListArr[songIndex][1]);
   }, []);
   return (
-    <div>
-      <h3>im the sound bar</h3>
+    <div className="sound-bar-container">
       {/* {playList} */}
-      <button type="button" onClick={() => currentSong.play()}>
-        Play
-      </button>
-      <button type="button" onClick={handleStop}>
-        Stop
-      </button>
-      <button type="button" onClick={handlePause}>
-        Pause
-      </button>
-      <button type="button" onClick={handleMute}>
-        Mute
-      </button>
-      <button type="button" onClick={() => handleVolume(0.05)}>
-        Vol +
-      </button>
-      <button type="button" onClick={() => handleVolume(-0.05)}>
-        Vol -
-      </button>
-      <button type="button" onClick={() => handleSongSkip(-1)}>
-        Prev
-      </button>
-      <button type="button" onClick={() => handleSongSkip(1)}>
-        Next
-      </button>
-      {findTitleOfCurrentSong(currentSong)}
+      <div className="music-controls">
+        <button type="button" onClick={() => currentSong.play()}>
+          Play
+        </button>
+        <button type="button" onClick={handleStop}>
+          Stop
+        </button>
+        <button type="button" onClick={handlePause}>
+          Pause
+        </button>
+        <button type="button" onClick={handleMute}>
+          Mute
+        </button>
+        <button type="button" onClick={() => handleVolume(0.05)}>
+          Vol +
+        </button>
+        <button type="button" onClick={() => handleVolume(-0.05)}>
+          Vol -
+        </button>
+        <button type="button" onClick={() => handleSongSkip(-1)}>
+          Prev
+        </button>
+        <button type="button" onClick={() => handleSongSkip(1)}>
+          Next
+        </button>
+      </div>
+      <div className="song-title">{findTitleOfCurrentSong(currentSong)}</div>
     </div>
   );
 };

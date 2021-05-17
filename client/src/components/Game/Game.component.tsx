@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import './Game.styles.css';
 import Room from '../../scenes/Room/Room.scene';
@@ -30,6 +30,7 @@ import {
 } from '../../audioControllers/gameOverSounds';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 import SoundBar from '../SoundBar/SoundBar.components';
+import soundBarContext from '../../contexts/music.context';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ const Game = (): JSX.Element => {
   const { gameOver } = useAppSelector((state) => state.game);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
+  const soundBarCTX = useContext(soundBarContext);
 
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
@@ -79,6 +81,7 @@ const Game = (): JSX.Element => {
   return (
     <div>
       <SoundBar />
+      {/* {soundBarCTX && soundBarCTX.SoundBar} */}
       <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
         {gameOver && <GameOver />}
         <div>

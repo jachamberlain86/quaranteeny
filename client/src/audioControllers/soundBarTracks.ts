@@ -7,7 +7,7 @@ import chillSong from '../assets/audio/tracks/in-game/A Reluctant Hero (LOOP).mp
 import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow (LOOP).mp3';
 import EightiesSlowFunkSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Modern Bits.mp3';
 
-const playListArray = [
+const importArray = [
   track1,
   track2,
   track3,
@@ -17,10 +17,10 @@ const playListArray = [
   EightiesSlowFunkSong,
 ];
 
-type HowlObject = Record<string, Howl>;
+export type HowlObject = Record<string, Howl>;
 
 export const playListObject = {} as HowlObject;
-playListArray.forEach((track) => {
+importArray.forEach((track) => {
   playListObject[track] = new Howl({
     src: [track],
     volume: 0.3,
@@ -28,3 +28,5 @@ playListArray.forEach((track) => {
     loop: true,
   });
 });
+
+export const playListArr = Object.entries(playListObject);

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Howler } from 'howler';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
@@ -23,6 +23,7 @@ import {
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 import SoundBar from '../../components/SoundBar/SoundBar.components';
+import soundBarContext from '../../contexts/music.context';
 
 interface initialState {
   name: string;
@@ -51,11 +52,12 @@ const GameStart = (): JSX.Element => {
   );
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
+  const testContext = useContext(soundBarContext);
 
   // // TODO create an audio player...not essential
-  // useEffect(() => {
-  //   musicCuriousIntense.play();
-  // }, []);
+  useEffect(() => {
+    // musicCuriousIntense.play();
+  }, []);
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;

@@ -10,6 +10,8 @@ import {
   fetchUserDataAsync,
   createUserInDbAsync,
 } from './features/user/userSlice';
+import musicContext from './contexts/music.context';
+import { musicController } from './audioControllers/musicController';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -25,17 +27,21 @@ const App = (): JSX.Element => {
 
   return (
     <div className="app-container">
-      <Switch>
-        <Route path="/start">
-          <Game />
-        </Route>
-        <Route path="/game-stats">
-          <GameStats />
-        </Route>
-        <Route path="/">
-          <GameStart />
-        </Route>
-      </Switch>
+      {/* <soundBarContext.Provider value={SoundBar}> */}
+      <musicContext.Provider value={musicController}>
+        <Switch>
+          <Route path="/start">
+            <Game />
+          </Route>
+          <Route path="/game-stats">
+            <GameStats />
+          </Route>
+          <Route path="/">
+            <GameStart />
+          </Route>
+        </Switch>
+        {/* </soundBarContext.Provider> */}
+      </musicContext.Provider>
     </div>
   );
 };
