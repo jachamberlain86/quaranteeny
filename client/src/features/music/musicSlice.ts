@@ -1,21 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import {
-  musicController,
-  playListArr,
-} from '../../audioControllers/musicController';
-
-// const howlFile = musicController.findHowlFileFromTitle('connected');
-// console.log('howlFile', howlFile);
-// const firstSong = howlFile
-//   ? musicController.findTitleOfCurrentSong(playListArr[0][1])
-//   : 'No song loaded';
-// const firstSong = firstSongTitle || 'No song loaded';
-const firstSong = musicController.findSongTitleFromHowlFile(playListArr[3][1]);
-musicController.findHowlFileFromTitle('connected');
-const howlFile = firstSong
-  ? musicController.findHowlFileFromTitle('connected')
-  : playListArr[0][1];
 
 interface musicSlice {
   currentSong: string;
@@ -24,7 +8,7 @@ interface musicSlice {
 }
 
 const initialState = {
-  currentSong: firstSong || 'No song loaded',
+  currentSong: '',
   isSongMuted: false,
   currentSongIndex: 0,
 };
@@ -35,6 +19,7 @@ const musicSlice = createSlice({
   reducers: {
     resetMusic: () => initialState,
     setCurrentSong(state, action: PayloadAction<string>) {
+      // TODO ask TA why?!
       // eslint-disable-next-line no-param-reassign
       state.currentSong = action.payload;
     },

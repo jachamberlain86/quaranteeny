@@ -56,8 +56,16 @@ const GameStart = (): JSX.Element => {
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
   const musicController = useContext(musicContext);
   useEffect(() => {
-    const howlSong = musicController?.findHowlFileFromTitle('Connected');
-    if (howlSong) musicController?.playSong(howlSong);
+    const howlSongFile = musicController?.findHowlFileFromTitle('Connected');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
   }, []);
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
@@ -122,8 +130,6 @@ const GameStart = (): JSX.Element => {
     bleepFiveConfirmation.play();
     whooshOne.play();
     setTimeout(() => {
-      // currentGameInfoDivRef.classList.add('displayOff');
-      // musicCuriousIntense.stop();
       dispatch(setIsCurrentGameActive());
       history.push('/start');
     }, animationSpeed);
@@ -135,14 +141,11 @@ const GameStart = (): JSX.Element => {
     whooshOne.play();
     resetGamePlay();
     setAnimate({ name: 'showChooseGameSpeed' });
-    // console.log('clicked');
-    // history.push('/start');
   };
 
   const handleContinueGame = (): void => {
     btnPressTwo.play();
     whooshOne.play();
-    // musicCuriousIntense.stop();
     history.push('/start');
   };
 

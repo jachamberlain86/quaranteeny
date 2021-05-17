@@ -8,7 +8,9 @@ import {
   setGameOver,
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
-// import { gameStatsMusic } from '../../audioControllers/gameStatsMusic';
+import { store } from '../../app/store';
+import { musicController } from '../../audioControllers/musicController';
+import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
@@ -17,12 +19,10 @@ import {
   btnPressOne,
   bleepFiveConfirmation,
 } from '../../audioControllers/buttonSounds';
-// import { setIsCurrentGameActive } from '../../features/user/userSlice';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
   const history = useHistory();
-  const dispatch = useAppDispatch();
   const { timeLasted } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
   const scores = useAppSelector(selectScores);
@@ -35,7 +35,6 @@ const GameStats: FC = () => {
   const handleExit = (): void => {
     resetGamePlay();
     btnPressOne.play();
-    // gameStatsMusic.stop();
     setTimeout(() => {
       history.push('/');
     }, 300);
@@ -43,13 +42,21 @@ const GameStats: FC = () => {
   const handlePlayAgain = (): void => {
     resetGamePlay();
     bleepFiveConfirmation.play();
-    // gameStatsMusic.stop();
     // TODO divide Game start page then push user to choose speed
     history.push('/');
   };
 
   useEffect(() => {
-    // gameStatsMusic.play();
+    const howlSongFile = musicController?.findHowlFileFromTitle('stats');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
   }, []);
   return (
     <div>

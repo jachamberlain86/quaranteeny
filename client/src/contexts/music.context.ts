@@ -1,9 +1,6 @@
 import { createContext } from 'react';
 import { Howl } from 'howler';
 
-// interface AppContextInterface {
-//   SoundBar(): JSX.Element;
-// }
 interface AppContextInterface {
   findHowlFileFromTitle(title: string): Howl | null;
   findSongTitleFromHowlFile(song: Howl): string | null;

@@ -8,7 +8,8 @@ import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
-
+import { store } from '../../app/store';
+import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   checkLoseStates,
   checkConditionsState,
@@ -18,10 +19,6 @@ import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
 import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
-// import {
-//   musicEightiesSlowFunk,
-//   musicChillSong,
-// } from '../../audioControllers/soundTracks';
 import {
   gameOverOne,
   gameOverTwo,
@@ -30,15 +27,16 @@ import {
 } from '../../audioControllers/gameOverSounds';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 import SoundBar from '../SoundBar/SoundBar.components';
-import soundBarContext from '../../contexts/music.context';
+import musicContext from '../../contexts/music.context';
+import { musicController } from '../../audioControllers/musicController';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
   const { gameOver } = useAppSelector((state) => state.game);
+  const { currentSong } = useAppSelector((state) => state.music);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
-  const soundBarCTX = useContext(soundBarContext);
 
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
@@ -66,12 +64,22 @@ const Game = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
-  // useEffect(() => {
-  //   musicChillSong.play();
-  // }, []);
+  useEffect(() => {
+    const howlSongFile = musicController?.findHowlFileFromTitle('Hero');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
+  }, []);
   useEffect(() => {
     if (gameOver) {
-      // musicChillSong.stop();
+      const howlSongFile = musicController.findHowlFileFromTitle(currentSong);
+      if (howlSongFile) musicController.stopSong(howlSongFile);
       gameOverTwo.play();
       setTimeout(() => {
         gameOverMusic.play();

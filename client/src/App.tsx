@@ -27,7 +27,6 @@ const App = (): JSX.Element => {
 
   return (
     <div className="app-container">
-      {/* <soundBarContext.Provider value={SoundBar}> */}
       <musicContext.Provider value={musicController}>
         <Switch>
           <Route path="/start">
@@ -40,7 +39,6 @@ const App = (): JSX.Element => {
             <GameStart />
           </Route>
         </Switch>
-        {/* </soundBarContext.Provider> */}
       </musicContext.Provider>
     </div>
   );

@@ -2,6 +2,7 @@ import { Howl } from 'howler';
 import track1 from '../assets/audio/tracks/in-game/simon-dark-tune.mp3';
 import track2 from '../assets/audio/tracks/in-game/simon-good-morning-tune.mp3';
 import track3 from '../assets/audio/tracks/in-game/simon-onra-tune.mp3';
+import track4 from '../assets/audio/tracks/in-game/simons-game-stats-music.mp3';
 import curiousIntenseSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Connected.mp3';
 import chillSong from '../assets/audio/tracks/in-game/A Reluctant Hero.mp3';
 import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow.mp3';
@@ -22,6 +23,7 @@ const importArray = [
   track1,
   track2,
   track3,
+  track4,
   curiousIntenseSong,
   chillSong,
   heartyFellow,
@@ -80,6 +82,10 @@ export const findHowlFileFromTitle = (title: string): Howl | null => {
 };
 
 export const playSong = (song: Howl): void => {
+  for (let i = 0; i < playListArr.length; i += 1) {
+    const howlSongFile = playListArr[i][1];
+    if (howlSongFile.playing()) howlSongFile.stop();
+  }
   song.play();
 };
 
