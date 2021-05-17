@@ -18,11 +18,7 @@ import {
   selectClockTimeInGame,
   selectTimeLasted,
 } from '../features/game/gameSlice';
-<<<<<<< HEAD
-import { second, day } from '../data/time.data';
-=======
 import { second, minute } from '../data/time.data';
->>>>>>> 7a2f29eab0512455ab93c87da9a3578cf12266c1
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
