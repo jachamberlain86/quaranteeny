@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import {
+  musicController,
+  playListArr,
+} from '../../audioControllers/musicController';
+
+const firstSong = musicController.findTitleOfCurrentSong(playListArr[1][1]);
+// const firstSong = firstSongTitle || 'No song loaded';
 
 interface musicSlice {
   currentSong: string;
@@ -8,7 +15,7 @@ interface musicSlice {
 }
 
 const initialState = {
-  currentSong: '',
+  currentSong: firstSong || 'No song loaded',
   isSongMuted: false,
   currentSongIndex: 0,
 };
@@ -19,15 +26,16 @@ const musicSlice = createSlice({
   reducers: {
     resetMusic: () => initialState,
     setCurrentSong(state, action) {
-      console.log(state);
+      // eslint-disable-next-line no-param-reassign
+      state.currentSong = action.payload;
     },
     setIsSongMuted(state, action: PayloadAction<boolean>) {
-      console.log(state);
       // eslint-disable-next-line no-param-reassign
       state.isSongMuted = action.payload;
     },
     setCurrentSongIndex(state, action: PayloadAction<number>) {
-      console.log(state);
+      // eslint-disable-next-line no-param-reassign
+      state.currentSongIndex = action.payload;
     },
   },
 });
