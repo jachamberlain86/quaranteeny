@@ -1,7 +1,8 @@
 .game {
   display: flex;
-  flex-direction: row;
-  background-color: aquamarine;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  background-color: rgb(122, 122, 122);
   width: 100%;
   height: 100%
 }
