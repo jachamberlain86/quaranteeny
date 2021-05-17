@@ -7,6 +7,7 @@ import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
+import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
@@ -17,8 +18,8 @@ import {
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
 import {
-  setTimeLasted,
   selectIsInFastForwardMode,
+  selectIsRoomLoading,
 } from '../../features/game/gameSlice';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
@@ -39,6 +40,7 @@ import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
+  const isRoomLoading = useAppSelector(selectIsRoomLoading);
   const isInFastForwardMode = useAppSelector(selectIsInFastForwardMode);
   const { gameOver } = useAppSelector((state) => state.game);
   const gameScreen = useRef<HTMLDivElement | null>(null);
@@ -84,12 +86,14 @@ const Game = (): JSX.Element => {
     }
   }, [gameOver]);
 
+  const roomLoading = isRoomLoading ? <Loading /> : '';
   const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
 
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
       {gameOver && <GameOver />}
       {fastForwardIndicator}
+      {roomLoading}
       <div>
         <DayCounter />
         <Mood />
