@@ -126,9 +126,7 @@ const Room = (): JSX.Element => {
           <Provider store={store}>
             <Layer>{roomLayer}</Layer>
             <Layer>{furnitureLayer}</Layer>
-            <Layer>
-              <Player />
-            </Layer>
+            <Player />
             <Layer>{topLayer}</Layer>
           </Provider>
         </Stage>
