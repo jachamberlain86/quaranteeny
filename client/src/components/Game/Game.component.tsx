@@ -6,7 +6,9 @@ import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
+import FastForward from '../FastForward/FastForward.component';
 import { selectUserStatus } from '../../features/user/userSlice';
+import { selectIsInFastForwardMode } from '../../features/game/gameSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
@@ -34,6 +36,7 @@ import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
+  const isInFastForwardMode = useAppSelector(selectIsInFastForwardMode);
   const { gameOver } = useAppSelector((state) => state.game);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
@@ -76,9 +79,13 @@ const Game = (): JSX.Element => {
       }, 200);
     }
   }, [gameOver]);
+
+  const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
+
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
       {gameOver && <GameOver />}
+      {fastForwardIndicator}
       <div>
         <DayCounter />
         <Mood />
