@@ -46,7 +46,6 @@ const Game = (): JSX.Element => {
 
   useEffect(() => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
-      console.log('game started');
       startClock();
       resumeInProgressInteraction();
       checkMeterStates();

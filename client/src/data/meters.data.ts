@@ -25,7 +25,7 @@ export const needs: Need[] = [
     name: 'hunger',
     decayRate: -minute,
     pauseDecay: false,
-    safeSize: day,
+    safeSize: hour * 12,
     deficitImpacts: ['hungry'],
     excessImpacts: ['overfed'],
   },

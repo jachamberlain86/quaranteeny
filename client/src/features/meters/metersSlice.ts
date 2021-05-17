@@ -132,9 +132,13 @@ export const metersSlice = createSlice({
         state[key as keyof MetersState] = value;
       });
     },
-    togglePauseDecay: (state, action: PayloadAction<string>) => {
+    pauseDecayOn: (state, action: PayloadAction<string>) => {
       const meter = state[action.payload as keyof MetersState];
-      meter.pauseDecay = !meter.pauseDecay;
+      meter.pauseDecay = true;
+    },
+    pauseDecayOff: (state, action: PayloadAction<string>) => {
+      const meter = state[action.payload as keyof MetersState];
+      meter.pauseDecay = false;
     },
   },
 });
@@ -147,7 +151,8 @@ export const {
   addModifier,
   removeModifier,
   loadMetersStateFromDb,
-  togglePauseDecay,
+  pauseDecayOn,
+  pauseDecayOff,
 } = metersSlice.actions;
 
 export const changeValueScaled = (meterChange: MeterChange): AppThunk => (

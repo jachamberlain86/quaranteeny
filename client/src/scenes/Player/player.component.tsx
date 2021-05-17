@@ -94,12 +94,6 @@ const Player = (): JSX.Element => {
     console.log(character);
   }, [character.pixelLocation]);
 
-  const tileKey = imageDirectory.ofdon;
-
-  // const img = new window.Image();
-  // img.src = imageDirectory[tileKey as keyof ImageDirectory];
-  // img.crossOrigin = 'Anonymous';
-
   return (
     <Layer>
       <Group>

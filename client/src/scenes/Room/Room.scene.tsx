@@ -3,8 +3,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
-import { renderLayer, handleClickTile } from '../../helpers/game.helper';
-import imageAtlas from '../../assets/tiles/atlas/quarantiny-tile-atlas.png';
+import { handleClickTile } from '../../helpers/game.helper';
+import staticImages from '../../assets/tiles/atlas/quarantiny-tile-atlas.png';
 import { imageDirectory, ImageDirectory } from '../../assets/tiles/index';
 
 import './Room.styles.css';
@@ -18,12 +18,12 @@ const Room = (): JSX.Element => {
   const [roomLayer, setRoomLayer] = useState<JSX.Element[]>([]);
   const [furnitureLayer, setFurnitureLayer] = useState<JSX.Element[]>([]);
   const [topLayer, setTopLayer] = useState<JSX.Element[]>([]);
+  const [imageAtlas, setImageAtlas] = useState<HTMLImageElement>();
 
   useEffect(() => {
-    // setLayer0(renderLayer(0));
-    // setLayer2(renderLayer(2));
-
     const img = new window.Image();
+    setImageAtlas(img);
+
     img.crossOrigin = 'Anonymous';
     img.onload = () => {
       for (let layer = 0; layer < layers.length; layer += 1) {
@@ -32,6 +32,7 @@ const Room = (): JSX.Element => {
           for (let xAxis = 0; xAxis < cols; xAxis += 1) {
             const tileKey = layers[layer][yAxis * cols + xAxis].key;
             const imgRef = imageDirectory[tileKey];
+
             if (layer === layers.length - 1) {
               const clickableTile: JSX.Element = (
                 <Rect
@@ -77,47 +78,8 @@ const Room = (): JSX.Element => {
         if (layer === 2) setTopLayer(layerArr);
       }
     };
-
-    img.src = imageAtlas;
+    img.src = staticImages;
   }, []);
-
-  //   const layerArr: JSX.Element[] = [];
-  //   for (let yAxis = 0; yAxis < cols; yAxis += 1) {
-  //     for (let xAxis = 0; xAxis < cols; xAxis += 1) {
-  //       const img = new window.Image();
-  //       img.crossOrigin = 'Anonymous';
-  //       const tileKey = layers[layer][yAxis * cols + xAxis].key;
-  //       let tile: null | JSX.Element = null;
-  //       img.onload = () => {
-  //         if (layer === 2) {
-  //           tile = (
-  //             <Image
-  //               x={xAxis * tileSize}
-  //               y={yAxis * tileSize}
-  //               key={`${xAxis}, ${yAxis}`}
-  //               image={img}
-  //               height={tileSize}
-  //               width={tileSize}
-  //               onClick={handleClickTile}
-  //             />
-  //           );
-  //         } else {
-  //           tile = (
-  //             <Image
-  //               x={xAxis * tileSize}
-  //               y={yAxis * tileSize}
-  //               key={`${xAxis}, ${yAxis}`}
-  //               image={img}
-  //               height={tileSize}
-  //               width={tileSize}
-  //             />
-  //           );
-  //         }
-  //         layerArr.push(tile);
-  //       };
-  //       img.src = imageDirectory[tileKey];
-  //     }
-  //   }
 
   return (
     <ReactReduxContext.Consumer>

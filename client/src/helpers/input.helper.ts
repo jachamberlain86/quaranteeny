@@ -43,7 +43,7 @@ export function checkIndex(x: number, y: number): number {
   return y * cols + x;
 }
 
-function checkCanMove(newPos: number[]): boolean {
+export function checkCanMove(newPos: number[]): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos[0], newPos[1]);
   const result = layers[0][mapIndex].walk;
@@ -54,7 +54,6 @@ function handleMove(key: string): void {
   const timerDel = selectDelay(store.getState());
   const timer = window.setInterval(() => {
     const newPos = calcNewPos(key);
-    console.log(newPos);
     if (checkCanMove(newPos)) {
       shuffleWalkShort.play();
       store.dispatch(changeMovePos());
@@ -95,7 +94,6 @@ export function downHandler(event: KeyboardEvent): void {
     }
   }
   if (event.key === 'd' && !rightFired) {
-    console.log('registered right');
     if (moveDir === null) {
       store.dispatch(toggleRightFired());
       store.dispatch(setMoveDir(event.key));
