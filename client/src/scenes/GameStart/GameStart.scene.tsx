@@ -22,8 +22,9 @@ import {
   bleepSevenHover,
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
-import SoundBar from '../../components/SoundBar/SoundBar.components';
-import soundBarContext from '../../contexts/music.context';
+// import SoundBar from '../../components/SoundBar/SoundBar.components';
+import musicContext from '../../contexts/music.context';
+import { store } from '../../app/store';
 
 interface initialState {
   name: string;
@@ -52,11 +53,16 @@ const GameStart = (): JSX.Element => {
   );
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
-  const testContext = useContext(soundBarContext);
+  const musicController = useContext(musicContext);
 
   // // TODO create an audio player...not essential
   useEffect(() => {
     // musicCuriousIntense.play();
+    const currentSongTitle = store.getState().music.currentSong;
+    if (musicController) {
+      const howlFile = musicController.findHowlFileFromTitle(currentSongTitle);
+      if (howlFile) musicController.playSong(howlFile);
+    }
   }, []);
 
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -367,7 +373,7 @@ const GameStart = (): JSX.Element => {
 
   return (
     <div className="game-start-page">
-      <SoundBar />
+      {/* <SoundBar /> */}
       <div className="start-page-container">
         <MuteSoundBtn />
         <div className="title-row">

@@ -5,6 +5,7 @@ import { Howl } from 'howler';
 //   SoundBar(): JSX.Element;
 // }
 interface AppContextInterface {
+  findHowlFileFromTitle(title: string): Howl | null;
   findTitleOfCurrentSong(song: Howl): string | null;
   playSong(song: Howl): void;
   stopSong(song: Howl): void;

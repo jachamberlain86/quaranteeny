@@ -68,6 +68,17 @@ export const findTitleOfCurrentSong = (song: Howl): string | null => {
   return null;
 };
 
+const findHowlFileFromTitle = (title: string): Howl | null => {
+  for (let i = 0; i < playListArr.length; i += 1) {
+    const howlSong = playListArr[i][1];
+    const songPathString = playListArr[i][0];
+    if (songPathString.includes(title)) {
+      return howlSong;
+    }
+  }
+  return null;
+};
+
 const firstSong = playListArr[0][1];
 const currentSongTypeHowl = playListArr[0][1];
 const currentSongTypeRedux = findTitleOfCurrentSong(currentSongTypeHowl);
@@ -125,6 +136,7 @@ export const handleSongSkip = (direction: number): void => {
 };
 
 export const musicController = {
+  findHowlFileFromTitle,
   findTitleOfCurrentSong,
   playSong,
   stopSong,
