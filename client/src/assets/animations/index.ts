@@ -136,8 +136,10 @@ export class AnimationDirectory {
         const newFrame = {
           x: calcPixelPos(frame.x),
           y: calcPixelPos(frame.y),
-          width: calcPixelSize(frame.width),
-          height: calcPixelSize(frame.height),
+          width: frame.width,
+          height: frame.height,
+          pixWidth: calcPixelSize(frame.width),
+          pixHeight: calcPixelSize(frame.height),
         };
         framesArr.push(newFrame);
         this[animation.name] = framesArr;
