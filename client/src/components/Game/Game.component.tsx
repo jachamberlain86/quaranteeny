@@ -6,14 +6,21 @@ import MeterArea from '../MeterArea/MeterArea.component';
 import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
+import FastForward from '../FastForward/FastForward.component';
+import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
   checkLoseStates,
   checkConditionsState,
+  resumeInProgressInteraction,
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
+import {
+  selectIsInFastForwardMode,
+  selectIsRoomLoading,
+} from '../../features/game/gameSlice';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
@@ -33,6 +40,8 @@ import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
+  const isRoomLoading = useAppSelector(selectIsRoomLoading);
+  const isInFastForwardMode = useAppSelector(selectIsInFastForwardMode);
   const { gameOver } = useAppSelector((state) => state.game);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
@@ -41,6 +50,7 @@ const Game = (): JSX.Element => {
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
       console.log('game started');
       startClock();
+      resumeInProgressInteraction();
       checkMeterStates();
       checkConditionsState();
       checkLoseStates();
@@ -75,9 +85,15 @@ const Game = (): JSX.Element => {
       }, 200);
     }
   }, [gameOver]);
+
+  const roomLoading = isRoomLoading ? <Loading /> : '';
+  const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
+
   return (
     <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
       {gameOver && <GameOver />}
+      {fastForwardIndicator}
+      {roomLoading}
       <div>
         <DayCounter />
         <Mood />

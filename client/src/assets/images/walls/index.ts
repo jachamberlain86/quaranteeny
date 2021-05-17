@@ -21,6 +21,7 @@ import wallR from './wall-right.png';
 import wallTL from './wall-top-left.png';
 import wallTR from './wall-top-right.png';
 import wallT from './wall-top.png';
+import wallDoorTTrans from './door-wall-trans.png';
 
 export const wallImgs = {
   rimBL,
@@ -46,4 +47,5 @@ export const wallImgs = {
   wallTL,
   wallTR,
   wallT,
+  wallDoorTTrans,
 };

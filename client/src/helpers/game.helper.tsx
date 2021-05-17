@@ -4,12 +4,19 @@ import Konva from 'konva';
 import { store } from '../app/store';
 import {
   updateClockTime,
+  updateClockWhenFastForwarding,
   selectGameOver,
+  selectGameSpeed,
   selectStartTime,
+  selectClockTimeReal,
   setStartTime,
+  changeGameSpeed,
+  userReturnedAfterGap,
+  finishedCatchingUpToPresent,
   resetGameState,
+  setTimeLasted,
 } from '../features/game/gameSlice';
-import { second } from '../data/time.data';
+import { second, minute } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import { resetSprite } from '../features/sprite/spriteSlice';
@@ -22,22 +29,44 @@ import { handleInteraction, setCurrentInteraction } from './sprite.helper';
 import { checkIndex } from './input.helper';
 import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 
+const fastForwardGameSpeed = 10_000;
+
 export const startClock = (): void => {
   const startTime = selectStartTime(store.getState());
   // Set startTime to now if it's not already set. Otherwise leave it as is
   // since game is in progress.
   if (startTime === 0) {
     store.dispatch(setStartTime(Date.now()));
+  } else {
+    store.dispatch(userReturnedAfterGap());
   }
+  const gameSpeedOriginal = selectGameSpeed(store.getState());
   const clockIntervalId: NodeJS.Timeout = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
     if (gameOver) clearInterval(clockIntervalId);
     else {
-      store.dispatch(
-        updateClockTime({
-          currTimeReal: Date.now(),
-        })
-      );
+      // Check how long it's been since the player last closed the game
+      const lastRecordedClockTime = selectClockTimeReal(store.getState());
+      const timeSinceClosedGame = Date.now() - lastRecordedClockTime;
+
+      if (timeSinceClosedGame > minute) {
+        // Speed up game speed to fast forward until we reach present
+        store.dispatch(changeGameSpeed(fastForwardGameSpeed));
+        store.dispatch(
+          updateClockWhenFastForwarding({
+            timeNow: Date.now(),
+            gameSpeedOriginal,
+          })
+        );
+      } else {
+        store.dispatch(finishedCatchingUpToPresent());
+        store.dispatch(changeGameSpeed(gameSpeedOriginal));
+        store.dispatch(
+          updateClockTime({
+            timeNow: Date.now(),
+          })
+        );
+      }
     }
   }, second);
 };
@@ -98,39 +127,47 @@ export function handleClickTile(
 export function renderLayer(layer: number): JSX.Element[] {
   const { cols, layers, tileSize } = game;
 
+  // const imageObj = new window.Image();
+  // imageObj.onload = () => {
+
   const layerArr: JSX.Element[] = [];
   for (let yAxis = 0; yAxis < cols; yAxis += 1) {
     for (let xAxis = 0; xAxis < cols; xAxis += 1) {
-      const tileKey = layers[layer][yAxis * cols + xAxis].key;
       const img = new window.Image();
-      img.src = imageDirectory[tileKey as keyof ImageDirectory];
       img.crossOrigin = 'Anonymous';
-      if (layer === 2) {
-        layerArr.push(
-          <Image
-            x={xAxis * tileSize}
-            y={yAxis * tileSize}
-            key={`${xAxis}, ${yAxis}`}
-            image={img}
-            height={tileSize}
-            width={tileSize}
-            onClick={handleClickTile}
-          />
-        );
-      } else {
-        layerArr.push(
-          <Image
-            x={xAxis * tileSize}
-            y={yAxis * tileSize}
-            key={`${xAxis}, ${yAxis}`}
-            image={img}
-            height={tileSize}
-            width={tileSize}
-            // onClick={handleClickTile}
-          />
-        );
-      }
+      const tileKey = layers[layer][yAxis * cols + xAxis].key;
+      let tile: null | JSX.Element = null;
+      img.onload = () => {
+        if (layer === 2) {
+          tile = (
+            <Image
+              x={xAxis * tileSize}
+              y={yAxis * tileSize}
+              key={`${xAxis}, ${yAxis}`}
+              image={img}
+              height={tileSize}
+              width={tileSize}
+              onClick={handleClickTile}
+            />
+          );
+        } else {
+          tile = (
+            <Image
+              x={xAxis * tileSize}
+              y={yAxis * tileSize}
+              key={`${xAxis}, ${yAxis}`}
+              image={img}
+              height={tileSize}
+              width={tileSize}
+            />
+          );
+        }
+        layerArr.push(tile);
+      };
+      img.src = imageDirectory[tileKey];
     }
   }
+  // };
+
   return layerArr;
 }

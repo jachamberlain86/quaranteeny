@@ -1,0 +1,88 @@
+import { AtlasRefDetails } from '../../interfaces/atlasRefDetails.interface';
+
+export const altImages: AtlasRefDetails[] = [
+  {
+    key: 'bath-bottom-closed',
+    x: 15,
+    y: 4,
+    width: 3,
+    height: 2,
+  },
+  {
+    key: 'basin-bottom-open',
+    x: 18,
+    y: 7,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'door-open',
+    x: 5,
+    y: 15,
+    width: 3,
+    height: 3,
+  },
+  {
+    key: 'dresser-bottom-open',
+    x: 15,
+    y: 7,
+    width: 2,
+    height: 1,
+  },
+  {
+    key: 'fridge-middle-open-empty',
+    x: 11,
+    y: 8,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'fridge-middle-open-full',
+    x: 13,
+    y: 8,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'cabinet-1-bottom-open',
+    x: 11,
+    y: 10,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'cabinet-2-bottom-open',
+    x: 13,
+    y: 10,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'sink-bottom-open',
+    x: 12,
+    y: 10,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'oven-top-on',
+    x: 15,
+    y: 12,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'phone-on',
+    x: 15,
+    y: 17,
+    width: 1,
+    height: 1,
+  },
+  {
+    key: 'plant-dead',
+    x: 16,
+    y: 16,
+    width: 1,
+    height: 2,
+  },
+];

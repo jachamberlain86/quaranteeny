@@ -9,7 +9,7 @@ const initialState: Character = {
   movePos: [1, 4],
   dimensions: [40, 40],
   pixelLocation: [40, 160],
-  direction: 'yellow',
+  direction: 'idle',
   isMoving: false,
   leftFired: false,
   rightFired: false,
@@ -66,19 +66,19 @@ const characterSlice = createSlice({
     setMoveDir(state, action: PayloadAction<string | null>) {
       if (action.payload === 's') {
         state.moveDir = action.payload;
-        state.direction = 'blue';
+        state.direction = 'walkingDown';
       }
       if (action.payload === 'w') {
         state.moveDir = action.payload;
-        state.direction = 'red';
+        state.direction = 'walkingUp';
       }
       if (action.payload === 'a') {
         state.moveDir = action.payload;
-        state.direction = 'green';
+        state.direction = 'walkingLeft';
       }
       if (action.payload === 'd') {
         state.moveDir = action.payload;
-        state.direction = 'purple';
+        state.direction = 'walkingRight';
       }
     },
     changeMovePos(state) {

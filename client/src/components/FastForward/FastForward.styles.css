@@ -1,0 +1,43 @@
+.FastForward__container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px 5px black;
+}
+
+.FastForward__box {
+  background-color: #fff;
+}
+
+.FastForward__dotOne {
+  animation: dot 1s infinite;
+  animation-fill-mode: both;
+  animation-delay: 0;
+}
+.FastForward__dotTwo {
+  animation: dot 1s infinite;
+  animation-fill-mode: both;
+  animation-delay: 0.33s;
+}
+.FastForward__dotThree {
+  animation: dot 1s infinite;
+  animation-fill-mode: both;
+  animation-delay: 0.66s;
+
+}
+
+@keyframes dot {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

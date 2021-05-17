@@ -1,6 +1,7 @@
 import { calcPixelPos, calcPixelSize } from '../../helpers/atlas.helper';
 import { AtlasRef } from '../../interfaces/atlasRef.interface';
-import { AnimationRef } from '../../interfaces/animationRef.interfact';
+import { AnimationRef } from '../../interfaces/animationRef.interface';
+import { AniFrame } from '../../interfaces/aniFrame.interface';
 
 import { sleeping } from './sleeping';
 import { watching } from './watching';
@@ -19,12 +20,13 @@ import {
 import { ring } from './ring';
 import { bubbles } from './bubbles';
 import { music } from './music';
+import { plant } from './plant';
 
 const blank = [
   {
     key: 'blank',
     x: 19,
-    y: 0,
+    y: 3,
     width: 1,
     height: 1,
   },
@@ -116,23 +118,29 @@ const animations: AnimationRef[] = [
     frames: music,
   },
   {
+    name: 'plant',
+    frames: plant,
+  },
+  {
     name: 'blank',
     frames: blank,
   },
 ];
 
 export class AnimationDirectory {
-  [key: string]: AtlasRef[];
+  [key: string]: AniFrame[];
 
   constructor(animationsArr: AnimationRef[]) {
     animationsArr.forEach((animation: AnimationRef) => {
-      const framesArr: AtlasRef[] = [];
+      const framesArr: AniFrame[] = [];
       animation.frames.forEach((frame) => {
         const newFrame = {
           x: calcPixelPos(frame.x),
           y: calcPixelPos(frame.y),
-          width: calcPixelSize(frame.width),
-          height: calcPixelSize(frame.height),
+          width: frame.width,
+          height: frame.height,
+          pixWidth: calcPixelSize(frame.width),
+          pixHeight: calcPixelSize(frame.height),
         };
         framesArr.push(newFrame);
         this[animation.name] = framesArr;

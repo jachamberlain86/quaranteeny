@@ -2,13 +2,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { GameTime } from '../../interfaces/gameTime.interface';
-import { minute, hour, day } from '../../data/time.data';
+import { second, minute, hour, day } from '../../data/time.data';
 
 export interface GameState {
+  isRoomLoading: boolean;
   gameSpeed: number;
-  currClockTimeInGame: number;
-  currClockTimeReal: number;
   startTime: number;
+  currClockTimeReal: number;
+  currClockTimeInGame: number;
+  isInFastForwardMode: boolean;
   gameOver: boolean;
   timeLasted: number;
   isCurrentGameActive: boolean;
@@ -18,10 +20,12 @@ export interface GameState {
 }
 
 const initialState: GameState = {
+  isRoomLoading: false,
   gameSpeed: 1,
   startTime: 0,
-  currClockTimeInGame: 0,
   currClockTimeReal: 0,
+  currClockTimeInGame: 0,
+  isInFastForwardMode: false,
   gameOver: false,
   timeLasted: 0,
   isCurrentGameActive: false,
@@ -35,7 +39,7 @@ export const selectGameTime = (state: GameState): GameTime => {
     gameMinute: minute / state.gameSpeed,
     gameHour: hour / state.gameSpeed,
     gameDay: day / state.gameSpeed,
-    updateInterval: 5 * state.gameSpeed.toString().length,
+    updateInterval: 5,
   };
   return gameTime;
 };
@@ -44,6 +48,12 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    setIsRoomLoadingToTrue: (state) => {
+      state.isRoomLoading = true;
+    },
+    setIsRoomLoadingToFalse: (state) => {
+      state.isRoomLoading = false;
+    },
     resetGameState: () => initialState,
     changeGameSpeed: (state, action: PayloadAction<number>) => {
       state.gameSpeed = action.payload;
@@ -56,13 +66,36 @@ export const gameSlice = createSlice({
     updateClockTime: (
       state,
       action: PayloadAction<{
-        currTimeReal: number;
+        timeNow: number;
       }>
     ) => {
-      state.currClockTimeReal = action.payload.currTimeReal;
+      state.currClockTimeReal = action.payload.timeNow;
       const timeSinceStartReal = state.currClockTimeReal - state.startTime;
       const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
       state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
+    },
+    updateClockWhenFastForwarding: (
+      state,
+      action: PayloadAction<{
+        timeNow: number;
+        gameSpeedOriginal: number;
+      }>
+    ) => {
+      state.currClockTimeReal += second * state.gameSpeed;
+      // prevent currClockTimeReal from becoming greater than timeNow;
+      if (state.currClockTimeReal > action.payload.timeNow) {
+        state.currClockTimeReal = action.payload.timeNow;
+      }
+      const timeSinceStartReal = state.currClockTimeReal - state.startTime;
+      const timeSinceStartInGame =
+        timeSinceStartReal * action.payload.gameSpeedOriginal;
+      state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
+    },
+    userReturnedAfterGap: (state) => {
+      state.isInFastForwardMode = true;
+    },
+    finishedCatchingUpToPresent: (state) => {
+      state.isInFastForwardMode = false;
     },
     increaseStarvation: (state) => {
       const { updateInterval } = selectGameTime(state);
@@ -108,6 +141,7 @@ export const gameSlice = createSlice({
       state.gameSpeed = action.payload.gameSpeed;
       state.startTime = action.payload.startTime;
       state.currClockTimeInGame = action.payload.currClockTimeInGame;
+      state.currClockTimeReal = action.payload.currClockTimeReal;
       state.isCurrentGameActive = action.payload.isCurrentGameActive;
       state.starvationCounter = action.payload.starvationCounter;
       state.sleepDepCounter = action.payload.sleepDepCounter;
@@ -123,10 +157,15 @@ export const gameSlice = createSlice({
 });
 
 export const {
+  setIsRoomLoadingToTrue,
+  setIsRoomLoadingToFalse,
   resetGameState,
   changeGameSpeed,
   setStartTime,
   updateClockTime,
+  updateClockWhenFastForwarding,
+  userReturnedAfterGap,
+  finishedCatchingUpToPresent,
   setGameOver,
   loadGameStateFromDb,
   setTimeLasted,
@@ -139,6 +178,9 @@ export const {
   decreaseSick,
 } = gameSlice.actions;
 
+export const selectIsRoomLoading = (state: RootState): boolean =>
+  state.game.isRoomLoading;
+
 export const selectGameSpeed = (state: RootState): number =>
   state.game.gameSpeed;
 
@@ -150,6 +192,11 @@ export const selectClockTimeInGame = (state: RootState): number =>
 
 export const selectClockTimeReal = (state: RootState): number =>
   state.game.currClockTimeReal;
+
+export const selectTimeLasted = (state: RootState): number =>
+  state.game.timeLasted;
+export const selectIsInFastForwardMode = (state: RootState): boolean =>
+  state.game.isInFastForwardMode;
 
 export const selectGameOver = (state: RootState): boolean =>
   state.game.gameOver;

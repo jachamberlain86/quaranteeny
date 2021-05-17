@@ -23,7 +23,11 @@ import {
 } from '../features/game/gameSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
 import { MeterModifier } from '../interfaces/meterModifier.interface';
-import { deductCost, triggerChangeMeters } from './meters.helper';
+import {
+  deductCost,
+  triggerChangeMeters,
+  triggerIncrementalChange,
+} from './meters.helper';
 import { calcPercentage } from './game.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
@@ -77,6 +81,14 @@ export const handleInteraction = (entity: string): void => {
     if (entityData.conditions.length)
       triggerAddConditions(entityData.conditions);
     triggerChangeMeters(entityData, entity);
+  }
+};
+
+export const resumeInProgressInteraction = (): void => {
+  const currentInteraction = selectCurrentInteraction(store.getState());
+  if (currentInteraction) {
+    const entityData: Entity = getEntityData(currentInteraction);
+    triggerIncrementalChange(entityData, currentInteraction);
   }
 };
 
@@ -145,4 +157,5 @@ export function updateInteractionProgress(
     percentageComplete = 100 - calcPercentage(current, total);
   }
   store.dispatch(setInteractionProgress(percentageComplete));
+  console.log('percentageComplete', percentageComplete);
 }

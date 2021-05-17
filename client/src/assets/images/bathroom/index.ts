@@ -23,6 +23,8 @@ import sinkT from './bath-sink-top.png';
 import ducksL from './ducks-left.png';
 import ducksM from './ducks-mid.png';
 import ducksR from './ducks-right.png';
+import toiletT from './toilet-top.png';
+import toiletB from './toilet-bottom.png';
 
 export const bathImgs = {
   bathCBL,
@@ -50,4 +52,6 @@ export const bathImgs = {
   ducksL,
   ducksM,
   ducksR,
+  toiletT,
+  toiletB,
 };

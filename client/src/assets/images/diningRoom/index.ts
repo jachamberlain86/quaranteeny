@@ -19,10 +19,17 @@ import foodWaste2 from './food-waste-2.png';
 import tableL from './dining-table-left.png';
 import tableR from './dining-table-right.png';
 
+import exerciseL from './exercise-left.png';
+import exerciseR from './exercise-right.png';
+import phone from './phone.png';
+
 export const diningImgs = {
   chair,
   foodWaste2,
 
   tableL,
   tableR,
+  exerciseL,
+  exerciseR,
+  phone,
 };

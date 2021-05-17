@@ -61,18 +61,25 @@ export const metersSlice = createSlice({
   initialState,
   reducers: {
     resetMeters: () => initialState,
-    increaseMeter: (state, action: PayloadAction<MeterChange>) => {
+    increaseValueScaled: (state, action: PayloadAction<MeterChange>) => {
       const meter = state[action.payload.name as keyof MetersState];
       const incRate = selectIncRate(state, action.payload.name);
       meter.value += Math.round(action.payload.amount * (incRate / 100));
       if (meter.value > meters[action.payload.name].max)
         meter.value = meters[action.payload.name].max;
     },
-    decreaseMeter: (state, action: PayloadAction<MeterChange>) => {
+    decreaseValueScaled: (state, action: PayloadAction<MeterChange>) => {
       const decRate = selectDecRate(state, action.payload.name);
       const meter = state[action.payload.name as keyof MetersState];
       meter.value += Math.round(action.payload.amount * (decRate / 100));
       if (meter.value < 0) meter.value = 0;
+    },
+    changeValueFixed: (state, action: PayloadAction<MeterChange>) => {
+      const meter = state[action.payload.name as keyof MetersState];
+      meter.value += action.payload.amount;
+      if (meter.value < 0) meter.value = 0;
+      if (meter.value > meters[action.payload.name].max)
+        meter.value = meters[action.payload.name].max;
     },
     addModifier: (state, action: PayloadAction<MeterModifier>) => {
       console.log('modifier added');
@@ -134,19 +141,20 @@ export const metersSlice = createSlice({
 
 export const {
   resetMeters,
-  increaseMeter,
-  decreaseMeter,
+  increaseValueScaled,
+  decreaseValueScaled,
+  changeValueFixed,
   addModifier,
   removeModifier,
   loadMetersStateFromDb,
   togglePauseDecay,
 } = metersSlice.actions;
 
-export const changeByAmount = (meterChange: MeterChange): AppThunk => (
+export const changeValueScaled = (meterChange: MeterChange): AppThunk => (
   dispatch
 ) => {
-  if (meterChange.amount > 0) dispatch(increaseMeter(meterChange));
-  else if (meterChange.amount < 0) dispatch(decreaseMeter(meterChange));
+  if (meterChange.amount > 0) dispatch(increaseValueScaled(meterChange));
+  else if (meterChange.amount < 0) dispatch(decreaseValueScaled(meterChange));
 };
 
 export default metersSlice.reducer;

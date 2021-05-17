@@ -38,6 +38,8 @@ export class ImageDirectory {
     this.dtrt = wallImgs.wallDoorTRT;
     this.dbrt = wallImgs.wallDoorBRT;
 
+    this.dttrans = wallImgs.wallDoorTTrans;
+
     this.ctl = floorImgs.carpetTL;
     this.ct = floorImgs.carpetT;
     this.ctr = floorImgs.carpetTR;
@@ -56,6 +58,9 @@ export class ImageDirectory {
     this.babtlo = bathImgs.bathOTL;
     this.babtro = bathImgs.bathOTR;
     this.babto = bathImgs.bathOT;
+
+    this.batt = bathImgs.toiletT;
+    this.batb = bathImgs.toiletB;
 
     this.basbc = bathImgs.sinkBC;
     this.basm = bathImgs.sinkM;
@@ -84,6 +89,11 @@ export class ImageDirectory {
 
     this.ditl = diningImgs.tableL;
     this.ditr = diningImgs.tableR;
+
+    this.dip = diningImgs.phone;
+
+    this.diel = diningImgs.exerciseL;
+    this.dier = diningImgs.exerciseR;
 
     this.doblc = doorImgs.doorBLC;
     this.dobrc = doorImgs.doorBRC;

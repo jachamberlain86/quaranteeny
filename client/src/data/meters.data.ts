@@ -17,35 +17,38 @@ const calcExcess = (safe: number): number => safe + calcDeficit(safe);
 const calcMax = (safe: number): number => calcDeficit(safe) + calcExcess(safe);
 const calcInitialValue = (safe: number): number =>
   Math.round(
-    Math.random() * (calcExcess(safe) - calcDeficit(safe) + 1) +
-      calcDeficit(safe)
+    Math.random() * (calcExcess(safe) - calcDeficit(safe)) + calcDeficit(safe)
   );
 
 export const needs: Need[] = [
   {
     name: 'hunger',
     decayRate: -minute,
-    safeSize: hour * 8,
+    pauseDecay: false,
+    safeSize: day,
     deficitImpacts: ['hungry'],
     excessImpacts: ['overfed'],
   },
   {
     name: 'energy',
     decayRate: -minute,
-    safeSize: hour * 16,
+    pauseDecay: false,
+    safeSize: day,
     deficitImpacts: ['exhausted'],
     excessImpacts: ['lethargic'],
   },
   {
     name: 'health',
     decayRate: -minute,
-    safeSize: day * 14,
+    pauseDecay: true,
+    safeSize: day,
     deficitImpacts: ['unwell'],
     excessImpacts: ['hardy'],
   },
   {
     name: 'money',
-    decayRate: 0,
+    decayRate: -1,
+    pauseDecay: true,
     safeSize: 1000,
     deficitImpacts: ['broke'],
     excessImpacts: ['rich'],
@@ -53,34 +56,39 @@ export const needs: Need[] = [
   {
     name: 'fitness',
     decayRate: -minute,
+    pauseDecay: false,
     safeSize: day * 7,
     deficitImpacts: ['unfit'],
     excessImpacts: ['injured'],
   },
   {
     name: 'mood',
-    decayRate: 0,
-    safeSize: day * 3,
+    decayRate: -minute,
+    pauseDecay: true,
+    safeSize: hour * 6,
     deficitImpacts: ['depressed'],
     excessImpacts: ['ecstatic'],
   },
   {
     name: 'hygeine',
     decayRate: -minute,
-    safeSize: day * 4,
+    pauseDecay: false,
+    safeSize: day,
     deficitImpacts: ['filthy'],
     excessImpacts: ['anal'],
   },
   {
     name: 'comfort',
-    decayRate: 0,
-    safeSize: hour * 4,
-    deficitImpacts: ['hurt'],
+    decayRate: -minute,
+    pauseDecay: true,
+    safeSize: hour * 6,
+    deficitImpacts: ['achey'],
     excessImpacts: ['cosy'],
   },
   {
     name: 'connection',
     decayRate: -minute,
+    pauseDecay: false,
     safeSize: day * 7,
     deficitImpacts: ['lonely'],
     excessImpacts: ['dependent'],
@@ -88,35 +96,40 @@ export const needs: Need[] = [
   {
     name: 'engagement',
     decayRate: -minute,
-    safeSize: hour * 6,
+    pauseDecay: false,
+    safeSize: hour * 12,
     deficitImpacts: ['bored'],
     excessImpacts: ['hooked'],
   },
   {
     name: 'freedom',
     decayRate: -minute,
-    safeSize: day * 14,
+    pauseDecay: false,
+    safeSize: day * 7,
     deficitImpacts: ['trapped'],
     excessImpacts: ['wild'],
   },
   {
     name: 'motivation',
-    decayRate: 0,
-    safeSize: day * 10,
+    decayRate: -minute,
+    pauseDecay: true,
+    safeSize: day * 7,
     deficitImpacts: ['apathetic'],
     excessImpacts: ['ambitious'],
   },
   {
     name: 'appetite',
-    decayRate: 0,
+    decayRate: -minute,
+    pauseDecay: true,
     safeSize: day,
     deficitImpacts: ['nauseous'],
     excessImpacts: ['greedy'],
   },
   {
     name: 'mind',
-    decayRate: 0,
-    safeSize: day * 14,
+    decayRate: -minute,
+    pauseDecay: true,
+    safeSize: day * 7,
     deficitImpacts: ['unstable'],
     excessImpacts: ['enlightened'],
   },
@@ -136,6 +149,7 @@ export class Meters {
         excessImpacts: need.excessImpacts,
         max: calcMax(need.safeSize),
         initialValue: calcInitialValue(need.safeSize),
+        pauseDecay: need.pauseDecay,
       };
     });
   }
