@@ -34,7 +34,7 @@ export const houseInteractablesObj = {} as howlObject;
 houseInteractables.forEach((object) => {
   houseInteractablesObj[object] = new Howl({
     src: [object],
-    volume: 0.2,
+    volume: 0.4,
     rate: 1,
     loop: false,
   });
