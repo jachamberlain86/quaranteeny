@@ -129,7 +129,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
     (entityData.hoursToComplete * gameHour) / (gameMinute * updateInterval)
   );
   console.log('iterations', iterations);
-  let iterationCount = iterations;
+  let iterationsLeft = iterations;
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
     const pausedMeters: string[] = [];
@@ -146,14 +146,14 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
-      } else if (iterationCount <= 0) {
+      } else if (iterationsLeft <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
         setCurrentInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
-        updateInteractionProgress(iterationCount, iterations);
+        updateInteractionProgress(iterationsLeft, iterations);
 
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           if (!pausedMeters.includes(meterImpact.name))
@@ -166,8 +166,8 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
             })
           );
         });
-        iterationCount -= 1;
-        console.log('iterationCount', iterationCount);
+        iterationsLeft -= 1;
+        console.log('iterationsLeft', iterationsLeft);
       }
     }
   }, gameMinute * updateInterval);
