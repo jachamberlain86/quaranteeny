@@ -31,9 +31,7 @@ const Room = (): JSX.Element => {
         for (let yAxis = 0; yAxis < cols; yAxis += 1) {
           for (let xAxis = 0; xAxis < cols; xAxis += 1) {
             const tileKey = layers[layer][yAxis * cols + xAxis].key;
-            console.log(tileKey);
             const imgRef = imageDirectory[tileKey];
-            console.log(imgRef);
             if (layer === layers.length - 1) {
               const clickableTile: JSX.Element = (
                 <Rect
