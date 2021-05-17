@@ -64,9 +64,9 @@ const Game = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
-  useEffect(() => {
-    musicChillSong.play();
-  }, []);
+  // useEffect(() => {
+  //   musicChillSong.play();
+  // }, []);
   useEffect(() => {
     if (gameOver) {
       musicChillSong.stop();

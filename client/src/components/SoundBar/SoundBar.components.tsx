@@ -10,12 +10,13 @@ const SoundBar = (): JSX.Element => {
   const [currentSong, setCurrentSong] = useState(initialState);
   const [isSongMuted, setIsSongMuted] = useState(false);
   const [songIndex, setSongIndex] = useState(0);
-  console.log('songIndex', songIndex);
-  console.log('currentSong', currentSong);
+  // console.log('songIndex', songIndex);
+  // console.log('currentSong', currentSong);
+  // regExp (strips static media)(finds songtitle)(strips numbers and extension)
+  const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
   const playListArr = Object.entries(playListObject);
   // TODO use playlist track listing in drop down menu
   const playList = playListArr.map((song, index) => {
-    const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div key={song[0]} onClick={() => song[1].play()}>
@@ -23,6 +24,17 @@ const SoundBar = (): JSX.Element => {
       </div>
     );
   });
+  const findTitleOfCurrentSong = (song: Howl): string | null => {
+    for (let i = 0; i < playListArr.length; i += 1) {
+      const trackInfo = playListArr[i];
+      if (trackInfo[1] === song) {
+        const songTitle = trackInfo[0].match(regExp);
+        if (songTitle) return songTitle[0];
+        return null;
+      }
+    }
+    return null;
+  };
   const playSong = (song: Howl): void => {
     song.play();
   };
@@ -99,6 +111,7 @@ const SoundBar = (): JSX.Element => {
       <button type="button" onClick={() => handleSongSkip(1)}>
         Next
       </button>
+      {findTitleOfCurrentSong(currentSong)}
     </div>
   );
 };
