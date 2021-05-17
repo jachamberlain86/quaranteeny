@@ -5,8 +5,17 @@ import {
   playListArr,
 } from '../../audioControllers/musicController';
 
-const firstSong = musicController.findTitleOfCurrentSong(playListArr[1][1]);
+// const howlFile = musicController.findHowlFileFromTitle('connected');
+// console.log('howlFile', howlFile);
+// const firstSong = howlFile
+//   ? musicController.findTitleOfCurrentSong(playListArr[0][1])
+//   : 'No song loaded';
 // const firstSong = firstSongTitle || 'No song loaded';
+const firstSong = musicController.findSongTitleFromHowlFile(playListArr[3][1]);
+musicController.findHowlFileFromTitle('connected');
+const howlFile = firstSong
+  ? musicController.findHowlFileFromTitle('connected')
+  : playListArr[0][1];
 
 interface musicSlice {
   currentSong: string;
@@ -25,7 +34,7 @@ const musicSlice = createSlice({
   initialState,
   reducers: {
     resetMusic: () => initialState,
-    setCurrentSong(state, action) {
+    setCurrentSong(state, action: PayloadAction<string>) {
       // eslint-disable-next-line no-param-reassign
       state.currentSong = action.payload;
     },
@@ -55,6 +64,3 @@ export const selectCurrentSongIndex = (state: RootState): number =>
   state.music.currentSongIndex;
 
 export default musicSlice.reducer;
-// const [currentSong, setCurrentSong] = useState(initialState);
-// const [isSongMuted, setIsSongMuted] = useState(false);
-// const [songIndex, setSongIndex] = useState(0);

@@ -6,7 +6,7 @@ import { Howl } from 'howler';
 // }
 interface AppContextInterface {
   findHowlFileFromTitle(title: string): Howl | null;
-  findTitleOfCurrentSong(song: Howl): string | null;
+  findSongTitleFromHowlFile(song: Howl): string | null;
   playSong(song: Howl): void;
   stopSong(song: Howl): void;
   handleStop(): void;

@@ -10,11 +10,7 @@ const initialState = {} as Howl;
 
 const SoundBar = (): JSX.Element => {
   const currentSongTitle = useAppSelector((state) => state.music.currentSong);
-  // const currentSongTitle = store.getState().music.currentSong;
   const currentSong = musicController.findHowlFileFromTitle(currentSongTitle);
-  // useEffect(() => {
-  //   console.log('summat');
-  // }, [currentSongTitle]);
   return (
     <div className="sound-bar-container">
       {/* {playList} */}

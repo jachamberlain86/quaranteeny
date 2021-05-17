@@ -10,7 +10,7 @@ import {
 } from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/oldImages/TinyJamesWalk.gif';
-import { musicCuriousIntense } from '../../audioControllers/soundTracks';
+// import { musicCuriousIntense } from '../../audioControllers/soundTracks';
 import {
   btnPressOne,
   btnPressTwo,
@@ -25,6 +25,7 @@ import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 import SoundBar from '../../components/SoundBar/SoundBar.components';
 import musicContext from '../../contexts/music.context';
 import { store } from '../../app/store';
+import { setCurrentSong } from '../../features/music/musicSlice';
 
 interface initialState {
   name: string;
@@ -54,17 +55,10 @@ const GameStart = (): JSX.Element => {
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
   const musicController = useContext(musicContext);
-
-  // // TODO create an audio player...not essential
-  // useEffect(() => {
-  //   // musicCuriousIntense.play();
-  //   const currentSongTitle = store.getState().music.currentSong;
-  //   if (musicController) {
-  //     const howlFile = musicController.findHowlFileFromTitle(currentSongTitle);
-  //     if (howlFile) musicController.playSong(howlFile);
-  //   }
-  // }, []);
-
+  useEffect(() => {
+    const howlSong = musicController?.findHowlFileFromTitle('Connected');
+    if (howlSong) musicController?.playSong(howlSong);
+  }, []);
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
     setNameInput(input.toUpperCase());
@@ -129,7 +123,7 @@ const GameStart = (): JSX.Element => {
     whooshOne.play();
     setTimeout(() => {
       // currentGameInfoDivRef.classList.add('displayOff');
-      musicCuriousIntense.stop();
+      // musicCuriousIntense.stop();
       dispatch(setIsCurrentGameActive());
       history.push('/start');
     }, animationSpeed);
@@ -148,7 +142,7 @@ const GameStart = (): JSX.Element => {
   const handleContinueGame = (): void => {
     btnPressTwo.play();
     whooshOne.play();
-    musicCuriousIntense.stop();
+    // musicCuriousIntense.stop();
     history.push('/start');
   };
 

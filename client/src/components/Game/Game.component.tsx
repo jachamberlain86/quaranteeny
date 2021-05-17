@@ -18,10 +18,10 @@ import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
 import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
-import {
-  musicEightiesSlowFunk,
-  musicChillSong,
-} from '../../audioControllers/soundTracks';
+// import {
+//   musicEightiesSlowFunk,
+//   musicChillSong,
+// } from '../../audioControllers/soundTracks';
 import {
   gameOverOne,
   gameOverTwo,
@@ -71,7 +71,7 @@ const Game = (): JSX.Element => {
   // }, []);
   useEffect(() => {
     if (gameOver) {
-      musicChillSong.stop();
+      // musicChillSong.stop();
       gameOverTwo.play();
       setTimeout(() => {
         gameOverMusic.play();

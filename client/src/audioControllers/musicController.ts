@@ -3,8 +3,8 @@ import track1 from '../assets/audio/tracks/in-game/simon-dark-tune.mp3';
 import track2 from '../assets/audio/tracks/in-game/simon-good-morning-tune.mp3';
 import track3 from '../assets/audio/tracks/in-game/simon-onra-tune.mp3';
 import curiousIntenseSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Connected.mp3';
-import chillSong from '../assets/audio/tracks/in-game/A Reluctant Hero (LOOP).mp3';
-import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow (LOOP).mp3';
+import chillSong from '../assets/audio/tracks/in-game/A Reluctant Hero.mp3';
+import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow.mp3';
 import EightiesSlowFunkSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Modern Bits.mp3';
 
 import {
@@ -54,7 +54,7 @@ export const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
 //   );
 // });
 
-export const findTitleOfCurrentSong = (song: Howl): string | null => {
+export const findSongTitleFromHowlFile = (song: Howl): string | null => {
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
     const songPathString = playListArr[i][0];
@@ -67,7 +67,8 @@ export const findTitleOfCurrentSong = (song: Howl): string | null => {
   return null;
 };
 
-const findHowlFileFromTitle = (title: string): Howl | null => {
+export const findHowlFileFromTitle = (title: string): Howl | null => {
+  console.log('title is ', title);
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
     const songPathString = playListArr[i][0];
@@ -77,17 +78,6 @@ const findHowlFileFromTitle = (title: string): Howl | null => {
   }
   return null;
 };
-
-let currentSongTypeHowl: Howl;
-// const currentSongTypeHowl = playListArr[0][1];
-// const currentSongTypeRedux = findTitleOfCurrentSong(currentSongTypeHowl);
-// store.dispatch(setCurrentSong(currentSongTypeRedux));
-// const getCurrentHowlFile = (): Howl | null => {
-//   const songTitle = store.getState().music.currentSong;
-//   const howlFile = findHowlFileFromTitle(songTitle);
-//   if (howlFile) return howlFile;
-//   return null;
-// };
 
 export const playSong = (song: Howl): void => {
   song.play();
@@ -155,15 +145,17 @@ export const handleSongSkip = (direction: number): void => {
   if (howlFile) {
     howlFile.stop();
     const newSong = playListArr[newIndex][1];
-    const newSongTitle = findTitleOfCurrentSong(newSong);
-    store.dispatch(setCurrentSong(newSongTitle));
-    newSong.play();
+    const newSongTitle = findSongTitleFromHowlFile(newSong);
+    if (newSongTitle) {
+      store.dispatch(setCurrentSong(newSongTitle));
+      newSong.play();
+    }
   }
 };
 
 export const musicController = {
   findHowlFileFromTitle,
-  findTitleOfCurrentSong,
+  findSongTitleFromHowlFile,
   playSong,
   stopSong,
   handleStop,

@@ -8,7 +8,7 @@ import {
   setGameOver,
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
-import { gameStatsMusic } from '../../audioControllers/gameStatsMusic';
+// import { gameStatsMusic } from '../../audioControllers/gameStatsMusic';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
@@ -35,7 +35,7 @@ const GameStats: FC = () => {
   const handleExit = (): void => {
     resetGamePlay();
     btnPressOne.play();
-    gameStatsMusic.stop();
+    // gameStatsMusic.stop();
     setTimeout(() => {
       history.push('/');
     }, 300);
@@ -43,13 +43,13 @@ const GameStats: FC = () => {
   const handlePlayAgain = (): void => {
     resetGamePlay();
     bleepFiveConfirmation.play();
-    gameStatsMusic.stop();
+    // gameStatsMusic.stop();
     // TODO divide Game start page then push user to choose speed
     history.push('/');
   };
 
   useEffect(() => {
-    gameStatsMusic.play();
+    // gameStatsMusic.play();
   }, []);
   return (
     <div>
