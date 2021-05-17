@@ -3,21 +3,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
+import { generateRandomPos } from '../../helpers/sprite.helper';
 
 const initialState: Character = {
   curPos: [1, 4],
   movePos: [1, 4],
-  dimensions: [40, 40],
-  pixelLocation: [40, 160],
-  direction: 'idle',
-  isMoving: false,
   leftFired: false,
   rightFired: false,
   upFired: false,
   downFired: false,
   moveIntId: null,
   moveDir: null,
-  delay: 200,
+  lastInput: Date.now(),
 };
 
 export const selectCharacter = (state: RootState): Character => state.character;
@@ -37,11 +34,8 @@ export const selectCurPos = (state: RootState): number[] =>
   state.character.curPos;
 export const selectMovePos = (state: RootState): number[] =>
   state.character.movePos;
-export const selectPixelLocation = (state: RootState): number[] =>
-  state.character.pixelLocation;
-export const selectDelay = (state: RootState): number => state.character.delay;
-
-const { tileSize } = game;
+export const selectLastInput = (state: RootState): number =>
+  state.character.lastInput;
 
 const characterSlice = createSlice({
   name: 'character',
@@ -66,38 +60,33 @@ const characterSlice = createSlice({
     setMoveDir(state, action: PayloadAction<string | null>) {
       if (action.payload === 's') {
         state.moveDir = action.payload;
-        state.direction = 'walkingDown';
       }
       if (action.payload === 'w') {
         state.moveDir = action.payload;
-        state.direction = 'walkingUp';
       }
       if (action.payload === 'a') {
         state.moveDir = action.payload;
-        state.direction = 'walkingLeft';
       }
       if (action.payload === 'd') {
         state.moveDir = action.payload;
-        state.direction = 'walkingRight';
       }
     },
     changeMovePos(state) {
       if (state.moveDir === 's') {
         state.curPos[1] += 1;
-        state.pixelLocation[1] = tileSize * state.curPos[1];
       }
       if (state.moveDir === 'w') {
         state.curPos[1] -= 1;
-        state.pixelLocation[1] = tileSize * state.curPos[1];
       }
       if (state.moveDir === 'a') {
         state.curPos[0] -= 1;
-        state.pixelLocation[0] = tileSize * state.curPos[0];
       }
       if (state.moveDir === 'd') {
         state.curPos[0] += 1;
-        state.pixelLocation[0] = tileSize * state.curPos[0];
       }
+    },
+    updateLastInput(state) {
+      state.lastInput = Date.now();
     },
   },
 });
@@ -111,6 +100,7 @@ export const {
   setMoveIntId,
   setMoveDir,
   changeMovePos,
+  updateLastInput,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

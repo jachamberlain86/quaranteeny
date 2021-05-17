@@ -21,6 +21,7 @@ import {
   selectSleepDep,
   selectSick,
 } from '../features/game/gameSlice';
+import { selectLastInput } from '../features/character/characterSlice';
 import { addModifier, removeModifier } from '../features/meters/metersSlice';
 import { MeterModifier } from '../interfaces/meterModifier.interface';
 import {
@@ -33,7 +34,7 @@ import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
-import { checkIndex, checkCanMove } from './input.helper';
+import { checkCanMove } from './input.helper';
 
 // Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
@@ -87,7 +88,7 @@ export const handleInteraction = (entity: string): void => {
 
 export const resumeInProgressInteraction = (): void => {
   const currentInteraction = selectCurrentInteraction(store.getState());
-  if (currentInteraction) {
+  if (currentInteraction && currentInteraction !== 'idle') {
     const entityData: Entity = getEntityData(currentInteraction);
     triggerIncrementalChange(entityData, currentInteraction);
   }
@@ -162,11 +163,17 @@ export function updateInteractionProgress(
 }
 
 export function generateRandomPos(): number[] {
-  const validPos = false;
+  let validPos = false;
   const newPos = [0, 0];
   do {
     newPos[0] = Math.floor(Math.random() * 21);
     newPos[1] = Math.floor(Math.random() * 21);
+    validPos = checkCanMove(newPos);
   } while (validPos === false);
   return newPos;
+}
+
+export function startSpriteDecisions(): void {
+  const lastInput = selectLastInput(store.getState());
+  const currentInteraction = selectCurrentInteraction(store.getState());
 }

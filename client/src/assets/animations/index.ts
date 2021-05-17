@@ -7,6 +7,7 @@ import { sleeping } from './sleeping';
 import { watching } from './watching';
 import { chatting } from './chatting';
 import { eating } from './eating';
+import { exercising } from './exercising';
 import { working } from './working';
 import { sitting } from './sitting';
 import { idlingD, idlingL, idlingR, idlingU } from './idling';
@@ -48,6 +49,10 @@ const animations: AnimationRef[] = [
   {
     name: 'eating',
     frames: eating,
+  },
+  {
+    name: 'exercising',
+    frames: exercising,
   },
   {
     name: 'working',

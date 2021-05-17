@@ -10,7 +10,7 @@ export interface SpriteState {
 }
 
 const initialState: SpriteState = {
-  currentInteraction: null,
+  currentInteraction: 'idle',
   interactionProgress: null,
   interactionChangesRemaining: 0,
   conditions: [],

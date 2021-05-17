@@ -2,97 +2,148 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Rect, Sprite, Group, Layer } from 'react-konva';
 import { useAppSelector } from '../../app/hooks';
 import { selectCharacter } from '../../features/character/characterSlice';
+import { selectCurrentInteraction } from '../../features/sprite/spriteSlice';
 import { imageDirectory, ImageDirectory } from '../../assets/images/index';
+import { spriteAnimations } from '../../data/animationCycles.data';
 import game from '../../data/gameMap.data';
-import spriteAnimations from '../../assets/animations/atlas/quarantiny-animation-atlas.png';
+import animationFrames from '../../assets/animations/atlas/quarantiny-animation-atlas.png';
 import { animationDirectory } from '../../assets/animations/index';
 
 const Player = (): JSX.Element => {
-  const [imgOptions, setImgOptions] = useState<any | null>({ image: null });
+  const [imgOptions, setImgOptions] = useState<any | null>({ img: null });
+
   const character = useAppSelector(selectCharacter);
-  const spriteRef = useRef<any | null>(null);
+  const currentInteraction = useAppSelector(selectCurrentInteraction);
   const { tileSize } = game;
-  const [
-    spriteAnimationDirection,
-    setSpriteAnimationDirection,
-  ] = useState<string>('walkingUp');
+  const scale = tileSize / 32;
 
-  const { walkingD, walkingU, walkingL, walkingR } = animationDirectory;
+  const spriteRef = useRef<any | null>(null);
+  const [direction, setDirection] = useState<string | null>(null);
 
-  const animations = {
-    idle: [
-      walkingD[0].x,
-      walkingD[0].y,
-      walkingD[0].pixWidth,
-      walkingD[0].pixHeight,
-      walkingD[1].x,
-      walkingD[1].y,
-      walkingD[1].pixWidth,
-      walkingD[1].pixHeight,
-    ],
-    walkingDown: [
-      walkingD[0].x,
-      walkingD[0].y,
-      walkingD[0].pixWidth,
-      walkingD[0].pixHeight,
-      walkingD[1].x,
-      walkingD[1].y,
-      walkingD[1].pixWidth,
-      walkingD[1].pixHeight,
-    ],
-    walkingUp: [
-      walkingU[0].x,
-      walkingU[0].y,
-      walkingU[0].pixWidth,
-      walkingU[0].pixHeight,
-      walkingU[1].x,
-      walkingU[1].y,
-      walkingU[1].pixWidth,
-      walkingU[1].pixHeight,
-    ],
-    walkingLeft: [
-      walkingL[0].x,
-      walkingL[0].y,
-      walkingL[0].pixWidth,
-      walkingL[0].pixHeight,
-      walkingL[1].x,
-      walkingL[1].y,
-      walkingL[1].pixWidth,
-      walkingL[1].pixHeight,
-    ],
-    walkingRight: [
-      walkingR[0].x,
-      walkingR[0].y,
-      walkingR[0].pixWidth,
-      walkingR[0].pixHeight,
-      walkingR[1].x,
-      walkingR[1].y,
-      walkingR[1].pixWidth,
-      walkingR[1].pixHeight,
-    ],
-  };
+  const [interaction, setInteraction] = useState<string | null>(null);
+
+  const [currentAnimation, setCurrentAnimation] = useState<string>('idling');
 
   useEffect(() => {
-    setSpriteAnimationDirection(character.direction);
-  }, [character.direction]);
+    setDirection(character.moveDir);
+  }, [character.moveDir]);
+
   useEffect(() => {
-    const image = new window.Image();
-    image.src = spriteAnimations;
-    image.onload = () => {
-      // set image only when it is loaded
+    setInteraction(currentInteraction);
+  }, [currentInteraction]);
+
+  useEffect(() => {
+    const ref = spriteRef.current;
+    if (interaction === 'bath') {
+      ref.to({
+        x: tileSize * 17,
+        y: tileSize * 2,
+        duration: 0,
+      });
+      setCurrentAnimation('bubbles');
+      spriteRef.current.start();
+    } else if (interaction === 'phone') {
+      ref.to({
+        x: tileSize * 17,
+        y: tileSize * 14,
+        duration: 0,
+      });
+      setCurrentAnimation('chatting');
+      spriteRef.current.start();
+    } else if (interaction === 'oven') {
+      ref.to({
+        x: tileSize * 17,
+        y: tileSize * 11,
+        duration: 0,
+      });
+      setCurrentAnimation('eating');
+      spriteRef.current.start();
+    } else if (interaction === 'fridge') {
+      ref.to({
+        x: tileSize * 18,
+        y: tileSize * 11,
+        duration: 0,
+      });
+      setCurrentAnimation('eating');
+      spriteRef.current.start();
+    } else if (interaction === 'exercise') {
+      ref.to({
+        x: tileSize * 11,
+        y: tileSize * 17,
+        duration: 0,
+      });
+      setCurrentAnimation('exercising');
+      spriteRef.current.start();
+    } else if (interaction === 'table') {
+      ref.to({
+        x: tileSize * 13,
+        y: tileSize * 13,
+        duration: 0,
+      });
+      setCurrentAnimation('sitting');
+      spriteRef.current.start();
+    } else if (interaction === 'bed') {
+      ref.to({
+        x: tileSize * 2,
+        y: tileSize * 3,
+        duration: 0,
+      });
+      setCurrentAnimation('sleeping');
+      spriteRef.current.start();
+    } else if (interaction === 'sofa') {
+      ref.to({
+        x: tileSize * 4,
+        y: tileSize * 14,
+        duration: 0,
+      });
+      setCurrentAnimation('watching');
+      spriteRef.current.start();
+    } else if (interaction === 'desk') {
+      ref.to({
+        x: tileSize * 9,
+        y: tileSize * 11,
+        duration: 0,
+      });
+      setCurrentAnimation('working');
+      spriteRef.current.start();
+    } else if (interaction === 'idle') setCurrentAnimation('idling');
+    else if (interaction === 'walking' && direction === 'a')
+      setCurrentAnimation('walkingL');
+    else if (interaction === 'walking' && direction === 'd')
+      setCurrentAnimation('walkingR');
+    else if (interaction === 'walking' && direction === 'w')
+      setCurrentAnimation('walkingU');
+    else if (interaction === 'walking' && direction === 's')
+      setCurrentAnimation('walkingD');
+    else if (interaction !== null && direction === 'a')
+      setCurrentAnimation('interactingL');
+    else if (interaction !== null && direction === 'd')
+      setCurrentAnimation('interactingR');
+    else if (interaction !== null && direction === 's')
+      setCurrentAnimation('interactingD');
+    else if (interaction !== null && direction === 'w')
+      setCurrentAnimation('interactingU');
+  }, [direction, interaction]);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = animationFrames;
+    img.onload = () => {
       setImgOptions({
-        image,
+        img,
       });
     };
+  }, []);
+
+  useEffect(() => {
     const ref = spriteRef.current;
     ref.to({
-      x: character.pixelLocation[0],
-      y: character.pixelLocation[1] - tileSize / 2,
-      duration: character.delay / 1000,
+      x: character.curPos[0] * tileSize,
+      y: (character.curPos[1] - 1) * tileSize,
+      duration: 0.16,
     });
     spriteRef.current.start();
-    console.log(character);
-  }, [character.pixelLocation]);
+  }, [character.curPos]);
 
   return (
     <Layer>
@@ -101,23 +152,16 @@ const Player = (): JSX.Element => {
           ref={spriteRef}
           frameRate={7}
           frameIndex={0}
-          animation={spriteAnimationDirection}
-          animations={animations}
-          image={imgOptions.image}
-          height={character.dimensions[0] * 2}
-          width={character.dimensions[1]}
+          animation={currentAnimation}
+          animations={spriteAnimations}
+          image={imgOptions.img}
+          height={tileSize * 2}
+          width={tileSize}
+          scale={{ x: scale, y: scale }}
         />
-        {/* <Rect
-        ref={spriteRef}
-        fill="red"
-        height={character.dimensions[0] * 2}
-        width={character.dimensions[1]}
-        offset={{ x: 0, y: tileSize }}
-      /> */}
       </Group>
     </Layer>
   );
-  // image={img}
 };
 
 export default Player;

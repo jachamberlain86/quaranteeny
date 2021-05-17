@@ -15,8 +15,9 @@ import {
   selectMoveDir,
   selectCurPos,
   changeMovePos,
-  selectDelay,
+  updateLastInput,
 } from '../features/character/characterSlice';
+import { changeInteraction } from '../features/sprite/spriteSlice';
 import {
   cuteWalkOne,
   shuffleWalkOne,
@@ -51,7 +52,7 @@ export function checkCanMove(newPos: number[]): boolean {
 }
 
 function handleMove(key: string): void {
-  const timerDel = selectDelay(store.getState());
+  store.dispatch(changeInteraction('walking'));
   const timer = window.setInterval(() => {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
@@ -62,7 +63,7 @@ function handleMove(key: string): void {
         collisionArray[Math.floor(Math.random() * collisionArray.length)];
       howlCollisionsObj[randomCollisionSound].play();
     }
-  }, timerDel);
+  }, 200);
   store.dispatch(setMoveIntId(timer));
 }
 
@@ -70,6 +71,7 @@ function handleStop(): void {
   const timer = selectMoveIntId(store.getState());
   if (timer) {
     window.clearInterval(timer);
+    store.dispatch(changeInteraction('idle'));
     store.dispatch(setMoveIntId(null));
     store.dispatch(setMoveDir(null));
   }
@@ -137,6 +139,7 @@ export function upHandler(event: KeyboardEvent): void {
   const rightFired = selectRightFired(store.getState());
   const upFired = selectUpFired(store.getState());
   const downFired = selectDownFired(store.getState());
+  store.dispatch(updateLastInput);
 
   if (event.key === 'a') {
     if (leftFired) {

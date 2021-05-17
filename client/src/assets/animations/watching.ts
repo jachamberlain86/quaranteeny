@@ -53,7 +53,7 @@ export const watching: AtlasRefDetails[] = [
   {
     key: 'watch8',
     x: 14,
-    y: 2,
+    y: 0,
     width: 2,
     height: 3,
   },

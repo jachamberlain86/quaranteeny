@@ -135,6 +135,7 @@ export function triggerIncrementalChange(
     (entityData.hoursToComplete * gameHour) / (gameMinute * updateInterval)
   );
   // This is to check if the interaction is already in progress
+  // TODO causes issues if cancelling a meter
   const interactionChangesRemainingInitial = selectInteractionChangesRemaining(
     store.getState()
   );
@@ -158,6 +159,7 @@ export function triggerIncrementalChange(
       if (currentInteraction !== entity) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
+        updateInteractionProgress(0, 0);
         pausedMeters.forEach((meter) => pauseDecayOff(meter));
       } else if (interactionChangesRemaining <= 0) {
         clearInterval(timer);
