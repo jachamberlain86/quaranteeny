@@ -28,9 +28,9 @@ const Room = (): JSX.Element => {
           <Provider store={store}>
             <Layer>{layer0}</Layer>
             <Furniture />
-            <Layer>
-              <Player />
-            </Layer>
+            {/* <Layer> */}
+            <Player />
+            {/* </Layer> */}
             <Layer>{layer2}</Layer>
           </Provider>
         </Stage>
