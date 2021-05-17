@@ -15,8 +15,6 @@ import {
   finishedCatchingUpToPresent,
   resetGameState,
   setTimeLasted,
-  selectClockTimeInGame,
-  selectTimeLasted,
 } from '../features/game/gameSlice';
 import { second, minute } from '../data/time.data';
 import game from '../data/gameMap.data';
@@ -39,7 +37,6 @@ export const startClock = (): void => {
   // since game is in progress.
   if (startTime === 0) {
     store.dispatch(setStartTime(Date.now()));
-    store.dispatch(setTimeLasted(0));
   } else {
     store.dispatch(userReturnedAfterGap());
   }

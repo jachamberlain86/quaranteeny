@@ -16,7 +16,6 @@ import {
   checkConditionsState,
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
-import { setTimeLasted } from '../../features/game/gameSlice';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';

@@ -16,8 +16,8 @@ import { untidy } from './untidy';
 const blank = [
   {
     key: 'blank',
-    x: 18,
-    y: 8,
+    x: 8,
+    y: 10,
     width: 1,
     height: 1,
   },
@@ -45,8 +45,10 @@ export class ImageDirectory {
       const newImage = {
         x: calcPixelPos(image.x),
         y: calcPixelPos(image.y),
-        width: calcPixelSize(image.width),
-        height: calcPixelSize(image.height),
+        width: image.width,
+        height: image.height,
+        pixWidth: calcPixelSize(image.width),
+        pixHeight: calcPixelSize(image.height),
       };
       this[image.key] = newImage;
     });

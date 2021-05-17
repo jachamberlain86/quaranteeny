@@ -102,7 +102,7 @@ const GameStart = (): JSX.Element => {
     } else if (id === 'oneMinIsOneHour') {
       dispatch(changeGameSpeed(60));
     } else if (id === 'oneMinIsOneDay') {
-      dispatch(changeGameSpeed(1440));
+      dispatch(changeGameSpeed(1000));
     }
     currentChooseSpeedDivRef.classList.add('slideOutLeft');
     btnPressOne.play();
@@ -314,7 +314,7 @@ const GameStart = (): JSX.Element => {
         </div>
       );
     }
-    if (gameSpeed === 1440) {
+    if (gameSpeed === 1000) {
       return (
         <div>
           <h4>Hard Mode:</h4>
