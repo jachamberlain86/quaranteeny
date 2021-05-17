@@ -8,7 +8,6 @@ import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
 import { selectUserStatus } from '../../features/user/userSlice';
-import { selectIsInFastForwardMode } from '../../features/game/gameSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
 
 import {
@@ -16,7 +15,10 @@ import {
   checkConditionsState,
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
-import { setTimeLasted } from '../../features/game/gameSlice';
+import {
+  setTimeLasted,
+  selectIsInFastForwardMode,
+} from '../../features/game/gameSlice';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
