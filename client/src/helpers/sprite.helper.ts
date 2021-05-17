@@ -29,6 +29,7 @@ import { Entity } from '../interfaces/entity.interface';
 import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
+import { checkIndex, checkCanMove } from './input.helper';
 
 // Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
@@ -89,9 +90,9 @@ export const checkConditionsState = (): void => {
     if (gameOver) clearInterval(timer);
     else {
       const currentConditions = selectConditions(store.getState());
-      if (currentConditions.includes('exhausted'))
+      if (currentConditions.includes('exhausted')) {
         store.dispatch(increaseSleepDep());
-      else store.dispatch(decreaseSleepDep());
+      } else store.dispatch(decreaseSleepDep());
       if (currentConditions.includes('hungry'))
         store.dispatch(increaseStarvation());
       else store.dispatch(decreaseStarvation());
@@ -120,10 +121,10 @@ export const checkLoseStates = (): void => {
       triggerRemoveConditions(['starved']);
     }
     if (sleepDep > day * 3) {
-      triggerAddConditions(['strange']);
+      triggerAddConditions(['delirious']);
     }
     if (sleepDep < day * 3) {
-      triggerRemoveConditions(['strange']);
+      triggerRemoveConditions(['delirious']);
     }
     if (sick > day * 4) {
       triggerAddConditions(['feverish']);
@@ -146,4 +147,14 @@ export function updateInteractionProgress(
   }
   store.dispatch(setInteractionProgress(percentageComplete));
   console.log('percentageComplete', percentageComplete);
+}
+
+export function generateRandomPos(): number[] {
+  const validPos = false;
+  const newPos = [0, 0];
+  do {
+    newPos[0] = Math.floor(Math.random() * 21);
+    newPos[1] = Math.floor(Math.random() * 21);
+  } while (validPos === false);
+  return newPos;
 }

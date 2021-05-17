@@ -96,7 +96,7 @@ const entitiesData: EntityDetails[] = [
     cost: 5,
     hoursToComplete: 1,
     meterImpacts: [
-      { name: 'hunger', amount: hour * 12 },
+      { name: 'hunger', amount: hour * 10 },
       { name: 'mind', amount: hour * 4 },
       { name: 'comfort', amount: hour * 1 },
     ],
@@ -107,7 +107,7 @@ const entitiesData: EntityDetails[] = [
     cost: 5,
     hoursToComplete: 0.25,
     meterImpacts: [
-      { name: 'hunger', amount: hour * 6 },
+      { name: 'hunger', amount: hour * 5 },
       {
         name: 'energy',
         amount: hour * 2,

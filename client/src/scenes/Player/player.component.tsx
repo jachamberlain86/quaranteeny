@@ -18,7 +18,6 @@ const Player = (): JSX.Element => {
       duration: character.delay / 1000,
       fill: character.direction,
     });
-    console.log(character);
   }, [character.pixelLocation]);
 
   const tileKey = imageDirectory.ofdon;

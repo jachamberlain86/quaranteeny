@@ -8,18 +8,21 @@ const ProgressBar = (): JSX.Element => {
   );
 
   const displayProgressBar = (): JSX.Element => (
-    <progress
-      className="nes-progress is-success"
-      value={interactionProgress || 0.1}
-      max={100}
-    />
-  );
-
-  return (
-    <div className="interaction-progress">
-      {interactionProgress ? displayProgressBar() : null}
+    <div>
+      <div className="meter-container meter-text">
+        Progress: {interactionProgress}%
+      </div>
+      <div className="meter-container">
+        <progress
+          className="nes-progress is-success"
+          value={interactionProgress || 0.1}
+          max={100}
+        />
+      </div>
     </div>
   );
+
+  return <div>{interactionProgress ? displayProgressBar() : null}</div>;
 };
 
 export default ProgressBar;

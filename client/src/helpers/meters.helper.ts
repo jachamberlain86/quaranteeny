@@ -3,7 +3,8 @@ import {
   changeValueScaled,
   changeValueFixed,
   selectMeterValue,
-  togglePauseDecay,
+  pauseDecayOn,
+  pauseDecayOff,
   selectPauseDecay,
 } from '../features/meters/metersSlice';
 import {
@@ -13,6 +14,7 @@ import {
   selectClockTimeInGame,
   setTimeLasted,
   selectTimeLasted,
+  selectSleepDep,
 } from '../features/game/gameSlice';
 import { selectCurrentInteraction } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
@@ -28,10 +30,6 @@ import { Entity } from '../interfaces/entity.interface';
 
 function checkPauseDecayState(meter: string): boolean {
   return selectPauseDecay(store.getState(), meter);
-}
-
-function triggerPauseDecayToggle(meter: string): void {
-  store.dispatch(togglePauseDecay(meter));
 }
 
 function deductRent(): void {
@@ -139,17 +137,16 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
     });
     if (gameOver) {
       clearInterval(timer);
-      pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
     } else {
       const currentInteraction = selectCurrentInteraction(store.getState());
       if (currentInteraction !== entity) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
-        pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
+        pausedMeters.forEach((meter) => pauseDecayOff(meter));
       } else if (iterationCount <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
-        pausedMeters.forEach((meter) => triggerPauseDecayToggle(meter));
+        pausedMeters.forEach((meter) => pauseDecayOff(meter));
         setCurrentInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
@@ -157,7 +154,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
 
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           if (!pausedMeters.includes(meterImpact.name))
-            triggerPauseDecayToggle(meterImpact.name);
+            pauseDecayOn(meterImpact.name);
           const incrementalValue = Math.ceil(meterImpact.amount / iterations);
           store.dispatch(
             changeValueScaled({
