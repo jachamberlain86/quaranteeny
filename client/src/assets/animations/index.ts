@@ -1,6 +1,7 @@
 import { calcPixelPos, calcPixelSize } from '../../helpers/atlas.helper';
 import { AtlasRef } from '../../interfaces/atlasRef.interface';
-import { AnimationRef } from '../../interfaces/animationRef.interfact';
+import { AnimationRef } from '../../interfaces/animationRef.interface';
+import { AniFrame } from '../../interfaces/aniFrame.interface';
 
 import { sleeping } from './sleeping';
 import { watching } from './watching';
@@ -127,11 +128,11 @@ const animations: AnimationRef[] = [
 ];
 
 export class AnimationDirectory {
-  [key: string]: AtlasRef[];
+  [key: string]: AniFrame[];
 
   constructor(animationsArr: AnimationRef[]) {
     animationsArr.forEach((animation: AnimationRef) => {
-      const framesArr: AtlasRef[] = [];
+      const framesArr: AniFrame[] = [];
       animation.frames.forEach((frame) => {
         const newFrame = {
           x: calcPixelPos(frame.x),
