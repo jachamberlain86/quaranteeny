@@ -145,5 +145,5 @@ export function updateInteractionProgress(
     percentageComplete = 100 - calcPercentage(current, total);
   }
   store.dispatch(setInteractionProgress(percentageComplete));
-  console.log(percentageComplete);
+  console.log('percentageComplete', percentageComplete);
 }

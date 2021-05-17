@@ -128,6 +128,7 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
   const iterations = Math.ceil(
     (entityData.hoursToComplete * gameHour) / (gameMinute * updateInterval)
   );
+  console.log('iterations', iterations);
   let iterationCount = iterations;
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
@@ -164,9 +165,9 @@ function triggerIncrementalChange(entityData: Entity, entity: string): void {
               amount: incrementalValue,
             })
           );
-          iterationCount -= 1;
-          console.log(iterationCount);
         });
+        iterationCount -= 1;
+        console.log('iterationCount', iterationCount);
       }
     }
   }, gameMinute * updateInterval);
