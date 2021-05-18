@@ -103,6 +103,13 @@ const entitiesData: EntityDetails[] = [
     conditions: ['cooking'],
   },
   {
+    name: 'lamp',
+    cost: 0,
+    hoursToComplete: 0,
+    meterImpacts: [],
+    conditions: [],
+  },
+  {
     name: 'fridge',
     cost: 5,
     hoursToComplete: 0.25,
