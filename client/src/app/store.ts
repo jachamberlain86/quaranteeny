@@ -5,6 +5,7 @@ import gameReducer from '../features/game/gameSlice';
 import spriteReducer from '../features/sprite/spriteSlice';
 import userReducer from '../features/user/userSlice';
 import characterReducer from '../features/character/characterSlice';
+import musicReducer from '../features/music/musicSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     meters: metersReducer,
     user: userReducer,
     character: characterReducer,
+    music: musicReducer,
   },
 });
 

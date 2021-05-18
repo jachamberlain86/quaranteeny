@@ -5,11 +5,17 @@ import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
 import { handleClickTile } from '../../helpers/game.helper';
 import staticImages from '../../assets/tiles/atlas/quarantiny-tile-atlas.png';
+import {
+  setIsRoomLoadingToFalse,
+  setIsRoomLoadingToTrue,
+} from '../../features/game/gameSlice';
 import { imageDirectory, ImageDirectory } from '../../assets/tiles/index';
 
 import './Room.styles.css';
+import { useAppDispatch } from '../../app/hooks';
 
 const Room = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const { cols, tileSize, layers } = game;
   const canvasWidth = cols * tileSize;
   const canvasHeight = cols * tileSize;
@@ -21,6 +27,9 @@ const Room = (): JSX.Element => {
   const [imageAtlas, setImageAtlas] = useState<HTMLImageElement>();
 
   useEffect(() => {
+    // setLayer0(renderLayer(0));
+    // setLayer2(renderLayer(2));
+    dispatch(setIsRoomLoadingToTrue());
     const img = new window.Image();
     setImageAtlas(img);
 
@@ -77,6 +86,7 @@ const Room = (): JSX.Element => {
         if (layer === 1) setFurnitureLayer(layerArr);
         if (layer === 2) setTopLayer(layerArr);
       }
+      dispatch(setIsRoomLoadingToFalse());
     };
     img.src = staticImages;
   }, []);

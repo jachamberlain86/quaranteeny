@@ -1,4 +1,4 @@
-.FastForward__container {
+.Loading__container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -8,25 +8,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.99);
   box-shadow: 0 0 20px 5px black;
 }
 
-.FastForward__box {
+.Loading__box {
   background-color: #fff;
 }
 
-.FastForward__dotOne {
+.Loading__dotOne {
   animation: dot 1s infinite;
   animation-fill-mode: both;
   animation-delay: 0;
 }
-.FastForward__dotTwo {
+.Loading__dotTwo {
   animation: dot 1s infinite;
   animation-fill-mode: both;
   animation-delay: 0.33s;
 }
-.FastForward__dotThree {
+.Loading__dotThree {
   animation: dot 1s infinite;
   animation-fill-mode: both;
   animation-delay: 0.66s;

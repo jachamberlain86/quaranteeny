@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import './Game.styles.css';
 import Room from '../../scenes/Room/Room.scene';
@@ -7,9 +7,11 @@ import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
+import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
-
+import { store } from '../../app/store';
+import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   checkLoseStates,
   checkConditionsState,
@@ -17,17 +19,13 @@ import {
 } from '../../helpers/sprite.helper';
 import { startClock } from '../../helpers/game.helper';
 import {
-  setTimeLasted,
   selectIsInFastForwardMode,
+  selectIsRoomLoading,
 } from '../../features/game/gameSlice';
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
 import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
-import {
-  musicEightiesSlowFunk,
-  musicChillSong,
-} from '../../audioControllers/soundTracks';
 import {
   gameOverOne,
   gameOverTwo,
@@ -35,12 +33,17 @@ import {
   gameOverFour,
 } from '../../audioControllers/gameOverSounds';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
+import SoundBar from '../SoundBar/SoundBar.components';
+import musicContext from '../../contexts/music.context';
+import { musicController } from '../../audioControllers/musicController';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const userLoadingStatus = useAppSelector(selectUserStatus);
+  const isRoomLoading = useAppSelector(selectIsRoomLoading);
   const isInFastForwardMode = useAppSelector(selectIsInFastForwardMode);
   const { gameOver } = useAppSelector((state) => state.game);
+  const { currentSong } = useAppSelector((state) => state.music);
   const gameScreen = useRef<HTMLDivElement | null>(null);
   const currentGameScreen = gameScreen.current as HTMLDivElement;
 
@@ -71,11 +74,21 @@ const Game = (): JSX.Element => {
   }, [gameOver]);
 
   useEffect(() => {
-    musicChillSong.play();
+    const howlSongFile = musicController?.findHowlFileFromTitle('Hero');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
   }, []);
   useEffect(() => {
     if (gameOver) {
-      musicChillSong.stop();
+      const howlSongFile = musicController.findHowlFileFromTitle(currentSong);
+      if (howlSongFile) musicController.stopSong(howlSongFile);
       gameOverTwo.play();
       setTimeout(() => {
         gameOverMusic.play();
@@ -83,20 +96,26 @@ const Game = (): JSX.Element => {
     }
   }, [gameOver]);
 
+  const roomLoading = isRoomLoading ? <Loading /> : '';
   const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
 
   return (
-    <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
-      {gameOver && <GameOver />}
-      {fastForwardIndicator}
-      <div>
-        <DayCounter />
-        <Mood />
-        <GameOverBtn />
-        <MuteSoundBtn />
+    <div>
+      <SoundBar />
+      {/* {soundBarCTX && soundBarCTX.SoundBar} */}
+      <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+        {gameOver && <GameOver />}
+        {fastForwardIndicator}
+        {roomLoading}
+        <div>
+          <DayCounter />
+          <Mood />
+          <GameOverBtn />
+          <MuteSoundBtn />
+        </div>
+        <Room />
+        <MeterArea />
       </div>
-      <Room />
-      <MeterArea />
     </div>
   );
 };

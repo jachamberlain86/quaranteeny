@@ -48,7 +48,7 @@ export const collisionArray: string[] = [collision1, collision2];
 collisionArray.forEach((sound) => {
   howlCollisionsObj[sound] = new Howl({
     src: [sound],
-    volume: 0.2,
+    volume: 0.4,
     loop: false,
     rate: 1.3,
   });

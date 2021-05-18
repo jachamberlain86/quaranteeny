@@ -5,6 +5,7 @@ import { GameTime } from '../../interfaces/gameTime.interface';
 import { second, minute, hour, day } from '../../data/time.data';
 
 export interface GameState {
+  isRoomLoading: boolean;
   gameSpeed: number;
   startTime: number;
   currClockTimeReal: number;
@@ -19,6 +20,7 @@ export interface GameState {
 }
 
 const initialState: GameState = {
+  isRoomLoading: false,
   gameSpeed: 1,
   startTime: 0,
   currClockTimeReal: 0,
@@ -46,6 +48,12 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    setIsRoomLoadingToTrue: (state) => {
+      state.isRoomLoading = true;
+    },
+    setIsRoomLoadingToFalse: (state) => {
+      state.isRoomLoading = false;
+    },
     resetGameState: () => initialState,
     changeGameSpeed: (state, action: PayloadAction<number>) => {
       state.gameSpeed = action.payload;
@@ -149,6 +157,8 @@ export const gameSlice = createSlice({
 });
 
 export const {
+  setIsRoomLoadingToTrue,
+  setIsRoomLoadingToFalse,
   resetGameState,
   changeGameSpeed,
   setStartTime,
@@ -167,6 +177,9 @@ export const {
   decreaseSleepDep,
   decreaseSick,
 } = gameSlice.actions;
+
+export const selectIsRoomLoading = (state: RootState): boolean =>
+  state.game.isRoomLoading;
 
 export const selectGameSpeed = (state: RootState): number =>
   state.game.gameSpeed;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Howler } from 'howler';
 import './GameStart.styles.css';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +10,7 @@ import {
 } from '../../features/game/gameSlice';
 import { resetGamePlay } from '../../helpers/game.helper';
 import spriteGif from '../../assets/oldImages/TinyJamesWalk.gif';
-import { musicCuriousIntense } from '../../audioControllers/soundTracks';
+// import { musicCuriousIntense } from '../../audioControllers/soundTracks';
 import {
   btnPressOne,
   btnPressTwo,
@@ -22,6 +22,10 @@ import {
   bleepSevenHover,
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
+import SoundBar from '../../components/SoundBar/SoundBar.components';
+import musicContext from '../../contexts/music.context';
+import { store } from '../../app/store';
+import { setCurrentSong } from '../../features/music/musicSlice';
 
 interface initialState {
   name: string;
@@ -50,12 +54,19 @@ const GameStart = (): JSX.Element => {
   );
   const chooseSpeedDivRef = useRef<HTMLDivElement | null>(null);
   const gameInfoDivRef = useRef<HTMLDivElement | null>(null);
-
-  // TODO create an audio player...not essential
+  const musicController = useContext(musicContext);
   useEffect(() => {
-    musicCuriousIntense.play();
+    const howlSongFile = musicController?.findHowlFileFromTitle('Connected');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
   }, []);
-
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
     setNameInput(input.toUpperCase());
@@ -119,8 +130,6 @@ const GameStart = (): JSX.Element => {
     bleepFiveConfirmation.play();
     whooshOne.play();
     setTimeout(() => {
-      // currentGameInfoDivRef.classList.add('displayOff');
-      musicCuriousIntense.stop();
       dispatch(setIsCurrentGameActive());
       history.push('/start');
     }, animationSpeed);
@@ -132,14 +141,11 @@ const GameStart = (): JSX.Element => {
     whooshOne.play();
     resetGamePlay();
     setAnimate({ name: 'showChooseGameSpeed' });
-    // console.log('clicked');
-    // history.push('/start');
   };
 
   const handleContinueGame = (): void => {
     btnPressTwo.play();
     whooshOne.play();
-    musicCuriousIntense.stop();
     history.push('/start');
   };
 
@@ -364,6 +370,7 @@ const GameStart = (): JSX.Element => {
 
   return (
     <div className="game-start-page">
+      <SoundBar />
       <div className="start-page-container">
         <MuteSoundBtn />
         <div className="title-row">
