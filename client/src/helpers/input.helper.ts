@@ -17,7 +17,11 @@ import {
   changeMovePos,
   updateLastInput,
 } from '../features/character/characterSlice';
-import { changeInteraction } from '../features/sprite/spriteSlice';
+import {
+  changeInteraction,
+  updateObjectsNearBy,
+} from '../features/sprite/spriteSlice';
+import { handleInteraction } from './sprite.helper';
 import {
   cuteWalkOne,
   shuffleWalkOne,
@@ -27,6 +31,7 @@ import {
   howlCollisionsObj,
   collisionArray,
 } from '../audioControllers/playerSounds';
+import { playObjectSound } from '../audioControllers/houseObjectsSounds';
 import game from '../data/gameMap.data';
 
 function calcNewPos(key: string): number[] {
@@ -47,6 +52,9 @@ export function checkIndex(x: number, y: number): number {
 export function checkCanMove(newPos: number[]): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos[0], newPos[1]);
+  const nearByObjects = layers[1][mapIndex].intPos;
+  store.dispatch(updateObjectsNearBy(nearByObjects));
+  console.log('nearByObjects -> ', nearByObjects);
   const result = layers[0][mapIndex].walk;
   return result;
 }
@@ -172,5 +180,28 @@ export function upHandler(event: KeyboardEvent): void {
     if (moveDir === event.key) {
       handleStop();
     }
+  }
+  // test for interaction
+  if (event.key === 'k') {
+    console.log('k fired');
+    const interactionOne = store.getState().sprite.objectsNearBy[0];
+    console.log('interactionOne -> ', interactionOne);
+    if (typeof interactionOne === 'string') {
+      const { currentInteraction } = store.getState().sprite;
+      if (currentInteraction === 'idle') {
+        store.dispatch(changeInteraction(interactionOne));
+        playObjectSound(interactionOne);
+        handleInteraction(interactionOne);
+      }
+    }
+    // check interaction state
+    // change interaction state
+    // handle interaction
+  }
+  if (event.key === 'l') {
+    console.log('l fired');
+    const objectTwo = store.getState().sprite.objectsNearBy[1];
+    console.log('objectOne -> ', objectTwo);
+    if (typeof objectTwo === 'string') playObjectSound(objectTwo);
   }
 }

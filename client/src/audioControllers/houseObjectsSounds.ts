@@ -39,3 +39,15 @@ houseInteractables.forEach((object) => {
     loop: false,
   });
 });
+
+export const houseSoundsArray = Object.entries(houseInteractablesObj);
+
+export const playObjectSound = (object: string): void => {
+  console.log('incoming sound string: ', object);
+  for (let i = 0; i < houseSoundsArray.length; i += 1) {
+    const soundFile = houseSoundsArray[i];
+    if (soundFile[0].includes(object)) {
+      soundFile[1].play();
+    }
+  }
+};

@@ -93,7 +93,7 @@ export function calcPercentage(current: number, total: number): number {
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
-  console.log(event);
+  console.log('handleClickTile Event: ', event);
   const clickedIdx = event.target.index;
   const clickedEntity = game.layers[1][clickedIdx].int;
   const clickPosX = event.target.attrs.x;
