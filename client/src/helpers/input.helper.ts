@@ -47,6 +47,8 @@ export function checkIndex(x: number, y: number): number {
 export function checkCanMove(newPos: number[]): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos[0], newPos[1]);
+  const nearByObjects = layers[1][mapIndex].intPos;
+  console.log('nearByObjects -> ', nearByObjects);
   const result = layers[0][mapIndex].walk;
   return result;
 }

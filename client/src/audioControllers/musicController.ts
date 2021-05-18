@@ -70,7 +70,7 @@ export const findSongTitleFromHowlFile = (song: Howl): string | null => {
 };
 
 export const findHowlFileFromTitle = (title: string): Howl | null => {
-  console.log('title is ', title);
+  // TODO FIX: seems like this function is being fired constantly
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
     const songPathString = playListArr[i][0];
