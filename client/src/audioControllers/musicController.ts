@@ -36,7 +36,7 @@ export const playListObject = {} as HowlObject;
 importArray.forEach((track) => {
   playListObject[track] = new Howl({
     src: [track],
-    volume: 0.25,
+    volume: 0.1,
     rate: 1,
     loop: true,
   });
@@ -70,6 +70,7 @@ export const findSongTitleFromHowlFile = (song: Howl): string | null => {
 };
 
 export const findHowlFileFromTitle = (title: string): Howl | null => {
+  // TODO FIX: seems like this function is being fired constantly
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
     const songPathString = playListArr[i][0];

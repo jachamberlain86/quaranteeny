@@ -4,18 +4,10 @@ import {
   changeValueFixed,
   selectMeterValue,
   pauseDecayOn,
-  pauseDecayOff,
+  resetMeterPauseDecayToInit,
   selectPauseDecay,
 } from '../features/meters/metersSlice';
-import {
-  selectGameOver,
-  selectGameTime,
-  selectStartTime,
-  selectClockTimeInGame,
-  setTimeLasted,
-  selectTimeLasted,
-  selectSleepDep,
-} from '../features/game/gameSlice';
+import { selectGameOver, selectGameTime } from '../features/game/gameSlice';
 import {
   selectCurrentInteraction,
   selectInteractionChangesRemaining,
@@ -30,7 +22,6 @@ import {
   setCurrentInteraction,
   updateInteractionProgress,
 } from './sprite.helper';
-import { day } from '../data/time.data';
 import { Entity } from '../interfaces/entity.interface';
 
 function checkPauseDecayState(meter: string): boolean {
@@ -135,7 +126,6 @@ export function triggerIncrementalChange(
     (entityData.hoursToComplete * gameHour) / (gameMinute * updateInterval)
   );
   // This is to check if the interaction is already in progress
-  // TODO causes issues if cancelling a meter
   const interactionChangesRemainingInitial = selectInteractionChangesRemaining(
     store.getState()
   );
@@ -160,11 +150,15 @@ export function triggerIncrementalChange(
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         updateInteractionProgress(0, 0);
-        pausedMeters.forEach((meter) => pauseDecayOff(meter));
+        pausedMeters.forEach((meter) =>
+          store.dispatch(resetMeterPauseDecayToInit(meter))
+        );
       } else if (interactionChangesRemaining <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
-        pausedMeters.forEach((meter) => pauseDecayOff(meter));
+        pausedMeters.forEach((meter) =>
+          store.dispatch(resetMeterPauseDecayToInit(meter))
+        );
         setCurrentInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
@@ -172,7 +166,7 @@ export function triggerIncrementalChange(
 
         entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
           if (!pausedMeters.includes(meterImpact.name))
-            pauseDecayOn(meterImpact.name);
+            store.dispatch(pauseDecayOn(meterImpact.name));
           const incrementalValue = Math.ceil(meterImpact.amount / iterations);
           store.dispatch(
             changeValueScaled({
