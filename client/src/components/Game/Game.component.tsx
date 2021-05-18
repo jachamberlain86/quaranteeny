@@ -56,13 +56,21 @@ const Game = (): JSX.Element => {
       checkConditionsState();
       checkLoseStates();
       decayMeters(meters);
-      window.addEventListener('keydown', downHandler);
-      window.addEventListener('keyup', upHandler);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userLoadingStatus]);
   // TODO mention that this is causing the page to rerender every second
   // }, [dispatch, userLoadingStatus]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler);
+    window.addEventListener('keyup', upHandler);
+
+    return () => {
+      window.removeEventListener('keydown', downHandler);
+      window.removeEventListener('keydown', upHandler);
+    };
+  }, []);
 
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {

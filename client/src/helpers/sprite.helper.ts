@@ -64,7 +64,7 @@ export function triggerRemoveConditions(conditionsArr: string[]): void {
 
 // Set to null if not interacting with anything or to a string identifying current interaction
 
-export function setCurrentInteraction(newInteraction: string | null): boolean {
+export function setNewInteraction(newInteraction: string | null): boolean {
   const currentInteraction = selectCurrentInteraction(store.getState());
   if (currentInteraction === newInteraction) return false;
   store.dispatch(changeInteraction(newInteraction));

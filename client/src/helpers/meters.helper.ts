@@ -19,7 +19,7 @@ import { meters, Meters } from '../data/meters.data';
 import {
   triggerAddConditions,
   triggerRemoveConditions,
-  setCurrentInteraction,
+  setNewInteraction,
   updateInteractionProgress,
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
@@ -159,7 +159,7 @@ export function triggerIncrementalChange(
         pausedMeters.forEach((meter) =>
           store.dispatch(resetMeterPauseDecayToInit(meter))
         );
-        setCurrentInteraction(null);
+        setNewInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
         updateInteractionProgress(interactionChangesRemaining, iterations);
@@ -186,7 +186,7 @@ function triggerImmediateChange(entityData: Entity): void {
     store.dispatch(changeValueScaled(meterImpact));
   });
   triggerRemoveConditions(entityData.conditions);
-  setCurrentInteraction(null);
+  setNewInteraction(null);
 }
 
 export function triggerChangeMeters(entityData: Entity, entity: string): void {

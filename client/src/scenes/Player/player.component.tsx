@@ -34,6 +34,7 @@ const Player = (): JSX.Element => {
   const musicRef = useRef<any | null>(null);
   const [direction, setDirection] = useState<string | null>(null);
   const [idleStart, setIdleStart] = useState<number>(0);
+  const [timeNow, setTimeNow] = useState<number>(Date.now());
 
   const [interaction, setInteraction] = useState<string | null>(null);
 
@@ -55,7 +56,6 @@ const Player = (): JSX.Element => {
 
   const character = useAppSelector(selectCharacter);
   const currentInteraction = useAppSelector(selectCurrentInteraction);
-  const clockTimeReal = useAppSelector(selectClockTimeReal);
 
   useEffect(() => {
     setDirection(character.moveDir);
@@ -68,18 +68,30 @@ const Player = (): JSX.Element => {
     }
   }, [currentInteraction]);
 
+  function checkTime(): void {
+    if (idleStart > 0) {
+      setTimeout(() => {
+        setTimeNow(Date.now());
+      }, 1000);
+    }
+  }
+
   useEffect(() => {
-    const timePassed = clockTimeReal - idleStart;
+    const timePassed = Date.now() - idleStart;
     const seconds = timePassed / 1000;
     if (currentAnimation === 'idling') {
       if (seconds >= 5) console.log('I want to move!');
+      setIdleStart(0);
     } else if (interaction === 'idle') {
       if (seconds >= 1) setCurrentAnimation('idling');
     }
-  }, [clockTimeReal]);
+    checkTime();
+  }, [timeNow]);
 
   useEffect(() => {
     const ref = spriteRef.current;
+    console.log(interaction);
+    console.log(direction);
     if (interaction === 'cancel') {
       ref.to({
         x: character.curPos.x * tileSize,
@@ -134,6 +146,7 @@ const Player = (): JSX.Element => {
       } else if (direction === 's') {
         setCurrentAnimation('idlingD');
       }
+      checkTime();
     } else if (interaction === 'idle') {
       setCurrentAnimation('idling');
     }

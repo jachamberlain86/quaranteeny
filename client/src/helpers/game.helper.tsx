@@ -29,7 +29,7 @@ import {
   selectCurPos,
 } from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
-import { handleInteraction, setCurrentInteraction } from './sprite.helper';
+import { handleInteraction, setNewInteraction } from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
 import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 
@@ -121,7 +121,7 @@ export function handleClickTile(
           soundFile[1].play();
         }
       }
-      if (setCurrentInteraction(clickedEntity)) {
+      if (setNewInteraction(clickedEntity)) {
         handleInteraction(clickedEntity);
       }
     } else {
