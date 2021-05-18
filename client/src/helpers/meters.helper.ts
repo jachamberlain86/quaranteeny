@@ -7,15 +7,7 @@ import {
   resetMeterPauseDecayToInit,
   selectPauseDecay,
 } from '../features/meters/metersSlice';
-import {
-  selectGameOver,
-  selectGameTime,
-  selectStartTime,
-  selectClockTimeInGame,
-  setTimeLasted,
-  selectTimeLasted,
-  selectSleepDep,
-} from '../features/game/gameSlice';
+import { selectGameOver, selectGameTime } from '../features/game/gameSlice';
 import {
   selectCurrentInteraction,
   selectInteractionChangesRemaining,
@@ -30,7 +22,6 @@ import {
   setCurrentInteraction,
   updateInteractionProgress,
 } from './sprite.helper';
-import { day } from '../data/time.data';
 import { Entity } from '../interfaces/entity.interface';
 
 function checkPauseDecayState(meter: string): boolean {
