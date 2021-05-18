@@ -140,6 +140,11 @@ export const metersSlice = createSlice({
       const meter = state[action.payload as keyof MetersState];
       meter.pauseDecay = false;
     },
+    resetMeterPauseDecayToInit: (state, action: PayloadAction<string>) => {
+      const meter = state[action.payload as keyof MetersState];
+      const meterInitial = initialState[action.payload as keyof MetersState];
+      meter.pauseDecay = meterInitial.pauseDecay;
+    },
   },
 });
 
@@ -153,6 +158,7 @@ export const {
   loadMetersStateFromDb,
   pauseDecayOn,
   pauseDecayOff,
+  resetMeterPauseDecayToInit,
 } = metersSlice.actions;
 
 export const changeValueScaled = (meterChange: MeterChange): AppThunk => (

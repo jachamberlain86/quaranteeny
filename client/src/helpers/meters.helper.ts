@@ -4,7 +4,7 @@ import {
   changeValueFixed,
   selectMeterValue,
   pauseDecayOn,
-  pauseDecayOff,
+  resetMeterPauseDecayToInit,
   selectPauseDecay,
 } from '../features/meters/metersSlice';
 import {
@@ -159,11 +159,15 @@ export function triggerIncrementalChange(
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         updateInteractionProgress(0, 0);
-        pausedMeters.forEach((meter) => pauseDecayOff(meter));
+        pausedMeters.forEach((meter) =>
+          store.dispatch(resetMeterPauseDecayToInit(meter))
+        );
       } else if (interactionChangesRemaining <= 0) {
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
-        pausedMeters.forEach((meter) => pauseDecayOff(meter));
+        pausedMeters.forEach((meter) =>
+          store.dispatch(resetMeterPauseDecayToInit(meter))
+        );
         setCurrentInteraction(null);
         updateInteractionProgress(0, 0);
       } else {
