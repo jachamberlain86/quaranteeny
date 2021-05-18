@@ -23,6 +23,7 @@ export const spriteSlice = createSlice({
     resetSprite: () => initialState,
     changeInteraction: (state, action: PayloadAction<string | null>) => {
       state.currentInteraction = action.payload;
+      state.interactionChangesRemaining = 0;
     },
     decrementInteractionChangesRemaining: (state) => {
       state.interactionChangesRemaining -= 1;
