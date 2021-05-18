@@ -7,8 +7,24 @@ const ObjectInteraction = (): JSX.Element => {
   // const [isInteraction, setIsInteraction] = useState(
   //   objectsNearBy.length !== 0
   // );
-  const objectList = objectsNearBy.map((object) => {
-    return <li key={object}>{object}</li>;
+  const objectList = objectsNearBy.map((object, index) => {
+    // return <li key={object}>{object}</li>;
+    // type keys = {
+    //   0: string;
+    //   1: string;
+    // };
+    const keys = ['k', 'l', 'j'];
+    return (
+      <li key={object}>
+        Use the {object.toUpperCase()}, press {keys[index]}
+      </li>
+    );
+  });
+  window.addEventListener('keyup', (event: KeyboardEvent): void => {
+    // fireInteraction
+    console.log('event.key', event.key);
+    if (event.key === 'l') console.log('interact with "l"');
+    if (event.key === 'l') console.log('interact with "l"');
   });
   // useEffect(() => {
   //   if (objectList.length >= 1) {
