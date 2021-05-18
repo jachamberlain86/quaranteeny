@@ -89,6 +89,14 @@ function handleStop(): void {
 export function cancelCurrentInteraction(): void {
   store.dispatch(changeInteraction('cancel'));
 }
+const runInteractionAnimations = (interaction: string): void => {
+  const { currentInteraction } = store.getState().sprite;
+  if (currentInteraction === 'idle') {
+    store.dispatch(changeInteraction(interaction));
+    playObjectSound(interaction);
+    handleInteraction(interaction);
+  }
+};
 
 export function downHandler(event: KeyboardEvent): void {
   const currentInteraction = selectCurrentInteraction(store.getState());
@@ -190,27 +198,14 @@ export function upHandler(event: KeyboardEvent): void {
       handleStop();
     }
   }
-  // test for interaction
   if (event.key === 'k') {
-    console.log('k fired');
     const interactionOne = store.getState().sprite.objectsNearBy[0];
-    console.log('interactionOne -> ', interactionOne);
-    if (typeof interactionOne === 'string') {
-      const { currentInteraction } = store.getState().sprite;
-      if (currentInteraction === 'idle') {
-        store.dispatch(changeInteraction(interactionOne));
-        playObjectSound(interactionOne);
-        handleInteraction(interactionOne);
-      }
-    }
-    // check interaction state
-    // change interaction state
-    // handle interaction
+    if (typeof interactionOne === 'string')
+      runInteractionAnimations(interactionOne);
   }
   if (event.key === 'l') {
-    console.log('l fired');
-    const objectTwo = store.getState().sprite.objectsNearBy[1];
-    console.log('objectOne -> ', objectTwo);
-    if (typeof objectTwo === 'string') playObjectSound(objectTwo);
+    const interactionTwo = store.getState().sprite.objectsNearBy[1];
+    if (typeof interactionTwo === 'string')
+      runInteractionAnimations(interactionTwo);
   }
 }
