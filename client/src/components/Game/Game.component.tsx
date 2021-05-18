@@ -26,6 +26,7 @@ import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
 import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
+import ObjectInteraction from '../ObjectInteraction/ObjectInteraction.component';
 import {
   gameOverOne,
   gameOverTwo,
@@ -60,6 +61,8 @@ const Game = (): JSX.Element => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userLoadingStatus]);
+  // TODO mention that this is causing the page to rerender every second
+  // }, [dispatch, userLoadingStatus]);
 
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {
@@ -102,7 +105,6 @@ const Game = (): JSX.Element => {
   return (
     <div>
       <SoundBar />
-      {/* {soundBarCTX && soundBarCTX.SoundBar} */}
       <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
         {gameOver && <GameOver />}
         {fastForwardIndicator}
@@ -112,6 +114,7 @@ const Game = (): JSX.Element => {
           <Mood />
           <GameOverBtn />
           <MuteSoundBtn />
+          <ObjectInteraction />
         </div>
         <Room />
         <MeterArea />

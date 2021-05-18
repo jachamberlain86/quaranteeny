@@ -7,6 +7,7 @@ export interface SpriteState {
   interactionProgress: number | null;
   interactionChangesRemaining: number;
   conditions: string[];
+  objectsNearBy: string[];
 }
 
 const initialState: SpriteState = {
@@ -14,6 +15,7 @@ const initialState: SpriteState = {
   interactionProgress: null,
   interactionChangesRemaining: 0,
   conditions: [],
+  objectsNearBy: [],
 };
 
 export const spriteSlice = createSlice({
@@ -49,6 +51,9 @@ export const spriteSlice = createSlice({
         action.payload.interactionChangesRemaining;
       state.conditions = action.payload.conditions;
     },
+    updateObjectsNearBy: (state, action: PayloadAction<string[]>) => {
+      state.objectsNearBy = action.payload;
+    },
   },
 });
 
@@ -59,7 +64,7 @@ export const {
   setInteractionChangesRemaining,
   addCondition,
   removeCondition,
-
+  updateObjectsNearBy,
   setInteractionProgress,
   loadSpriteStateFromDb,
 } = spriteSlice.actions;
