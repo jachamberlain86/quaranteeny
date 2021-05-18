@@ -17,7 +17,10 @@ import {
   changeMovePos,
   updateLastInput,
 } from '../features/character/characterSlice';
-import { changeInteraction } from '../features/sprite/spriteSlice';
+import {
+  changeInteraction,
+  selectCurrentInteraction,
+} from '../features/sprite/spriteSlice';
 import {
   cuteWalkOne,
   shuffleWalkOne,
@@ -29,13 +32,13 @@ import {
 } from '../audioControllers/playerSounds';
 import game from '../data/gameMap.data';
 
-function calcNewPos(key: string): number[] {
+function calcNewPos(key: string): { x: number; y: number } {
   const curPos = selectCurPos(store.getState());
-  const curPosCopy = [...curPos];
-  if (key === 's') curPosCopy[1] += 1;
-  if (key === 'w') curPosCopy[1] -= 1;
-  if (key === 'a') curPosCopy[0] -= 1;
-  if (key === 'd') curPosCopy[0] += 1;
+  const curPosCopy = { ...curPos };
+  if (key === 's') curPosCopy.y += 1;
+  if (key === 'w') curPosCopy.y -= 1;
+  if (key === 'a') curPosCopy.x -= 1;
+  if (key === 'd') curPosCopy.x += 1;
   return curPosCopy;
 }
 
@@ -44,9 +47,9 @@ export function checkIndex(x: number, y: number): number {
   return y * cols + x;
 }
 
-export function checkCanMove(newPos: number[]): boolean {
+export function checkCanMove(newPos: { x: number; y: number }): boolean {
   const { layers } = game;
-  const mapIndex = checkIndex(newPos[0], newPos[1]);
+  const mapIndex = checkIndex(newPos.x, newPos.y);
   const result = layers[0][mapIndex].walk;
   return result;
 }
@@ -77,7 +80,15 @@ function handleStop(): void {
   }
 }
 
+export function cancelCurrentInteraction(): void {
+  store.dispatch(changeInteraction('cancel'));
+}
+
 export function downHandler(event: KeyboardEvent): void {
+  const currentInteraction = selectCurrentInteraction(store.getState());
+  if (currentInteraction !== 'walking') {
+    cancelCurrentInteraction();
+  }
   const moveDir = selectMoveDir(store.getState());
   const leftFired = selectLeftFired(store.getState());
   const rightFired = selectRightFired(store.getState());

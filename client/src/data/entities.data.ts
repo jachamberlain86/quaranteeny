@@ -26,7 +26,7 @@ const entitiesData: EntityDetails[] = [
   {
     name: 'dresser',
     cost: 0,
-    hoursToComplete: 0.1,
+    hoursToComplete: 1,
     meterImpacts: [],
     conditions: ['changing'],
   },
@@ -64,7 +64,7 @@ const entitiesData: EntityDetails[] = [
   {
     name: 'jukebox',
     cost: 1,
-    hoursToComplete: 0,
+    hoursToComplete: 1,
     meterImpacts: [],
     conditions: ['music'],
   },
@@ -104,8 +104,8 @@ const entitiesData: EntityDetails[] = [
   },
   {
     name: 'lamp',
-    cost: 0,
-    hoursToComplete: 0,
+    cost: 3,
+    hoursToComplete: 1,
     meterImpacts: [],
     conditions: [],
   },

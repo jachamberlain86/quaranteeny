@@ -19,14 +19,18 @@ import {
 import { second, minute } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
-import { resetSprite } from '../features/sprite/spriteSlice';
+import {
+  resetSprite,
+  changeInteraction,
+  selectCurrentInteraction,
+} from '../features/sprite/spriteSlice';
 import {
   resetCharacter,
   selectCurPos,
 } from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setCurrentInteraction } from './sprite.helper';
-import { checkIndex } from './input.helper';
+import { checkIndex, cancelCurrentInteraction } from './input.helper';
 import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 
 const fastForwardGameSpeed = 10_000;
@@ -94,32 +98,34 @@ export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   console.log(event);
+  const currentInteraction = selectCurrentInteraction(store.getState());
   const clickedIdx = event.target.index;
   const clickedEntity = game.layers[1][clickedIdx].int;
   const clickPosX = event.target.attrs.x;
   const clickPosY = event.target.attrs.y;
   const curPos = selectCurPos(store.getState());
-  const curIdxLegs = checkIndex(curPos[0], curPos[1]);
-  const curIdxHead = checkIndex(curPos[0], curPos[1] - 1);
-  if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
-    console.log('That tickles!');
-  } else if (clickedEntity !== null) {
-    console.log(`clicked the ${clickedEntity}`);
-    // TODO move sound logic to sprite collision logic when in place.
-    // sound file logic
-    // might be more useful in spriteHelper line: 66
-    const houseSoundsArray = Object.entries(houseInteractablesObj);
-    for (let i = 0; i < houseSoundsArray.length; i += 1) {
-      const soundFile = houseSoundsArray[i];
-      if (soundFile[0].includes(clickedEntity)) {
-        soundFile[1].play();
+  const curIdxLegs = checkIndex(curPos.x, curPos.y);
+  const curIdxHead = checkIndex(curPos.x, curPos.y - 1);
+
+  if (currentInteraction === 'idle') {
+    if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
+      console.log('That tickles!');
+    } else if (clickedEntity !== null) {
+      // TODO move sound logic to sprite collision logic when in place.
+      // sound file logic
+      // might be more useful in spriteHelper line: 66
+      const houseSoundsArray = Object.entries(houseInteractablesObj);
+      for (let i = 0; i < houseSoundsArray.length; i += 1) {
+        const soundFile = houseSoundsArray[i];
+        if (soundFile[0].includes(clickedEntity)) {
+          soundFile[1].play();
+        }
       }
+      if (setCurrentInteraction(clickedEntity)) {
+        handleInteraction(clickedEntity);
+      }
+    } else {
+      cancelCurrentInteraction();
     }
-    if (setCurrentInteraction(clickedEntity)) {
-      handleInteraction(clickedEntity);
-    }
-  } else {
-    setCurrentInteraction(null);
-    console.log(`clicked ${clickPosX}, ${clickPosY}`);
-  }
+  } else cancelCurrentInteraction();
 }

@@ -12,6 +12,7 @@ import { livingArea } from './livingArea';
 import { meals } from './meals';
 import { office } from './office';
 import { untidy } from './untidy';
+import { room } from './room';
 
 const blank = [
   {
@@ -24,6 +25,7 @@ const blank = [
 ];
 
 const images: AtlasRefDetails[] = [
+  ...room,
   ...altImages,
   ...bathroom,
   ...bedroom,

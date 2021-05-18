@@ -162,12 +162,12 @@ export function updateInteractionProgress(
   console.log('percentageComplete', percentageComplete);
 }
 
-export function generateRandomPos(): number[] {
+export function generateRandomPos(): { x: number; y: number } {
   let validPos = false;
-  const newPos = [0, 0];
+  const newPos = { x: 0, y: 0 };
   do {
-    newPos[0] = Math.floor(Math.random() * 21);
-    newPos[1] = Math.floor(Math.random() * 21);
+    newPos.x = Math.floor(Math.random() * 20);
+    newPos.y = Math.floor(Math.random() * 20);
     validPos = checkCanMove(newPos);
   } while (validPos === false);
   return newPos;

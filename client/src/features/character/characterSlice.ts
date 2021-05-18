@@ -1,13 +1,12 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
 import game from '../../data/gameMap.data';
-import { generateRandomPos } from '../../helpers/sprite.helper';
 
 const initialState: Character = {
-  curPos: [1, 4],
-  movePos: [1, 4],
+  curPos: { x: 1, y: 4 },
+  movePos: { x: 1, y: 4 },
   leftFired: false,
   rightFired: false,
   upFired: false,
@@ -30,9 +29,9 @@ export const selectMoveIntId = (state: RootState): number | null =>
   state.character.moveIntId;
 export const selectMoveDir = (state: RootState): string | null =>
   state.character.moveDir;
-export const selectCurPos = (state: RootState): number[] =>
+export const selectCurPos = (state: RootState): { x: number; y: number } =>
   state.character.curPos;
-export const selectMovePos = (state: RootState): number[] =>
+export const selectMovePos = (state: RootState): { x: number; y: number } =>
   state.character.movePos;
 export const selectLastInput = (state: RootState): number =>
   state.character.lastInput;
@@ -73,17 +72,20 @@ const characterSlice = createSlice({
     },
     changeMovePos(state) {
       if (state.moveDir === 's') {
-        state.curPos[1] += 1;
+        state.curPos.y += 1;
       }
       if (state.moveDir === 'w') {
-        state.curPos[1] -= 1;
+        state.curPos.y -= 1;
       }
       if (state.moveDir === 'a') {
-        state.curPos[0] -= 1;
+        state.curPos.x -= 1;
       }
       if (state.moveDir === 'd') {
-        state.curPos[0] += 1;
+        state.curPos.x += 1;
       }
+    },
+    changeCurPos(state, action: PayloadAction<{ x: number; y: number }>) {
+      state.curPos = action.payload;
     },
     updateLastInput(state) {
       state.lastInput = Date.now();
@@ -101,6 +103,7 @@ export const {
   setMoveDir,
   changeMovePos,
   updateLastInput,
+  changeCurPos,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

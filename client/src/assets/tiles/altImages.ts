@@ -65,11 +65,11 @@ export const altImages: AtlasRefDetails[] = [
     height: 1,
   },
   {
-    key: 'oven-top-on',
-    x: 15,
-    y: 12,
+    key: 'oven-on',
+    x: 9,
+    y: 11,
     width: 1,
-    height: 1,
+    height: 2,
   },
   {
     key: 'phone-on',

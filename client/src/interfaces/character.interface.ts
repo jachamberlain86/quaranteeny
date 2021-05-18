@@ -1,6 +1,6 @@
 export interface Character {
-  curPos: number[];
-  movePos: number[];
+  curPos: { x: number; y: number };
+  movePos: { x: number; y: number };
   leftFired: boolean;
   rightFired: boolean;
   upFired: boolean;

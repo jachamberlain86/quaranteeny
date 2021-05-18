@@ -2,7 +2,7 @@ import { FurnitureTile } from '../interfaces/gameMap.interface';
 
 export const furniturerMap: FurnitureTile[] = [
   // Row 0
-  { key: 'blank', int: null, intPos: [] },
+  { key: 'room', int: null, intPos: [] },
   { key: 'blank', int: null, intPos: [] },
   { key: 'blank', int: null, intPos: [] },
   { key: 'blank', int: null, intPos: [] },
@@ -255,8 +255,8 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'blank', int: null, intPos: [] },
   // Row 12
   { key: 'blank', int: null, intPos: [] },
-  { key: 'blank', int: null, intPos: ['lamp'] },
-  { key: 'blank', int: null, intPos: ['lamp', 'bookcase'] },
+  { key: 'blank', int: 'lamp', intPos: ['lamp'] },
+  { key: 'blank', int: 'lamp', intPos: ['lamp', 'bookcase'] },
   { key: 'blank', int: 'bookcase', intPos: ['bookcase'] },
   { key: 'blank', int: null, intPos: ['bookcase', 'jukebox'] },
   { key: 'blank', int: 'jukebox', intPos: ['jukebox'] },
@@ -303,7 +303,7 @@ export const furniturerMap: FurnitureTile[] = [
   { key: 'tv', int: 'sofa', intPos: [] },
   { key: 'blank', int: 'sofa', intPos: [] },
   { key: 'right-speaker', int: 'sofa', intPos: [] },
-  { key: 'plant', int: 'plant', intPos: [] },
+  { key: 'blank', int: 'plant', intPos: [] },
   { key: 'blank', int: null, intPos: [] },
   { key: 'blank', int: null, intPos: [] },
   { key: 'blank', int: null, intPos: [] },
