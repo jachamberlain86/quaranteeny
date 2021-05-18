@@ -14,6 +14,7 @@ import table from '../assets/audio/sound-efx/house-objects/Its-hopeless-table.mp
 import telephone from '../assets/audio/sound-efx/house-objects/telephone-ring.mp3';
 import exercises from '../assets/audio/sound-efx/house-objects/exercise-situps.mp3';
 import toilet from '../assets/audio/sound-efx/house-objects/toilet-peeing.mp3';
+import bin from '../assets/audio/sound-efx/house-objects/bin-can.mp3';
 
 export const houseInteractables: string[] = [
   sink,
@@ -32,6 +33,7 @@ export const houseInteractables: string[] = [
   telephone,
   exercises,
   toilet,
+  bin,
 ];
 
 type howlObject = Record<string, Howl>;
