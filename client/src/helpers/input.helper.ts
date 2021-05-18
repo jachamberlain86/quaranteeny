@@ -30,6 +30,7 @@ import {
   howlCollisionsObj,
   collisionArray,
 } from '../audioControllers/playerSounds';
+import { playObjectSound } from '../audioControllers/houseObjectsSounds';
 import game from '../data/gameMap.data';
 
 function calcNewPos(key: string): number[] {
@@ -178,5 +179,18 @@ export function upHandler(event: KeyboardEvent): void {
     if (moveDir === event.key) {
       handleStop();
     }
+  }
+  // test for interaction
+  if (event.key === 'k') {
+    console.log('k fired');
+    const objectOne = store.getState().sprite.objectsNearBy[0];
+    console.log('objectOne -> ', objectOne);
+    if (typeof objectOne === 'string') playObjectSound(objectOne);
+  }
+  if (event.key === 'l') {
+    console.log('l fired');
+    const objectTwo = store.getState().sprite.objectsNearBy[1];
+    console.log('objectOne -> ', objectTwo);
+    if (typeof objectTwo === 'string') playObjectSound(objectTwo);
   }
 }

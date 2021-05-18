@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ObjectInteraction.styles.css';
 import { useAppSelector } from '../../app/hooks';
+import { playObjectSound } from '../../audioControllers/houseObjectsSounds';
 
 const ObjectInteraction = (): JSX.Element => {
   const { objectsNearBy } = useAppSelector((state) => state.sprite);
@@ -9,10 +10,6 @@ const ObjectInteraction = (): JSX.Element => {
   // );
   const objectList = objectsNearBy.map((object, index) => {
     // return <li key={object}>{object}</li>;
-    // type keys = {
-    //   0: string;
-    //   1: string;
-    // };
     const keys = ['k', 'l', 'j'];
     return (
       <li key={object}>
@@ -20,12 +17,19 @@ const ObjectInteraction = (): JSX.Element => {
       </li>
     );
   });
-  window.addEventListener('keyup', (event: KeyboardEvent): void => {
-    // fireInteraction
-    console.log('event.key', event.key);
-    if (event.key === 'l') console.log('interact with "l"');
-    if (event.key === 'l') console.log('interact with "l"');
-  });
+  // window.addEventListener('keyup', (event: KeyboardEvent): void => {
+  //   // fireInteraction
+  //   if (event.key === 'k') {
+  //     console.log('interact with "k"');
+  //     console.log('objectsNearBy[0]', objectsNearBy[0]);
+  //     // playObjectSound(objectsNearBy[0]);
+  //   }
+  //   if (event.key === 'l') {
+  //     console.log('interact with "l"');
+  //     console.log('objectsNearBy[1]', objectsNearBy[1]);
+  //     // playObjectSound(objectsNearBy[1]);
+  //   }
+  // });
   // useEffect(() => {
   //   if (objectList.length >= 1) {
   //     console.log('objectList', objectList);
