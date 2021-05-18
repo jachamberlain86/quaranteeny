@@ -36,7 +36,7 @@ export const playListObject = {} as HowlObject;
 importArray.forEach((track) => {
   playListObject[track] = new Howl({
     src: [track],
-    volume: 0.25,
+    volume: 0.1,
     rate: 1,
     loop: true,
   });

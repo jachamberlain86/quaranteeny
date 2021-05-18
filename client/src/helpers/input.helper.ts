@@ -21,6 +21,7 @@ import {
   changeInteraction,
   updateObjectsNearBy,
 } from '../features/sprite/spriteSlice';
+import { handleInteraction } from './sprite.helper';
 import {
   cuteWalkOne,
   shuffleWalkOne,
@@ -183,9 +184,19 @@ export function upHandler(event: KeyboardEvent): void {
   // test for interaction
   if (event.key === 'k') {
     console.log('k fired');
-    const objectOne = store.getState().sprite.objectsNearBy[0];
-    console.log('objectOne -> ', objectOne);
-    if (typeof objectOne === 'string') playObjectSound(objectOne);
+    const interactionOne = store.getState().sprite.objectsNearBy[0];
+    console.log('interactionOne -> ', interactionOne);
+    if (typeof interactionOne === 'string') {
+      const { currentInteraction } = store.getState().sprite;
+      if (currentInteraction === 'idle') {
+        store.dispatch(changeInteraction(interactionOne));
+        playObjectSound(interactionOne);
+        handleInteraction(interactionOne);
+      }
+    }
+    // check interaction state
+    // change interaction state
+    // handle interaction
   }
   if (event.key === 'l') {
     console.log('l fired');
