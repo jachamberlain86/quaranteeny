@@ -5,11 +5,34 @@
   margin: .5rem;
 }
 
-.meter{
+.meter {
   /* padding: .25rem; */
-  padding: .5rem 1rem;
-  width: 90%;
-  margin: .65rem .5rem .5rem .5rem;
+  /* padding: .5rem 1rem; */
+  width: 96%;
+  margin: 0.275rem;
+  background-color: #fff;
+}
+
+.Meter__progress-bar {
+  -webkit-appearance: none;
+  border-radius: 5px;
+  height: 42px;
+  border: 2px solid #444;
+  padding: 5px 4px;
+  width: 96%;
+}
+
+.Meter__progress-bar::-webkit-progress-bar {
+  background-color: #fff;
+}
+.Meter__progress-bar--normal::-webkit-progress-value {
+  background-color: var(--nes-blue);
+}
+.Meter__progress-bar--low::-webkit-progress-value {
+  background-color: var(--nes-red) !important;
+}
+.Meter__progress-bar--high::-webkit-progress-value {
+  background-color: var(--nes-green) !important;
 }
 
 .meter-text{
