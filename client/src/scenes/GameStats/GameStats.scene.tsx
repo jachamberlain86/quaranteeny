@@ -49,7 +49,7 @@ const GameStats: FC = () => {
     }
   }, []);
   return (
-    <div>
+    <div className="GameStats__page">
       <div className="max-width-container">
         <div className="GameStats__main-container">
           <div className="GameStats__content-container">

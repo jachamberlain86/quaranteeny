@@ -1,9 +1,5 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
-:root {
-  --nes-yellow: #F7D51E;
-  --nes-red: #E86E54;
-}
 
 .meter-container {
   margin: .5rem;

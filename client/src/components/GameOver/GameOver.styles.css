@@ -3,12 +3,9 @@
 :root {
   --topPosition: 15%;
   --leftPosition: 35%;
-  --squareSize: 25vw
 }
 
 .game-over-container {
-  /* min-width: var(--squareSize);
-  min-height: var(--squareSize); */
   position: absolute;
   top: var(--topPosition);
   left: var(--leftPosition);
