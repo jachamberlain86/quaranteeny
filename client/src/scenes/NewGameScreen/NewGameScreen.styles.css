@@ -3,43 +3,84 @@
 }
 
 .new-game-page-content {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
+}
+
+.new-game__row-1{
+  padding: 2rem 0;
+}
+.new-game__row-1 h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.new-game__row-2 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 3rem;
+}
+
+.new-game__col-1-left h2{
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .difficulty-radio-buttons {
   display: flex;
   flex-direction: column;
-  flex: 2;
+  margin: 0 2rem;
+  /* flex: 2; */
 }
 
 .diff-radio-button-space {
   color:white;
   /* margin: 20px 30px 20px 0; */
   display:flex;
+  justify-content: space-between;
   align-items: center;
+  width: 80%;
 }
 
 .diff-radio-button-space h1 {
   flex: 3;
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   margin-left: 2rem;
 }
 .diff-radio-button-space p {
   color: orange; 
   flex: 5;
-  font-size: 0.75rem; 
+  /* font-size: 0.75rem;  */
+  font-size: 1rem; 
   margin: 1rem
 }
 .diff-radio {
   margin: 0 0 0 30px
 }
 
+.new-game__col-2-right{
+  /* display: flex; */
+  /* justify-content: space-between; */
+  width: 50%;
+}
+.new-game__col-2-right h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.instructions-container{
+  display: flex;
+  justify-content: space-between;
+}
 .direction-key-instructions {
   display: flex;
   flex-direction: column;
-  flex: 2;
+  /* flex: 2; */
+  width: 45%;
   align-items: center;
   color: white;
 }
@@ -106,13 +147,35 @@ border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14
   flex: 3
 }
 
+.new-game__row-3 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.new-game__row-3 button {
+  margin: 0;
+  font-size: 1rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: white;
+  color: var(--header-dark-brown);
+  border: 1px solid white;
+}
+.new-game__row-3 button:hover {
+  background-color: var(--header-darkest-brown);
+  color: white;
+}
 
 .flashing-button {
-  animation: blinker 1.5s linear infinite;
+  animation: blinker 1.2s linear infinite;
 }
 
 @keyframes blinker {
   50% {
-    opacity: 0;
+    opacity: 20%;
   }
+  /* 100% {
+    opacity: 100%;
+  } */
 }
