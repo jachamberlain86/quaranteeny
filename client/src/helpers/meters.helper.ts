@@ -13,6 +13,7 @@ import {
   selectInteractionChangesRemaining,
   setInteractionChangesRemaining,
   decrementInteractionChangesRemaining,
+  setInteractionProgress,
 } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { meters, Meters } from '../data/meters.data';
@@ -131,6 +132,10 @@ export function triggerIncrementalChange(
   );
   if (interactionChangesRemainingInitial === 0) {
     store.dispatch(setInteractionChangesRemaining(iterations));
+    // This is so that the progress bar displays as soon as an interaction is
+    // started, and we don't have to wait until the first setInterval runs
+    // before the progress bar shows.
+    store.dispatch(setInteractionProgress(0));
   }
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
