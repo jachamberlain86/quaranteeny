@@ -65,15 +65,17 @@ const GameStats: FC = () => {
                 nihil non repudiandae quod tenetur. Eaque nobis ab suscipit!
               </div>
             </div>
-            <div className="GameStats__column">
-              {timeLastedPretty && <h2>Lasted for {timeLastedPretty}</h2>}
-              <h3>List of top times</h3>
-              <ol className="nes-list is-circle score-list">
-                {topFiveScores.map((score, index) => {
-                  // eslint-disable-next-line react/no-array-index-key
-                  return <li key={index}>{score}</li>;
-                })}
-              </ol>
+            <div className="GameStats__column GameStats__column-right">
+              {timeLastedPretty && <h1>Lasted for {timeLastedPretty}</h1>}
+              <div className="GameStats__high-scores">
+                <h2>List of top times</h2>
+                <ol className="nes-list is-circle score-list">
+                  {topFiveScores.map((score, index) => {
+                    // eslint-disable-next-line react/no-array-index-key
+                    return <li key={index}>{score}</li>;
+                  })}
+                </ol>
+              </div>
             </div>
           </div>
           <div className="game-stats-btn-container">

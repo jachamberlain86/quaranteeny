@@ -15,6 +15,15 @@
 .GameStats__column {
   width: 100%;
   margin: 0 4rem;
+  padding: 1rem;
+}
+
+.GameStats__column-right {
+  border: 1px solid #eee;
+}
+
+.GameStats__high-scores {
+  margin-top: 2rem;
 }
 
 .game-stats-title {
