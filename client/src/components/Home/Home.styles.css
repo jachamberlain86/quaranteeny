@@ -5,7 +5,7 @@
 .home-container {
   width: 70%;
   margin: 0 auto;
-  height: 800px;
+  height: var(--game-height);
   color: var(--home-text-color);
 }
 .home-title-row{

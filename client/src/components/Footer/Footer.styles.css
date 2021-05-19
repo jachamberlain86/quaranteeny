@@ -1,16 +1,17 @@
 footer {
-  height: 50px;
+  height: var(--header-footer-height);
+  /* height: 50px; */
 }
 
-.footer-row-2 {
-  background-color: var(--header-light-brown);
-  /* height: 40px; */
-  height: 10vh;
-}
 .footer-row-1 {
   background-color: var(--footer-shade-brown);
-  height: 10px;
+  height: 10%;
   background-image: url('../../assets/images/header-footer/rim-bottom.png');
   background-repeat: repeat-x;
   background-size: contain;
+}
+.footer-row-2 {
+  background-color: var(--header-light-brown);
+  /* height: 40px; */
+  height: 90%;
 }
