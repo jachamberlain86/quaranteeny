@@ -1,38 +1,13 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Howler } from 'howler';
+import React, { useState } from 'react';
 import './NewGameScreen.styles.css';
 import { useHistory } from 'react-router-dom';
-import { setUserName } from '../../features/user/userSlice';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import {
-  changeGameSpeed,
-  setIsCurrentGameActive,
-} from '../../features/game/gameSlice';
-import { resetGamePlay } from '../../helpers/game.helper';
-import spriteGif from '../../assets/oldImages/TinyJamesWalk.gif';
-import {
-  btnPressOne,
-  btnPressTwo,
-  btnClickOne,
-  whooshOne,
-  bleepOneHover,
-  bleepTwo,
-  bleepFiveConfirmation,
-  bleepSevenHover,
-} from '../../audioControllers/buttonSounds';
-import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
-import SoundBar from '../../components/SoundBar/SoundBar.components';
-import musicContext from '../../contexts/music.context';
-import { store } from '../../app/store';
-import { setCurrentSong } from '../../features/music/musicSlice';
-import IntroAnimations from '../../components/IntroAnimations/IntroAnimations.component';
+import { useAppDispatch } from '../../app/hooks';
+import { changeGameSpeed } from '../../features/game/gameSlice';
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
 
 const NewGameScreen = (): JSX.Element => {
   const [radioBtn, setRadioBrn] = useState('');
   const history = useHistory();
-  const handleSubmit = (): void => {
-    // TODO handle radio button selection
   const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
@@ -50,12 +25,12 @@ const NewGameScreen = (): JSX.Element => {
     history.push('/start');
   };
   const playGameBtn = (
-    <button type="submit" onClick={handleSubmit}>
+    <button type="submit" onClick={handleSubmit} className="flashing-button">
       Press enter to start
     </button>
   );
+
   return (
-  <div>
     <div className="game-container">
       <div className="max-width-container">
         <div className="new-game-page-content">
@@ -108,7 +83,7 @@ const NewGameScreen = (): JSX.Element => {
               </form>
             </div>
             <div className="new-game__col-2-right">
-              <h2>Choose a game speed</h2>
+              <h2>Player Controls</h2>
               <div className="instructions-container">
                 <div className="direction-key-instructions">
                   <div className="key-arrow" id="up-arrow" />
@@ -153,15 +128,14 @@ const NewGameScreen = (): JSX.Element => {
             <div className="flashing-button">{playGameBtn}</div>
           </div>
         </div>
-        {/* <div className="new-game-page-furniture-icons">
+        <div className="new-game-page-furniture-icons">
           <div className="new-game-page-icon" id="sofa" />
-        </div> */}
+        </div>
         <div className="new-game-page-furniture-icons">
           <NewGamePageAnimations />
         </div>
       </div>
     </div>
-  </div>
   );
 };
 
