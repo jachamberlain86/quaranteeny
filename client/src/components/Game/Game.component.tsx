@@ -117,6 +117,25 @@ const Game = (): JSX.Element => {
         {gameOver && <GameOver />}
         {fastForwardIndicator}
         {roomLoading}
+
+        <div className="game-screen-whole-panel-area">
+          <div className="panel-top-row">
+            <div className="panel-top-left-corner" />
+            <div className="panel-top-middle" />
+            <div className="panel-top-right-corner" />
+          </div>
+          <div className="panel-middle-row">
+            <div className="panel-middle-row-left" />
+            <div className="panel-center-pane" />
+            <div className="panel-middle-row-right" />
+          </div>
+          <div className="panel-bottom-row">
+            <div className="panel-bottom-left-corner" />
+            <div className="panel-bottom-middle" />
+            <div className="panel-bottom-right-corner" />
+          </div>
+        </div>
+
         <div>
           <DayCounter />
           <Mood />
