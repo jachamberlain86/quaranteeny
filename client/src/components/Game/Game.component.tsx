@@ -117,14 +117,25 @@ const Game = (): JSX.Element => {
           {gameOver && <GameOver />}
           {fastForwardIndicator}
           {roomLoading}
-          <div>
-            <DayCounter />
+
+          <div className="space1">
+            <div className="panel-component-border">
+              <DayCounter />
+            </div>
+            <div className="panel-component-border">high scores here</div>
+
+            <div className="panel-component-border">
+              <GameOverBtn />
+            </div>
+          </div>
+          <div className="space2">
             <Mood />
-            <GameOverBtn />
-            <ObjectInteraction />
           </div>
           <Room />
-          <MeterArea />
+          <div className="panel-component-border">
+            <ObjectInteraction />
+            <MeterArea />
+          </div>
         </div>
       </div>
     </div>
