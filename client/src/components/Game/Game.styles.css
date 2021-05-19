@@ -28,30 +28,28 @@
 }
 
 .panel-component-border {
-  margin: 24px 0px 0 0;
+  margin: 50px 0 0;
   border: 16px solid transparent;
-  padding: 10px;
+  padding: 5px;
+  background-color: #e6f4ff;
+
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
 }
 
-.space1 {
+.panel_space {
   display: flex;
   flex-direction: column;
   width: 310px;
-  height: 776px
+  height: 750px
 }
 
-.space1 .panel-component-border {
-  background-color: var(--header-light-blue);
-}
-
-.space3 {
-  width: 310px
-}
-
-.space3 .panel-component-border {
+/* #left_panel_space .panel-component-border {
   background-color: var(--header-light-brown)
 }
+
+#right_panel_space .panel-component-border {
+  background-color: var(--header-light-brown)
+} */
 
 #dcount_panel {
   flex: 5.5
@@ -62,5 +60,17 @@
 }
 
 #gover_panel {
-flex-grow: 0.5
+  flex: 1
+}
+
+#mood_panel {
+  flex: 2;
+}
+
+#ointeract_panel {
+  flex: 2
+}
+
+#marea_panel {
+  flex: 4
 }

@@ -118,7 +118,7 @@ const Game = (): JSX.Element => {
           {fastForwardIndicator}
           {roomLoading}
 
-          <div className="space1">
+          <div className="panel_space" id="left_panel_space">
             <div className="panel-component-border" id="dcount_panel">
               <DayCounter />
             </div>
@@ -130,11 +130,11 @@ const Game = (): JSX.Element => {
               <GameOverBtn />
             </div>
           </div>
-          <div className="space2">
+          <div>
             <Room />
           </div>
 
-          <div className="space3">
+          <div className="panel_space" id="right_panel_space">
             <div className="panel-component-border" id="mood_panel">
               <Mood />
             </div>
