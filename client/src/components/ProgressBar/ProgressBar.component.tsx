@@ -6,23 +6,27 @@ const ProgressBar = (): JSX.Element => {
   const interactionProgress: number | null = useAppSelector(
     (state) => state.sprite.interactionProgress
   );
-
-  const displayProgressBar = (): JSX.Element => (
-    <div>
-      <div className="meter-container meter-text">
-        Progress: {interactionProgress}%
+  let renderedProgressBar;
+  if (interactionProgress !== null) {
+    renderedProgressBar = (
+      <div>
+        <div className="meter-container meter-text">
+          Progress: {interactionProgress}%
+        </div>
+        <div className="meter-container">
+          <progress
+            className="nes-progress is-success"
+            value={interactionProgress || 0.1}
+            max={100}
+          />
+        </div>
       </div>
-      <div className="meter-container">
-        <progress
-          className="nes-progress is-success"
-          value={interactionProgress || 0.1}
-          max={100}
-        />
-      </div>
-    </div>
-  );
+    );
+  } else {
+    renderedProgressBar = '';
+  }
 
-  return <div>{interactionProgress ? displayProgressBar() : null}</div>;
+  return <div>{renderedProgressBar}</div>;
 };
 
 export default ProgressBar;
