@@ -16,7 +16,7 @@ const GameOverBtn: FC = () => {
   };
   return (
     <div>
-      <button type="button" onClick={handleClick} className="nes-btn">
+      <button type="button" onClick={handleClick} className="game_over_button">
         End game
       </button>
     </div>

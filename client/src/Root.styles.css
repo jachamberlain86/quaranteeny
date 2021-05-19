@@ -5,11 +5,13 @@
   --header-light-brown: #ffd2a5;
   --header-shade-brown: #dc9b78;
   --header-dark-brown: #8c3c32;
+  --header-darkest-brown: #662c25;
   --home-text-color: white;
   --nes-yellow: #F7D51E;
   --nes-red: #E86E54;
   --nes-blue: #1D9DED;
   --nes-blue-dark: #1782c5;
-  --game-height: 90vh;
-  --header-footer-height: 5vh;
+  --game-height: 82vh;
+  --header-footer-height: 9vh;
+  --brown-border-frame: 13px solid transparent
 }

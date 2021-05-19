@@ -55,7 +55,7 @@ text-align: center;
 padding-top: 0px;
 font-size: 1rem; 
 margin: 0.5rem;
-border: 16px solid transparent;
+border: var(--brown-border-frame);
 border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
 }
 

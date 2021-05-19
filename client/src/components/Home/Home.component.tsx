@@ -82,15 +82,17 @@ const Home = (): JSX.Element => {
           <h2>You´re new!</h2>
           <label htmlFor="userName">
             Type your user name
-            <input
-              type="text"
-              name="userName"
-              id="userName"
-              placeholder="Type here..."
-              className=""
-              value={nameInput}
-              onChange={handleInput}
-            />
+            <div className="brown_border_box">
+              <input
+                type="text"
+                name="userName"
+                id="userName"
+                placeholder="Type here..."
+                className=""
+                value={nameInput}
+                onChange={handleInput}
+              />
+            </div>
           </label>
           <div>
             {isUserNameAlert && !nameInput ? (
@@ -113,6 +115,7 @@ const Home = (): JSX.Element => {
           onClick={handleNewGame}
           onMouseEnter={handleBtnHoverEnter}
           onMouseLeave={handleBtnHoverLeave}
+          className="bordered-button"
         >
           New Game
         </button>
@@ -121,6 +124,7 @@ const Home = (): JSX.Element => {
           onClick={handleContinueGame}
           onMouseEnter={handleBtnHoverEnter}
           onMouseLeave={handleBtnHoverLeave}
+          className="bordered-button"
         >
           Continue
         </button>
@@ -137,7 +141,7 @@ const Home = (): JSX.Element => {
           <div className="home-middle-row">
             <div className="home-col-left">
               <div className="home-story">
-                <h2>The story</h2>
+                <h2>The story so far...</h2>
                 <p>
                   Giant crabs have taken over the world, and your Quaranteeny
                   has gone into lockdown. Only you can stop them from going
@@ -145,8 +149,8 @@ const Home = (): JSX.Element => {
                 </p>
                 <p>
                   Pay attention to your Quaranteeny´s needs, make sure they have
-                  health, energy, and money - and don´t let them stay in the
-                  danger zone too long!
+                  health, energy, and money - and <br />
+                  don´t let them stay in the danger zone too long!
                 </p>
               </div>
             </div>

@@ -1,2 +1,8 @@
-@import '../../../node_modules/nes.css/css/nes.css';
+.game_over_button{
+  border: var(--brown-border-frame);
+  padding: 5px;
+  margin: 10px 10px 10px 10px;
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+} 
 
+/* background-color: #e6f4ff; */

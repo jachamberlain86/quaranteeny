@@ -29,7 +29,7 @@
 }
 
 .panel-component-border {
-  border: 16px solid transparent;
+  border: var(--brown-border-frame);
   padding: 5px;
   background-color: #e6f4ff;
   margin: 10px 10px 10px 10px;
