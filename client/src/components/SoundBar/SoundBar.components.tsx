@@ -97,7 +97,7 @@ const SoundBar = (): JSX.Element => {
           Next
         </button>
       </div>
-      <div className="song-title">{currentSongTitle}</div>
+      <div className="song-title">🎵 {currentSongTitle} </div>
       <MuteSoundBtn />
     </div>
   );

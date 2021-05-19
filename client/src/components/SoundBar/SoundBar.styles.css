@@ -11,13 +11,13 @@
 
 .sound-bar-container button {
   margin: 0 .25rem 0 0;
-  background-color: var(--header-light-brown);
-  border: 1px solid var(--header-dark-brown);
+  background-color: var(--header-shade-blue);
+  /* border: 1px solid var(--header-shade-brown); */
   padding: .15rem .5rem;
 }
 .sound-bar-container button:hover {
   cursor: pointer;
   color: white;
-  background-color: var(--header-dark-brown);
-  border: 1px solid var(--header-shade-brown);
+  background-color: var(--nes-blue-dark);
+  /* border: 1px solid var(--header-shade-brown); */
 }
