@@ -37,6 +37,7 @@ import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 import SoundBar from '../SoundBar/SoundBar.components';
 import musicContext from '../../contexts/music.context';
 import { musicController } from '../../audioControllers/musicController';
+import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -128,6 +129,9 @@ const Game = (): JSX.Element => {
 
             <div className="panel-component-border" id="gover_panel">
               <GameOverBtn />
+              <button type="button" onClick={() => stopObjectSound()}>
+                Stop EFX Loop
+              </button>
             </div>
           </div>
           <div>

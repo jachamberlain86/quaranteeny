@@ -10,5 +10,6 @@
   --nes-red: #E86E54;
   --nes-blue: #1D9DED;
   --nes-blue-dark: #1782c5;
-
+  --game-height: 90vh;
+  --header-footer-height: 5vh;
 }

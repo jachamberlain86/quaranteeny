@@ -44,7 +44,7 @@ houseInteractables.forEach((object) => {
     src: [object],
     volume: 0.4,
     rate: 1,
-    loop: false,
+    loop: true,
   });
 });
 
@@ -57,5 +57,13 @@ export const playObjectSound = (object: string): void => {
     if (soundFile[0].includes(object)) {
       soundFile[1].play();
     }
+  }
+};
+
+export const stopObjectSound = (): void => {
+  for (let i = 0; i < houseSoundsArray.length; i += 1) {
+    const soundTitle = houseSoundsArray[i][0];
+    const soundFile = houseSoundsArray[i][1];
+    if (soundFile.playing()) soundFile.stop();
   }
 };

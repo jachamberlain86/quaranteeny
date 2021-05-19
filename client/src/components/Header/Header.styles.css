@@ -1,19 +1,20 @@
 /* header colours */
 
 header {
-  height: 50px;
+  /* height: 50px; */
+  height: var(--header-footer-height);
   margin: 0 auto;
+  background-color: var(--header-light-blue);
 }
 
 .header-row-1 {
-  background-color: var(--header-light-blue);
-  height: 40px;
   display: flex;
   justify-content: center;
+  height: 90%;
 }
 .header-row-2 {
   background-color: var(--header-shade-brown);
-  height: 10px;
+  height: 10%;
   background-image: url('../../assets/images/header-footer/rim-bottom.png');
   background-repeat: repeat-x;
   background-size: contain;

@@ -3,6 +3,7 @@
 
 .GameStats__page{
   background-color: var(--bg-color-offBlack);
+  height: var(--game-height);
 }
 
 .GameStats__main-container{

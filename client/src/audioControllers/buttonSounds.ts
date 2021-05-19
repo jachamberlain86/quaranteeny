@@ -29,7 +29,7 @@ export const btnPressTwo = new Howl({
 export const btnClickOne = new Howl({
   src: [btnClick1],
   autoplay: false,
-  volume: 0.3,
+  volume: 0.15,
 });
 
 export const whooshOne = new Howl({

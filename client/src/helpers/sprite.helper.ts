@@ -35,6 +35,7 @@ import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
 import { checkCanMove } from './input.helper';
+import { stopObjectSound } from '../audioControllers/houseObjectsSounds';
 
 // Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
@@ -159,6 +160,8 @@ export function updateInteractionProgress(
     percentageComplete = 100 - calcPercentage(current, total);
   }
   store.dispatch(setInteractionProgress(percentageComplete));
+  // TODO confirm with James this is where the progress bar stops.
+  stopObjectSound();
 }
 
 export function generateRandomPos(): { x: number; y: number } {
