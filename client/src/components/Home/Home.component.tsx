@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.styles.css';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { store } from '../../app/store';
 import { setUserName } from '../../features/user/userSlice';
+import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   btnPressOne,
   btnPressTwo,
@@ -14,6 +16,7 @@ import {
   bleepSevenHover,
   cancelButton,
 } from '../../audioControllers/buttonSounds';
+import { musicController } from '../../audioControllers/musicController';
 
 interface initialState {
   name: string;
@@ -66,6 +69,18 @@ const Home = (): JSX.Element => {
     //   // target.classList.add('displayOff');
     // }, animationSpeed);
   };
+  useEffect(() => {
+    const howlSongFile = musicController?.findHowlFileFromTitle('Connect');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
+  }, []);
   return (
     <div className="home-background-color">
       <div className="max-width-container">

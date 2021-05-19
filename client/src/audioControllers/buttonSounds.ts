@@ -92,5 +92,5 @@ export const exitGamePress = new Howl({
 export const cancelButton = new Howl({
   src: [cancel],
   autoplay: false,
-  volume: 0.3,
+  volume: 0.4,
 });
