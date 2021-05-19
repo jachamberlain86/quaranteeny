@@ -11,13 +11,8 @@
   --nes-red: #E86E54;
   --nes-blue: #1D9DED;
   --nes-blue-dark: #1782c5;
-<<<<<<< HEAD
   --game-height: 82vh;
   --header-footer-height: 9vh;
-  --brown-border-frame: 13px solid transparent
-=======
-  --game-height: 90vh;
-  --header-footer-height: 5vh;
-  --nes-green: #92CC42;
->>>>>>> fcfed0b1af62352493fd84d5e004b632cdaa0ff4
+  --brown-border-frame: 13px solid transparent;
+  --nes-green: #92CC42; 
 }
