@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
+import Home from './components/Home/Home.component';
 import GameStart from './scenes/GameStart/GameStart.scene';
 import GameStats from './scenes/GameStats/GameStats.scene';
 import NewGameScreen from './scenes/NewGameScreen/NewGameScreen.scene';
@@ -41,6 +42,9 @@ const App = (): JSX.Element => {
             <NewGameScreen />
           </Route>
           <Route path="/">
+            <Home />
+          </Route>
+          <Route path="/oldhome">
             <GameStart />
           </Route>
         </Switch>
