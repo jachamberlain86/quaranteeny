@@ -1,4 +1,5 @@
 import { Howl } from 'howler';
+import { musicController } from './musicController';
 import sink from '../assets/audio/sound-efx/house-objects/sink-basin.mp3';
 import oven from '../assets/audio/sound-efx/house-objects/oven.mp3';
 import jukebox from '../assets/audio/sound-efx/house-objects/jukebox.mp3';
@@ -16,31 +17,33 @@ import exercises from '../assets/audio/sound-efx/house-objects/exercise-situps.m
 import toilet from '../assets/audio/sound-efx/house-objects/toilet-peeing.mp3';
 import bin from '../assets/audio/sound-efx/house-objects/bin-can.mp3';
 
-export const houseInteractables: string[] = [
-  sink,
-  oven,
-  jukebox,
+export const houseInteractablesLoops: string[] = [
   desk,
-  // should be tvHbo but the TV is activated with the word 'sofa'
   sofa,
   tvNetflix,
-  lamp,
   bed,
-  fridge,
   bath,
-  plant,
-  table,
   telephone,
   exercises,
   toilet,
+];
+
+export const houseInteractablesOneShot: string[] = [
+  sink,
+  oven,
+  jukebox,
+  lamp,
+  fridge,
+  plant,
+  table,
   bin,
 ];
 
 type howlObject = Record<string, Howl>;
 
-export const houseInteractablesObj = {} as howlObject;
-houseInteractables.forEach((object) => {
-  houseInteractablesObj[object] = new Howl({
+export const houseSoundsLoopsObj = {} as howlObject;
+houseInteractablesLoops.forEach((object) => {
+  houseSoundsLoopsObj[object] = new Howl({
     src: [object],
     volume: 0.4,
     rate: 1,
@@ -48,22 +51,43 @@ houseInteractables.forEach((object) => {
   });
 });
 
-export const houseSoundsArray = Object.entries(houseInteractablesObj);
+export const houseSoundsOneShotObj = {} as howlObject;
+houseInteractablesOneShot.forEach((object) => {
+  houseSoundsOneShotObj[object] = new Howl({
+    src: [object],
+    volume: 0.4,
+    rate: 1,
+    loop: false,
+  });
+});
+
+export const houseSoundsLoopsArr = Object.entries(houseSoundsLoopsObj);
+export const houseSoundsOneShotArr = Object.entries(houseSoundsOneShotObj);
 
 export const playObjectSound = (object: string): void => {
-  console.log('incoming sound string: ', object);
-  for (let i = 0; i < houseSoundsArray.length; i += 1) {
-    const soundFile = houseSoundsArray[i];
-    if (soundFile[0].includes(object)) {
-      soundFile[1].play();
+  for (let i = 0; i < houseSoundsOneShotArr.length; i += 1) {
+    const soundTitle = houseSoundsOneShotArr[i][0];
+    const soundFile = houseSoundsOneShotArr[i][1];
+    if (soundTitle.includes(object)) {
+      soundFile.play();
+    }
+  }
+  for (let i = 0; i < houseSoundsLoopsArr.length; i += 1) {
+    const soundTitle = houseSoundsOneShotArr[i][0];
+    const soundFile = houseSoundsOneShotArr[i][1];
+    if (soundTitle.includes(object)) {
+      soundFile.play();
     }
   }
 };
 
 export const stopObjectSound = (): void => {
-  for (let i = 0; i < houseSoundsArray.length; i += 1) {
-    const soundTitle = houseSoundsArray[i][0];
-    const soundFile = houseSoundsArray[i][1];
+  for (let i = 0; i < houseSoundsOneShotArr.length; i += 1) {
+    const soundFile = houseSoundsOneShotArr[i][1];
+    if (soundFile.playing()) soundFile.stop();
+  }
+  for (let i = 0; i < houseSoundsLoopsArr.length; i += 1) {
+    const soundFile = houseSoundsLoopsArr[i][1];
     if (soundFile.playing()) soundFile.stop();
   }
 };

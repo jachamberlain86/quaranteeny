@@ -26,7 +26,8 @@ import {
 } from '../features/character/characterSlice';
 import { handleInteraction, setNewInteraction } from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
-import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
+import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+import { musicController } from '../audioControllers/musicController';
 
 const fastForwardGameSpeed = 10_000;
 
@@ -106,16 +107,8 @@ export function handleClickTile(
     if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
       console.log('That tickles!');
     } else if (clickedEntity !== null) {
-      // TODO move sound logic to sprite collision logic when in place.
-      // sound file logic
-      // might be more useful in spriteHelper line: 66
-      const houseSoundsArray = Object.entries(houseInteractablesObj);
-      for (let i = 0; i < houseSoundsArray.length; i += 1) {
-        const soundFile = houseSoundsArray[i];
-        if (soundFile[0].includes(clickedEntity)) {
-          soundFile[1].play();
-        }
-      }
+      playObjectSound(clickedEntity);
+      if (clickedEntity === 'jukebox') musicController.handlePause();
       if (setNewInteraction(clickedEntity)) {
         handleInteraction(clickedEntity);
       }
