@@ -8,7 +8,7 @@ import { topLayerMap } from './topLayerMap.data';
 const game: GameMap = {
   cols: 20,
   layers: [floorMap, furniturerMap, topLayerMap],
-  tileSize: 40,
+  tileSize: 32,
 };
 
 export default game;
