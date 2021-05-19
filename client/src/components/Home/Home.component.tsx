@@ -18,6 +18,7 @@ import {
   cancelButton,
 } from '../../audioControllers/buttonSounds';
 import { musicController } from '../../audioControllers/musicController';
+import IntroAnimations from '../IntroAnimations/IntroAnimations.component';
 
 // TODO move to sound effects
 export const handleBtnHoverEnter = (): void => {
@@ -169,6 +170,7 @@ const Home = (): JSX.Element => {
           )}
         </div>
       </div>
+      <IntroAnimations />
     </div>
   );
 };

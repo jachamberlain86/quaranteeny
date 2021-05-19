@@ -1,0 +1,81 @@
+.intro-animations-bar {
+  width: 100vw;
+  height: 10rem;
+  display: flex;
+  /* background-color: orange; */
+}
+
+.intro-animations-bar-pic {
+  color: white
+}
+
+.lamp-buffer {
+  width:5rem;
+  background-color: orange;
+  margin-left: 5rem
+}
+
+.lamp-on {
+  height:20rem;
+  width: 20rem;
+  background-image: url('../../assets/images/livingRoom/lamp.png');
+  background-repeat: no-repeat;
+  background-size: 10rem 16rem;
+  margin-left: 5rem
+
+  /* background-color: red; */
+
+}
+
+.plant-buffer{
+height: 2rem;
+width: 5rem;
+}
+
+.plant-dead{
+  height: 13rem;
+  width: 6.5rem;
+  background-image: url('../../assets/images/livingRoom/plant-alive.png');
+  background-repeat: no-repeat;
+  background-size: 6.5rem 13rem;
+  /* background-color: blue; */
+  margin-right: 30rem;
+  margin-left: 5rem
+  }
+
+  
+
+  .tv-buffer {
+    height: 1rem; 
+    width:20rem;
+    /* background-color: orange; */
+  }
+
+  .tv-off {
+    height:14rem;
+    width:28rem;
+    /* background-color: pink; */
+    margin-right: 30rem;
+    margin-left: 5rem;
+    background-image: url('../../assets/images/livingRoom/tv-on.png');
+    background-repeat: no-repeat;
+    background-size: 28rem 14rem;
+  
+  }
+
+  .phone-buffer {
+    height: 11rem;
+    width: 5rem;
+    margin-right: 10rem;
+    /* background-color: yellow; */
+  }
+
+  .phone-pic {
+    height:10rem;
+    width:10rem;
+    /* background-color: pink; */
+    background-image: url('../../assets/images/diningRoom/phone.png');
+    background-repeat: no-repeat;
+    background-size: 7rem 7rem;
+
+  }
