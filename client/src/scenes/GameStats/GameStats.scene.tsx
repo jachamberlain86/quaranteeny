@@ -11,8 +11,11 @@ import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
-} from '../GameStart/GameStart.scene';
-import { bleepFiveConfirmation } from '../../audioControllers/buttonSounds';
+} from '../../components/Home/Home.component';
+import {
+  btnPressOne,
+  bleepFiveConfirmation,
+} from '../../audioControllers/buttonSounds';
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {

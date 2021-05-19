@@ -1,0 +1,58 @@
+:root {
+  --game-background-color: black;
+  --home-text-color: white;
+}
+
+.home-background-color{
+  background-color: var(--game-background-color);
+}
+.home-container {
+  width: 70%;
+  margin: 0 auto;
+  height: 800px;
+  color: var(--home-text-color);
+}
+.home-title-row{
+  display: flex;
+  justify-content: center;
+}
+.home-title-row h1 {
+  text-align: center;
+  font-size: 5rem;
+  margin: 3rem 0;
+}
+.home-container h2 {
+  margin-bottom: 2rem;
+}
+.home-middle-row{
+  display: flex;
+  justify-content: space-between;
+}
+.home-col-left, .home-col-right{
+  width: 45%;
+}
+.home-form, .home-form label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#submit-btn {
+  margin: 0 auto;
+  font-size: 1rem;
+  width: 40%;
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+}
+#submit-btn:hover{
+  background-color: black;
+  color: white;
+}
+.home-form label input[type='text']  {
+  margin-top: 1rem;
+}
+.home-bottom-row {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+}
