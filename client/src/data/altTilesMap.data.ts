@@ -1,6 +1,6 @@
-import { FilterTile } from '../interfaces/gameMap.interface';
+import { AltTile } from '../interfaces/gameMap.interface';
 
-export const topLayerMap: FilterTile[] = [
+export const altTilesMap: AltTile[] = [
   // Row 1
   { key: 'blank' },
   { key: 'blank' },

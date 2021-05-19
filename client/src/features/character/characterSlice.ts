@@ -11,12 +11,17 @@ const initialState: Character = {
   rightFired: false,
   upFired: false,
   downFired: false,
+  kFired: false,
+  lFired: false,
   moveIntId: null,
   moveDir: null,
   lastInput: Date.now(),
+  movingSelf: false,
 };
 
 export const selectCharacter = (state: RootState): Character => state.character;
+export const selectMovingSelf = (state: RootState): boolean =>
+  state.character.movingSelf;
 export const selectLeftFired = (state: RootState): boolean =>
   state.character.leftFired;
 export const selectRightFired = (state: RootState): boolean =>
@@ -25,6 +30,10 @@ export const selectUpFired = (state: RootState): boolean =>
   state.character.upFired;
 export const selectDownFired = (state: RootState): boolean =>
   state.character.downFired;
+export const selectKFired = (state: RootState): boolean =>
+  state.character.kFired;
+export const selectLFired = (state: RootState): boolean =>
+  state.character.lFired;
 export const selectMoveIntId = (state: RootState): number | null =>
   state.character.moveIntId;
 export const selectMoveDir = (state: RootState): string | null =>
@@ -52,6 +61,15 @@ const characterSlice = createSlice({
     },
     toggleDownFired(state) {
       state.downFired = !state.downFired;
+    },
+    toggleKFired(state) {
+      state.kFired = !state.kFired;
+    },
+    toggleLFired(state) {
+      state.lFired = !state.lFired;
+    },
+    setMovingSelf(state, action: PayloadAction<boolean>) {
+      state.movingSelf = action.payload;
     },
     setMoveIntId(state, action: PayloadAction<number | null>) {
       state.moveIntId = action.payload;
@@ -99,11 +117,14 @@ export const {
   toggleRightFired,
   toggleUpFired,
   toggleDownFired,
+  toggleKFired,
+  toggleLFired,
   setMoveIntId,
   setMoveDir,
   changeMovePos,
   updateLastInput,
   changeCurPos,
+  setMovingSelf,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

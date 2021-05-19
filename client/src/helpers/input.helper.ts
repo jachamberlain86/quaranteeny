@@ -5,10 +5,14 @@ import {
   selectRightFired,
   selectUpFired,
   selectDownFired,
+  selectKFired,
+  selectLFired,
   toggleLeftFired,
   toggleRightFired,
   toggleUpFired,
   toggleDownFired,
+  toggleKFired,
+  toggleLFired,
   setMoveIntId,
   selectMoveIntId,
   setMoveDir,
@@ -16,13 +20,20 @@ import {
   selectCurPos,
   changeMovePos,
   updateLastInput,
+  selectMovingSelf,
 } from '../features/character/characterSlice';
 import {
   changeInteraction,
   selectCurrentInteraction,
   updateObjectsNearBy,
 } from '../features/sprite/spriteSlice';
-import { handleInteraction } from './sprite.helper';
+import {
+  handleInteraction,
+  setNewInteraction,
+  checkNewInteraction,
+  triggerRemoveConditions,
+  getEntityData,
+} from './sprite.helper';
 import {
   cuteWalkOne,
   shuffleWalkOne,
@@ -34,6 +45,7 @@ import {
 } from '../audioControllers/playerSounds';
 import { playObjectSound } from '../audioControllers/houseObjectsSounds';
 import game from '../data/gameMap.data';
+import { roomMap } from '../data/roomMap.data';
 
 function calcNewPos(key: string): { x: number; y: number } {
   const curPos = selectCurPos(store.getState());
@@ -53,9 +65,8 @@ export function checkIndex(x: number, y: number): number {
 export function checkCanMove(newPos: { x: number; y: number }): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos.x, newPos.y);
-  const nearByObjects = layers[1][mapIndex].intPos;
+  const nearByObjects = roomMap[mapIndex].intPos;
   store.dispatch(updateObjectsNearBy(nearByObjects));
-  console.log('nearByObjects -> ', nearByObjects);
   const result = layers[0][mapIndex].walk;
   return result;
 }
@@ -87,73 +98,83 @@ function handleStop(): void {
 }
 
 export function cancelCurrentInteraction(): void {
+  const currentInteraction = selectCurrentInteraction(store.getState());
+  const entityData = getEntityData(currentInteraction);
+  triggerRemoveConditions(entityData.conditions);
   store.dispatch(changeInteraction('cancel'));
 }
+
 const runInteractionAnimations = (interaction: string): void => {
-  const { currentInteraction } = store.getState().sprite;
-  if (currentInteraction === 'idle') {
-    store.dispatch(changeInteraction(interaction));
+  if (checkNewInteraction(interaction)) {
     playObjectSound(interaction);
-    handleInteraction(interaction);
+    setNewInteraction(interaction);
   }
 };
 
 export function downHandler(event: KeyboardEvent): void {
-  const currentInteraction = selectCurrentInteraction(store.getState());
-  if (currentInteraction !== 'walking') {
-    cancelCurrentInteraction();
-  }
   const moveDir = selectMoveDir(store.getState());
   const leftFired = selectLeftFired(store.getState());
   const rightFired = selectRightFired(store.getState());
   const upFired = selectUpFired(store.getState());
   const downFired = selectDownFired(store.getState());
-  if (event.key === 'a' && !leftFired) {
-    if (moveDir === null) {
-      store.dispatch(toggleLeftFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
-    } else {
-      handleStop();
-      store.dispatch(toggleLeftFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
+  const currentInteraction = selectCurrentInteraction(store.getState());
+  const untimedInteractions = ['walking', 'idle'];
+  const ignoreKeys = ['k', 'l'];
+  const isMovingSelf = selectMovingSelf(store.getState());
+  if (!isMovingSelf) {
+    if (
+      !untimedInteractions.includes(currentInteraction) &&
+      !ignoreKeys.includes(event.key)
+    )
+      cancelCurrentInteraction();
+
+    if (event.key === 'a' && !leftFired) {
+      if (moveDir === null) {
+        store.dispatch(toggleLeftFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      } else {
+        handleStop();
+        store.dispatch(toggleLeftFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      }
     }
-  }
-  if (event.key === 'd' && !rightFired) {
-    if (moveDir === null) {
-      store.dispatch(toggleRightFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
-    } else {
-      handleStop();
-      store.dispatch(toggleRightFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
+    if (event.key === 'd' && !rightFired) {
+      if (moveDir === null) {
+        store.dispatch(toggleRightFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      } else {
+        handleStop();
+        store.dispatch(toggleRightFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      }
     }
-  }
-  if (event.key === 'w' && !upFired) {
-    if (moveDir === null) {
-      store.dispatch(toggleUpFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
-    } else {
-      handleStop();
-      store.dispatch(toggleUpFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
+    if (event.key === 'w' && !upFired) {
+      if (moveDir === null) {
+        store.dispatch(toggleUpFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      } else {
+        handleStop();
+        store.dispatch(toggleUpFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      }
     }
-  }
-  if (event.key === 's' && !downFired) {
-    if (moveDir === null) {
-      store.dispatch(toggleDownFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
-    } else {
-      handleStop();
-      store.dispatch(toggleDownFired());
-      store.dispatch(setMoveDir(event.key));
-      handleMove(event.key);
+    if (event.key === 's' && !downFired) {
+      if (moveDir === null) {
+        store.dispatch(toggleDownFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      } else {
+        handleStop();
+        store.dispatch(toggleDownFired());
+        store.dispatch(setMoveDir(event.key));
+        handleMove(event.key);
+      }
     }
   }
 }
@@ -165,47 +186,57 @@ export function upHandler(event: KeyboardEvent): void {
   const upFired = selectUpFired(store.getState());
   const downFired = selectDownFired(store.getState());
   store.dispatch(updateLastInput);
+  const isMovingSelf = selectMovingSelf(store.getState());
+  if (!isMovingSelf) {
+    if (event.key === 'a') {
+      if (leftFired) {
+        store.dispatch(toggleLeftFired());
+      }
+      if (moveDir === event.key) {
+        handleStop();
+      }
+    }
+    if (event.key === 'd') {
+      if (rightFired) {
+        store.dispatch(toggleRightFired());
+      }
+      if (moveDir === event.key) {
+        handleStop();
+      }
+    }
+    if (event.key === 'w') {
+      if (upFired) {
+        store.dispatch(toggleUpFired());
+      }
+      if (moveDir === event.key) {
+        handleStop();
+      }
+    }
+    if (event.key === 's') {
+      if (downFired) {
+        store.dispatch(toggleDownFired());
+      }
+      if (moveDir === event.key) {
+        handleStop();
+      }
+    }
 
-  if (event.key === 'a') {
-    if (leftFired) {
-      store.dispatch(toggleLeftFired());
+    const untimedInteractions = ['walking', 'idle'];
+    const currentInteraction = selectCurrentInteraction(store.getState());
+
+    if (!untimedInteractions.includes(currentInteraction))
+      cancelCurrentInteraction();
+    else {
+      if (event.key === 'k') {
+        const interactionOne = store.getState().sprite.objectsNearBy[0];
+        if (typeof interactionOne === 'string')
+          runInteractionAnimations(interactionOne);
+      }
+      if (event.key === 'l') {
+        const interactionTwo = store.getState().sprite.objectsNearBy[1];
+        if (typeof interactionTwo === 'string')
+          runInteractionAnimations(interactionTwo);
+      }
     }
-    if (moveDir === event.key) {
-      handleStop();
-    }
-  }
-  if (event.key === 'd') {
-    if (rightFired) {
-      store.dispatch(toggleRightFired());
-    }
-    if (moveDir === event.key) {
-      handleStop();
-    }
-  }
-  if (event.key === 'w') {
-    if (upFired) {
-      store.dispatch(toggleUpFired());
-    }
-    if (moveDir === event.key) {
-      handleStop();
-    }
-  }
-  if (event.key === 's') {
-    if (downFired) {
-      store.dispatch(toggleDownFired());
-    }
-    if (moveDir === event.key) {
-      handleStop();
-    }
-  }
-  if (event.key === 'k') {
-    const interactionOne = store.getState().sprite.objectsNearBy[0];
-    if (typeof interactionOne === 'string')
-      runInteractionAnimations(interactionOne);
-  }
-  if (event.key === 'l') {
-    const interactionTwo = store.getState().sprite.objectsNearBy[1];
-    if (typeof interactionTwo === 'string')
-      runInteractionAnimations(interactionTwo);
   }
 }

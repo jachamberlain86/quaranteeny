@@ -5,7 +5,10 @@ export interface Character {
   rightFired: boolean;
   upFired: boolean;
   downFired: boolean;
+  kFired: boolean;
+  lFired: boolean;
   moveIntId: number | null;
   moveDir: string | null;
   lastInput: number;
+  movingSelf: boolean;
 }

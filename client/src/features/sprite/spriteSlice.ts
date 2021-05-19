@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 export interface SpriteState {
-  currentInteraction: string | null;
+  currentInteraction: string;
   interactionProgress: number | null;
   interactionChangesRemaining: number;
   conditions: string[];
@@ -23,7 +23,7 @@ export const spriteSlice = createSlice({
   initialState,
   reducers: {
     resetSprite: () => initialState,
-    changeInteraction: (state, action: PayloadAction<string | null>) => {
+    changeInteraction: (state, action: PayloadAction<string>) => {
       state.currentInteraction = action.payload;
       state.interactionChangesRemaining = 0;
     },
@@ -75,7 +75,7 @@ export const selectSprite = (state: RootState): SpriteState => state.sprite;
 export const selectConditions = (state: RootState): string[] =>
   state.sprite.conditions;
 
-export const selectCurrentInteraction = (state: RootState): string | null =>
+export const selectCurrentInteraction = (state: RootState): string =>
   state.sprite.currentInteraction;
 export const selectInteractionProgress = (state: RootState): number | null =>
   state.sprite.interactionProgress;

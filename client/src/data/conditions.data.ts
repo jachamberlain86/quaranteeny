@@ -38,11 +38,6 @@ export const conditionsData: ConditionDetails[] = [
     impacts: [],
   },
   {
-    name: 'music',
-    modifiers: [],
-    impacts: [],
-  },
-  {
     name: 'cleaning',
     modifiers: [],
     impacts: [],

@@ -25,7 +25,7 @@ export class User {
 
   @Column({ type: 'simple-json', nullable: true })
   sprite: {
-    currentInteraction: string | null;
+    currentInteraction: string;
     interactionProgress: number | null;
     conditions: string[];
   };

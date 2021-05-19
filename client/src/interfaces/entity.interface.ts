@@ -5,4 +5,5 @@ export interface Entity {
   readonly cost: number;
   readonly meterImpacts: MeterChange[];
   readonly conditions: string[];
+  readonly triggers: string[];
 }

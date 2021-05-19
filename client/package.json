@@ -16,8 +16,10 @@
     "dotenv": "^8.2.0",
     "howler": "^2.2.1",
     "konva": "^7.2.5",
+    "l1-path-finder": "^1.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "ndarray": "^1.0.19",
     "nes.css": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -53,6 +55,7 @@
   },
   "devDependencies": {
     "@types/howler": "^2.2.2",
+    "@types/ndarray": "^1.0.9",
     "@types/react-router-dom": "^5.1.7",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",

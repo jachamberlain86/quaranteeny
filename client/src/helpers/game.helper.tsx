@@ -25,13 +25,23 @@ import {
   selectCurrentInteraction,
 } from '../features/sprite/spriteSlice';
 import {
+  changeCurPos,
   resetCharacter,
   selectCurPos,
+  selectMovingSelf,
 } from '../features/character/characterSlice';
 import { imageDirectory, ImageDirectory } from '../assets/images/index';
-import { handleInteraction, setNewInteraction } from './sprite.helper';
+import {
+  handleInteraction,
+  checkNewInteraction,
+  setNewInteraction,
+  calcPath,
+  spriteMoveSelf,
+  spriteMoveSelfThenInteract,
+} from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
 import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
+import { roomMap } from '../data/roomMap.data';
 
 const fastForwardGameSpeed = 10_000;
 
@@ -52,7 +62,6 @@ export const startClock = (): void => {
       // Check how long it's been since the player last closed the game
       const lastRecordedClockTime = selectClockTimeReal(store.getState());
       const timeSinceClosedGame = Date.now() - lastRecordedClockTime;
-
       if (timeSinceClosedGame > minute) {
         // Speed up game speed to fast forward until we reach present
         store.dispatch(changeGameSpeed(fastForwardGameSpeed));
@@ -87,45 +96,44 @@ export function calcPercentage(current: number, total: number): number {
   return Math.round(percentage * 100);
 }
 
-// export function handleClickSprite(
-//   event: Konva.KonvaEventObject<MouseEvent>
-// ): void {
-//   console.log('That tickles!');
-//   console.log(event);
-// }
-
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
   const currentInteraction = selectCurrentInteraction(store.getState());
-  console.log('handleClickTile Event: ', event);
   const clickedIdx = event.target.index;
-  const clickedEntity = game.layers[1][clickedIdx].int;
+  const clickedEntity = roomMap[clickedIdx].int;
   const clickPosX = event.target.attrs.x;
   const clickPosY = event.target.attrs.y;
   const curPos = selectCurPos(store.getState());
   const curIdxLegs = checkIndex(curPos.x, curPos.y);
   const curIdxHead = checkIndex(curPos.x, curPos.y - 1);
-
-  if (currentInteraction === 'idle') {
-    if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
-      console.log('That tickles!');
-    } else if (clickedEntity !== null) {
-      // TODO move sound logic to sprite collision logic when in place.
-      // sound file logic
-      // might be more useful in spriteHelper line: 66
-      const houseSoundsArray = Object.entries(houseInteractablesObj);
-      for (let i = 0; i < houseSoundsArray.length; i += 1) {
-        const soundFile = houseSoundsArray[i];
-        if (soundFile[0].includes(clickedEntity)) {
-          soundFile[1].play();
+  const { tileSize } = game;
+  const isMovingSelf = selectMovingSelf(store.getState());
+  if (!isMovingSelf) {
+    if (currentInteraction === 'idle' || currentInteraction === 'walking') {
+      if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
+        console.log('That tickles!');
+      } else if (clickedEntity !== null) {
+        // TODO move sound logic to sprite collision logic when in place.
+        // sound file logic
+        // might be more useful in spriteHelper line: 66
+        if (checkNewInteraction(clickedEntity)) {
+          spriteMoveSelfThenInteract(clickedEntity);
+          const houseSoundsArray = Object.entries(houseInteractablesObj);
+          for (let i = 0; i < houseSoundsArray.length; i += 1) {
+            const soundFile = houseSoundsArray[i];
+            if (soundFile[0].includes(clickedEntity)) {
+              soundFile[1].play();
+            }
+          }
         }
+      } else {
+        const clickTarget = {
+          x: clickPosX / tileSize,
+          y: clickPosY / tileSize,
+        };
+        spriteMoveSelf(clickTarget);
       }
-      if (setNewInteraction(clickedEntity)) {
-        handleInteraction(clickedEntity);
-      }
-    } else {
-      cancelCurrentInteraction();
-    }
-  } else cancelCurrentInteraction();
+    } else cancelCurrentInteraction();
+  }
 }

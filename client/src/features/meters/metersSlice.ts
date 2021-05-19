@@ -82,7 +82,6 @@ export const metersSlice = createSlice({
         meter.value = meters[action.payload.name].max;
     },
     addModifier: (state, action: PayloadAction<MeterModifier>) => {
-      console.log('modifier added');
       const meter = state[action.payload.meter as keyof MetersState];
       if (action.payload.incRateModifier) {
         const modifier = action.payload.incRateModifier;
@@ -90,7 +89,6 @@ export const metersSlice = createSlice({
           modifier > 0
             ? meter.incRate * modifier
             : meter.incRate / Math.abs(modifier);
-        console.log(meter.incRate);
       }
       if (action.payload.decRateModifier) {
         const modifier = action.payload.decRateModifier;
@@ -98,7 +96,6 @@ export const metersSlice = createSlice({
           modifier > 0
             ? meter.decRate * modifier
             : meter.decRate / Math.abs(modifier);
-        console.log(meter.decRate);
       }
       if (meter.decRate <= 0) meter.decRate = 0.1;
       if (meter.decRate > 1000) meter.decRate = 1000;

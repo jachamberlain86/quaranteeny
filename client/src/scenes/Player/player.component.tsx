@@ -5,8 +5,12 @@ import {
   selectCharacter,
   changeCurPos,
   selectCurPos,
+  setMovingSelf,
 } from '../../features/character/characterSlice';
-import { selectClockTimeReal } from '../../features/game/gameSlice';
+import {
+  selectClockTimeReal,
+  selectMusicOn,
+} from '../../features/game/gameSlice';
 import {
   selectCurrentInteraction,
   changeInteraction,
@@ -19,7 +23,10 @@ import {
 import game from '../../data/gameMap.data';
 import animationFrames from '../../assets/animations/atlas/quarantiny-animation-atlas.png';
 import { animationDirectory } from '../../assets/animations/index';
-import { generateRandomPos } from '../../helpers/sprite.helper';
+import {
+  generateRandomPos,
+  startSpriteDecisions,
+} from '../../helpers/sprite.helper';
 
 const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -35,6 +42,8 @@ const Player = (): JSX.Element => {
   const [direction, setDirection] = useState<string | null>(null);
   const [idleStart, setIdleStart] = useState<number>(0);
   const [timeNow, setTimeNow] = useState<number>(Date.now());
+  const [makingDecision, setMakingDecision] = useState<boolean>(false);
+  const [checkingTime, setCheckingTime] = useState<boolean>(false);
 
   const [interaction, setInteraction] = useState<string | null>(null);
 
@@ -49,49 +58,85 @@ const Player = (): JSX.Element => {
         img,
       });
     };
-    const startPos = generateRandomPos();
+    const startPos = generateRandomPos(false);
     dispatch(changeCurPos(startPos));
     plantRef.current.start();
   }, []);
 
   const character = useAppSelector(selectCharacter);
   const currentInteraction = useAppSelector(selectCurrentInteraction);
+  const musicOn = useAppSelector(selectMusicOn);
+
+  useEffect(() => {
+    const nextMusic = musicOn ? 'blank' : 'music';
+    setMusicAnimation(nextMusic);
+    musicRef.current.start();
+  }, [musicOn]);
 
   useEffect(() => {
     setDirection(character.moveDir);
   }, [character.moveDir]);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
     setInteraction(currentInteraction);
+    if (currentInteraction !== 'idle') {
+      setIdleStart(0);
+      setMakingDecision(false);
+    }
+    if (currentInteraction !== 'walking') {
+      timer = setTimeout(() => {
+        dispatch(setMovingSelf(false));
+      }, 100);
+    }
     if (currentInteraction === 'cancel') {
       dispatch(changeInteraction('idle'));
+      setIdleStart(Date.now());
     }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [currentInteraction]);
 
-  function checkTime(): void {
-    if (idleStart > 0) {
-      setTimeout(() => {
+  function checkTime(): NodeJS.Timeout | undefined {
+    let timer: NodeJS.Timeout | undefined;
+    if (!checkingTime) {
+      setCheckingTime(true);
+      timer = setTimeout(() => {
+        setCheckingTime(false);
         setTimeNow(Date.now());
       }, 1000);
     }
+    return timer;
   }
 
   useEffect(() => {
+    let decisionTimer: NodeJS.Timeout | undefined;
+    let timeTimer: NodeJS.Timeout | undefined;
     const timePassed = Date.now() - idleStart;
     const seconds = timePassed / 1000;
     if (currentAnimation === 'idling') {
-      if (seconds >= 5) console.log('I want to move!');
-      setIdleStart(0);
+      if (seconds >= 10) {
+        setMakingDecision(true);
+        dispatch(setMovingSelf(true));
+        decisionTimer = setTimeout(() => {
+          startSpriteDecisions();
+        }, 100);
+      }
     } else if (interaction === 'idle') {
       if (seconds >= 1) setCurrentAnimation('idling');
     }
-    checkTime();
+    if (!makingDecision) {
+      timeTimer = checkTime();
+    }
+    return () => {
+      if (decisionTimer) clearTimeout(decisionTimer);
+      if (timeTimer) clearTimeout(timeTimer);
+    };
   }, [timeNow]);
 
   useEffect(() => {
     const ref = spriteRef.current;
-    console.log(interaction);
-    console.log(direction);
     if (interaction === 'cancel') {
       ref.to({
         x: character.curPos.x * tileSize,
@@ -146,7 +191,7 @@ const Player = (): JSX.Element => {
       } else if (direction === 's') {
         setCurrentAnimation('idlingD');
       }
-      checkTime();
+      if (!makingDecision) checkTime();
     } else if (interaction === 'idle') {
       setCurrentAnimation('idling');
     }
@@ -278,8 +323,6 @@ const Player = (): JSX.Element => {
       setCurrentAnimation('interactingU');
       spriteRef.current.start();
     } else if (interaction === 'jukebox') {
-      const nextMusic = musicAnimation === 'music' ? 'blank' : 'music';
-      setMusicAnimation(nextMusic);
       ref.to({
         x: tileSize * 5,
         y: tileSize * 11,
@@ -287,7 +330,6 @@ const Player = (): JSX.Element => {
       });
       setCurrentAnimation('interactingU');
       spriteRef.current.start();
-      musicRef.current.start();
     } else if (interaction === 'bin') {
       ref.to({
         x: tileSize * 11,

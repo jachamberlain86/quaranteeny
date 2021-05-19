@@ -22,13 +22,15 @@ const entitiesData: EntityDetails[] = [
       { name: 'mind', amount: hour * 16 },
     ],
     conditions: ['asleep'],
+    triggers: [],
   },
   {
     name: 'dresser',
     cost: 0,
-    hoursToComplete: 1,
+    hoursToComplete: 0,
     meterImpacts: [],
-    conditions: ['changing'],
+    conditions: [],
+    triggers: ['clothes'],
   },
   {
     name: 'basin',
@@ -39,6 +41,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'energy', amount: hour * 2 },
     ],
     conditions: ['washing'],
+    triggers: [],
   },
   {
     name: 'bath',
@@ -49,6 +52,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'hygeine', amount: hour * 16 },
     ],
     conditions: ['washing'],
+    triggers: [],
   },
   {
     name: 'bookcase',
@@ -60,13 +64,15 @@ const entitiesData: EntityDetails[] = [
       { name: 'mind', amount: hour * 6 },
     ],
     conditions: ['relaxing'],
+    triggers: [],
   },
   {
     name: 'jukebox',
     cost: 1,
-    hoursToComplete: 1,
+    hoursToComplete: 0,
     meterImpacts: [],
-    conditions: ['music'],
+    conditions: [],
+    triggers: ['music'],
   },
   {
     name: 'desk',
@@ -83,6 +89,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'freedom', amount: -hour * 4 },
     ],
     conditions: ['working'],
+    triggers: ['computer'],
   },
   {
     name: 'sink',
@@ -90,6 +97,7 @@ const entitiesData: EntityDetails[] = [
     hoursToComplete: 0.25,
     meterImpacts: [{ name: 'freedom', amount: -hour * 2 }],
     conditions: ['cleaning'],
+    triggers: [],
   },
   {
     name: 'oven',
@@ -101,13 +109,15 @@ const entitiesData: EntityDetails[] = [
       { name: 'comfort', amount: hour * 1 },
     ],
     conditions: ['cooking'],
+    triggers: [],
   },
   {
     name: 'lamp',
     cost: 3,
-    hoursToComplete: 1,
+    hoursToComplete: 0,
     meterImpacts: [],
     conditions: [],
+    triggers: ['light'],
   },
   {
     name: 'fridge',
@@ -129,6 +139,7 @@ const entitiesData: EntityDetails[] = [
       },
     ],
     conditions: ['snacking'],
+    triggers: [],
   },
   {
     name: 'sofa',
@@ -143,6 +154,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'motivation', amount: -hour * 3 },
     ],
     conditions: ['relaxing'],
+    triggers: ['tv'],
   },
   {
     name: 'plant',
@@ -153,11 +165,12 @@ const entitiesData: EntityDetails[] = [
       { name: 'mind', amount: hour * 1 },
     ],
     conditions: ['watering'],
+    triggers: [],
   },
   {
     name: 'table',
     cost: 0,
-    hoursToComplete: 12,
+    hoursToComplete: 4,
     meterImpacts: [
       { name: 'fitness', amount: -hour * 3 },
       { name: 'mood', amount: -hour * 3 },
@@ -169,6 +182,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'appetite', amount: -hour * 3 },
     ],
     conditions: ['wallowing'],
+    triggers: [],
   },
   {
     name: 'exercise',
@@ -186,6 +200,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'mind', amount: hour * 5 },
     ],
     conditions: [],
+    triggers: [],
   },
   {
     name: 'phone',
@@ -200,6 +215,7 @@ const entitiesData: EntityDetails[] = [
       { name: 'motivation', amount: hour * 2 },
     ],
     conditions: [],
+    triggers: [],
   },
   {
     name: 'toilet',
@@ -211,13 +227,23 @@ const entitiesData: EntityDetails[] = [
       { name: 'comfort', amount: hour * 2 },
     ],
     conditions: [],
+    triggers: [],
   },
   {
     name: 'bin',
     cost: 0,
-    hoursToComplete: 0.5,
+    hoursToComplete: 0,
     meterImpacts: [{ name: 'freedom', amount: -hour * 2 }],
     conditions: ['cleaning'],
+    triggers: [],
+  },
+  {
+    name: 'idle',
+    cost: 0,
+    hoursToComplete: 0,
+    meterImpacts: [],
+    conditions: [],
+    triggers: ['clear'],
   },
 ];
 
@@ -231,6 +257,7 @@ export class Entities {
         hoursToComplete: entity.hoursToComplete,
         meterImpacts: entity.meterImpacts,
         conditions: entity.conditions,
+        triggers: entity.triggers,
       };
     });
   }

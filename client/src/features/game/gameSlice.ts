@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import moment from 'moment';
 import { RootState } from '../../app/store';
 import { GameTime } from '../../interfaces/gameTime.interface';
 import { second, minute, hour, day } from '../../data/time.data';
@@ -17,6 +18,12 @@ export interface GameState {
   starvationCounter: number;
   sleepDepCounter: number;
   sickCounter: number;
+  timeOfDay: string;
+  lightOn: boolean;
+  musicOn: boolean;
+  computerOn: boolean;
+  tvOn: boolean;
+  dressed: boolean;
 }
 
 const initialState: GameState = {
@@ -32,6 +39,12 @@ const initialState: GameState = {
   starvationCounter: 0,
   sleepDepCounter: 0,
   sickCounter: 0,
+  timeOfDay: 'day',
+  lightOn: false,
+  musicOn: true,
+  computerOn: false,
+  tvOn: false,
+  dressed: false,
 };
 
 export const selectGameTime = (state: GameState): GameTime => {
@@ -73,6 +86,11 @@ export const gameSlice = createSlice({
       const timeSinceStartReal = state.currClockTimeReal - state.startTime;
       const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
       state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
+      const hourOfGameDay = moment(state.currClockTimeInGame).format('H');
+      if (+hourOfGameDay >= 8 && +hourOfGameDay < 19) state.timeOfDay = 'day';
+      if (+hourOfGameDay >= 19 && +hourOfGameDay < 21) state.timeOfDay = 'dusk';
+      if (+hourOfGameDay >= 21 || +hourOfGameDay < 6) state.timeOfDay = 'night';
+      if (+hourOfGameDay >= 6 && +hourOfGameDay < 8) state.timeOfDay = 'dawn';
     },
     updateClockWhenFastForwarding: (
       state,
@@ -153,6 +171,26 @@ export const gameSlice = createSlice({
     setIsCurrentGameActive: (state) => {
       state.isCurrentGameActive = !state.isCurrentGameActive;
     },
+    toggleLightOn: (state, action: PayloadAction<boolean>) => {
+      state.lightOn = action.payload;
+    },
+    toggleMusicOn: (state, action: PayloadAction<boolean>) => {
+      state.musicOn = action.payload;
+    },
+    toggleComputerOn: (state, action: PayloadAction<boolean>) => {
+      state.computerOn = action.payload;
+    },
+    toggleTvOn: (state, action: PayloadAction<boolean>) => {
+      state.tvOn = action.payload;
+    },
+    toggleDressed: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        console.log('You put clothes on');
+      } else {
+        console.log("You're naked!");
+      }
+      state.dressed = action.payload;
+    },
   },
 });
 
@@ -176,6 +214,11 @@ export const {
   decreaseStarvation,
   decreaseSleepDep,
   decreaseSick,
+  toggleLightOn,
+  toggleMusicOn,
+  toggleComputerOn,
+  toggleTvOn,
+  toggleDressed,
 } = gameSlice.actions;
 
 export const selectIsRoomLoading = (state: RootState): boolean =>
@@ -206,5 +249,14 @@ export const selectStarvation = (state: RootState): number =>
 export const selectSleepDep = (state: RootState): number =>
   state.game.sleepDepCounter;
 export const selectSick = (state: RootState): number => state.game.sickCounter;
+
+export const selectTimeOfDay = (state: RootState): string =>
+  state.game.timeOfDay;
+export const selectLightOn = (state: RootState): boolean => state.game.lightOn;
+export const selectMusicOn = (state: RootState): boolean => state.game.musicOn;
+export const selectComputerOn = (state: RootState): boolean =>
+  state.game.computerOn;
+export const selectTvOn = (state: RootState): boolean => state.game.tvOn;
+export const selectDressed = (state: RootState): boolean => state.game.dressed;
 
 export default gameSlice.reducer;

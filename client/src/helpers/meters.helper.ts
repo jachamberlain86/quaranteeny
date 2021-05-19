@@ -9,6 +9,7 @@ import {
 } from '../features/meters/metersSlice';
 import { selectGameOver, selectGameTime } from '../features/game/gameSlice';
 import {
+  changeInteraction,
   selectCurrentInteraction,
   selectInteractionChangesRemaining,
   setInteractionChangesRemaining,
@@ -32,7 +33,6 @@ function deductRent(): void {
   const currentValue = selectMeterValue(store.getState(), 'money');
   if (currentValue > 0) {
     store.dispatch(changeValueFixed({ name: 'money', amount: -200 }));
-    console.log('rent deducted');
   }
 }
 
@@ -159,7 +159,7 @@ export function triggerIncrementalChange(
         pausedMeters.forEach((meter) =>
           store.dispatch(resetMeterPauseDecayToInit(meter))
         );
-        setNewInteraction(null);
+        store.dispatch(changeInteraction('cancel'));
         updateInteractionProgress(0, 0);
       } else {
         updateInteractionProgress(interactionChangesRemaining, iterations);
@@ -182,11 +182,15 @@ export function triggerIncrementalChange(
 }
 
 function triggerImmediateChange(entityData: Entity): void {
-  entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
-    store.dispatch(changeValueScaled(meterImpact));
-  });
-  triggerRemoveConditions(entityData.conditions);
-  setNewInteraction(null);
+  if (entityData.meterImpacts.length) {
+    entityData.meterImpacts.forEach((meterImpact: MeterChange) => {
+      store.dispatch(changeValueScaled(meterImpact));
+    });
+    triggerRemoveConditions(entityData.conditions);
+  }
+  setTimeout(() => {
+    store.dispatch(changeInteraction('cancel'));
+  }, 200);
 }
 
 export function triggerChangeMeters(entityData: Entity, entity: string): void {
