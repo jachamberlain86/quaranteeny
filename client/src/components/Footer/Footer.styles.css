@@ -1,6 +1,7 @@
 footer {
   height: var(--header-footer-height);
   /* height: 50px; */
+  z-index: 1
 }
 
 .footer-row-1 {
@@ -10,6 +11,8 @@ footer {
   background-repeat: repeat-x;
   background-size: contain;
 }
+
+
 .footer-row-2 {
   background-color: var(--header-light-brown);
   /* height: 40px; */

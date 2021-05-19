@@ -172,9 +172,9 @@ const Home = (): JSX.Element => {
               </button>
             </div>
           )}
+          <IntroAnimations />
         </div>
       </div>
-      <IntroAnimations />
     </div>
   );
 };
