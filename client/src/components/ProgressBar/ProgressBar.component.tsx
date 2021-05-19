@@ -15,7 +15,7 @@ const ProgressBar = (): JSX.Element => {
         </div>
         <div className="meter-container">
           <progress
-            className="nes-progress is-success"
+            className="Meter__progress-bar nes-progress is-success"
             value={interactionProgress || 0.1}
             max={100}
           />
