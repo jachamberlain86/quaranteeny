@@ -5,6 +5,7 @@ import { store } from '../../app/store';
 import { useAppSelector } from '../../app/hooks';
 import './SoundBar.styles.css';
 import { musicController } from '../../audioControllers/musicController';
+import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
 
 const initialState = {} as Howl;
 
@@ -50,6 +51,7 @@ const SoundBar = (): JSX.Element => {
         </button>
       </div>
       <div className="song-title">{currentSongTitle}</div>
+      <MuteSoundBtn />
     </div>
   );
 };

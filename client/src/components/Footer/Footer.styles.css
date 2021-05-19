@@ -4,7 +4,8 @@ footer {
 
 .footer-row-2 {
   background-color: var(--header-light-brown);
-  height: 40px;
+  /* height: 40px; */
+  height: 10vh;
 }
 .footer-row-1 {
   background-color: var(--footer-shade-brown);

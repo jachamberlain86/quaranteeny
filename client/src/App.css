@@ -1,5 +1,11 @@
 .app-container {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+}
+
+/* To be used in as a global container to limit screen component width on larger screens */
+.max-width-container {
+  max-width: 1440px;
+  margin: 0 auto;
 }
