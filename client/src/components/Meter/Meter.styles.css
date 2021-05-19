@@ -9,16 +9,16 @@
   /* padding: .25rem; */
   /* padding: .5rem 1rem; */
   width: 96%;
-  margin: 0.275rem;
+  /* margin: 0.1rem; */
   background-color: #fff;
 }
 
 .Meter__progress-bar {
   -webkit-appearance: none;
   border-radius: 5px;
-  height: 42px;
+  height: 30px;
   border: 2px solid #444;
-  padding: 5px 4px;
+  padding: 4px 4px;
   width: 96%;
 }
 

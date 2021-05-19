@@ -141,9 +141,9 @@ const Game = (): JSX.Element => {
 
           <div className="panel_space" id="right_panel_space">
             <div className="panel-component-border" id="mood_panel">
+              <MeterArea />
               <Mood />
               <ObjectInteraction />
-              <MeterArea />
             </div>
           </div>
         </div>
