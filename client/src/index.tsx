@@ -7,6 +7,7 @@ import App from './App';
 import { store } from './app/store';
 import * as serviceWorker from './serviceWorker';
 import Header from './components/Header/Header.component';
+import Footer from './components/Footer/Footer.component';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Router>
         <Header />
         <App />
+        <Footer />
       </Router>
     </Provider>
   </React.StrictMode>,

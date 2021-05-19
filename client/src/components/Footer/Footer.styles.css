@@ -1,0 +1,15 @@
+footer {
+  height: 50px;
+}
+
+.footer-row-2 {
+  background-color: var(--header-light-brown);
+  height: 40px;
+}
+.footer-row-1 {
+  background-color: var(--footer-shade-brown);
+  height: 10px;
+  background-image: url('../../assets/images/header-footer/rim-bottom.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
