@@ -106,6 +106,17 @@ border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14
   flex: 3
 }
 
+.new-game-page-furniture-icons{
+  margin-top: 28vh;
+  z-index: 3;
+}
+
+.new-game-page-icon {
+  height: 10vh;
+  width: 10vw; 
+  background-color: grey;
+}
+
 
 .flashing-button {
   animation: blinker 1.5s linear infinite;

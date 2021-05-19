@@ -1,0 +1,39 @@
+.new-game-page-animations-bar {
+  /* width: 100vw; */
+  margin-top: 0rem;
+  height: 50vh;
+  display: flex;
+  /* background-color: green; */
+  z-index: 2;
+  /* position: absolute;
+  bottom:  */
+}
+
+.desk-ng-page {
+  /* margin-top: vh; */
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-left: 30vw;
+  margin-right: 0vw;
+
+  background-image: url('../../assets/images/office/desk-off.png');
+  background-repeat: no-repeat;
+  background-size: 10vw 20vh
+
+}
+
+.fridge-ng-page{
+  position: relative;
+  bottom: 2vh;
+  height: 30vh;
+  width: 8vh;
+  background-image: url('../../assets/images/kitchen/fridge-open-full.png');
+  background-repeat: no-repeat;
+  background-size: 8vh 25vh;
+  margin-left: 10vw; 
+  margin-right: 10vw; 
+
+  /* margin-top: 3.5vh; */
+  }
+
