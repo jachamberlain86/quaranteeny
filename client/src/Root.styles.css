@@ -1,0 +1,14 @@
+:root {
+  --bg-color-offBlack: rgb(38, 38, 38);
+  --header-light-blue: #bbdbee;
+  --header-shade-blue: #97c0d8;
+  --header-light-brown: #ffd2a5;
+  --header-shade-brown: #dc9b78;
+  --header-dark-brown: #8c3c32;
+  --home-text-color: white;
+  --nes-yellow: #F7D51E;
+  --nes-red: #E86E54;
+  --nes-blue: #1D9DED;
+  --nes-blue-dark: #1782c5;
+
+}

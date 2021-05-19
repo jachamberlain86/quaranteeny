@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import './Root.styles.css';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
 import Home from './components/Home/Home.component';

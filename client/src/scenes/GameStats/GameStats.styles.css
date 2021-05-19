@@ -1,9 +1,14 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
+
+.GameStats__page{
+  background-color: var(--bg-color-offBlack);
+}
+
 .GameStats__main-container{
   color: #eee;
   padding: 4rem 10rem;
-  background-color: rgb(38, 38, 38);
+  background-color: var(--bg-color-offBlack);
   display: flex;
   flex-direction: column;
 }
