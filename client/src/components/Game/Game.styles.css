@@ -80,10 +80,18 @@
   flex-direction: row;
   width: 100% 
 }
-.panel-bottom-left-corner{}
+.panel-bottom-left-corner{
+  background:url('../../assets/images/walls/rim-right.png'); 
+  width: 32px;
+  height: 32px;
+}
 .panel-bottom-middle{
   background:url('../../assets/images/walls/rim-right.png'); 
   width: 32px;
   height: 32px;
 }
-.panel-bottom-right-corner{}
+.panel-bottom-right-corner{
+  background:url('../../assets/images/walls/rim-right.png'); 
+  width: 32px;
+  height: 32px;
+}

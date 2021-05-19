@@ -4,6 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import Game from './components/Game/Game.component';
 import GameStart from './scenes/GameStart/GameStart.scene';
 import GameStats from './scenes/GameStats/GameStats.scene';
+import NewGameScreen from './scenes/NewGameScreen/NewGameScreen.scene';
+
 import { useAppDispatch } from './app/hooks';
 import {
   setUserId,
@@ -34,6 +36,9 @@ const App = (): JSX.Element => {
           </Route>
           <Route path="/game-stats">
             <GameStats />
+          </Route>
+          <Route path="/new-game">
+            <NewGameScreen />
           </Route>
           <Route path="/">
             <GameStart />
