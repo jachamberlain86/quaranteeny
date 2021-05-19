@@ -28,7 +28,7 @@ import { setCurrentSong } from '../../features/music/musicSlice';
 
 const NewGameScreen = (): JSX.Element => {
   return (
-    <div>
+    <div className="max-width-container">
       <div className="new-game-page-content">
         <div className="difficulty-radio-buttons">
           <div className="diff-radio-button" id="easy">
