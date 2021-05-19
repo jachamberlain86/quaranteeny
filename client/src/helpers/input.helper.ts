@@ -55,7 +55,6 @@ export function checkCanMove(newPos: { x: number; y: number }): boolean {
   const mapIndex = checkIndex(newPos.x, newPos.y);
   const nearByObjects = layers[1][mapIndex].intPos;
   store.dispatch(updateObjectsNearBy(nearByObjects));
-  console.log('nearByObjects -> ', nearByObjects);
   const result = layers[0][mapIndex].walk;
   return result;
 }

@@ -1,3 +1,7 @@
+.game-container{
+  height: var(--game-height);
+}
+
 .new-game-page-content {
   display: flex;
   align-items: center;
