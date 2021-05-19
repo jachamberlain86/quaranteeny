@@ -1,12 +1,47 @@
 .new-game-page-content {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
+.difficulty-radio-buttons {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  background-color: yellow;
+}
+
+.diff-radio-button-space {
+  color:white;
+  background-color: green;
+  /* margin: 20px 30px 20px 0; */
+  display:flex;
+  align-items: center;
+}
+
+.diff-radio-button-space h1 {
+  color: red;
+  flex: 3;
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+.diff-radio-button-space p {
+  color: orange; 
+  flex: 5;
+  font-size: 1rem; 
+  margin: 1rem
+}
+.diff-radio {
+  margin: 0 0 0 30px
+}
 
 .direction-key-instructions {
   display: flex;
   flex-direction: column;
-  margin: 5rem
+  flex: 2;
+  align-items: center;
+  color: white;
+  background-color: pink
 }
 
 .letter-instruction {
@@ -22,14 +57,8 @@ margin: 0.5rem
 }
 
 #w{
-  margin-left: 80px;
+  margin-left: -20px;
 }
-
-#a{}
-
-#s{}
-
-#d{}
 
 .key-arrow {
   width: 0;
@@ -39,14 +68,14 @@ margin: 0.5rem
 
 
 #up-arrow {
-  margin-left: 80px;
+  margin-left: -20px;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-bottom: 25px solid var(--header-dark-brown)
 }
 
 #down-arrow {
-  margin-left: 115px;
+  /* margin-left: px; */
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 25px solid var(--header-dark-brown)
@@ -71,6 +100,6 @@ margin: 0.5rem
 
 .k-and-l-key-instructions{
   display: flex;
-  margin: 5rem;
   align-items: center;
+  flex: 3
 }
