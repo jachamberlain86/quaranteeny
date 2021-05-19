@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import { Howler } from 'howler';
 import { btnClickOne } from '../../audioControllers/buttonSounds';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { setAllSoundMuted } from '../../features/music/musicSlice';
 
 const MuteSoundBtn = (): JSX.Element => {
-  const [isMuted, setIsMuted] = useState(false);
+  const dispatch = useAppDispatch();
+  const { areAllSoundsMuted } = useAppSelector((state) => state.music);
   const handleMute = (): void => {
     btnClickOne.play();
-    setIsMuted(!isMuted);
-    Howler.mute(isMuted);
+    dispatch(setAllSoundMuted());
   };
   return (
     <button
       type="button"
       onClick={handleMute}
-      className={
-        isMuted
-          ? 'nes-btn mute-sound-btn'
-          : 'nes-btn is-disabled mute-sound-btn'
-      }
+      onMouseOver={() => btnClickOne.play()}
+      onFocus={() => {
+        console.log('focus');
+      }}
+      className={areAllSoundsMuted ? 'mute-sound-btn' : ''}
     >
-      Mute/Unmute
+      {areAllSoundsMuted ? 'Unmute All Sounds' : 'Mute All Sounds'}
     </button>
   );
 };

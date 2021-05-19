@@ -24,8 +24,6 @@ import {
   selectSick,
   selectLightOn,
   selectMusicOn,
-  selectComputerOn,
-  selectTvOn,
   toggleLightOn,
   toggleMusicOn,
   toggleComputerOn,
@@ -34,7 +32,6 @@ import {
   toggleDressed,
 } from '../features/game/gameSlice';
 import {
-  selectLastInput,
   selectCurPos,
   setMoveDir,
   changeMovePos,
@@ -53,8 +50,10 @@ import { conditions } from '../data/conditions.data';
 import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
 import { checkCanMove, checkIndex } from './input.helper';
-import game from '../data/gameMap.data';
 import { roomMap } from '../data/roomMap.data';
+import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+
+import { musicController } from '../audioControllers/musicController';
 
 // Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
 
@@ -377,8 +376,11 @@ export function spriteMoveSelfThenInteract(interaction: string): void {
   for (let i = 0; i < movesArr.length + 1; i += 1) {
     setTimeout(() => {
       if (i === 0) store.dispatch(changeInteraction('walking'));
-      if (i === movesArr.length) setNewInteraction(interaction);
-      else {
+      if (i === movesArr.length) {
+        setNewInteraction(interaction);
+        playObjectSound(interaction);
+        if (interaction === 'jukebox') musicController.handlePause();
+      } else {
         const curPos = selectCurPos(store.getState());
         let direction = 'w';
         if (curPos.x > movesArr[i].x) direction = 'a';

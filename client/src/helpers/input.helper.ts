@@ -43,9 +43,13 @@ import {
   howlCollisionsObj,
   collisionArray,
 } from '../audioControllers/playerSounds';
-import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+import {
+  playObjectSound,
+  stopObjectSound,
+} from '../audioControllers/houseObjectsSounds';
 import game from '../data/gameMap.data';
 import { roomMap } from '../data/roomMap.data';
+import { musicController } from '../audioControllers/musicController';
 
 function calcNewPos(key: string): { x: number; y: number } {
   const curPos = selectCurPos(store.getState());
@@ -65,8 +69,6 @@ export function checkIndex(x: number, y: number): number {
 export function checkCanMove(newPos: { x: number; y: number }): boolean {
   const { layers } = game;
   const mapIndex = checkIndex(newPos.x, newPos.y);
-  const nearByObjects = roomMap[mapIndex].intPos;
-  store.dispatch(updateObjectsNearBy(nearByObjects));
   const result = layers[0][mapIndex].walk;
   return result;
 }
@@ -78,6 +80,9 @@ function handleMove(key: string): void {
     if (checkCanMove(newPos)) {
       shuffleWalkShort.play();
       store.dispatch(changeMovePos());
+      const mapIndex = checkIndex(newPos.x, newPos.y);
+      const nearByObjects = roomMap[mapIndex].intPos;
+      store.dispatch(updateObjectsNearBy(nearByObjects));
     } else {
       const randomCollisionSound =
         collisionArray[Math.floor(Math.random() * collisionArray.length)];
@@ -102,12 +107,14 @@ export function cancelCurrentInteraction(): void {
   const entityData = getEntityData(currentInteraction);
   triggerRemoveConditions(entityData.conditions);
   store.dispatch(changeInteraction('cancel'));
+  stopObjectSound();
 }
 
 const runInteractionAnimations = (interaction: string): void => {
   if (checkNewInteraction(interaction)) {
     playObjectSound(interaction);
     setNewInteraction(interaction);
+    if (interaction === 'jukebox') musicController.handlePause();
   }
 };
 

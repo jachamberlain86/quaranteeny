@@ -1,43 +1,49 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
-.game-stats-container{
-  margin: 4rem auto;
+
+.GameStats__page{
+  background-color: var(--bg-color-offBlack);
+  height: var(--game-height);
 }
 
-.game-stats-title {
+.GameStats__main-container{
+  color: #eee;
+  padding: 4rem 10rem;
+  background-color: var(--bg-color-offBlack);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem;
-  color: blue;
-  font-size: 1.8rem;
+  flex-direction: column;
 }
 
-.game-stats-sub-container{
-  margin: 2rem auto;
-  padding: 0 1rem;
+.GameStats__content-container {
+  display: flex;
 }
 
-.game-stats-sub-container > * {
-  margin-bottom: 1rem;
+.GameStats__column {
+  width: 100%;
+  margin: 0 4rem;
+  padding: 1rem;
 }
 
-.game-stats-btn-container{
+.GameStats__column-right {
+  border: 1px solid #eee;
+}
+
+.GameStats__high-scores {
+  margin-top: 2rem;
+}
+
+.GameStats__btn-container {
+  padding-top: 2rem;
   display: flex;
   justify-content: space-around;
 }
 
-.game-stats-btn-container button {
-  /* padding: 1rem 1rem; */
-  width: 45%;
+.GameStats__btn-container button {
+  padding: 0.5rem 3rem;
   font-size: 1.5rem;
 }
 
-.score-list li:first-child{
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.score-list li {
+.GameStats__high-scores-list li {
   margin-bottom: 1rem;
+  margin-left: 1.5rem;
 }

@@ -2,19 +2,27 @@
 @import '~sanitize.css/forms.css';
 @import '~sanitize.css/typography.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/*  Vcr Osd Mono is a Free Font for commercial use created by Riciery Leal. */
+@font-face {
+  font-family: 'VCR OSD Mono';
+  src:  url('./assets/fonts/vcr-osd-mono__onlinewebfonts.woff2') format('woff2'),
+        url('./assets/fonts/vcr-osd-mono__onlinewebfonts.woff') format('woff'),
+        url('./assets/fonts/vcr-osd-mono__onlinewebfonts.ttf') format('ttf');
+}
+
 @import '../node_modules/nes.css/css/nes.css';
 
 html {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
+  font-size: 18px;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  font-family:'Press Start 2P', cursive;
+  font-family:'VCR OSD Mono', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,12 +31,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-/* .app-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-} */
 
 * {
   box-sizing: border-box;

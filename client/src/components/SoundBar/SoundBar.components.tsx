@@ -5,6 +5,8 @@ import { store } from '../../app/store';
 import { useAppSelector } from '../../app/hooks';
 import './SoundBar.styles.css';
 import { musicController } from '../../audioControllers/musicController';
+import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
+import { btnClickOne } from '../../audioControllers/buttonSounds';
 
 const initialState = {} as Howl;
 
@@ -13,43 +15,90 @@ const SoundBar = (): JSX.Element => {
   const currentSong = musicController.findHowlFileFromTitle(currentSongTitle);
   return (
     <div className="sound-bar-container">
-      {/* {playList} */}
       <div className="music-controls">
-        <button type="button" onClick={() => currentSong?.play()}>
+        <button
+          type="button"
+          onClick={() => currentSong?.play()}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
+        >
           Play
         </button>
-        <button type="button" onClick={musicController.handleStop}>
+        <button
+          type="button"
+          onClick={musicController.handleStop}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
+        >
           Stop
         </button>
-        <button type="button" onClick={musicController.handlePause}>
+        <button
+          type="button"
+          onClick={musicController.handlePause}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
+        >
           Pause
         </button>
-        <button type="button" onClick={musicController.handleMute}>
+        <button
+          type="button"
+          onClick={musicController.handleMute}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
+        >
           Mute
         </button>
         <button
           type="button"
           onClick={() => musicController.handleVolume(0.05)}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
         >
           Vol +
         </button>
         <button
           type="button"
           onClick={() => musicController.handleVolume(-0.05)}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
         >
           Vol -
         </button>
         <button
           type="button"
           onClick={() => musicController.handleSongSkip(-1)}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
         >
           Prev
         </button>
-        <button type="button" onClick={() => musicController.handleSongSkip(1)}>
+        <button
+          type="button"
+          onClick={() => musicController.handleSongSkip(1)}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => {
+            console.log('focus');
+          }}
+        >
           Next
         </button>
       </div>
-      <div className="song-title">{currentSongTitle}</div>
+      <div className="song-title">🎵 {currentSongTitle} </div>
+      <MuteSoundBtn />
     </div>
   );
 };

@@ -1,0 +1,129 @@
+.game-container{
+  height: var(--game-height);
+}
+
+.new-game-page-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.difficulty-radio-buttons {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.diff-radio-button-space {
+  color:white;
+  /* margin: 20px 30px 20px 0; */
+  display:flex;
+  align-items: center;
+}
+
+.diff-radio-button-space h1 {
+  flex: 3;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+}
+.diff-radio-button-space p {
+  color: orange; 
+  flex: 5;
+  font-size: 0.75rem; 
+  margin: 1rem
+}
+.diff-radio {
+  margin: 0 0 0 30px
+}
+
+.direction-key-instructions {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  align-items: center;
+  color: white;
+}
+
+.letter-instruction {
+width: 50px;
+height:50px;
+/* line-height: -10px; */
+background-color: var(--header-dark-brown);
+color: white;
+text-align: center;
+/* vertical-align: middle; */
+padding-top: 0px;
+font-size: 1rem; 
+margin: 0.5rem;
+border: var(--brown-border-frame);
+border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+}
+
+#w{
+  margin-left: -20px;
+}
+
+.key-arrow {
+  width: 0;
+  height:0;
+  margin: 0.5rem
+}
+
+
+#up-arrow {
+  margin-left: -20px;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 25px solid var(--header-dark-brown)
+}
+
+#down-arrow {
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 25px solid var(--header-dark-brown)
+}
+
+#left-arrow{
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent; 
+  border-right:25px solid var(--header-dark-brown)
+}
+
+#right-arrow{
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-left: 25px solid var(--header-dark-brown)
+}
+
+.bottom-row-of-direction-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.k-and-l-key-instructions{
+  display: flex;
+  align-items: center;
+  flex: 3
+}
+
+.new-game-page-furniture-icons{
+  margin-top: 28vh;
+  z-index: 3;
+}
+
+.new-game-page-icon {
+  height: 10vh;
+  width: 10vw; 
+  background-color: grey;
+}
+
+
+.flashing-button {
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

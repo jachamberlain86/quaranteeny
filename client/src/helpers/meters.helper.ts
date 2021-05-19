@@ -14,6 +14,7 @@ import {
   selectInteractionChangesRemaining,
   setInteractionChangesRemaining,
   decrementInteractionChangesRemaining,
+  setInteractionProgress,
 } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { meters, Meters } from '../data/meters.data';
@@ -24,6 +25,7 @@ import {
   updateInteractionProgress,
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
+import { stopObjectSound } from '../audioControllers/houseObjectsSounds';
 
 function checkPauseDecayState(meter: string): boolean {
   return selectPauseDecay(store.getState(), meter);
@@ -131,6 +133,10 @@ export function triggerIncrementalChange(
   );
   if (interactionChangesRemainingInitial === 0) {
     store.dispatch(setInteractionChangesRemaining(iterations));
+    // This is so that the progress bar displays as soon as an interaction is
+    // started, and we don't have to wait until the first setInterval runs
+    // before the progress bar shows.
+    store.dispatch(setInteractionProgress(0));
   }
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
@@ -147,6 +153,7 @@ export function triggerIncrementalChange(
     } else {
       const currentInteraction = selectCurrentInteraction(store.getState());
       if (currentInteraction !== entity) {
+        stopObjectSound();
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         updateInteractionProgress(0, 0);
@@ -154,6 +161,7 @@ export function triggerIncrementalChange(
           store.dispatch(resetMeterPauseDecayToInit(meter))
         );
       } else if (interactionChangesRemaining <= 0) {
+        stopObjectSound();
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
         pausedMeters.forEach((meter) =>

@@ -26,12 +26,12 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
   const meterValue = calcPercentage(currentValue, meter.max);
   const meterColor = (): string => {
     if (meterValue <= meterWarningValue) {
-      return 'nes-progress is-error meter';
+      return 'Meter__progress-bar--low meter';
     }
     if (meterValue > meterWarningValue && meterValue < meterExcellentValue) {
-      return 'nes-progress is-primary meter';
+      return 'Meter__progress-bar--normal meter';
     }
-    return 'nes-progress is-warning meter';
+    return 'Meter__progress-bar--high meter';
   };
 
   const renderMeter =
@@ -48,10 +48,15 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
               : 'meter-text'
           }
         >
-          {meterName}: {meterValue}%
+          {meterName}
+          {/* : {meterValue}% */}
         </div>
         <div className={meterValue <= meterWarningValue ? 'meter-warning' : ''}>
-          <progress className={meterColor()} value={meterValue} max={100} />
+          <progress
+            className={`Meter__progress-bar ${meterColor()}`}
+            value={meterValue}
+            max={100}
+          />
         </div>
       </div>
     );

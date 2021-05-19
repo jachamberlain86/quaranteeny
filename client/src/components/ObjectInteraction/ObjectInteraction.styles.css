@@ -1,7 +1,4 @@
-:root {
-  --nes-blue: #1D9DED;
-  --nes-blue-dark: #1782c5;
-}
+
 .object-interaction-container {
   background-color: white;
   width: 90%;

@@ -1,0 +1,80 @@
+
+.home-background-color{
+  background-color: var(--bg-color-offBlack);
+}
+.home-container {
+  width: 70%;
+  margin: 0 auto;
+  height: var(--game-height);
+  color: var(--home-text-color);
+}
+.home-title-row{
+  display: flex;
+  justify-content: center;
+}
+.home-title-row h1 {
+  text-align: center;
+  font-size: 4rem;
+  margin: 2rem 0;
+}
+.home-container h2 {
+  margin-bottom: 2rem;
+}
+.home-middle-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-col-right{
+  width: 35%;
+}
+.home-col-left{
+  width: 55%;
+}
+
+.home-col-left p{
+  font-size: 1.2rem;
+}
+.home-form, .home-form label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#submit-btn, .home-btn-container button {
+  margin: 0 auto;
+  font-size: 1rem;
+  width: 30%;
+  background-color: var(--header-dark-brown);
+  color: white;
+  border: var(--brown-border-frame);
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+
+}
+
+.home-btn-container button {
+  margin: 0;
+  font-size: 1rem;
+  width: 45%;
+  background-color: white;
+  color: var(--header-dark-brown);
+  border: 1px solid white;
+}
+#submit-btn:hover, .home-btn-container button:hover {
+  background-color: var(--header-darkest-brown);
+  color: white;
+}
+.home-form label input[type='text']  {
+  margin: 1rem 0;
+  /* border: var(--brown-border-frame);
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round; */
+}
+
+.home-bottom-row {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+}
+.home-btn-container {
+  display: flex;
+  justify-content: space-between;
+}

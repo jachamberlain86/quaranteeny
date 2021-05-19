@@ -41,7 +41,7 @@ const initialState: GameState = {
   sickCounter: 0,
   timeOfDay: 'day',
   lightOn: false,
-  musicOn: true,
+  musicOn: false,
   computerOn: false,
   tvOn: false,
   dressed: false,

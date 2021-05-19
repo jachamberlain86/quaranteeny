@@ -48,7 +48,7 @@ const Player = (): JSX.Element => {
   const [interaction, setInteraction] = useState<string | null>(null);
 
   const [currentAnimation, setCurrentAnimation] = useState<string>('idling');
-  const [musicAnimation, setMusicAnimation] = useState<string>('blank');
+  const [musicAnimation, setMusicAnimation] = useState<string>('music');
 
   useEffect(() => {
     const img = new window.Image();

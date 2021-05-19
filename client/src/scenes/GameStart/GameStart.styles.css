@@ -1,43 +1,32 @@
 @import '../../../node_modules/nes.css/css/nes.css';
-
+/* 
 .game-start-page {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-around; */
-  /* align-items: center; */
-  width: 100vw;
-  height: 100vh;
   text-align: center;
   background:url('https://i.imgur.com/vG36Qiz.png');
   background-size: 40px 40px;
   background-position: left;
   background-repeat: repeat;
   animation: animate 2000ms steps(8) infinite reverse;
-}
-
+} 
+*/
+/* 
 .start-page-container{
   position: relative;
-  /* height: 20vh; */
 }
 
 .title-row{
-  /* max-height: 20vh; */
-  /* height: 30%; */
   margin: 20% auto 1rem auto;
 }
 
 .game-start-page h1 {
-  font-size: 3.5rem;
+  font-size: 6rem;
   margin-bottom: 2rem;
 }
 .start-btn {
   font-size: 2rem;
   width: 40%;
-  /* position: absolute;
-  top: 100%;
-  left: 25% */
-}
-
+} */
+/* 
 .return-btn-container{
   display: flex;
   justify-content: space-around;
@@ -57,7 +46,6 @@
   transition: 
     transform 200ms ease-in-out,
     box-shadow 200ms ease-in-out;
-  /* min-height: 100%; */
 }
 
 .rtn-btn:hover {
@@ -93,9 +81,9 @@
 .speed-btn:hover {
   transform: translateY(-5%) scale(1.03);
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.603);
-}
+} */
 
-.form {
+/* .form {
   transform: translateX(0);
 }
 
@@ -107,22 +95,22 @@
 
 .form label {
   font-size: 1.5rem;
-}
+} */
 
-#userName {
+/* #userName {
   width: 50%;
   margin: 1rem auto;
   padding: .25rem 1rem;
   font-size: 1.7rem;
   text-align: center;
-}
+} */
 
-.submit-btn {
+/* .submit-btn {
   margin: 0 auto;
   font-size: 2rem;
   width: 50%;
-}
-
+} */
+/* 
 .game-info-title {
   margin-bottom: 2rem;
 }
@@ -137,7 +125,7 @@
 .game-info-sub-container {
   display: flex;
   justify-content: space-around;
-}
+} */
 
 
 .animate {

@@ -32,11 +32,7 @@ const DayCounter = (): JSX.Element => {
   return (
     <div className="conNum">
       <div className="numHeader">
-        {userName ? (
-          <p>{userName}, you have survived lockdown for:</p>
-        ) : (
-          <p>You have survived lockdown for:</p>
-        )}
+        <p>You&apos;ve been in lockdown for:</p>
       </div>
       <div className="numOfDays">
         <h2>{timeSinceStart}</h2>

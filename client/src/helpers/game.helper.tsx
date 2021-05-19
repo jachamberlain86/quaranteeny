@@ -1,5 +1,3 @@
-import React from 'react';
-import { Image } from 'react-konva';
 import Konva from 'konva';
 import { store } from '../app/store';
 import {
@@ -14,33 +12,25 @@ import {
   userReturnedAfterGap,
   finishedCatchingUpToPresent,
   resetGameState,
-  setTimeLasted,
 } from '../features/game/gameSlice';
 import { second, minute } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import {
   resetSprite,
-  changeInteraction,
   selectCurrentInteraction,
 } from '../features/sprite/spriteSlice';
 import {
-  changeCurPos,
   resetCharacter,
   selectCurPos,
   selectMovingSelf,
 } from '../features/character/characterSlice';
-import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import {
-  handleInteraction,
   checkNewInteraction,
-  setNewInteraction,
-  calcPath,
   spriteMoveSelf,
   spriteMoveSelfThenInteract,
 } from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
-import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
 import { roomMap } from '../data/roomMap.data';
 
 const fastForwardGameSpeed = 10_000;
@@ -119,13 +109,6 @@ export function handleClickTile(
         // might be more useful in spriteHelper line: 66
         if (checkNewInteraction(clickedEntity)) {
           spriteMoveSelfThenInteract(clickedEntity);
-          const houseSoundsArray = Object.entries(houseInteractablesObj);
-          for (let i = 0; i < houseSoundsArray.length; i += 1) {
-            const soundFile = houseSoundsArray[i];
-            if (soundFile[0].includes(clickedEntity)) {
-              soundFile[1].play();
-            }
-          }
         }
       } else {
         const clickTarget = {

@@ -7,6 +7,7 @@ import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
+import HighScores from '../HighScores/HighScores.component';
 import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
@@ -37,6 +38,7 @@ import { gameOverMusic } from '../../audioControllers/gameOverMusic';
 import SoundBar from '../SoundBar/SoundBar.components';
 import musicContext from '../../contexts/music.context';
 import { musicController } from '../../audioControllers/musicController';
+import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -111,21 +113,40 @@ const Game = (): JSX.Element => {
   const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
 
   return (
-    <div>
-      <SoundBar />
-      <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
-        {gameOver && <GameOver />}
-        {fastForwardIndicator}
-        {roomLoading}
-        <div>
-          <DayCounter />
-          <Mood />
-          <GameOverBtn />
-          <MuteSoundBtn />
-          <ObjectInteraction />
+    <div className="game-container">
+      <div className="max-width-container">
+        <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+          {gameOver && <GameOver />}
+          {fastForwardIndicator}
+          {roomLoading}
+
+          <div className="panel_space" id="left_panel_space">
+            <div className="panel-component-border" id="dcount_panel">
+              <DayCounter />
+            </div>
+            <div className="panel-component-border" id="hscore_panel">
+              <HighScores />
+            </div>
+
+            <div className="panel-component-border" id="gover_panel">
+              <GameOverBtn />
+              <button type="button" onClick={() => stopObjectSound()}>
+                Stop EFX Loop
+              </button>
+            </div>
+          </div>
+          <div>
+            <Room />
+          </div>
+
+          <div className="panel_space" id="right_panel_space">
+            <div className="panel-component-border" id="mood_panel">
+              <MeterArea />
+              <Mood />
+              <ObjectInteraction />
+            </div>
+          </div>
         </div>
-        <Room />
-        <MeterArea />
       </div>
     </div>
   );

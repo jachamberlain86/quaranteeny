@@ -369,23 +369,27 @@ const GameStart = (): JSX.Element => {
   };
 
   return (
-    <div className="game-start-page">
-      <SoundBar />
-      <div className="start-page-container">
-        <MuteSoundBtn />
-        <div className="title-row">
-          <h1>Quarantiny</h1>
-        </div>
-        <div className="bottom-row">
-          {animate.name === 'showStartBtn' ? renderStartBtn() : null}
-          {!userName && animate.name === 'showForm'
-            ? renderNewUserForm()
-            : null}
-          {userName && animate.name === 'showReturnUser'
-            ? renderReturnUser()
-            : null}
-          {animate.name === 'showChooseGameSpeed' ? renderChooseSpeed() : null}
-          {animate.name === 'showGameInfo' ? renderGameInfo() : null}
+    <div>
+      <div className="max-width-container">
+        <div className="game-start-page">
+          <div className="start-page-container">
+            <div className="title-row">
+              <h1>Quarantiny</h1>
+            </div>
+            <div className="bottom-row">
+              {animate.name === 'showStartBtn' ? renderStartBtn() : null}
+              {!userName && animate.name === 'showForm'
+                ? renderNewUserForm()
+                : null}
+              {userName && animate.name === 'showReturnUser'
+                ? renderReturnUser()
+                : null}
+              {animate.name === 'showChooseGameSpeed'
+                ? renderChooseSpeed()
+                : null}
+              {animate.name === 'showGameInfo' ? renderGameInfo() : null}
+            </div>
+          </div>
         </div>
       </div>
     </div>

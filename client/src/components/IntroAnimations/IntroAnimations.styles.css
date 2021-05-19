@@ -1,0 +1,57 @@
+.intro-animations-bar {
+  /* width: 100vw; */
+  margin-top: 1rem;
+  height: 20vh;
+  display: flex;
+  /* background-color: green; */
+  z-index: 2;
+  /* position: absolute;
+  bottom:  */
+}
+
+.intro-animations-bar-pic {
+  color: white
+}
+
+.lamp-on {
+  height: 20vh;
+  width: 10vw;
+  background-image: url('../../assets/images/livingRoom/lamp.png');
+  background-repeat: no-repeat;
+  background-size: 8.5vw 20vh;
+  margin-right: 6vw;
+}
+
+.tv-off {
+  margin-top: 3vh;
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-image: url('../../assets/images/livingRoom/tv-on.png');
+  background-repeat: no-repeat;
+  background-size: 20vw 20vh
+
+}
+
+.plant-alive{
+  height: 16vh;
+  width: 8vh;
+  background-image: url('../../assets/images/livingRoom/plant-alive.png');
+  background-repeat: no-repeat;
+  background-size: 8vh 16vh;
+  margin-left: 20vw; 
+  margin-top: 3.5vh;
+  }
+
+/* 
+  .phone-pic {
+    height:1rem;
+    width:1rem;
+    background-color: pink;
+    background-image: url('../../assets/images/diningRoom/phone.png');
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+
+  } */
