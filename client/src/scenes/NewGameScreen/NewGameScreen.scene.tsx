@@ -81,6 +81,7 @@ const NewGameScreen = (): JSX.Element => {
             </div>
             <div className="key-arrow" id="down-arrow" />
             <p> Use the W, A, S, and D keys to move around the screen</p>
+            <div className="flashing-button">{playGameBtn}</div>
           </div>
           <div className="direction-key-instructions">
             <div className="k-and-l-key-instructions">
@@ -98,11 +99,6 @@ const NewGameScreen = (): JSX.Element => {
             </p>
           </div>
         </div>
-      </div>
-      <div>{playGameBtn}</div>
-
-      <div className="graphic-room-items-border-bar">
-        the plants and stuff will go here
       </div>
     </div>
   );

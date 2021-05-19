@@ -19,13 +19,13 @@
 
 .diff-radio-button-space h1 {
   flex: 3;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-left: 2rem;
 }
 .diff-radio-button-space p {
   color: orange; 
   flex: 5;
-  font-size: 1rem; 
+  font-size: 0.75rem; 
   margin: 1rem
 }
 .diff-radio {
@@ -100,4 +100,15 @@ border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14
   display: flex;
   align-items: center;
   flex: 3
+}
+
+
+.flashing-button {
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
