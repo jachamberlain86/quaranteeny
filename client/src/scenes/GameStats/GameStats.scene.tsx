@@ -32,13 +32,6 @@ const GameStats: FC = () => {
   );
   const topFiveScores = scoresPretty.slice(0, 4);
 
-  const handleExit = (): void => {
-    resetGamePlay();
-    btnPressOne.play();
-    setTimeout(() => {
-      history.push('/');
-    }, 300);
-  };
   const handlePlayAgain = (): void => {
     resetGamePlay();
     bleepFiveConfirmation.play();
@@ -61,22 +54,27 @@ const GameStats: FC = () => {
   return (
     <div>
       <div className="max-width-container">
-        <div className="game-stats-container">
-          <div className="nes-container is-rounded game-stats-title">
-            <h1>game stats</h1>
-          </div>
-          <div className="game-stats-sub-container">
-            {timeLastedPretty && (
-              <h2>Your character survived for {timeLastedPretty}</h2>
-            )}
-            <h3>List of top times</h3>
-            <ol className="nes-list is-circle score-list">
-              {topFiveScores.map((score, index) => {
-                // eslint-disable-next-line react/no-array-index-key
-                return <li key={index}>{score}</li>;
-              })}
-            </ol>
-            <p>Had enough, or are you ready to beat the quarantine?</p>
+        <div className="GameStats__main-container">
+          <div className="GameStats__content-container">
+            <div className="GameStats__column">
+              <h1>Oh no!</h1>
+              <div className="GameStats__why-lost-text">
+                Your quarantiny went outside! Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Error, consectetur sed aliquid
+                expedita temporibus minus beatae omnis soluta ipsam officia id
+                nihil non repudiandae quod tenetur. Eaque nobis ab suscipit!
+              </div>
+            </div>
+            <div className="GameStats__column">
+              {timeLastedPretty && <h2>Lasted for {timeLastedPretty}</h2>}
+              <h3>List of top times</h3>
+              <ol className="nes-list is-circle score-list">
+                {topFiveScores.map((score, index) => {
+                  // eslint-disable-next-line react/no-array-index-key
+                  return <li key={index}>{score}</li>;
+                })}
+              </ol>
+            </div>
           </div>
           <div className="game-stats-btn-container">
             <button
@@ -86,16 +84,7 @@ const GameStats: FC = () => {
               onMouseEnter={handleBtnHoverEnter}
               onMouseLeave={handleBtnHoverLeave}
             >
-              Play again
-            </button>
-            <button
-              type="button"
-              className="nes-btn is-error"
-              onClick={handleExit}
-              onMouseEnter={handleBtnHoverEnter}
-              onMouseLeave={handleBtnHoverLeave}
-            >
-              Exit
+              New game
             </button>
           </div>
         </div>

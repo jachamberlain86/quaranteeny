@@ -1,8 +1,20 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
-.game-stats-container{
-  margin: 4rem auto;
-  width: 70%;
+.GameStats__main-container{
+  color: #eee;
+  padding: 4rem 10rem;
+  background-color: rgb(38, 38, 38);
+  display: flex;
+  flex-direction: column;
+}
+
+.GameStats__content-container {
+  display: flex;
+}
+
+.GameStats__column {
+  width: 100%;
+  margin: 0 4rem;
 }
 
 .game-stats-title {
@@ -24,6 +36,7 @@
 }
 
 .game-stats-btn-container{
+  padding-top: 2rem;
   display: flex;
   justify-content: space-around;
 }
