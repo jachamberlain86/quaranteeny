@@ -12,6 +12,7 @@ import bleep5Confirmation from '../assets/audio/sound-efx/buttons/bleep-5-confir
 import bleep6Select from '../assets/audio/sound-efx/buttons/bleep-6-select.mp3';
 import bleep7Hover from '../assets/audio/sound-efx/buttons/bleep-7-hover.mp3';
 import exitGameBtn from '../assets/audio/sound-efx/buttons/exit-game-press.mp3';
+import cancel from '../assets/audio/sound-efx/buttons/cancel-1.mp3';
 
 export const btnPressOne = new Howl({
   src: [btnPress1],
@@ -86,4 +87,10 @@ export const exitGamePress = new Howl({
   src: [exitGameBtn],
   autoplay: false,
   volume: 0.1,
+});
+
+export const cancelButton = new Howl({
+  src: [cancel],
+  autoplay: false,
+  volume: 0.4,
 });

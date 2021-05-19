@@ -17,7 +17,7 @@ const MuteSoundBtn = (): JSX.Element => {
       onClick={handleMute}
       className={areAllSoundsMuted ? 'mute-sound-btn' : ''}
     >
-      Mute/Unmute
+      {areAllSoundsMuted ? 'Unmute All Sounds' : 'Mute All Sounds'}
     </button>
   );
 };
