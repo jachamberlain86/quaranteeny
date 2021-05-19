@@ -28,7 +28,7 @@ export interface GameState {
 
 const initialState: GameState = {
   isRoomLoading: false,
-  gameSpeed: 1,
+  gameSpeed: 60,
   startTime: 0,
   currClockTimeReal: 0,
   currClockTimeInGame: 0,

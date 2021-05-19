@@ -12,7 +12,7 @@ const Mood = (): JSX.Element => {
   const renderBoard = (): JSX.Element => {
     return (
       <div className="mood-board">
-        <h4>I´m...</h4>
+        <h4>Quaranteeny is...</h4>
         <div className="Mood__list">
           {moodList &&
             moodList.map(

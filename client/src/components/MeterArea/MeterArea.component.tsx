@@ -1,15 +1,14 @@
 import React from 'react';
+import './MeterArea.styles.css';
 import Meter from '../Meter/Meter.component';
-import ProgressBar from '../ProgressBar/ProgressBar.component';
 
 const MeterArea = (): JSX.Element => {
   return (
-    <div>
+    <div className="MeterArea">
       <Meter meterName="hunger" />
       <Meter meterName="energy" />
       <Meter meterName="health" />
       <Meter meterName="money" />
-      <ProgressBar />
     </div>
   );
 };

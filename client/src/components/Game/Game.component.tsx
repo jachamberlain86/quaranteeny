@@ -8,6 +8,7 @@ import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
 import HighScores from '../HighScores/HighScores.component';
+import ProgressBar from '../ProgressBar/ProgressBar.component';
 import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
@@ -144,6 +145,7 @@ const Game = (): JSX.Element => {
               <MeterArea />
               <Mood />
               <ObjectInteraction />
+              <ProgressBar />
             </div>
           </div>
         </div>

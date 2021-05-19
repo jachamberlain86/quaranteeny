@@ -1,8 +1,12 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
+.ProgressBar {
+  margin: 0 auto;
+  width: 95%;
+}
 
 .meter-container {
-  margin: .5rem;
+  /* margin: .5rem; */
 }
 
 .meter{

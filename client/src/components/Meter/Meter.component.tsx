@@ -51,7 +51,13 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
           {meterName}
           {/* : {meterValue}% */}
         </div>
-        <div className={meterValue <= meterWarningValue ? 'meter-warning' : ''}>
+        <div
+          className={
+            meterValue <= meterWarningValue
+              ? 'meter-warning Meter__progress-bar-wrap'
+              : 'Meter__progress-bar-wrap'
+          }
+        >
           <progress
             className={`Meter__progress-bar ${meterColor()}`}
             value={meterValue}
