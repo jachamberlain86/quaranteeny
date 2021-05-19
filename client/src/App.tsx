@@ -44,9 +44,9 @@ const App = (): JSX.Element => {
           <Route path="/">
             <Home />
           </Route>
-          <Route path="/oldhome">
+          {/* <Route path="/oldhome">
             <GameStart />
-          </Route>
+          </Route> */}
         </Switch>
       </musicContext.Provider>
     </div>
