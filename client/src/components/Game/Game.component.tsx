@@ -7,6 +7,7 @@ import DayCounter from '../DayCounter/DayCounter.component';
 import Mood from '../Mood/Mood.component';
 import GameOver from '../GameOver/GameOver.component';
 import FastForward from '../FastForward/FastForward.component';
+import HighScores from '../HighScores/HighScores.component';
 import Loading from '../Loading/Loading.component';
 import { selectUserStatus } from '../../features/user/userSlice';
 import { upHandler, downHandler } from '../../helpers/input.helper';
@@ -124,7 +125,7 @@ const Game = (): JSX.Element => {
               <DayCounter />
             </div>
             <div className="panel-component-border" id="hscore_panel">
-              high scores here
+              <HighScores />
             </div>
 
             <div className="panel-component-border" id="gover_panel">

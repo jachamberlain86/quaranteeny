@@ -27,7 +27,7 @@ const GameStats: FC = () => {
   const scoresPretty = sortedScored.map((score) =>
     moment.duration(score).humanize()
   );
-  const topFiveScores = scoresPretty.slice(0, 4);
+  const topFiveScores = scoresPretty.slice(0, 5);
 
   const handlePlayAgain = (): void => {
     resetGamePlay();
