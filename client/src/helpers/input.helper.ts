@@ -34,6 +34,7 @@ import {
 } from '../audioControllers/playerSounds';
 import { playObjectSound } from '../audioControllers/houseObjectsSounds';
 import game from '../data/gameMap.data';
+import { musicController } from '../audioControllers/musicController';
 
 function calcNewPos(key: string): { x: number; y: number } {
   const curPos = selectCurPos(store.getState());
@@ -94,6 +95,7 @@ const runInteractionAnimations = (interaction: string): void => {
     store.dispatch(changeInteraction(interaction));
     playObjectSound(interaction);
     handleInteraction(interaction);
+    if (interaction === 'jukebox') musicController.handlePause();
   }
 };
 

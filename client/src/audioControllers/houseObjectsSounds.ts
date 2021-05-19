@@ -1,4 +1,5 @@
 import { Howl } from 'howler';
+import { musicController } from './musicController';
 import sink from '../assets/audio/sound-efx/house-objects/sink-basin.mp3';
 import oven from '../assets/audio/sound-efx/house-objects/oven.mp3';
 import jukebox from '../assets/audio/sound-efx/house-objects/jukebox.mp3';
@@ -65,27 +66,27 @@ export const houseSoundsOneShotArr = Object.entries(houseSoundsOneShotObj);
 
 export const playObjectSound = (object: string): void => {
   for (let i = 0; i < houseSoundsOneShotArr.length; i += 1) {
-    const soundFile = houseSoundsOneShotArr[i];
-    if (soundFile[0].includes(object)) {
-      soundFile[1].play();
+    const soundTitle = houseSoundsOneShotArr[i][0];
+    const soundFile = houseSoundsOneShotArr[i][1];
+    if (soundTitle.includes(object)) {
+      soundFile.play();
     }
   }
   for (let i = 0; i < houseSoundsLoopsArr.length; i += 1) {
-    const soundFile = houseSoundsLoopsArr[i];
-    if (soundFile[0].includes(object)) {
-      soundFile[1].play();
+    const soundTitle = houseSoundsOneShotArr[i][0];
+    const soundFile = houseSoundsOneShotArr[i][1];
+    if (soundTitle.includes(object)) {
+      soundFile.play();
     }
   }
 };
 
 export const stopObjectSound = (): void => {
   for (let i = 0; i < houseSoundsOneShotArr.length; i += 1) {
-    const soundTitle = houseSoundsOneShotArr[i][0];
     const soundFile = houseSoundsOneShotArr[i][1];
     if (soundFile.playing()) soundFile.stop();
   }
   for (let i = 0; i < houseSoundsLoopsArr.length; i += 1) {
-    const soundTitle = houseSoundsLoopsArr[i][0];
     const soundFile = houseSoundsLoopsArr[i][1];
     if (soundFile.playing()) soundFile.stop();
   }

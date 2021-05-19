@@ -27,6 +27,7 @@ import {
 import { handleInteraction, setNewInteraction } from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
 import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+import { musicController } from '../audioControllers/musicController';
 
 const fastForwardGameSpeed = 10_000;
 
@@ -107,6 +108,7 @@ export function handleClickTile(
       console.log('That tickles!');
     } else if (clickedEntity !== null) {
       playObjectSound(clickedEntity);
+      if (clickedEntity === 'jukebox') musicController.handlePause();
       if (setNewInteraction(clickedEntity)) {
         handleInteraction(clickedEntity);
       }
