@@ -14,7 +14,7 @@ import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
-} from '../GameStart/GameStart.scene';
+} from '../../components/Home/Home.component';
 import {
   btnPressOne,
   bleepFiveConfirmation,
