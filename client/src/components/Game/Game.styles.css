@@ -28,12 +28,39 @@
 }
 
 .panel-component-border {
-  margin: 0.5rem;
-  border: 20px solid transparent;
+  margin: 24px 0px 0 0;
+  border: 16px solid transparent;
   padding: 10px;
-  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
 }
 
 .space1 {
-  width: 300px
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 776px
+}
+
+.space1 .panel-component-border {
+  background-color: var(--header-light-blue);
+}
+
+.space3 {
+  width: 310px
+}
+
+.space3 .panel-component-border {
+  background-color: var(--header-light-brown)
+}
+
+#dcount_panel {
+  flex: 5.5
+}
+
+#hscore_panel {
+  flex: 4
+}
+
+#gover_panel {
+flex-grow: 0.5
 }

@@ -119,22 +119,31 @@ const Game = (): JSX.Element => {
           {roomLoading}
 
           <div className="space1">
-            <div className="panel-component-border">
+            <div className="panel-component-border" id="dcount_panel">
               <DayCounter />
             </div>
-            <div className="panel-component-border">high scores here</div>
+            <div className="panel-component-border" id="hscore_panel">
+              high scores here
+            </div>
 
-            <div className="panel-component-border">
+            <div className="panel-component-border" id="gover_panel">
               <GameOverBtn />
             </div>
           </div>
           <div className="space2">
-            <Mood />
+            <Room />
           </div>
-          <Room />
-          <div className="panel-component-border">
-            <ObjectInteraction />
-            <MeterArea />
+
+          <div className="space3">
+            <div className="panel-component-border" id="mood_panel">
+              <Mood />
+            </div>
+            <div className="panel-component-border" id="ointeract_panel">
+              <ObjectInteraction />
+            </div>
+            <div className="panel-component-border" id="marea_panel">
+              <MeterArea />
+            </div>
           </div>
         </div>
       </div>
