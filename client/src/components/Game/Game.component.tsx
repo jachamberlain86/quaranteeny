@@ -111,20 +111,22 @@ const Game = (): JSX.Element => {
   const fastForwardIndicator = isInFastForwardMode ? <FastForward /> : '';
 
   return (
-    <div>
-      <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
-        {gameOver && <GameOver />}
-        {fastForwardIndicator}
-        {roomLoading}
-        <div>
-          <DayCounter />
-          <Mood />
-          <GameOverBtn />
-          <MuteSoundBtn />
-          <ObjectInteraction />
+    <div className="game-container">
+      <div className="max-width-container">
+        <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+          {gameOver && <GameOver />}
+          {fastForwardIndicator}
+          {roomLoading}
+          <div>
+            <DayCounter />
+            <Mood />
+            <GameOverBtn />
+            <MuteSoundBtn />
+            <ObjectInteraction />
+          </div>
+          <Room />
+          <MeterArea />
         </div>
-        <Room />
-        <MeterArea />
       </div>
     </div>
   );

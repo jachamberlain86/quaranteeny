@@ -60,42 +60,44 @@ const GameStats: FC = () => {
   }, []);
   return (
     <div>
-      <div className="game-stats-container">
-        <div className="nes-container is-rounded game-stats-title">
-          <h1>game stats</h1>
-        </div>
-        <div className="game-stats-sub-container">
-          {timeLastedPretty && (
-            <h2>Your character survived for {timeLastedPretty}</h2>
-          )}
-          <h3>List of top times</h3>
-          <ol className="nes-list is-circle score-list">
-            {topFiveScores.map((score, index) => {
-              // eslint-disable-next-line react/no-array-index-key
-              return <li key={index}>{score}</li>;
-            })}
-          </ol>
-          <p>Had enough, or are you ready to beat the quarantine?</p>
-        </div>
-        <div className="game-stats-btn-container">
-          <button
-            type="button"
-            className="nes-btn is-success"
-            onClick={handlePlayAgain}
-            onMouseEnter={handleBtnHoverEnter}
-            onMouseLeave={handleBtnHoverLeave}
-          >
-            Play again
-          </button>
-          <button
-            type="button"
-            className="nes-btn is-error"
-            onClick={handleExit}
-            onMouseEnter={handleBtnHoverEnter}
-            onMouseLeave={handleBtnHoverLeave}
-          >
-            Exit
-          </button>
+      <div className="max-width-container">
+        <div className="game-stats-container">
+          <div className="nes-container is-rounded game-stats-title">
+            <h1>game stats</h1>
+          </div>
+          <div className="game-stats-sub-container">
+            {timeLastedPretty && (
+              <h2>Your character survived for {timeLastedPretty}</h2>
+            )}
+            <h3>List of top times</h3>
+            <ol className="nes-list is-circle score-list">
+              {topFiveScores.map((score, index) => {
+                // eslint-disable-next-line react/no-array-index-key
+                return <li key={index}>{score}</li>;
+              })}
+            </ol>
+            <p>Had enough, or are you ready to beat the quarantine?</p>
+          </div>
+          <div className="game-stats-btn-container">
+            <button
+              type="button"
+              className="nes-btn is-success"
+              onClick={handlePlayAgain}
+              onMouseEnter={handleBtnHoverEnter}
+              onMouseLeave={handleBtnHoverLeave}
+            >
+              Play again
+            </button>
+            <button
+              type="button"
+              className="nes-btn is-error"
+              onClick={handleExit}
+              onMouseEnter={handleBtnHoverEnter}
+              onMouseLeave={handleBtnHoverLeave}
+            >
+              Exit
+            </button>
+          </div>
         </div>
       </div>
     </div>
