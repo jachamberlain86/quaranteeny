@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { store } from '../../app/store';
 import { setUserName } from '../../features/user/userSlice';
 import { setCurrentSong } from '../../features/music/musicSlice';
+import { resetGamePlay } from '../../helpers/game.helper';
 import {
   btnPressOne,
   btnPressTwo,
@@ -18,30 +19,20 @@ import {
 } from '../../audioControllers/buttonSounds';
 import { musicController } from '../../audioControllers/musicController';
 
-interface initialState {
-  name: string;
-}
-const initialState = {
-  name: 'showForm',
-};
-
 // TODO move to sound effects
 export const handleBtnHoverEnter = (): void => {
-  console.log('handleBtnHoverEnter');
   bleepTwo.play();
 };
 export const handleBtnHoverLeave = (): void => {
-  console.log('handleBtnHoverLeave');
   bleepOneHover.play();
 };
 
 const Home = (): JSX.Element => {
-  const animationSpeed = 400;
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [nameInput, setNameInput] = useState('');
   const [isUserNameAlert, setIsUserNameAlert] = useState(false);
-  const [animate, setAnimate] = useState(initialState);
+  const { userName } = useAppSelector((state) => state.user);
   const handleNoUserName = (): void => {
     cancelButton.play();
     setIsUserNameAlert(true);
@@ -60,14 +51,16 @@ const Home = (): JSX.Element => {
     dispatch(setUserName(nameInput));
     btnPressOne.play();
     history.push('/new-game');
-    // const target = e.target as HTMLFormElement;
-    // target.classList.add('slideOutLeft');
-    // whooshOne.play();
-    // setTimeout(() => {
-    //   setAnimate({ name: 'showChooseGameSpeed' });
-    //   setNameInput('');
-    //   // target.classList.add('displayOff');
-    // }, animationSpeed);
+  };
+  const handleNewGame = (): void => {
+    bleepFiveConfirmation.play();
+    resetGamePlay();
+    history.push('/new-game');
+  };
+
+  const handleContinueGame = (): void => {
+    btnPressTwo.play();
+    history.push('/start');
   };
   useEffect(() => {
     const howlSongFile = musicController?.findHowlFileFromTitle('Connect');
@@ -81,6 +74,58 @@ const Home = (): JSX.Element => {
       }
     }
   }, []);
+  const newUser = (
+    <>
+      <div className="home-form">
+        <form className="form" autoComplete="off">
+          <h2>You´re new!</h2>
+          <label htmlFor="userName">
+            Type your user name
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              placeholder="Type here..."
+              className=""
+              value={nameInput}
+              onChange={handleInput}
+            />
+          </label>
+          <div>
+            {isUserNameAlert && !nameInput ? (
+              <p>Please fill in your name</p>
+            ) : null}
+          </div>
+        </form>
+      </div>
+    </>
+  );
+  const returnUser = (
+    <>
+      <div className="returnGreeting">
+        <h2>Hey {userName}!</h2>
+        <h2>Welcome Back</h2>
+      </div>
+      <div className="home-btn-container">
+        <button
+          type="button"
+          onClick={handleNewGame}
+          onMouseEnter={handleBtnHoverEnter}
+          onMouseLeave={handleBtnHoverLeave}
+        >
+          New Game
+        </button>
+        <button
+          type="button"
+          onClick={handleContinueGame}
+          onMouseEnter={handleBtnHoverEnter}
+          onMouseLeave={handleBtnHoverLeave}
+        >
+          Continue
+        </button>
+      </div>
+    </>
+  );
   return (
     <div className="home-background-color">
       <div className="max-width-container">
@@ -105,47 +150,23 @@ const Home = (): JSX.Element => {
               </div>
             </div>
             <div className="home-col-right">
-              <div className="home-form">
-                <form
-                  className="form"
-                  // onSubmit={handleSubmit}
-                  autoComplete="off"
-                >
-                  <h2>You´re new!</h2>
-                  <label htmlFor="userName">
-                    Type your user name
-                    <input
-                      type="text"
-                      name="userName"
-                      id="userName"
-                      placeholder="Type here..."
-                      className=""
-                      value={nameInput}
-                      onChange={handleInput}
-                    />
-                  </label>
-                  <div>
-                    {isUserNameAlert && !nameInput ? (
-                      <p>Please fill in your name</p>
-                    ) : null}
-                  </div>
-                </form>
-              </div>
+              {userName ? returnUser : newUser}
             </div>
           </div>
-          <div className="home-bottom-row">
-            <button
-              type="button"
-              className="submit-btn"
-              id="submit-btn"
-              // disabled={!nameInput}
-              onClick={handleSubmit}
-              onMouseEnter={handleBtnHoverEnter}
-              onMouseLeave={handleBtnHoverLeave}
-            >
-              Play
-            </button>
-          </div>
+          {userName || (
+            <div className="home-bottom-row">
+              <button
+                type="button"
+                className="submit-btn"
+                id="submit-btn"
+                onClick={handleSubmit}
+                onMouseEnter={handleBtnHoverEnter}
+                onMouseLeave={handleBtnHoverLeave}
+              >
+                New Game
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
