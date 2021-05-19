@@ -121,7 +121,6 @@ const Game = (): JSX.Element => {
             <DayCounter />
             <Mood />
             <GameOverBtn />
-            <MuteSoundBtn />
             <ObjectInteraction />
           </div>
           <Room />

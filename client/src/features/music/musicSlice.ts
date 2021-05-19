@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Howler } from 'howler';
 import { RootState } from '../../app/store';
 
 interface musicSlice {
   currentSong: string;
   isSongMuted: boolean;
   currentSongIndex: number;
+  areAllSoundsMuted: boolean;
 }
 
 const initialState = {
   currentSong: '',
   isSongMuted: false,
   currentSongIndex: 0,
+  areAllSoundsMuted: false,
 };
 
 const musicSlice = createSlice({
@@ -31,6 +34,11 @@ const musicSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.currentSongIndex = action.payload;
     },
+    setAllSoundMuted(state) {
+      // eslint-disable-next-line no-param-reassign
+      state.areAllSoundsMuted = !state.areAllSoundsMuted;
+      Howler.mute(state.areAllSoundsMuted);
+    },
   },
 });
 
@@ -39,6 +47,7 @@ export const {
   setCurrentSong,
   setIsSongMuted,
   setCurrentSongIndex,
+  setAllSoundMuted,
 } = musicSlice.actions;
 
 export const selectCurrentSong = (state: RootState): string =>

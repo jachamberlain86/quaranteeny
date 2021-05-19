@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 80%;
 }
 
 .sound-bar-container button, .sound-bar-container .song-title {
