@@ -159,7 +159,6 @@ export function updateInteractionProgress(
     percentageComplete = 100 - calcPercentage(current, total);
   }
   store.dispatch(setInteractionProgress(percentageComplete));
-  console.log('percentageComplete', percentageComplete);
 }
 
 export function generateRandomPos(): { x: number; y: number } {
