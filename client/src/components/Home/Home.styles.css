@@ -49,7 +49,7 @@
   color: white;
 }
 .home-form label input[type='text']  {
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 .home-bottom-row {
   display: flex;

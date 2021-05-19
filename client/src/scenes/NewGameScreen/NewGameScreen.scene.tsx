@@ -27,6 +27,16 @@ import { store } from '../../app/store';
 import { setCurrentSong } from '../../features/music/musicSlice';
 
 const NewGameScreen = (): JSX.Element => {
+  const history = useHistory();
+  const handleSubmit = (): void => {
+    // TODO handle radio button selection
+    history.push('/start');
+  };
+  const playGameBtn = (
+    <button type="button" onClick={handleSubmit}>
+      Press enter to start
+    </button>
+  );
   return (
     <div className="game-container">
       <div className="max-width-container">
@@ -88,6 +98,11 @@ const NewGameScreen = (): JSX.Element => {
             </p>
           </div>
         </div>
+      </div>
+      <div>{playGameBtn}</div>
+
+      <div className="graphic-room-items-border-bar">
+        the plants and stuff will go here
       </div>
     </div>
   );

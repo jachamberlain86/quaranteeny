@@ -33,7 +33,7 @@ const GameStats: FC = () => {
     resetGamePlay();
     bleepFiveConfirmation.play();
     // TODO divide Game start page then push user to choose speed
-    history.push('/');
+    history.push('/new-game');
   };
 
   useEffect(() => {

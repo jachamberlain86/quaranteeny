@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.styles.css';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { store } from '../../app/store';
 import { setUserName } from '../../features/user/userSlice';
+import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   btnPressOne,
   btnPressTwo,
@@ -12,7 +14,9 @@ import {
   bleepTwo,
   bleepFiveConfirmation,
   bleepSevenHover,
+  cancelButton,
 } from '../../audioControllers/buttonSounds';
+import { musicController } from '../../audioControllers/musicController';
 
 interface initialState {
   name: string;
@@ -23,9 +27,11 @@ const initialState = {
 
 // TODO move to sound effects
 export const handleBtnHoverEnter = (): void => {
+  console.log('handleBtnHoverEnter');
   bleepTwo.play();
 };
 export const handleBtnHoverLeave = (): void => {
+  console.log('handleBtnHoverLeave');
   bleepOneHover.play();
 };
 
@@ -34,16 +40,26 @@ const Home = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [nameInput, setNameInput] = useState('');
+  const [isUserNameAlert, setIsUserNameAlert] = useState(false);
   const [animate, setAnimate] = useState(initialState);
+  const handleNoUserName = (): void => {
+    cancelButton.play();
+    setIsUserNameAlert(true);
+  };
   const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
     const input = e.currentTarget.value;
+    setIsUserNameAlert(false);
     setNameInput(input.toUpperCase());
   };
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
+    if (!nameInput) {
+      handleNoUserName();
+      return;
+    }
     dispatch(setUserName(nameInput));
     btnPressOne.play();
-    history.push('/');
+    history.push('/new-game');
     // const target = e.target as HTMLFormElement;
     // target.classList.add('slideOutLeft');
     // whooshOne.play();
@@ -53,6 +69,18 @@ const Home = (): JSX.Element => {
     //   // target.classList.add('displayOff');
     // }, animationSpeed);
   };
+  useEffect(() => {
+    const howlSongFile = musicController?.findHowlFileFromTitle('Connect');
+    if (howlSongFile) {
+      const songTitle = musicController?.findSongTitleFromHowlFile(
+        howlSongFile
+      );
+      if (songTitle) {
+        store.dispatch(setCurrentSong(songTitle));
+        musicController?.playSong(howlSongFile);
+      }
+    }
+  }, []);
   return (
     <div className="home-background-color">
       <div className="max-width-container">
@@ -96,6 +124,11 @@ const Home = (): JSX.Element => {
                       onChange={handleInput}
                     />
                   </label>
+                  <div>
+                    {isUserNameAlert && !nameInput ? (
+                      <p>Please fill in your name</p>
+                    ) : null}
+                  </div>
                 </form>
               </div>
             </div>
@@ -105,8 +138,10 @@ const Home = (): JSX.Element => {
               type="button"
               className="submit-btn"
               id="submit-btn"
-              disabled={!nameInput}
+              // disabled={!nameInput}
               onClick={handleSubmit}
+              onMouseEnter={handleBtnHoverEnter}
+              onMouseLeave={handleBtnHoverLeave}
             >
               Play
             </button>
