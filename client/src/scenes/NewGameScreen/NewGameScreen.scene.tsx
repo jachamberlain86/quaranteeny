@@ -35,8 +35,8 @@ const NewGameScreen = (): JSX.Element => {
     history.push('/start');
   };
   const playGameBtn = (
-    <button type="button" onClick={handleSubmit}>
-      Press enter to start
+    <button type="button" onClick={handleSubmit} className="flashing-button">
+      Click to start
     </button>
   );
   return (
@@ -84,7 +84,7 @@ const NewGameScreen = (): JSX.Element => {
               </div>
               <div className="key-arrow" id="down-arrow" />
               <p> Use the W, A, S, and D keys to move around the screen</p>
-              <div className="flashing-button">{playGameBtn}</div>
+              <div>{playGameBtn}</div>
             </div>
             <div className="direction-key-instructions">
               <div className="k-and-l-key-instructions">
