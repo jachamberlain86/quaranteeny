@@ -26,41 +26,18 @@
   margin-top: 2rem;
 }
 
-.game-stats-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem;
-  color: blue;
-  font-size: 1.8rem;
-}
-
-.game-stats-sub-container{
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.game-stats-sub-container > * {
-  margin-bottom: 1rem;
-}
-
-.game-stats-btn-container{
+.GameStats__btn-container {
   padding-top: 2rem;
   display: flex;
   justify-content: space-around;
 }
 
-.game-stats-btn-container button {
-  /* padding: 1rem 1rem; */
-  width: 45%;
+.GameStats__btn-container button {
+  padding: 0.5rem 3rem;
   font-size: 1.5rem;
 }
 
-.score-list li:first-child{
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.score-list li {
+.GameStats__high-scores-list li {
   margin-bottom: 1rem;
+  margin-left: 1.5rem;
 }
