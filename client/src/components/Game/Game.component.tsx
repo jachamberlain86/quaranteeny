@@ -112,7 +112,6 @@ const Game = (): JSX.Element => {
 
   return (
     <div>
-      <SoundBar />
       <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
         {gameOver && <GameOver />}
         {fastForwardIndicator}

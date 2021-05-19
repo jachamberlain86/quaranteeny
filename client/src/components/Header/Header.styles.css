@@ -1,0 +1,27 @@
+/* header colours */
+:root{
+  --header-light-blue: #bbdbee;
+  --header-shade-blue: #97c0d8;
+  --header-light-brown: #ffd2a5;
+  --header-shade-brown: #dc9b78;
+  --header-dark-brown: #8c3c32;
+}
+
+header {
+  height: 50px;
+  margin: 0 auto;
+}
+
+.header-row-1 {
+  background-color: var(--header-light-blue);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+.header-row-2 {
+  background-color: var(--header-shade-brown);
+  height: 10px;
+  background-image: url('../../assets/images/header-footer/rim-bottom.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
