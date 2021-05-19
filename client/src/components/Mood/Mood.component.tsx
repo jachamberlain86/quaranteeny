@@ -11,17 +11,20 @@ const Mood = (): JSX.Element => {
 
   const renderBoard = (): JSX.Element => {
     return (
-      <div className="nes-balloon from-right mood-board">
-        {/* <div className="mood-board"> */}
-        <h3>I´m feeling a little</h3>
-        <ul className="moodList">
+      <div className="mood-board">
+        <h4>I´m feeling a little...</h4>
+        <div className="Mood__list">
           {moodList &&
             moodList.map(
-              (mood): JSX.Element => {
-                return <li key={mood}>{mood}</li>;
+              (mood, index): JSX.Element => {
+                return (
+                  <span className="Mood__item" key={mood}>
+                    {mood}
+                  </span>
+                );
               }
             )}
-        </ul>
+        </div>
       </div>
     );
   };
