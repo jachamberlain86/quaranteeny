@@ -370,7 +370,6 @@ const GameStart = (): JSX.Element => {
 
   return (
     <div className="game-start-page">
-      <SoundBar />
       <div className="start-page-container">
         <MuteSoundBtn />
         <div className="title-row">

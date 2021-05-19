@@ -9,11 +9,14 @@
 
 header {
   height: 50px;
+  margin: 0 auto;
 }
 
 .header-row-1 {
   background-color: var(--header-light-blue);
   height: 40px;
+  display: flex;
+  justify-content: center;
 }
 .header-row-2 {
   background-color: var(--header-shade-brown);

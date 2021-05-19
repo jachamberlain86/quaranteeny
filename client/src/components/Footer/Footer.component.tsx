@@ -6,7 +6,7 @@ const Footer = (): JSX.Element => {
     <div>
       <footer>
         <div className="footer-row-1" />
-        <div className="footer-row-2">footer</div>
+        <div className="footer-row-2" />
       </footer>
     </div>
   );
