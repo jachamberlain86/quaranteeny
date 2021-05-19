@@ -1,5 +1,3 @@
-import React from 'react';
-import { Image } from 'react-konva';
 import Konva from 'konva';
 import { store } from '../app/store';
 import {
@@ -14,21 +12,18 @@ import {
   userReturnedAfterGap,
   finishedCatchingUpToPresent,
   resetGameState,
-  setTimeLasted,
 } from '../features/game/gameSlice';
 import { second, minute } from '../data/time.data';
 import game from '../data/gameMap.data';
 import { resetMeters } from '../features/meters/metersSlice';
 import {
   resetSprite,
-  changeInteraction,
   selectCurrentInteraction,
 } from '../features/sprite/spriteSlice';
 import {
   resetCharacter,
   selectCurPos,
 } from '../features/character/characterSlice';
-import { imageDirectory, ImageDirectory } from '../assets/images/index';
 import { handleInteraction, setNewInteraction } from './sprite.helper';
 import { checkIndex, cancelCurrentInteraction } from './input.helper';
 import { houseInteractablesObj } from '../audioControllers/houseObjectsSounds';
