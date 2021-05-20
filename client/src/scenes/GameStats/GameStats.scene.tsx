@@ -20,7 +20,7 @@ import './GameStats.styles.css';
 
 const GameStats: FC = () => {
   const history = useHistory();
-  const { timeLasted } = useAppSelector((state) => state.game);
+  const { timeLasted, gameOverCause } = useAppSelector((state) => state.game);
   const timeLastedPretty = moment.duration(timeLasted).humanize();
   const scores = useAppSelector(selectScores);
   const sortedScored = scores.slice().sort((a, b) => b - a);
@@ -48,6 +48,26 @@ const GameStats: FC = () => {
       }
     }
   }, []);
+
+  let gameOverText1 =
+    'Quaranteeny went outside and got mauled by a giant crab.';
+  let gameOverText2 =
+    "It's not safe outdoors! Remember to look after quaranteeny!";
+  if (gameOverCause === 'starvation') {
+    gameOverText1 =
+      "Quaranteeny went looking for food. Now they're crab food...";
+    gameOverText2 = 'Eat dinner or be eaten. Remember to keep quaranteeny fed!';
+  } else if (gameOverCause === 'sleep deprivation') {
+    gameOverText1 =
+      'Quaranteeny went sleepwalking and bumped into an angry crab.';
+    gameOverText2 = 'Sleep keeps you safe! Remember to put quaranteeny to bed!';
+  } else if (gameOverCause === 'sickness') {
+    gameOverText1 =
+      'Quaranteeny went in search of medicine, but found crabs instead.';
+    gameOverText2 =
+      "Crabs are bad for you! Take better care of quaranteeny's health!";
+  }
+
   return (
     <div className="GameStats__page">
       <div className="max-width-container">
@@ -55,9 +75,8 @@ const GameStats: FC = () => {
           <div className="GameStats__content-container">
             <div className="GameStats__column">
               <h1>Oh no!</h1>
-              <div className="GameStats__why-lost-text">
-                Your quaranteeny went outside and got eaten by giant crabs.
-              </div>
+              <div className="GameStats__why-lost-text">{gameOverText1}</div>
+              <div className="GameStats__why-lost-text">{gameOverText2}</div>
             </div>
             <div className="GameStats__column GameStats__column-right">
               {timeLastedPretty && <h1>Lasted for {timeLastedPretty}</h1>}

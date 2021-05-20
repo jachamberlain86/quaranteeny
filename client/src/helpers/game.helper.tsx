@@ -35,7 +35,7 @@ import { roomMap } from '../data/roomMap.data';
 
 const fastForwardGameSpeed = 10_000;
 
-export const startClock = (): void => {
+export const startClock = (): NodeJS.Timeout => {
   const startTime = selectStartTime(store.getState());
   // Set startTime to now if it's not already set. Otherwise leave it as is
   // since game is in progress.
@@ -72,6 +72,7 @@ export const startClock = (): void => {
       }
     }
   }, second);
+  return clockIntervalId;
 };
 
 export const resetGamePlay = (): void => {

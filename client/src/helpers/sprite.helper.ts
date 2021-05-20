@@ -30,6 +30,7 @@ import {
   toggleTvOn,
   selectDressed,
   toggleDressed,
+  updateGameOverCause,
 } from '../features/game/gameSlice';
 import {
   selectCurPos,
@@ -137,7 +138,7 @@ export const resumeInProgressInteraction = (): void => {
 
 // Used to check whether lose state conditions are present in the sprite's conditions array
 
-export const checkConditionsState = (): void => {
+export const checkConditionsState = (): NodeJS.Timeout => {
   const { gameHour, updateInterval } = selectGameTime(store.getState().game);
   const timer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
@@ -154,39 +155,51 @@ export const checkConditionsState = (): void => {
       else store.dispatch(decreaseSick());
     }
   }, gameHour * updateInterval);
+  return timer;
 };
 
 // After specific periods of time with certain losing conditions in the sprite's conditions array different states are added and then a gave over is triggered if still unresolved.
 
-export const checkLoseStates = (): void => {
+export const checkLoseStates = (): NodeJS.Timeout => {
   const { gameHour, updateInterval } = selectGameTime(store.getState().game);
   const timer = setInterval(() => {
     const starvation = selectStarvation(store.getState());
     const sleepDep = selectSleepDep(store.getState());
     const sick = selectSick(store.getState());
-    if (starvation > day * 5 || sleepDep > day * 8 || sick > day * 7) {
+    if (starvation > day * 5) {
+      store.dispatch(updateGameOverCause('starvation'));
       store.dispatch(setGameOver());
       clearInterval(timer);
-    }
-    if (starvation > day * 3) {
-      triggerAddConditions(['starved']);
-    }
-    if (starvation < day * 3) {
-      triggerRemoveConditions(['starved']);
-    }
-    if (sleepDep > day * 3) {
-      triggerAddConditions(['delirious']);
-    }
-    if (sleepDep < day * 3) {
-      triggerRemoveConditions(['delirious']);
-    }
-    if (sick > day * 4) {
-      triggerAddConditions(['feverish']);
-    }
-    if (sick < day * 4) {
-      triggerRemoveConditions(['feverish']);
+    } else if (sleepDep > day * 8) {
+      store.dispatch(updateGameOverCause('sleep deprivation'));
+      store.dispatch(setGameOver());
+      clearInterval(timer);
+    } else if (sick > day * 7) {
+      store.dispatch(updateGameOverCause('sickness'));
+      store.dispatch(setGameOver());
+      clearInterval(timer);
+    } else {
+      if (starvation > day * 3) {
+        triggerAddConditions(['starved']);
+      }
+      if (starvation < day * 3) {
+        triggerRemoveConditions(['starved']);
+      }
+      if (sleepDep > day * 3) {
+        triggerAddConditions(['delirious']);
+      }
+      if (sleepDep < day * 3) {
+        triggerRemoveConditions(['delirious']);
+      }
+      if (sick > day * 4) {
+        triggerAddConditions(['feverish']);
+      }
+      if (sick < day * 4) {
+        triggerRemoveConditions(['feverish']);
+      }
     }
   }, gameHour * updateInterval);
+  return timer;
 };
 
 export function updateInteractionProgress(

@@ -99,7 +99,7 @@ export const needs: Need[] = [
     pauseDecay: false,
     safeSize: hour * 12,
     deficitImpacts: ['bored'],
-    excessImpacts: ['hooked'],
+    excessImpacts: ['overstimulated'],
   },
   {
     name: 'freedom',

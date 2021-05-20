@@ -15,6 +15,7 @@ import {
   setInteractionChangesRemaining,
   decrementInteractionChangesRemaining,
   setInteractionProgress,
+  updateCurrentThought,
 } from '../features/sprite/spriteSlice';
 import { MeterChange } from '../interfaces/meterChange.interface';
 import { meters, Meters } from '../data/meters.data';
@@ -26,6 +27,7 @@ import {
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { stopObjectSound } from '../audioControllers/houseObjectsSounds';
+import { minute } from '../data/time.data';
 
 function checkPauseDecayState(meter: string): boolean {
   return selectPauseDecay(store.getState(), meter);
@@ -40,11 +42,11 @@ function deductRent(): void {
 
 // On game init, all meters will state to decay at their defined decay rate. At faster game speeds, calls to decay the meter are reduced by updateInterval. Meters decay by greater amounts when there are greater intervals between function calls.
 
-export const decayMeters = (metersObj: Meters): void => {
+export const decayMeters = (metersObj: Meters): NodeJS.Timeout[] => {
   const { gameMinute, gameDay, updateInterval } = selectGameTime(
     store.getState().game
   );
-
+  const timersArr: NodeJS.Timeout[] = [];
   const keysArr = Object.keys(metersObj);
   keysArr.forEach((key) => {
     const meter = metersObj[key];
@@ -64,7 +66,13 @@ export const decayMeters = (metersObj: Meters): void => {
         }
       }
     }, gameMinute * updateInterval);
+    timersArr.push(decayTimer);
   });
+  const minuteTimer = setInterval(() => {
+    const gameOver = selectGameOver(store.getState());
+    if (gameOver) clearInterval(minuteTimer);
+    store.dispatch(updateCurrentThought());
+  }, minute / 2);
   const weekTimer = setInterval(() => {
     const gameOver = selectGameOver(store.getState());
     if (gameOver) clearInterval(weekTimer);
@@ -72,13 +80,16 @@ export const decayMeters = (metersObj: Meters): void => {
       deductRent();
     }
   }, gameDay * 7);
+
+  return [minuteTimer, weekTimer, ...timersArr];
 };
 
 // Used to watch meters falling in an out of danger zones, adding and removing relevant conditions when necessary.
 
-export const checkMeterStates = (): void => {
+export const checkMeterStates = (): NodeJS.Timeout[] => {
   const { gameMinute, updateInterval } = selectGameTime(store.getState().game);
   const meterNames = Object.keys(meters);
+  const timersArr: NodeJS.Timeout[] = [];
   meterNames.forEach((meter) => {
     let deficitAdded = false;
     let excessAdded = false;
@@ -104,7 +115,9 @@ export const checkMeterStates = (): void => {
         }
       }
     }, gameMinute * updateInterval);
+    timersArr.push(timer);
   });
+  return timersArr;
 };
 
 export function deductCost(cost: number): boolean {
@@ -120,7 +133,7 @@ export function deductCost(cost: number): boolean {
 export function triggerIncrementalChange(
   entityData: Entity,
   entity: string
-): void {
+): NodeJS.Timeout {
   const { gameMinute, gameHour, updateInterval } = selectGameTime(
     store.getState().game
   );
@@ -187,6 +200,7 @@ export function triggerIncrementalChange(
       }
     }
   }, gameMinute * updateInterval);
+  return timer;
 }
 
 function triggerImmediateChange(entityData: Entity): void {

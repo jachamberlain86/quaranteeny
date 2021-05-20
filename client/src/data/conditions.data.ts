@@ -168,7 +168,7 @@ export const conditionsData: ConditionDetails[] = [
     impacts: [],
   },
   {
-    name: 'hooked',
+    name: 'overstimulated',
     modifiers: [],
     impacts: [],
   },
