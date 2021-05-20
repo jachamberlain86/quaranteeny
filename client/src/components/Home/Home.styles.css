@@ -26,10 +26,10 @@
 }
 
 .home-col-right{
-  width: 35%;
+  width: 48%;
 }
 .home-col-left{
-  width: 55%;
+  width: 48%;
 }
 
 .home-col-left p{
@@ -53,8 +53,9 @@
 
 .home-btn-container button {
   margin: 0;
+  padding: .5rem;
   font-size: 1rem;
-  width: 45%;
+  width: 48%;
   background-color: white;
   color: var(--header-dark-brown);
   border: 1px solid white;
