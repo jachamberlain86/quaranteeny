@@ -54,7 +54,7 @@ const App = (): JSX.Element => {
   useEffect(() => {
     setCurrentKey(location.pathname.split('/')[1] || '/');
     console.log(location);
-  }, [prevDepth]);
+  }, [location]);
 
   return (
     <TransitionGroup component="div" className="App">
