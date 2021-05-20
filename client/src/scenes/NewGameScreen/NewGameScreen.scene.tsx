@@ -26,7 +26,7 @@ const NewGameScreen = (): JSX.Element => {
   };
   const playGameBtn = (
     <button type="submit" onClick={handleSubmit} className="flashing-button">
-      Press enter to start
+      Click to start
     </button>
   );
 
@@ -56,7 +56,9 @@ const NewGameScreen = (): JSX.Element => {
                 </div>
                 <div className="diff-radio-button-space">
                   <h1>medium</h1>
-                  <p>1 Real Minute = 1 Quaranteeny Hour</p>
+                  <p>
+                    1 Real Minute = <br />1 Quaranteeny Hour
+                  </p>
 
                   <input
                     type="radio"
@@ -83,7 +85,7 @@ const NewGameScreen = (): JSX.Element => {
               </form>
             </div>
             <div className="new-game__col-2-right">
-              <h2>Player Controls</h2>
+              <h2>Controls</h2>
               <div className="instructions-container">
                 <div className="direction-key-instructions">
                   <div className="key-arrow" id="up-arrow" />
