@@ -1,7 +1,8 @@
-.app-container {
+.App {
   /* display: flex;
   justify-content: center;
   align-items: center; */
+  background-color: var(--bg-color-offBlack);
 }
 
 /* To be used in as a global container to limit screen component width on larger screens */

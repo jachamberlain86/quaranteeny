@@ -3,3 +3,4 @@ declare module '*.png';
 declare module '*.jpeg';
 declare module '*.gif';
 declare module 'l1-path-finder';
+declare module 'react-transition-group';

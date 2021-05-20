@@ -49,39 +49,41 @@ const GameStats: FC = () => {
     }
   }, []);
   return (
-    <div className="GameStats__page">
-      <div className="max-width-container">
-        <div className="GameStats__main-container">
-          <div className="GameStats__content-container">
-            <div className="GameStats__column">
-              <h1>Oh no!</h1>
-              <div className="GameStats__why-lost-text">
-                Your quaranteeny went outside and got eaten by giant crabs.
+    <div className="game-container">
+      <div className="GameStats__page">
+        <div className="max-width-container">
+          <div className="GameStats__main-container">
+            <div className="GameStats__content-container">
+              <div className="GameStats__column">
+                <h1>Oh no!</h1>
+                <div className="GameStats__why-lost-text">
+                  Your quaranteeny went outside and got eaten by giant crabs.
+                </div>
+              </div>
+              <div className="GameStats__column GameStats__column-right">
+                {timeLastedPretty && <h1>Lasted for {timeLastedPretty}</h1>}
+                <div className="GameStats__high-scores">
+                  <h2>List of top times</h2>
+                  <ol className="GameStats__high-scores-list">
+                    {topFiveScores.map((score, index) => {
+                      // eslint-disable-next-line react/no-array-index-key
+                      return <li key={index}>{score}</li>;
+                    })}
+                  </ol>
+                </div>
               </div>
             </div>
-            <div className="GameStats__column GameStats__column-right">
-              {timeLastedPretty && <h1>Lasted for {timeLastedPretty}</h1>}
-              <div className="GameStats__high-scores">
-                <h2>List of top times</h2>
-                <ol className="GameStats__high-scores-list">
-                  {topFiveScores.map((score, index) => {
-                    // eslint-disable-next-line react/no-array-index-key
-                    return <li key={index}>{score}</li>;
-                  })}
-                </ol>
-              </div>
+            <div className="GameStats__btn-container">
+              <button
+                type="button"
+                className="GameStats__new-game-btn"
+                onClick={handlePlayAgain}
+                onMouseEnter={handleBtnHoverEnter}
+                onMouseLeave={handleBtnHoverLeave}
+              >
+                New game
+              </button>
             </div>
-          </div>
-          <div className="GameStats__btn-container">
-            <button
-              type="button"
-              className="GameStats__new-game-btn"
-              onClick={handlePlayAgain}
-              onMouseEnter={handleBtnHoverEnter}
-              onMouseLeave={handleBtnHoverLeave}
-            >
-              New game
-            </button>
           </div>
         </div>
       </div>

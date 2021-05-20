@@ -369,7 +369,7 @@ const GameStart = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="game-container">
       <div className="max-width-container">
         <div className="game-start-page">
           <div className="start-page-container">

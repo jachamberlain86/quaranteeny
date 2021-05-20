@@ -177,7 +177,7 @@ border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14
 }
 
 .flashing-button {
-  animation: blinker 1.2s linear infinite;
+  animation: blinker 2s linear infinite;
 }
 
 @keyframes blinker {
