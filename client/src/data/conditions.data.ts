@@ -23,11 +23,6 @@ export const conditionsData: ConditionDetails[] = [
     impacts: [],
   },
   {
-    name: 'changing',
-    modifiers: [],
-    impacts: [],
-  },
-  {
     name: 'relaxing',
     modifiers: [],
     impacts: [],

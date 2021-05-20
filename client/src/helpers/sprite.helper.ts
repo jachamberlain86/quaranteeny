@@ -323,7 +323,7 @@ export function spriteMoveSelfThenInteract(interaction: string): void {
     newPos.x = 17;
     newPos.y = 15;
   } else if (interaction === 'oven') {
-    newPos.x = 17;
+    newPos.x = 16;
     newPos.y = 12;
   } else if (interaction === 'fridge') {
     newPos.x = 18;

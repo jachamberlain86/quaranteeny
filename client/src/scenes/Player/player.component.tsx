@@ -149,7 +149,7 @@ const Player = (): JSX.Element => {
     } else if (interaction === 'phone') {
       dispatch(changeCurPos({ x: 17, y: 15 }));
     } else if (interaction === 'oven') {
-      dispatch(changeCurPos({ x: 17, y: 12 }));
+      dispatch(changeCurPos({ x: 16, y: 12 }));
     } else if (interaction === 'fridge') {
       dispatch(changeCurPos({ x: 18, y: 12 }));
     } else if (interaction === 'exercise') {
@@ -228,7 +228,7 @@ const Player = (): JSX.Element => {
       spriteRef.current.start();
     } else if (interaction === 'oven') {
       ref.to({
-        x: tileSize * 17,
+        x: tileSize * 16,
         y: tileSize * 11,
         duration: 0,
       });
