@@ -34,6 +34,7 @@ const Home = (): JSX.Element => {
   const [nameInput, setNameInput] = useState('');
   const [isUserNameAlert, setIsUserNameAlert] = useState(false);
   const { userName } = useAppSelector((state) => state.user);
+  const { isCurrentGameActive } = useAppSelector((state) => state.game);
   const handleNoUserName = (): void => {
     cancelButton.play();
     setIsUserNameAlert(true);
@@ -110,6 +111,17 @@ const Home = (): JSX.Element => {
         <h2>Welcome Back</h2>
       </div>
       <div className="home-btn-container">
+        {isCurrentGameActive && (
+          <button
+            type="button"
+            onClick={handleContinueGame}
+            onMouseEnter={handleBtnHoverEnter}
+            onMouseLeave={handleBtnHoverLeave}
+            className="bordered-button"
+          >
+            Continue
+          </button>
+        )}
         <button
           type="button"
           onClick={handleNewGame}
@@ -118,15 +130,6 @@ const Home = (): JSX.Element => {
           className="bordered-button"
         >
           New Game
-        </button>
-        <button
-          type="button"
-          onClick={handleContinueGame}
-          onMouseEnter={handleBtnHoverEnter}
-          onMouseLeave={handleBtnHoverLeave}
-          className="bordered-button"
-        >
-          Continue
         </button>
       </div>
     </>
@@ -158,7 +161,7 @@ const Home = (): JSX.Element => {
               {userName ? returnUser : newUser}
             </div>
           </div>
-          {userName || (
+          {!userName && (
             <div className="home-bottom-row">
               <button
                 type="button"

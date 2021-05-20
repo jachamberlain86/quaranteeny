@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import './NewGameScreen.styles.css';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
-import { changeGameSpeed } from '../../features/game/gameSlice';
+import {
+  changeGameSpeed,
+  setIsCurrentGameActive,
+} from '../../features/game/gameSlice';
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
 
 const NewGameScreen = (): JSX.Element => {
@@ -22,6 +25,7 @@ const NewGameScreen = (): JSX.Element => {
     } else if (radioBtn === 'hard') {
       dispatch(changeGameSpeed(1000));
     }
+    dispatch(setIsCurrentGameActive());
     history.push('/start');
   };
   const playGameBtn = (
