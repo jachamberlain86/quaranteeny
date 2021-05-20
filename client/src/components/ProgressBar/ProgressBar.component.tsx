@@ -11,7 +11,7 @@ const ProgressBar = (): JSX.Element => {
     renderedProgressBar = (
       <div className="meter-container">
         <div className=" meter-text">Progress: {interactionProgress}%</div>
-        <div className="Meter__progress-bar-wrap meter-container">
+        <div className="Meter__progress-bar-wrap">
           <progress
             className="Meter__progress-bar nes-progress is-success"
             value={interactionProgress || 0.1}
