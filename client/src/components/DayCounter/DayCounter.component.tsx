@@ -32,7 +32,7 @@ const DayCounter = (): JSX.Element => {
   return (
     <div className="conNum">
       <div className="numHeader">
-        <p>Quaranteeny has been in lockdown for:</p>
+        <p>Quaranteeny has been locked down for:</p>
       </div>
       <div className="numOfDays">
         <h2>{timeSinceStart}</h2>

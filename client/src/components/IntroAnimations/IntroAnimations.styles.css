@@ -20,9 +20,13 @@
   background-repeat: no-repeat;
   background-size: 8.5vw 20vh;
   margin-right: 6vw;
+  position: absolute;
+  bottom: 3vh; 
+  left: 3vw
 }
 
-.tv-off {
+
+.tv-on{
   margin-top: 3vh;
   height:20vh;
   width:20vw;
@@ -31,7 +35,26 @@
   margin-left: 1rem;
   background-image: url('../../assets/images/livingRoom/tv-on.png');
   background-repeat: no-repeat;
-  background-size: 20vw 20vh
+  background-size: 20vw 20vh;
+  position: absolute;
+  bottom: 2vh;
+  right: 60vw;
+
+}
+.tv-off {
+  margin-top: 3vh;
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-image: url('../../assets/images/livingRoom/tv-off.png');
+  background-repeat: no-repeat;
+  background-size: 20vw 20vh;
+  position: absolute;
+  bottom: 2vh;
+  right: 60vw;
+  animation: blinker 20s linear infinite
 
 }
 
@@ -43,6 +66,9 @@
   background-size: 8vh 16vh;
   margin-left: 20vw; 
   margin-top: 3.5vh;
+  position: absolute;
+  bottom: 1vh;
+  right: 3vw
   }
 
 /* 

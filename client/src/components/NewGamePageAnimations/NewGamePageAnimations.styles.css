@@ -9,7 +9,20 @@
   /* bottom:  */
 }
 
-.desk-ng-page {
+.sofa-ng-page {
+  bottom: 5vh;
+  height: 10vh;
+  width: 30vw;
+  background-image: url('../../assets/images/livingRoom/blue_sofa_front.png');
+  background-repeat: no-repeat;
+  background-size: 10vw 5vw;
+  position: absolute;
+  bottom:4vh;
+  left: 25vw
+
+}
+
+.desk-on-ng-page {
   /* margin-top: vh; */
   height:20vh;
   width:20vw;
@@ -18,24 +31,52 @@
   margin-right: 0vw;
   background-image: url('../../assets/images/office/desk-on.png');
   background-repeat: no-repeat;
-  background-size: 10vw 20vh;
-  position: relative;
-  bottom: 3vh; 
-  left: 30vh
+  background-size: 8vw 16vh;
+  position: absolute;
+  bottom: -1vh; 
+  right: -6vw
+}
+
+.desk-off-ng-page {
+  /* margin-top: vh; */
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-left: 30vw;
+  margin-right: 0vw;
+  background-image: url('../../assets/images/office/desk-off.png');
+  background-repeat: no-repeat;
+  background-size: 8vw 16vh;
+  position: absolute;
+  bottom: -1vh; 
+  right: -6vw;
+  animation: blinker 8s linear infinite;
 
 }
 
 .fridge-ng-page{
-  position: relative;
   bottom: 5vh;
   height: 30vh;
   width: 8vh;
   background-image: url('../../assets/images/kitchen/fridge-open-full.png');
   background-repeat: no-repeat;
   background-size: 8vh 25vh;
-  margin-left: 10vw; 
-  margin-right: 10vw; 
+  position: absolute;
+  bottom:-3vh; 
+  left: 10vw
 
   /* margin-top: 3.5vh; */
+  }
+
+  .plant-ng-page{
+  height: 30vh;
+  width: 8vh;
+  background-image: url('../../assets/images/livingRoom/plant-alive.png');
+  background-repeat: no-repeat;
+  background-size: 6vh 13vh;
+  position: absolute;
+  bottom: -15vh
+  /* left: 2vw; */
+  ;
   }
 

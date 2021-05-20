@@ -149,11 +149,11 @@ const Game = (): JSX.Element => {
               <HighScores />
             </div>
 
-            <div className="panel-component-border" id="gover_panel">
+            <div id="gover_panel">
               <GameOverBtn />
-              <button type="button" onClick={() => stopObjectSound()}>
+              {/* <button type="button" onClick={() => stopObjectSound()}>
                 Stop EFX Loop
-              </button>
+              </button> */}
             </div>
           </div>
           <div>

@@ -26,10 +26,10 @@
 }
 
 .home-col-right{
-  width: 35%;
+  width: 48%;
 }
 .home-col-left{
-  width: 55%;
+  width: 48%;
 }
 
 .home-col-left p{
@@ -54,14 +54,17 @@
 .home-btn-container button {
   margin: 0;
   font-size: 1rem;
-  width: 45%;
-  background-color: white;
-  color: var(--header-dark-brown);
-  border: 1px solid white;
+  width: 48%;
+  background-color: var(--header-dark-brown);
+  color: white;
+  border: var(--brown-border-frame);
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+  transition: transform 200ms ease-in-out;
 }
 #submit-btn:hover, .home-btn-container button:hover {
   background-color: var(--header-darkest-brown);
   color: white;
+  transform: translateY(-5%) scale(1.02);
 }
 .home-form label input[type='text']  {
   margin: 1rem 0;

@@ -11,11 +11,10 @@ import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
-} from '../../components/Home/Home.component';
-import {
   btnPressOne,
   bleepFiveConfirmation,
 } from '../../audioControllers/buttonSounds';
+
 import './GameStats.styles.css';
 
 const GameStats: FC = () => {
@@ -94,7 +93,7 @@ const GameStats: FC = () => {
           <div className="GameStats__btn-container">
             <button
               type="button"
-              className=""
+              className="GameStats__new-game-btn"
               onClick={handlePlayAgain}
               onMouseEnter={handleBtnHoverEnter}
               onMouseLeave={handleBtnHoverLeave}

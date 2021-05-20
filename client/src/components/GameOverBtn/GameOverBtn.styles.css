@@ -2,7 +2,14 @@
   border: var(--brown-border-frame);
   padding: 5px;
   margin: 10px 10px 10px 10px;
+  width: 95%;
+  background-color: var(--header-dark-brown);
+  color: white;
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+  transition: transform 200ms ease-in-out;
 } 
+.game_over_button:hover {
+  transform: translateY(-5%) scale(1.02);
+}
 
 /* background-color: #e6f4ff; */

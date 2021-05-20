@@ -94,3 +94,10 @@ export const cancelButton = new Howl({
   autoplay: false,
   volume: 0.4,
 });
+
+export const handleBtnHoverEnter = (): void => {
+  bleepTwo.play();
+};
+export const handleBtnHoverLeave = (): void => {
+  bleepOneHover.play();
+};

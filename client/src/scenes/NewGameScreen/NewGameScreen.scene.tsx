@@ -2,8 +2,17 @@ import React, { useState } from 'react';
 import './NewGameScreen.styles.css';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
-import { changeGameSpeed } from '../../features/game/gameSlice';
+import {
+  changeGameSpeed,
+  setIsCurrentGameActive,
+} from '../../features/game/gameSlice';
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
+import {
+  btnClickOne,
+  bleepSixSelect,
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
+} from '../../audioControllers/buttonSounds';
 
 const NewGameScreen = (): JSX.Element => {
   const [radioBtn, setRadioBrn] = useState('');
@@ -22,11 +31,18 @@ const NewGameScreen = (): JSX.Element => {
     } else if (radioBtn === 'hard') {
       dispatch(changeGameSpeed(1000));
     }
+    dispatch(setIsCurrentGameActive());
     history.push('/start');
   };
   const playGameBtn = (
-    <button type="submit" onClick={handleSubmit} className="flashing-button">
-      Press enter to start
+    <button
+      type="submit"
+      onClick={handleSubmit}
+      onMouseEnter={handleBtnHoverEnter}
+      onMouseLeave={handleBtnHoverLeave}
+      className="flashing-button"
+    >
+      Click to start
     </button>
   );
 
@@ -52,11 +68,17 @@ const NewGameScreen = (): JSX.Element => {
                     name="gameSpeed"
                     checked
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
                 <div className="diff-radio-button-space">
                   <h1>medium</h1>
-                  <p>1 Real Minute = 1 Quaranteeny Hour</p>
+                  <p>
+                    1 Real Minute = <br />1 Quaranteeny Hour
+                  </p>
 
                   <input
                     type="radio"
@@ -65,6 +87,10 @@ const NewGameScreen = (): JSX.Element => {
                     value="middle"
                     name="gameSpeed"
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
                 <div className="diff-radio-button-space">
@@ -78,12 +104,16 @@ const NewGameScreen = (): JSX.Element => {
                     value="hard"
                     name="gameSpeed"
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
               </form>
             </div>
             <div className="new-game__col-2-right">
-              <h2>Player Controls</h2>
+              <h2>Controls</h2>
               <div className="instructions-container">
                 <div className="direction-key-instructions">
                   <div className="key-arrow" id="up-arrow" />
