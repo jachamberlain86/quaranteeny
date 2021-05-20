@@ -9,12 +9,14 @@ import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
+import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
 // import { setIsCurrentGameActive } from '../../features/user/userSlice';
 
 const GameOverBtn: FC = () => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {
+    stopObjectSound();
     dispatch(setGameOver());
     dispatch(setIsCurrentGameActive());
   };

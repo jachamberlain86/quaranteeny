@@ -52,7 +52,10 @@ import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
 import { checkCanMove, checkIndex } from './input.helper';
 import { roomMap } from '../data/roomMap.data';
-import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+import {
+  playObjectSound,
+  stopObjectSound,
+} from '../audioControllers/houseObjectsSounds';
 
 import { musicController } from '../audioControllers/musicController';
 
@@ -169,6 +172,7 @@ export const checkLoseStates = (): NodeJS.Timeout => {
     if (starvation > day * 5) {
       store.dispatch(updateGameOverCause('starvation'));
       store.dispatch(setGameOver());
+      stopObjectSound();
       clearInterval(timer);
     } else if (sleepDep > day * 8) {
       store.dispatch(updateGameOverCause('sleep deprivation'));
