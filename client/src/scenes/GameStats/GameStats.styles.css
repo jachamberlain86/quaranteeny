@@ -58,6 +58,7 @@
   padding: 0.5rem 3rem;
   font-size: 1.5rem;
   transition: transform 200ms ease-in-out;
+  z-index: 2
 }
 .GameStats__btn-container button:hover {
   background-color: var(--header-darkest-brown);
@@ -71,3 +72,38 @@
   margin-left: 1.5rem;
 }
 
+.crab{
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../../assets/images/crab.png'); 
+  background-repeat: repeat;
+  background-size: 30vh 20vh;
+  position: relative;
+  z-index: 1;
+  -webkit-animation: floatBubble 10s infinite  normal ease-out;
+  animation: floatBubble 5s infinite  normal ease-out;
+
+}
+
+@-webkit-keyframes floatBubble {
+  0% {
+      top:0px;
+  }
+  50% {
+      top: 500px;
+  }
+  100% {
+    top: 0px;
+}
+}
+@keyframes floatBubble {
+  0% {
+      top:0px;
+  }
+50% {
+      top: 500px;
+  }
+  100% {
+    top: 0px;
+}
+}

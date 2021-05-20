@@ -104,6 +104,7 @@ const GameStats: FC = () => {
             </div>
           </div>
         </div>
+        <div className="crab" />
       </div>
     </div>
   );
