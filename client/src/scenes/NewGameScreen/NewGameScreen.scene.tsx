@@ -8,6 +8,8 @@ import {
 } from '../../features/game/gameSlice';
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
 import {
+  btnClickOne,
+  bleepSixSelect,
   handleBtnHoverEnter,
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
@@ -18,6 +20,7 @@ const NewGameScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
+    bleepSixSelect.play();
     setRadioBrn(value);
   };
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
@@ -66,6 +69,10 @@ const NewGameScreen = (): JSX.Element => {
                     name="gameSpeed"
                     checked
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
                 <div className="diff-radio-button-space">
@@ -81,6 +88,10 @@ const NewGameScreen = (): JSX.Element => {
                     value="middle"
                     name="gameSpeed"
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
                 <div className="diff-radio-button-space">
@@ -94,6 +105,10 @@ const NewGameScreen = (): JSX.Element => {
                     value="hard"
                     name="gameSpeed"
                     onChange={handleChange}
+                    onMouseOver={() => btnClickOne.play()}
+                    onFocus={() => {
+                      console.log('focus');
+                    }}
                   />
                 </div>
               </form>
