@@ -21,7 +21,8 @@
   background-size: 8.5vw 20vh;
   margin-right: 6vw;
   position: absolute;
-  bottom: 3vh
+  bottom: 3vh; 
+  left: 3vw
 }
 
 
@@ -37,7 +38,7 @@
   background-size: 20vw 20vh;
   position: absolute;
   bottom: 2vh;
-  right: 45vw;
+  right: 60vw;
 
 }
 .tv-off {
@@ -52,7 +53,7 @@
   background-size: 20vw 20vh;
   position: absolute;
   bottom: 2vh;
-  right: 45vw;
+  right: 60vw;
   animation: blinker 20s linear infinite
 
 }
