@@ -5,15 +5,11 @@
   margin: 0;
   display: flex;
   margin: .5rem;
-  /* justify-content: center; */
-  /* align-items: center; */
+  align-items: center;
 }
 
 .meter {
-  /* padding: .25rem; */
-  /* padding: .5rem 1rem; */
   width: 96%;
-  /* margin: 0.1rem; */
   background-color: #fff;
 }
 
@@ -21,7 +17,6 @@
   width: 98%;
   display: flex;
   align-items: center;
-  /* justify-content:center; */
   box-sizing: content-box;
   height: 37px;
 }
