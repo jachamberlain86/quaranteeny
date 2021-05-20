@@ -33,8 +33,8 @@
   background-image: url('../../assets/images/kitchen/fridge-open-full.png');
   background-repeat: no-repeat;
   background-size: 8vh 25vh;
-  position: relative;
-  bottom: 2vh; 
+  position: absolute;
+  bottom:-3vh; 
   left: 10vw
 
   /* margin-top: 3.5vh; */
