@@ -16,17 +16,11 @@ import {
   bleepFiveConfirmation,
   bleepSevenHover,
   cancelButton,
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 import { musicController } from '../../audioControllers/musicController';
 import IntroAnimations from '../IntroAnimations/IntroAnimations.component';
-
-// TODO move to sound effects
-export const handleBtnHoverEnter = (): void => {
-  bleepTwo.play();
-};
-export const handleBtnHoverLeave = (): void => {
-  bleepOneHover.play();
-};
 
 const Home = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -146,9 +140,9 @@ const Home = (): JSX.Element => {
               <div className="home-story">
                 <h2>The story so far...</h2>
                 <p>
-                  Giant crabs have taken over the world, and your Quaranteeny
-                  has gone into lockdown. Only you can stop them from going
-                  outside.
+                  Giant crabs have overrun the world and Quaranteeny has been
+                  put in lockdown. Keep your Quaranteeny happy, healthy...and
+                  inside!”
                 </p>
                 <p>
                   Pay attention to your Quaranteeny´s needs, make sure they have

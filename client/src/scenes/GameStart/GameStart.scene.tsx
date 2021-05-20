@@ -20,6 +20,8 @@ import {
   bleepTwo,
   bleepFiveConfirmation,
   bleepSevenHover,
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 import MuteSoundBtn from '../../components/MuteSoundBtn/MuteSoundBtn.component';
 import SoundBar from '../../components/SoundBar/SoundBar.components';
@@ -32,13 +34,6 @@ interface initialState {
 }
 const initialState = {
   name: 'showStartBtn',
-};
-
-export const handleBtnHoverEnter = (): void => {
-  bleepTwo.play();
-};
-export const handleBtnHoverLeave = (): void => {
-  bleepOneHover.play();
 };
 
 const GameStart = (): JSX.Element => {
