@@ -51,7 +51,10 @@ import { entities } from '../data/entities.data';
 import { day } from '../data/time.data';
 import { checkCanMove, checkIndex } from './input.helper';
 import { roomMap } from '../data/roomMap.data';
-import { playObjectSound } from '../audioControllers/houseObjectsSounds';
+import {
+  playObjectSound,
+  stopObjectSound,
+} from '../audioControllers/houseObjectsSounds';
 
 import { musicController } from '../audioControllers/musicController';
 
@@ -166,6 +169,7 @@ export const checkLoseStates = (): void => {
     const sick = selectSick(store.getState());
     if (starvation > day * 5 || sleepDep > day * 8 || sick > day * 7) {
       store.dispatch(setGameOver());
+      stopObjectSound();
       clearInterval(timer);
     }
     if (starvation > day * 3) {
