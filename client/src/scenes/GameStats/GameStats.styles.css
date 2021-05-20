@@ -38,12 +38,37 @@
   justify-content: space-around;
 }
 
+.GameStats__new-game-btn {
+  border: var(--brown-border-frame);
+  background-color: var(--header-dark-brown);
+  color: white;
+  width: 30%;
+  padding: auto;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin: 10px 10px 10px 10px;
+  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
+}
+
+.GameStats__new-game-btn:hover {
+  background-color: var(--header-darkest-brown);
+}
+
 .GameStats__btn-container button {
   padding: 0.5rem 3rem;
   font-size: 1.5rem;
+  background-color: white;
+  color: var(--header-dark-brown);
+  border: 1px solid white;
 }
+.GameStats__btn-container button:hover {
+  background-color: var(--header-darkest-brown);
+  color: white;
+} 
+
 
 .GameStats__high-scores-list li {
   margin-bottom: 1rem;
   margin-left: 1.5rem;
 }
+
