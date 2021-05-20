@@ -75,7 +75,7 @@ const GameStats: FC = () => {
           <div className="GameStats__btn-container">
             <button
               type="button"
-              className=""
+              className="GameStats__new-game-btn"
               onClick={handlePlayAgain}
               onMouseEnter={handleBtnHoverEnter}
               onMouseLeave={handleBtnHoverLeave}
