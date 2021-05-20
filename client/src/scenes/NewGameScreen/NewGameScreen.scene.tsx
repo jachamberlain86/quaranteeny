@@ -7,6 +7,10 @@ import {
   setIsCurrentGameActive,
 } from '../../features/game/gameSlice';
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
+import {
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
+} from '../../audioControllers/buttonSounds';
 
 const NewGameScreen = (): JSX.Element => {
   const [radioBtn, setRadioBrn] = useState('');
@@ -29,7 +33,13 @@ const NewGameScreen = (): JSX.Element => {
     history.push('/start');
   };
   const playGameBtn = (
-    <button type="submit" onClick={handleSubmit} className="flashing-button">
+    <button
+      type="submit"
+      onClick={handleSubmit}
+      onMouseEnter={handleBtnHoverEnter}
+      onMouseLeave={handleBtnHoverLeave}
+      className="flashing-button"
+    >
       Click to start
     </button>
   );

@@ -16,17 +16,11 @@ import {
   bleepFiveConfirmation,
   bleepSevenHover,
   cancelButton,
+  handleBtnHoverEnter,
+  handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 import { musicController } from '../../audioControllers/musicController';
 import IntroAnimations from '../IntroAnimations/IntroAnimations.component';
-
-// TODO move to sound effects
-export const handleBtnHoverEnter = (): void => {
-  bleepTwo.play();
-};
-export const handleBtnHoverLeave = (): void => {
-  bleepOneHover.play();
-};
 
 const Home = (): JSX.Element => {
   const dispatch = useAppDispatch();
