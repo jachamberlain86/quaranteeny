@@ -9,6 +9,19 @@
   /* bottom:  */
 }
 
+.sofa-ng-page {
+  bottom: 5vh;
+  height: 10vh;
+  width: 30vw;
+  background-image: url('../../assets/images/livingRoom/blue_sofa_front.png');
+  background-repeat: no-repeat;
+  background-size: 10vw 5vw;
+  position: absolute;
+  bottom:4vh;
+  left: 25vw
+
+}
+
 .desk-ng-page {
   /* margin-top: vh; */
   height:20vh;
@@ -18,15 +31,14 @@
   margin-right: 0vw;
   background-image: url('../../assets/images/office/desk-on.png');
   background-repeat: no-repeat;
-  background-size: 10vw 20vh;
+  background-size: 8vw 16vh;
   position: absolute;
-  bottom: 3vh; 
-  right: 2vw
+  bottom: -1vh; 
+  right: -6vw
 
 }
 
 .fridge-ng-page{
-  position: relative;
   bottom: 5vh;
   height: 30vh;
   width: 8vh;
