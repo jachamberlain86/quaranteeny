@@ -20,7 +20,6 @@ const NewGameScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    bleepSixSelect.play();
     setRadioBrn(value);
   };
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
