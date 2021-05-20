@@ -16,25 +16,24 @@ const GameOver = (): JSX.Element => {
     setTimeout(() => {
       exitGamePress.play();
       bleepingGameOver.stop();
-      history.push('/game-over/stats');
+      history.push('/game-over');
     }, 200);
   };
   useEffect(() => {
     bleepingGameOver.play();
   });
   return (
-    <div className="game-container">
-      <div className="game-over-container">
-        <div className="nes-container is-dark with-title game-over-tile">
-          <h1 className="game-over-title">Game Over</h1>
-          <button
-            type="button"
-            className="continue-btn nes-btn"
-            onClick={handleGameOver}
-          >
-            Continue
-          </button>
-        </div>
+    <div className="game-over-container">
+      <div className="nes-container is-dark with-title game-over-tile">
+        <h1 className="game-over-title">Game Over</h1>
+        <p>quaranteeny went outside</p>
+        <button
+          type="button"
+          className="continue-btn nes-btn"
+          onClick={handleGameOver}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );

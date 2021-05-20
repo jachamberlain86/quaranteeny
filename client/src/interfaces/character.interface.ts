@@ -7,7 +7,7 @@ export interface Character {
   downFired: boolean;
   kFired: boolean;
   lFired: boolean;
-  moveIntId: number | null;
+  moveIntId: NodeJS.Timeout | null;
   moveDir: string | null;
   lastInput: number;
   movingSelf: boolean;

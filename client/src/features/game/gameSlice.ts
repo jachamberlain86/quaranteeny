@@ -24,6 +24,7 @@ export interface GameState {
   computerOn: boolean;
   tvOn: boolean;
   dressed: boolean;
+  gameOverCause: string;
 }
 
 const initialState: GameState = {
@@ -45,6 +46,7 @@ const initialState: GameState = {
   computerOn: false,
   tvOn: false,
   dressed: false,
+  gameOverCause: '',
 };
 
 export const selectGameTime = (state: GameState): GameTime => {
@@ -191,9 +193,11 @@ export const gameSlice = createSlice({
       }
       state.dressed = action.payload;
     },
+    updateGameOverCause: (state, action: PayloadAction<string>) => {
+      state.gameOverCause = action.payload;
+    },
   },
 });
-
 export const {
   setIsRoomLoadingToTrue,
   setIsRoomLoadingToFalse,
@@ -219,7 +223,11 @@ export const {
   toggleComputerOn,
   toggleTvOn,
   toggleDressed,
+  updateGameOverCause,
 } = gameSlice.actions;
+
+export const selectGameOverCause = (state: RootState): string =>
+  state.game.gameOverCause;
 
 export const selectIsRoomLoading = (state: RootState): boolean =>
   state.game.isRoomLoading;

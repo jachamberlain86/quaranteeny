@@ -73,9 +73,9 @@ export function checkCanMove(newPos: { x: number; y: number }): boolean {
   return result;
 }
 
-function handleMove(key: string): void {
+function handleMove(key: string): NodeJS.Timeout {
   store.dispatch(changeInteraction('walking'));
-  const timer = window.setInterval(() => {
+  const timer = setInterval(() => {
     const newPos = calcNewPos(key);
     if (checkCanMove(newPos)) {
       shuffleWalkShort.play();
@@ -90,6 +90,7 @@ function handleMove(key: string): void {
     }
   }, 200);
   store.dispatch(setMoveIntId(timer));
+  return timer;
 }
 
 function handleStop(): void {
@@ -118,7 +119,7 @@ const runInteractionAnimations = (interaction: string): void => {
   }
 };
 
-export function downHandler(event: KeyboardEvent): void {
+export function downHandler(event: KeyboardEvent): NodeJS.Timeout | undefined {
   const moveDir = selectMoveDir(store.getState());
   const leftFired = selectLeftFired(store.getState());
   const rightFired = selectRightFired(store.getState());
@@ -128,62 +129,67 @@ export function downHandler(event: KeyboardEvent): void {
   const untimedInteractions = ['walking', 'idle'];
   const ignoreKeys = ['k', 'l'];
   const isMovingSelf = selectMovingSelf(store.getState());
+  let currentTimer;
   if (!isMovingSelf) {
     if (
       !untimedInteractions.includes(currentInteraction) &&
-      !ignoreKeys.includes(event.key)
-    )
+      !ignoreKeys.includes(event.key) &&
+      currentInteraction
+    ) {
+      console.log(currentInteraction);
       cancelCurrentInteraction();
+    }
 
     if (event.key === 'a' && !leftFired) {
       if (moveDir === null) {
         store.dispatch(toggleLeftFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       } else {
         handleStop();
         store.dispatch(toggleLeftFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       }
     }
     if (event.key === 'd' && !rightFired) {
       if (moveDir === null) {
         store.dispatch(toggleRightFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       } else {
         handleStop();
         store.dispatch(toggleRightFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       }
     }
     if (event.key === 'w' && !upFired) {
       if (moveDir === null) {
         store.dispatch(toggleUpFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       } else {
         handleStop();
         store.dispatch(toggleUpFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       }
     }
     if (event.key === 's' && !downFired) {
       if (moveDir === null) {
         store.dispatch(toggleDownFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       } else {
         handleStop();
         store.dispatch(toggleDownFired());
         store.dispatch(setMoveDir(event.key));
-        handleMove(event.key);
+        currentTimer = handleMove(event.key);
       }
     }
   }
+  return currentTimer;
 }
 
 export function upHandler(event: KeyboardEvent): void {

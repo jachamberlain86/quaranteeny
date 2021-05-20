@@ -4,31 +4,24 @@ import { useAppSelector } from '../../app/hooks';
 import { bubblePop } from '../../audioControllers/alerts';
 
 const Mood = (): JSX.Element => {
-  const conditions: string[] = useAppSelector(
-    (state) => state.sprite.conditions
+  const currentThought: string = useAppSelector(
+    (state) => state.sprite.currentThought
   );
-  const moodList = [...Array.from(new Set(conditions))];
 
   const renderBoard = (): JSX.Element => {
     return (
       <div className="mood-board">
-        <h4>Quaranteeny is...</h4>
-        <div className="Mood__list">
-          {moodList &&
-            moodList.map(
-              (mood, index): JSX.Element => {
-                return (
-                  <span className="Mood__item" key={mood}>
-                    {mood}
-                  </span>
-                );
-              }
-            )}
-        </div>
+        <h4>teeny thoughts:</h4>
+        <div className="Mood__list">{currentThought}</div>
       </div>
     );
   };
-  return <div>{conditions.length ? renderBoard() : null}</div>;
+  return (
+    <div className="mood-board">
+      <h4>teeny thoughts:</h4>
+      <div className="Mood__list">{currentThought}</div>
+    </div>
+  );
 };
 
 export default Mood;

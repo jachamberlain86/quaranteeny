@@ -34,7 +34,7 @@ export const selectKFired = (state: RootState): boolean =>
   state.character.kFired;
 export const selectLFired = (state: RootState): boolean =>
   state.character.lFired;
-export const selectMoveIntId = (state: RootState): number | null =>
+export const selectMoveIntId = (state: RootState): NodeJS.Timeout | null =>
   state.character.moveIntId;
 export const selectMoveDir = (state: RootState): string | null =>
   state.character.moveDir;
@@ -71,7 +71,7 @@ const characterSlice = createSlice({
     setMovingSelf(state, action: PayloadAction<boolean>) {
       state.movingSelf = action.payload;
     },
-    setMoveIntId(state, action: PayloadAction<number | null>) {
+    setMoveIntId(state, action: PayloadAction<NodeJS.Timeout | null>) {
       state.moveIntId = action.payload;
     },
     setMoveDir(state, action: PayloadAction<string | null>) {

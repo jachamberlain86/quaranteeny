@@ -52,26 +52,46 @@ const Game = (): JSX.Element => {
   const currentGameScreen = gameScreen.current as HTMLDivElement;
 
   useEffect(() => {
+    const timersArr: NodeJS.Timeout[] = [];
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
-      startClock();
+      const clockTimer = startClock();
+      timersArr.push(clockTimer);
       resumeInProgressInteraction();
-      checkMeterStates();
-      checkConditionsState();
-      checkLoseStates();
-      decayMeters(meters);
+      const metersTimers = checkMeterStates();
+      metersTimers.forEach((timer) => {
+        timersArr.push(timer);
+      });
+      const conditionsTimer = checkConditionsState();
+      timersArr.push(conditionsTimer);
+      const loseStatesTimer = checkLoseStates();
+      timersArr.push(loseStatesTimer);
+      const decayTimers = decayMeters(meters);
+      decayTimers.forEach((timer) => {
+        timersArr.push(timer);
+      });
     }
+
+    return () => {
+      timersArr.forEach((timer) => {
+        clearInterval(timer);
+      });
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userLoadingStatus]);
   // TODO mention that this is causing the page to rerender every second
   // }, [dispatch, userLoadingStatus]);
 
   useEffect(() => {
-    window.addEventListener('keydown', downHandler);
+    let moveTimer: NodeJS.Timeout | undefined;
+    window.addEventListener('keydown', (event) => {
+      moveTimer = downHandler(event);
+    });
     window.addEventListener('keyup', upHandler);
 
     return () => {
       window.removeEventListener('keydown', downHandler);
       window.removeEventListener('keydown', upHandler);
+      if (moveTimer) clearInterval(moveTimer);
     };
   }, []);
 

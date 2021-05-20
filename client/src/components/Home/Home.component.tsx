@@ -76,7 +76,7 @@ const Home = (): JSX.Element => {
         <form className="form" autoComplete="off">
           <h2>You´re new!</h2>
           <label htmlFor="userName">
-            Type your user name
+            Type your name
             <div className="brown_border_box">
               <input
                 type="text"
@@ -140,14 +140,17 @@ const Home = (): JSX.Element => {
               <div className="home-story">
                 <h2>The story so far...</h2>
                 <p>
-                  Giant crabs have overrun the world and Quaranteeny has been
-                  put in lockdown. Keep your Quaranteeny happy, healthy...and
-                  inside!”
+                  Giant crabs have overrun the world!
+                  <br />
+                  Quaranteeny has been put in lockdown.
+                  <br />
+                  Keep quaranteeny happy, healthy, and safely indoors!
                 </p>
                 <p>
-                  Pay attention to your Quaranteeny´s needs, make sure they have
-                  health, energy, and money - and <br />
-                  don´t let them stay in the danger zone too long!
+                  Pay attention to quaranteeny´s needs.
+                  <br />
+                  Keep their meters topped up, and don´t spend too much time in
+                  the danger zones!
                 </p>
               </div>
             </div>

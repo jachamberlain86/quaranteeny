@@ -147,8 +147,8 @@ const NewGameScreen = (): JSX.Element => {
                   </div>
                   <p>
                     {' '}
-                    Your Quaranteeny will tell you when they need something. Use
-                    K and L to interact with items in their flat
+                    Use K and L (or your mouse) to interact with items in the
+                    flat
                   </p>
                 </div>
               </div>

@@ -73,7 +73,7 @@ const App = (): JSX.Element => {
               <Route exact path="/start">
                 <Game />
               </Route>
-              <Route exact path="/game-over/stats">
+              <Route exact path="/game-over">
                 <GameStats />
               </Route>
               <Route exact path="/new-game">
