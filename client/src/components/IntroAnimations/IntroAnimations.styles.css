@@ -24,7 +24,8 @@
   bottom: 3vh
 }
 
-.tv-off {
+
+.tv-on{
   margin-top: 3vh;
   height:20vh;
   width:20vw;
@@ -36,7 +37,23 @@
   background-size: 20vw 20vh;
   position: absolute;
   bottom: 2vh;
-  right: 45vw
+  right: 45vw;
+
+}
+.tv-off {
+  margin-top: 3vh;
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-image: url('../../assets/images/livingRoom/tv-off.png');
+  background-repeat: no-repeat;
+  background-size: 20vw 20vh;
+  position: absolute;
+  bottom: 2vh;
+  right: 45vw;
+  animation: blinker 20s linear infinite
 
 }
 

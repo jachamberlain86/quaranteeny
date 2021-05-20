@@ -7,7 +7,9 @@ const NewGamePageAnimations = (): JSX.Element => {
       <div className="sofa-ng-page" />
       <div className="phone-ng-page" />
       <div className="fridge-ng-page" />
-      <div className="desk-ng-page" />
+      <div className="desk-on-ng-page" />
+      <div className="desk-off-ng-page" />
+
       <div className="plant-ng-page" />
     </div>
   );

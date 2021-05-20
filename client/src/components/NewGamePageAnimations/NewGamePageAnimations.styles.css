@@ -22,7 +22,7 @@
 
 }
 
-.desk-ng-page {
+.desk-on-ng-page {
   /* margin-top: vh; */
   height:20vh;
   width:20vw;
@@ -35,6 +35,22 @@
   position: absolute;
   bottom: -1vh; 
   right: -6vw
+}
+
+.desk-off-ng-page {
+  /* margin-top: vh; */
+  height:20vh;
+  width:20vw;
+  /* background-color: pink; */
+  margin-left: 30vw;
+  margin-right: 0vw;
+  background-image: url('../../assets/images/office/desk-off.png');
+  background-repeat: no-repeat;
+  background-size: 8vw 16vh;
+  position: absolute;
+  bottom: -1vh; 
+  right: -6vw;
+  animation: blinker 8s linear infinite;
 
 }
 
@@ -63,3 +79,4 @@
   /* left: 2vw; */
   ;
   }
+
