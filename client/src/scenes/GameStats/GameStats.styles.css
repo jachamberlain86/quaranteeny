@@ -57,14 +57,11 @@
 .GameStats__btn-container button {
   padding: 0.5rem 3rem;
   font-size: 1.5rem;
-  background-color: white;
-  color: var(--header-dark-brown);
-  border: 1px solid white;
 }
 .GameStats__btn-container button:hover {
   background-color: var(--header-darkest-brown);
   color: white;
-} 
+}
 
 
 .GameStats__high-scores-list li {
