@@ -17,7 +17,7 @@ const GameOverBtn: FC = () => {
   return (
     <div>
       <button type="button" onClick={handleClick} className="game_over_button">
-        End game
+        Give up? Go outside...
       </button>
     </div>
   );

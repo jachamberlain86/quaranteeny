@@ -39,7 +39,9 @@
 .panel_space {
   display: flex;
   flex-direction: column;
-  max-height: 640px; 
+  height: 550px; 
+  margin-top: 45px;
+  margin-bottom: 45px;
   flex: 1
 }
 
@@ -48,7 +50,7 @@
 }
 
 #right_panel_space {
-  margin-right: 20px
+  margin-right: 20px;
 }
 
 #dcount_panel {
