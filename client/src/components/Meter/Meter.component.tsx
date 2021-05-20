@@ -48,8 +48,7 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
               : 'meter-text'
           }
         >
-          {meterName}
-          {/* : {meterValue}% */}
+          {meterName}: {meterValue}%
         </div>
         <div
           className={
