@@ -4,7 +4,7 @@
 .meter-container {
   margin: 0;
   display: flex;
-  margin: .25rem;
+  margin: .5rem;
   /* justify-content: center; */
   /* align-items: center; */
 }
@@ -18,18 +18,23 @@
 }
 
 .Meter__progress-bar-wrap {
-  width: 100%;
+  width: 98%;
   display: flex;
   align-items: center;
+  /* justify-content:center; */
+  box-sizing: content-box;
+  height: 37px;
 }
 
 .Meter__progress-bar {
   -webkit-appearance: none;
   border-radius: 5px;
-  height: 35px;
+  height: 33px;
   border: 2px solid #444;
   padding: 5px 4px;
-  width: 95%;
+  width: 137px;
+  position: relative;
+  left: 1px;
 }
 
 .Meter__progress-bar::-webkit-progress-bar {
@@ -42,7 +47,7 @@
   background-color: var(--nes-red) !important;
 }
 .Meter__progress-bar--high::-webkit-progress-value {
-  background-color: var(--nes-yell) !important;
+  background-color: var(--nes-yellow) !important;
 }
 
 .meter-text{
