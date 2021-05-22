@@ -46,4 +46,10 @@ Start the server by running `npm start` from `/server`.
 
 Start the client by running `npm start` from `/client`.
 
+## Built By
+
+James Chamberlain - [LinkedIn](https://www.linkedin.com/in/chambermade/) || [GitHub](https://github.com/jachamberlain86)
+Roman Duda - [LinkedIn](https://www.linkedin.com/in/roman-duda-52287a52/) || [GitHub](https://github.com/romduda)
+Rosie Bullingdon - [LinkedIn](https://www.linkedin.com/in/romthomas/) || [GitHub](https://github.com/someonera)
+Ross Curry - [LinkedIn](https://www.linkedin.com/in/ross-curry/) || [GitHub](https://github.com/RossCurry)
 
