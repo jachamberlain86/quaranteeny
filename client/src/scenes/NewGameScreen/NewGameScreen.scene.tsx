@@ -10,32 +10,41 @@ import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGam
 import {
   btnClickOne,
   bleepSixSelect,
+  cancelButton,
   handleBtnHoverEnter,
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 
 const NewGameScreen = (): JSX.Element => {
   const [radioBtn, setRadioBrn] = useState('');
+  const [isUserNameAlert, setIsUserNameAlert] = useState(false);
   const history = useHistory();
   const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    console.log('radio btn', value);
     bleepSixSelect.play();
     setRadioBrn(value);
   };
+  const handleNoRadioButton = (): void => {
+    setIsUserNameAlert(true);
+    cancelButton.play();
+  };
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
-    if (!radioBtn) return;
-    if (radioBtn === 'easy') {
-      dispatch(changeGameSpeed(1));
-    } else if (radioBtn === 'middle') {
-      dispatch(changeGameSpeed(60));
-    } else if (radioBtn === 'hard') {
-      dispatch(changeGameSpeed(1000));
+    if (!radioBtn) {
+      handleNoRadioButton();
+    } else {
+      setIsUserNameAlert(false);
+      if (radioBtn === 'easy') {
+        dispatch(changeGameSpeed(1));
+      } else if (radioBtn === 'middle') {
+        dispatch(changeGameSpeed(60));
+      } else if (radioBtn === 'hard') {
+        dispatch(changeGameSpeed(1000));
+      }
+      dispatch(setIsCurrentGameActive());
+      history.push('/start');
     }
-    dispatch(setIsCurrentGameActive());
-    history.push('/start');
   };
   const playGameBtn = (
     <button
@@ -158,6 +167,11 @@ const NewGameScreen = (): JSX.Element => {
             </div>
           </div>
           <div className="new-game__row-3">
+            {!radioBtn && isUserNameAlert ? (
+              <div className="new-game__speed-alert">
+                <p>please choose a game speed</p>
+              </div>
+            ) : null}
             <div className="new-game__flashing-button">{playGameBtn}</div>
           </div>
         </div>
