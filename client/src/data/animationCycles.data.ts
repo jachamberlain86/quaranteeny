@@ -1,5 +1,3 @@
-import { imageDirectory, ImageDirectory } from '../assets/tiles/index';
-
 import { animationDirectory } from '../assets/animations/index';
 
 const {

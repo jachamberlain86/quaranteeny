@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './ObjectInteraction.styles.css';
 import { useAppSelector } from '../../app/hooks';
 
@@ -24,7 +24,6 @@ const ObjectInteraction = (): JSX.Element => {
           : 'slideOutLeft'
       }
     >
-      {/* {objectList.length > 0 ? interactionIndicator : null} */}
       <ul>{objectList && objectList}</ul>
     </div>
   );

@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
-import game from '../../data/gameMap.data';
 
 const initialState: Character = {
   curPos: { x: 1, y: 4 },

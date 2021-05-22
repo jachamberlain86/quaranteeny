@@ -1,5 +1,5 @@
 import { Stage, Layer, Rect } from 'react-konva';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import game from '../../data/gameMap.data';
 import Player from '../Player/player.component';
@@ -12,31 +12,22 @@ import {
   setIsRoomLoadingToTrue,
   selectTimeOfDay,
   selectLightOn,
-  selectMusicOn,
   selectComputerOn,
   selectTvOn,
 } from '../../features/game/gameSlice';
-import { imageDirectory, ImageDirectory } from '../../assets/tiles/index';
-import { filterDirectory, FilterDirectory } from '../../assets/filters/index';
+import { imageDirectory } from '../../assets/tiles/index';
+import { filterDirectory } from '../../assets/filters/index';
 import { roomMap } from '../../data/roomMap.data';
 import { altTilesMap } from '../../data/altTilesMap.data';
 
-import {
-  changeCurPos,
-  selectCurPos,
-  selectMovePos,
-} from '../../features/character/characterSlice';
+import { selectCurPos } from '../../features/character/characterSlice';
 import './Room.styles.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentInteraction } from '../../features/sprite/spriteSlice';
 
 const Room = (): JSX.Element => {
-  const dayRef = useRef<any | null>(null);
-  const duskDawnRef = useRef<any | null>(null);
-  const nightRef = useRef<any | null>(null);
-
   const dispatch = useAppDispatch();
-  const { cols, tileSize, layers } = game;
+  const { cols, tileSize } = game;
   const canvasWidth = cols * tileSize;
   const canvasHeight = cols * tileSize;
   const scale = tileSize / 32;
@@ -243,6 +234,7 @@ const Room = (): JSX.Element => {
     filtImg.src = filters;
     buildClickableLayer();
     dispatch(setIsRoomLoadingToFalse());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -304,6 +296,7 @@ const Room = (): JSX.Element => {
       });
     }
     setRoomLayer(currRoom);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curPos]);
 
   useEffect(() => {
@@ -367,6 +360,7 @@ const Room = (): JSX.Element => {
     }
 
     setRoomLayer(currRoom);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interaction]);
 
   useEffect(() => {
@@ -374,6 +368,7 @@ const Room = (): JSX.Element => {
     const filter = pickFilter();
     currFilter[0] = updateFilterImage(filter);
     setFilterLayer(currFilter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeOfDay, lightOn, deskOn, sofaOn]);
 
   return (

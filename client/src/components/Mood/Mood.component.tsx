@@ -7,14 +7,6 @@ const Mood = (): JSX.Element => {
     (state) => state.sprite.currentThought
   );
 
-  const renderBoard = (): JSX.Element => {
-    return (
-      <div className="mood-board">
-        <h4>teeny thoughts:</h4>
-        <div className="Mood__list">{currentThought}</div>
-      </div>
-    );
-  };
   return (
     <div className="mood-board">
       <h4>teeny thoughts:</h4>
