@@ -1,6 +1,6 @@
 @import '../../../node_modules/nes.css/css/nes.css';
 
-.ProgressBar {
+.progress-bar {
   margin: 0 auto;
   width: 95%;
 }

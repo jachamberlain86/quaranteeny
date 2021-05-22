@@ -1,11 +1,11 @@
-.new-game-page-animations-bar {
+.new-game-page__animations-bar {
   margin-top: 0rem;
   height: 50vh;
   display: flex;
   z-index: 2;
 }
 
-.sofa-ng-page {
+.new-game-page__sofa-ng-page {
   bottom: 5vh;
   height: 10vh;
   width: 30vw;
@@ -17,7 +17,7 @@
   left: 25vw
 }
 
-.desk-on-ng-page {
+.new-game-page__desk-on-ng-page {
   height:20vh;
   width:20vw;
   margin-left: 30vw;
@@ -30,7 +30,7 @@
   right: -6vw
 }
 
-.desk-off-ng-page {
+.new-game-page__desk-off-ng-page {
   height:20vh;
   width:20vw;
   margin-left: 30vw;
@@ -44,7 +44,7 @@
   animation: blinker 8s linear infinite;
 }
 
-.fridge-ng-page{
+.new-game-page__fridge-ng-page{
   bottom: 5vh;
   height: 30vh;
   width: 8vh;
@@ -56,7 +56,7 @@
   left: 10vw
 }
 
-.plant-ng-page{
+.new-game-page__plant-ng-page{
 height: 30vh;
 width: 8vh;
 background-image: url('../../assets/images/livingRoom/plant-alive.png');

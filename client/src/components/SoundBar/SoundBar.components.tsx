@@ -9,16 +9,19 @@ import { btnClickOne } from '../../audioControllers/buttonSounds';
 const SoundBar = (): JSX.Element => {
   const currentSongTitle = useAppSelector((state) => state.music.currentSong);
   const currentSong = musicController.findHowlFileFromTitle(currentSongTitle);
+  const handleFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
+    e.target.classList.add('sound-bar__btn--focus');
+  };
   return (
-    <div className="sound-bar-container">
-      <div className="music-controls">
+    <div className="sound-bar__container">
+      <div className="sound-bar__music-controls">
         <button
           type="button"
-          onClick={() => currentSong?.play()}
-          onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
+          onClick={() => {
+            if (currentSong) musicController.playSong(currentSong);
           }}
+          onMouseOver={() => btnClickOne.play()}
+          onFocus={() => handleFocus}
         >
           Play
         </button>
@@ -26,9 +29,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={musicController.handleStop}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Stop
         </button>
@@ -36,9 +37,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={musicController.handlePause}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Pause
         </button>
@@ -46,9 +45,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={musicController.handleMute}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Mute
         </button>
@@ -56,9 +53,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={() => musicController.handleVolume(0.05)}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Vol +
         </button>
@@ -66,9 +61,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={() => musicController.handleVolume(-0.05)}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Vol -
         </button>
@@ -76,9 +69,7 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={() => musicController.handleSongSkip(-1)}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Prev
         </button>
@@ -86,14 +77,12 @@ const SoundBar = (): JSX.Element => {
           type="button"
           onClick={() => musicController.handleSongSkip(1)}
           onMouseOver={() => btnClickOne.play()}
-          onFocus={() => {
-            console.log('focus');
-          }}
+          onFocus={() => handleFocus}
         >
           Next
         </button>
       </div>
-      <div className="song-title">🎵 {currentSongTitle} </div>
+      <div className="sound-bar__song-title">🎵 {currentSongTitle} </div>
       <MuteSoundBtn />
     </div>
   );

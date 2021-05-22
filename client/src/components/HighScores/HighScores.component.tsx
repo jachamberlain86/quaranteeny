@@ -17,7 +17,7 @@ const HighScores: FC = () => {
 
   if (topFiveScores.length) {
     highScoresList = (
-      <ol className="HighScores__list">
+      <ol className="highScores__list">
         {topFiveScores.map((score, index) => {
           // eslint-disable-next-line react/no-array-index-key
           return <li key={index}>{score}</li>;
@@ -29,7 +29,7 @@ const HighScores: FC = () => {
   }
 
   return (
-    <div className="HighScores__container">
+    <div className="highScores__container">
       <h3>High scores</h3>
       {highScoresList}
     </div>

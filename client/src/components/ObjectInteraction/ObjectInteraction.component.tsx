@@ -7,22 +7,17 @@ const ObjectInteraction = (): JSX.Element => {
   const objectList = objectsNearBy.map((object, index) => {
     const keys = ['K', 'L', 'J'];
     return (
-      <li className="key-press-list-item" key={object}>
+      <li className="object-interaction__list-item" key={object}>
         <div>Use {object.toUpperCase()}</div>
         <div>
-          <span className="key-press">{keys[index]}</span>
+          <span className="object-interaction__key-press">{keys[index]}</span>
         </div>
       </li>
     );
   });
-  const interactionIndicator = <div>press K to interact</div>;
   return (
     <div
-      className={
-        objectList.length > 0
-          ? 'object-interaction-container slideInFromLeft'
-          : 'slideOutLeft'
-      }
+      className={objectList.length > 0 ? 'object-interaction__container' : ''}
     >
       <ul>{objectList && objectList}</ul>
     </div>

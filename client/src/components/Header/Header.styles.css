@@ -5,12 +5,12 @@ header {
   background-color: var(--header-light-blue);
 }
 
-.header-row-1 {
+.header__row-1 {
   display: flex;
   justify-content: center;
   height: 90%;
 }
-.header-row-2 {
+.header__row-2 {
   background-color: var(--header-shade-brown);
   height: 10%;
   background-image: url('../../assets/images/header-footer/rim-bottom.png');

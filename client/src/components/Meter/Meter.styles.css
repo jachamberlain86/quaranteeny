@@ -11,7 +11,7 @@
   background-color: #fff;
 }
 
-.Meter__progress-bar-wrap {
+.meter__progress-bar-wrap {
   width: 98%;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   height: 37px;
 }
 
-.Meter__progress-bar {
+.meter__progress-bar {
   -webkit-appearance: none;
   border-radius: 5px;
   height: 33px;
@@ -30,16 +30,16 @@
   left: 1px;
 }
 
-.Meter__progress-bar::-webkit-progress-bar {
+.meter__progress-bar::-webkit-progress-bar {
   background-color: #fff;
 }
-.Meter__progress-bar--normal::-webkit-progress-value {
+.meter__progress-bar--normal::-webkit-progress-value {
   background-color: var(--nes-blue);
 }
-.Meter__progress-bar--low::-webkit-progress-value {
+.meter__progress-bar--low::-webkit-progress-value {
   background-color: var(--nes-red) !important;
 }
-.Meter__progress-bar--high::-webkit-progress-value {
+.meter__progress-bar--high::-webkit-progress-value {
   background-color: var(--nes-yellow) !important;
 }
 

@@ -6,10 +6,10 @@ const Header = (): JSX.Element => {
   return (
     <div>
       <header>
-        <div className="header-row-1">
+        <div className="header__row-1">
           <SoundBar />
         </div>
-        <div className="header-row-2" />
+        <div className="header__row-2" />
       </header>
     </div>
   );
