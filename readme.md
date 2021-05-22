@@ -45,3 +45,10 @@ Our server and database setup uses the following tech:
 * [Type ORM](https://typeorm.io/#/)
 
 * [PostgreSQL](https://www.postgresql.org/)
+
+## Built By
+
+James Chamberlain - [LinkedIn](https://www.linkedin.com/in/chambermade/) || [GitHub](https://github.com/jachamberlain86)
+Roman Duda - [LinkedIn](https://www.linkedin.com/in/roman-duda-52287a52/) || [GitHub](https://github.com/romduda)
+Rosie Bullingdon - [LinkedIn](https://www.linkedin.com/in/romthomas/) || [GitHub](https://github.com/someonera)
+Ross Curry - [LinkedIn](https://www.linkedin.com/in/ross-curry/) || [GitHub](https://github.com/RossCurry)
