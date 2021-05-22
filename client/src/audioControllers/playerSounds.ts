@@ -40,7 +40,6 @@ export const collisionTwo = new Howl({
 });
 
 // Creates an object of multiple sounds that can later be called at random
-// used in inputHelper - collision function: handleMove()
 type HowlObject = Record<string, Howl>;
 
 export const howlCollisionsObj = {} as HowlObject;

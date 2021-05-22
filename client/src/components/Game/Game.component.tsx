@@ -69,8 +69,6 @@ const Game = (): JSX.Element => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userLoadingStatus]);
-  // TODO mention that this is causing the page to rerender every second
-  // }, [dispatch, userLoadingStatus]);
 
   useEffect(() => {
     let moveTimer: NodeJS.Timeout | undefined;
@@ -143,9 +141,6 @@ const Game = (): JSX.Element => {
 
             <div id="gover_panel">
               <GameOverBtn />
-              {/* <button type="button" onClick={() => stopObjectSound()}>
-                Stop EFX Loop
-              </button> */}
             </div>
           </div>
           <div>

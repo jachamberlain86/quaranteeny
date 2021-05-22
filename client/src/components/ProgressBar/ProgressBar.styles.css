@@ -5,19 +5,8 @@
   width: 95%;
 }
 
-.meter-container {
-  /* margin: .5rem; */
-}
-
-.meter{
-  /* padding: .25rem; */
-  /* padding: .5rem 1rem; */
-  /* width: 90%; */
-}
-
 .meter-text{
   padding: .25rem;
-  /* margin-bottom: .5rem; */
 }
 
 .meter-text-warning {
@@ -30,7 +19,6 @@
   border-style: dashed;
   border-width: 4px;
   animation: warning 3000ms ease-in-out infinite;
-  /* animation-iteration-count: infinite; */
 }
 
 

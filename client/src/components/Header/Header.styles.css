@@ -1,7 +1,5 @@
-/* header colours */
 
 header {
-  /* height: 50px; */
   height: var(--header-footer-height);
   margin: 0 auto;
   background-color: var(--header-light-blue);

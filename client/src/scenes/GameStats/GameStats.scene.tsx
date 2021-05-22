@@ -30,7 +30,6 @@ const GameStats: FC = () => {
   const handlePlayAgain = (): void => {
     resetGamePlay();
     bleepFiveConfirmation.play();
-    // TODO divide Game start page then push user to choose speed
     history.push('/new-game');
   };
 

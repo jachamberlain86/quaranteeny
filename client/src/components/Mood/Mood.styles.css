@@ -19,17 +19,14 @@
 }
 
 .Mood__item {
-  /* border: 1px solid #444; */
   word-wrap: keep-all;
   margin-right: 0.5rem;
 }
 
 .Mood__item::after {
-  /* border: 1px solid #444; */
   content: ",";
 }
 
 .Mood__item:last-child::after {
-  /* border: 1px solid #444; */
   content: "";
 }

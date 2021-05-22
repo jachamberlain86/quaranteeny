@@ -36,9 +36,6 @@ export const whooshOne = new Howl({
   src: [whoosh1],
   autoplay: false,
   volume: 0.1,
-  // sprite: {
-  //   start: [400, 4000],
-  // },
 });
 
 export const bleepOneHover = new Howl({

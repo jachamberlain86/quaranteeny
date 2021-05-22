@@ -68,8 +68,6 @@
 }
 .home-form label input[type='text']  {
   margin: 1rem 0;
-  /* border: var(--brown-border-frame);
-  border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round; */
 }
 
 .home-bottom-row {

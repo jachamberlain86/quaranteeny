@@ -53,7 +53,6 @@ export const houseInteractablesOneShot: string[] = [
   table,
   bin,
   noise,
-  fart,
   dresser,
 ];
 

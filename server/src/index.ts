@@ -42,9 +42,6 @@ createConnection()
       );
     });
 
-    // setup express app here
-    // ...
-
     // start express server
     app.listen(PORT || 3001);
     // eslint-disable-next-line no-console
