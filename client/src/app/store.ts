@@ -1,5 +1,4 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import metersReducer from '../features/meters/metersSlice';
 import gameReducer from '../features/game/gameSlice';
 import spriteReducer from '../features/sprite/spriteSlice';
@@ -9,7 +8,6 @@ import musicReducer from '../features/music/musicSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     game: gameReducer,
     sprite: spriteReducer,
     meters: metersReducer,
