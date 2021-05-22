@@ -36,12 +36,13 @@ const Home = (): JSX.Element => {
     e.preventDefault();
   };
   const handleSubmit = (
-    e: React.FormEvent<HTMLButtonElement | HTMLFormElement>
+    e: React.FormEvent<HTMLInputElement | HTMLFormElement | HTMLButtonElement>
   ): void => {
-    e.preventDefault();
     if (!nameInput) {
       handleNoUserName();
+      return;
     }
+    e.preventDefault();
     dispatch(setUserName(nameInput));
     btnPressOne.play();
     history.push('/new-game');
