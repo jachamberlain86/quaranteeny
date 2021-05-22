@@ -5,6 +5,10 @@ import { RootState } from '../../app/store';
 import { GameTime } from '../../interfaces/gameTime.interface';
 import { second, minute, hour, day } from '../../data/time.data';
 
+// TODO reconfigure slices to reduce use of useEffect across app
+// TODO reorganise slices into singular game slice for all game logic
+// TODO refactor logic in slices to handle events rather than act like getters/setters
+
 export interface GameState {
   isRoomLoading: boolean;
   gameSpeed: number;
@@ -28,7 +32,7 @@ export interface GameState {
 }
 
 const initialState: GameState = {
-  isRoomLoading: false,
+  isRoomLoading: true,
   gameSpeed: 60,
   startTime: 0,
   currClockTimeReal: 0,
@@ -88,6 +92,8 @@ export const gameSlice = createSlice({
       const timeSinceStartReal = state.currClockTimeReal - state.startTime;
       const timeSinceStartInGame = timeSinceStartReal * state.gameSpeed;
       state.currClockTimeInGame = state.startTime + timeSinceStartInGame;
+
+      // used to set filter effects for time of day
       const hourOfGameDay = moment(state.currClockTimeInGame).format('H');
       if (+hourOfGameDay >= 8 && +hourOfGameDay < 19) state.timeOfDay = 'day';
       if (+hourOfGameDay >= 19 && +hourOfGameDay < 21) state.timeOfDay = 'dusk';
@@ -184,9 +190,9 @@ export const gameSlice = createSlice({
     },
     toggleDressed: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        console.log('You put clothes on');
+        // TODO put clothes on
       } else {
-        console.log("You're naked!");
+        // TODO took clothes off
       }
       state.dressed = action.payload;
     },
@@ -251,17 +257,24 @@ export const selectGameOver = (state: RootState): boolean =>
 
 export const selectStarvation = (state: RootState): number =>
   state.game.starvationCounter;
+
 export const selectSleepDep = (state: RootState): number =>
   state.game.sleepDepCounter;
+
 export const selectSick = (state: RootState): number => state.game.sickCounter;
 
 export const selectTimeOfDay = (state: RootState): string =>
   state.game.timeOfDay;
+
 export const selectLightOn = (state: RootState): boolean => state.game.lightOn;
+
 export const selectMusicOn = (state: RootState): boolean => state.game.musicOn;
+
 export const selectComputerOn = (state: RootState): boolean =>
   state.game.computerOn;
+
 export const selectTvOn = (state: RootState): boolean => state.game.tvOn;
+
 export const selectDressed = (state: RootState): boolean => state.game.dressed;
 
 export default gameSlice.reducer;

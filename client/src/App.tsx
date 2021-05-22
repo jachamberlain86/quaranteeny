@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './App.css';
 import './Root.styles.css';
@@ -22,6 +22,8 @@ import { musicController } from './audioControllers/musicController';
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
+  const nodeRef = useRef(null);
+
   useEffect(() => {
     const userIdFromStorage = localStorage.getItem('userId');
     if (userIdFromStorage) {
@@ -32,6 +34,7 @@ const App = (): JSX.Element => {
     }
   }, [dispatch]);
 
+  // eslint-disable-next-line
   const getPathDepth = (location: any): number => {
     let pathArr = location.pathname.split('/');
     pathArr = pathArr.filter((n: string) => n !== '');
@@ -57,6 +60,7 @@ const App = (): JSX.Element => {
   return (
     <TransitionGroup component="div" className="App">
       <CSSTransition
+        nodeRef={nodeRef}
         key={currentKey}
         timeout={timeout}
         classNames="pageSlider"
@@ -64,6 +68,7 @@ const App = (): JSX.Element => {
         unmountOnExit
       >
         <div
+          ref={nodeRef}
           className={getPathDepth(location) - prevDepth >= 0 ? 'left' : 'right'}
         >
           <musicContext.Provider value={musicController}>

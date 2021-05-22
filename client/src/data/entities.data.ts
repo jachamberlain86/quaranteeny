@@ -2,11 +2,24 @@ import { hour, day } from './time.data';
 import { Entity } from '../interfaces/entity.interface';
 import { EntityDetails } from '../interfaces/entityDetails.interface';
 
-// A reference for unchanging game data in relation to interactable game entities. Generates an entities object based off hard coded entity names, cost values, timeToComplete values, arrays of meter impact objects, and conditions activated during the interaction.
+/* A reference for unchanging game data in relation to interactable game entities.
+Generates an entities object based off hard coded entity names, cost values,
+timeToComplete values, arrays of meter impact objects,
+and conditions activated during the interaction.
 
-// timeToComplete values use scaling time variables from gameTime.data.ts. This enables the interaction duration to scale with game speed.
+timeToComplete values are used with scaling time variables
+found in gameSlice to calculate iterations required.
+This enables the interaction duration to scale with game speed.
 
-// Meter impact objects are passed a string, indentifying the meter impacted during the interaction, and a value that indicates the total amount by which that meter will change by if the full duration of the interaction is allowed to be carried out. These values can be positive or negative and should be set using the fix time variables in time.data.ts
+Meter impact objects are passed a string, indentifying the meter
+impacted during the interaction, and a value that indicates the total
+amount by which that meter will change by if the full duration
+of the interaction is allowed to be carried out.
+These values can be positive or negative and should be set using
+the fixed time variables in time.data.ts
+
+The triggers array causes custom logic to fire on the activation of
+specific interactions */
 
 const entitiesData: EntityDetails[] = [
   {
@@ -241,7 +254,23 @@ const entitiesData: EntityDetails[] = [
     hoursToComplete: 0,
     meterImpacts: [],
     conditions: [],
-    triggers: ['clear'],
+    triggers: [],
+  },
+  {
+    name: 'cancel',
+    cost: 0,
+    hoursToComplete: 0,
+    meterImpacts: [],
+    conditions: [],
+    triggers: [],
+  },
+  {
+    name: 'walking',
+    cost: 0,
+    hoursToComplete: 0,
+    meterImpacts: [],
+    conditions: [],
+    triggers: [],
   },
 ];
 

@@ -1,5 +1,9 @@
 import { FurnitureTile } from '../interfaces/gameMap.interface';
 
+/* Used by the game canvas to render room tiles and provide values
+for whether a tile is walkable, interactable through a mouse click, or near
+to an interactable object and interactable with a key */
+
 export const roomMap: FurnitureTile[] = [
   // Row 0
   { key: 'room', int: null, intPos: [], walk: false },
