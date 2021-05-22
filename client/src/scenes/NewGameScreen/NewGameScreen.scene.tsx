@@ -9,6 +9,7 @@ import {
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
 import {
   btnClickOne,
+  bleepSixSelect,
   handleBtnHoverEnter,
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
@@ -20,6 +21,7 @@ const NewGameScreen = (): JSX.Element => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     console.log('radio btn', value);
+    bleepSixSelect.play();
     setRadioBrn(value);
   };
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
