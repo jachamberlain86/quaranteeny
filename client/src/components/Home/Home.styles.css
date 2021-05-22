@@ -2,37 +2,37 @@
 .home-background-color{
   background-color: var(--bg-color-offBlack);
 }
-.home-container {
+.home__container {
   width: 70%;
   margin: 0 auto;
   height: var(--game-height);
   color: var(--home-text-color);
 }
-.home-title-row{
+.home__title-row{
   display: flex;
   justify-content: center;
 }
-.home-title-row h1 {
+.home__title-row h1 {
   text-align: center;
   font-size: 4rem;
   margin: 2rem 0;
 }
-.home-container h2 {
+.home__container h2 {
   margin-bottom: 2rem;
 }
-.home-middle-row{
+.home__middle-row{
   display: flex;
   justify-content: space-between;
 }
 
-.home-col-right{
+.home__col-right{
   width: 48%;
 }
-.home-col-left{
+.home__col-left{
   width: 48%;
 }
 
-.home-col-left p{
+.home__col-left p{
   font-size: 1.2rem;
 }
 .home-form, .home-form label {
@@ -40,7 +40,7 @@
   flex-direction: column;
   justify-content: center;
 }
-#submit-btn, .home-btn-container button {
+#submit-btn, .home__btn-container button {
   margin: 0 auto;
   font-size: 1rem;
   width: 30%;
@@ -51,7 +51,7 @@
 
 }
 
-.home-btn-container button {
+.home__btn-container button {
   margin: 0;
   font-size: 1rem;
   width: 48%;
@@ -61,7 +61,7 @@
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
   transition: transform 200ms ease-in-out;
 }
-#submit-btn:hover, .home-btn-container button:hover {
+#submit-btn:hover, .home__btn-container button:hover {
   background-color: var(--header-darkest-brown);
   color: white;
   transform: translateY(-5%) scale(1.02);
@@ -70,12 +70,12 @@
   margin: 1rem 0;
 }
 
-.home-bottom-row {
+.home__bottom-row {
   display: flex;
   justify-content: center;
   margin: 2rem 0 0 0;
 }
-.home-btn-container {
+.home__btn-container {
   display: flex;
   justify-content: space-between;
 }

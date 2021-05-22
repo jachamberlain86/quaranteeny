@@ -7,15 +7,14 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  /* height: 100% */
   height: var(--game-height);
 }
 
-.fadeToGrey {
+.--fadeToGrey {
   animation: fadeToGrey 1000ms linear 1 normal;
 }
 
-.grey {
+.--greyscale {
   filter: grayscale(100%);
 }
 
@@ -28,7 +27,7 @@
   }
 }
 
-.panel-component-border {
+.game__panel-component-border {
   border: var(--brown-border-frame);
   padding: 5px;
   background-color: #e6f4ff;
@@ -36,7 +35,7 @@
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
 }
 
-.panel_space {
+.game__panel_space {
   display: flex;
   flex-direction: column;
   height: 550px; 

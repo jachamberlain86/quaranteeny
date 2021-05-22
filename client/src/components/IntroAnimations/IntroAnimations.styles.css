@@ -9,7 +9,7 @@
   color: white
 }
 
-.lamp-on {
+.intro-animations-bar__lamp-on {
   height: 20vh;
   width: 10vw;
   background-image: url('../../assets/images/livingRoom/lamp.png');
@@ -22,7 +22,7 @@
 }
 
 
-.tv-on{
+.intro-animations-bar__tv-on{
   margin-top: 3vh;
   height:20vh;
   width:20vw;
@@ -36,7 +36,7 @@
   right: 60vw;
 
 }
-.tv-off {
+.intro-animations-bar__tv-off {
   margin-top: 3vh;
   height:20vh;
   width:20vw;
@@ -52,7 +52,7 @@
 
 }
 
-.plant-alive{
+.intro-animations-bar__plant-alive{
   height: 16vh;
   width: 8vh;
   background-image: url('../../assets/images/livingRoom/plant-alive.png');

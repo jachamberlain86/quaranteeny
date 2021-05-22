@@ -23,13 +23,13 @@ const GameOver = (): JSX.Element => {
     bleepingGameOver.play();
   });
   return (
-    <div className="game-over-container">
-      <div className="nes-container is-dark with-title game-over-tile">
-        <h1 className="game-over-title">Game Over</h1>
+    <div className="game-over__container">
+      <div className="nes-container is-dark with-title game-over__tile">
+        <h1 className="game-over__title">Game Over</h1>
         <p>quaranteeny went outside</p>
         <button
           type="button"
-          className="continue-btn nes-btn"
+          className="game-over__continue-btn nes-btn"
           onClick={handleGameOver}
         >
           Continue

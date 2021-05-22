@@ -4,21 +4,21 @@
   padding: 1rem;
 }
 
-.numHeader {
+.conNum__numHeader {
   display: flex; 
 }
 
-.numOfDays {
+.conNum__numOfDays {
   padding: 0.5rem;
   text-align: center; 
 }
 
-.date{
+.conNum__date{
   font-size: 1rem;
   text-align: right;
 }
 
-.clock {  
+.conNum__clock {  
   font-size: 1rem;
   text-align: right;
 }

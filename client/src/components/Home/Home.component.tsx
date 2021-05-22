@@ -68,7 +68,7 @@ const Home = (): JSX.Element => {
   const newUser = (
     <>
       <div className="home-form">
-        <form className="form" autoComplete="off">
+        <form autoComplete="off">
           <h2>You´re new!</h2>
           <label htmlFor="userName">
             Type your name
@@ -78,7 +78,6 @@ const Home = (): JSX.Element => {
                 name="userName"
                 id="userName"
                 placeholder="Type here..."
-                className=""
                 value={nameInput}
                 onChange={handleInput}
               />
@@ -95,11 +94,11 @@ const Home = (): JSX.Element => {
   );
   const returnUser = (
     <>
-      <div className="returnGreeting">
+      <div className="return-greeting">
         <h2>Hey {userName}!</h2>
         <h2>Welcome Back</h2>
       </div>
-      <div className="home-btn-container">
+      <div className="home__btn-container">
         {isCurrentGameActive && (
           <button
             type="button"
@@ -126,13 +125,13 @@ const Home = (): JSX.Element => {
   return (
     <div className="home-background-color">
       <div className="max-width-container">
-        <div className="home-container">
-          <div className="home-title-row">
+        <div className="home__container">
+          <div className="home__title-row">
             <h1>Quaranteeny</h1>
           </div>
-          <div className="home-middle-row">
-            <div className="home-col-left">
-              <div className="home-story">
+          <div className="home__middle-row">
+            <div className="home__col-left">
+              <div className="home__story">
                 <h2>The story so far...</h2>
                 <p>
                   Giant crabs have overrun the world!
@@ -149,15 +148,15 @@ const Home = (): JSX.Element => {
                 </p>
               </div>
             </div>
-            <div className="home-col-right">
+            <div className="home__col-right">
               {userName ? returnUser : newUser}
             </div>
           </div>
           {!userName && (
-            <div className="home-bottom-row">
+            <div className="home__bottom-row">
               <button
                 type="button"
-                className="submit-btn"
+                className="home__submit-btn"
                 id="submit-btn"
                 onClick={handleSubmit}
                 onMouseEnter={handleBtnHoverEnter}

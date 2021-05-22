@@ -3,7 +3,7 @@ footer {
   z-index: 1
 }
 
-.footer-row-1 {
+.footer__row-1 {
   background-color: var(--footer-shade-brown);
   height: 10%;
   background-image: url('../../assets/images/header-footer/rim-bottom.png');
@@ -12,7 +12,7 @@ footer {
 }
 
 
-.footer-row-2 {
+.footer__row-2 {
   background-color: var(--header-light-brown);
   height: 90%;
 }
