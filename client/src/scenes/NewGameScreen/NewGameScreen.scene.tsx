@@ -9,7 +9,6 @@ import {
 import NewGamePageAnimations from '../../components/NewGamePageAnimations/NewGamePageAnimations.component';
 import {
   btnClickOne,
-  bleepSixSelect,
   handleBtnHoverEnter,
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';

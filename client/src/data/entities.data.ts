@@ -1,8 +1,6 @@
 import { hour, day } from './time.data';
 import { Entity } from '../interfaces/entity.interface';
 import { EntityDetails } from '../interfaces/entityDetails.interface';
-import { selectGameTime } from '../features/game/gameSlice';
-import { store } from '../app/store';
 
 // A reference for unchanging game data in relation to interactable game entities. Generates an entities object based off hard coded entity names, cost values, timeToComplete values, arrays of meter impact objects, and conditions activated during the interaction.
 

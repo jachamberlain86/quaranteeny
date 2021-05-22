@@ -9,10 +9,6 @@ import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow.mp3';
 import EightiesSlowFunkSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Modern Bits.mp3';
 
 import {
-  selectCurrentSong,
-  selectIsSongMuted,
-  selectCurrentSongIndex,
-  resetMusic,
   setCurrentSong,
   setIsSongMuted,
   setCurrentSongIndex,

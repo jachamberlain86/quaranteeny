@@ -22,7 +22,6 @@ import { meters, Meters } from '../data/meters.data';
 import {
   triggerAddConditions,
   triggerRemoveConditions,
-  setNewInteraction,
   updateInteractionProgress,
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';

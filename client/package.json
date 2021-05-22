@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.12",
     "@types/react-redux": "^7.1.16",
     "dotenv": "^8.2.0",
+    "history": "^4.10.1",
     "howler": "^2.2.1",
     "konva": "^7.2.5",
     "l1-path-finder": "^1.0.0",

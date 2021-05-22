@@ -11,7 +11,6 @@ import { setCurrentSong } from '../../features/music/musicSlice';
 import {
   handleBtnHoverEnter,
   handleBtnHoverLeave,
-  btnPressOne,
   bleepFiveConfirmation,
 } from '../../audioControllers/buttonSounds';
 
@@ -104,6 +103,7 @@ const GameStats: FC = () => {
             </div>
           </div>
         </div>
+        <div className="crab" />
       </div>
     </div>
   );

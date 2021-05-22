@@ -1,14 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState, createContext } from 'react';
-import { Howl, Howler } from 'howler';
-import { store } from '../../app/store';
+import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import './SoundBar.styles.css';
 import { musicController } from '../../audioControllers/musicController';
 import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
 import { btnClickOne } from '../../audioControllers/buttonSounds';
-
-const initialState = {} as Howl;
 
 const SoundBar = (): JSX.Element => {
   const currentSongTitle = useAppSelector((state) => state.music.currentSong);
