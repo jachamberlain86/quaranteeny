@@ -6,3 +6,4 @@ tmp/
 temp/
 .env
 ormconfig.env
+ormconfig.json
