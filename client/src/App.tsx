@@ -5,7 +5,6 @@ import './Root.styles.css';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import Game from './components/Game/Game.component';
 import Home from './components/Home/Home.component';
-import GameStart from './scenes/GameStart/GameStart.scene';
 import GameStats from './scenes/GameStats/GameStats.scene';
 import NewGameScreen from './scenes/NewGameScreen/NewGameScreen.scene';
 import './pageTransitions/slideTransitions.css';
@@ -40,7 +39,6 @@ const App = (): JSX.Element => {
 
   const location = useLocation();
   const timeout = { enter: 800, exit: 400 };
-  // const currentKey = location.pathname.split("/")
 
   const [currentKey, setCurrentKey] = useState(
     location.pathname.split('/')[1] || '/'

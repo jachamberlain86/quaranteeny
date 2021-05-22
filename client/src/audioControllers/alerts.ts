@@ -6,7 +6,4 @@ export const bubblePop = new Howl({
   autoplay: false,
   loop: false,
   volume: 0.5,
-  // onend() {
-  //   console.log('Finished!');
-  // },
 });

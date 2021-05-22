@@ -10,9 +10,8 @@ import {
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
-// import { setIsCurrentGameActive } from '../../features/user/userSlice';
 
-const GameOverBtn: FC = () => {
+const GameOverBtn = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {

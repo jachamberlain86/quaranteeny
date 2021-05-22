@@ -2,12 +2,6 @@
   height: var(--game-height);
 }
 
-.new-game-page-content {
-  /* display: flex;
-  align-items: center;
-  justify-content: space-around; */
-}
-
 .new-game__row-1{
   padding: 2rem 0;
 }
@@ -19,7 +13,6 @@
 
 .new-game__row-2 {
   display: flex;
-  /* justify-content: space-evenly; */
   margin-bottom: 3rem;
 }
 .new-game__col-1-left{
@@ -36,12 +29,10 @@
   display: flex;
   flex-direction: column;
   margin: 0 2rem;
-  /* flex: 2; */
 }
 
 .diff-radio-button-space {
   color:white;
-  /* margin: 20px 30px 20px 0; */
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -56,7 +47,6 @@
 .diff-radio-button-space p {
   color: white; 
   flex: 5;
-  /* font-size: 0.75rem;  */
   font-size: 1rem; 
   margin: 1rem
 }
@@ -65,12 +55,9 @@
 }
 
 .new-game__col-2-right{
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* width: 50%;
-   */
   flex:1.7
 }
+
 .new-game__col-2-right h2 {
   color: white;
   text-align: center;
@@ -84,7 +71,6 @@
 .direction-key-instructions {
   display: flex;
   flex-direction: column;
-  /* flex: 2; */
   width: 45%;
   align-items: center;
   color: white;
@@ -95,11 +81,9 @@
 .letter-instruction {
 width: 50px;
 height:50px;
-/* line-height: -10px; */
 background-color: var(--header-dark-brown);
 color: white;
 text-align: center;
-/* vertical-align: middle; */
 padding-top: 0px;
 font-size: 1rem; 
 margin: 0.5rem;

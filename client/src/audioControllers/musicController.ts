@@ -9,10 +9,6 @@ import heartyFellow from '../assets/audio/tracks/in-game/A Hearty Fellow.mp3';
 import EightiesSlowFunkSong from '../assets/audio/tracks/in-game/Abstraction - Three Red Hearts - Modern Bits.mp3';
 
 import {
-  selectCurrentSong,
-  selectIsSongMuted,
-  selectCurrentSongIndex,
-  resetMusic,
   setCurrentSong,
   setIsSongMuted,
   setCurrentSongIndex,
@@ -46,16 +42,6 @@ export const playListArr = Object.entries(playListObject);
 
 export const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
 
-// TODO use playlist track listing in drop down menu
-// const playList = playListArr.map((song, index) => {
-//   return (
-//     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-//     <div key={song[0]} onClick={() => song[1].play()}>
-//       {song[0].match(regExp)}
-//     </div>
-//   );
-// });
-
 export const findSongTitleFromHowlFile = (song: Howl): string | null => {
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
@@ -70,7 +56,6 @@ export const findSongTitleFromHowlFile = (song: Howl): string | null => {
 };
 
 export const findHowlFileFromTitle = (title: string): Howl | null => {
-  // TODO FIX: seems like this function is being fired constantly
   for (let i = 0; i < playListArr.length; i += 1) {
     const howlSong = playListArr[i][1];
     const songPathString = playListArr[i][0];

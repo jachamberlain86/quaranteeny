@@ -1,12 +1,8 @@
 .intro-animations-bar {
-  /* width: 100vw; */
   margin-top: 1rem;
   height: 20vh;
   display: flex;
-  /* background-color: green; */
   z-index: 2;
-  /* position: absolute;
-  bottom:  */
 }
 
 .intro-animations-bar-pic {
@@ -30,7 +26,6 @@
   margin-top: 3vh;
   height:20vh;
   width:20vw;
-  /* background-color: pink; */
   margin-right: 1rem;
   margin-left: 1rem;
   background-image: url('../../assets/images/livingRoom/tv-on.png');
@@ -45,7 +40,6 @@
   margin-top: 3vh;
   height:20vh;
   width:20vw;
-  /* background-color: pink; */
   margin-right: 1rem;
   margin-left: 1rem;
   background-image: url('../../assets/images/livingRoom/tv-off.png');
@@ -69,15 +63,4 @@
   position: absolute;
   bottom: 1vh;
   right: 3vw
-  }
-
-/* 
-  .phone-pic {
-    height:1rem;
-    width:1rem;
-    background-color: pink;
-    background-image: url('../../assets/images/diningRoom/phone.png');
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-
-  } */
+}

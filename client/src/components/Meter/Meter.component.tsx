@@ -69,5 +69,4 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
   return <div>{renderMeter}</div>;
 };
 
-// value will come in through props and redux
 export default Meter;

@@ -105,9 +105,6 @@ export function handleClickTile(
       if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
         console.log('That tickles!');
       } else if (clickedEntity !== null) {
-        // TODO move sound logic to sprite collision logic when in place.
-        // sound file logic
-        // might be more useful in spriteHelper line: 66
         if (checkNewInteraction(clickedEntity)) {
           spriteMoveSelfThenInteract(clickedEntity);
         }

@@ -24,7 +24,6 @@ const ObjectInteraction = (): JSX.Element => {
           : 'slideOutLeft'
       }
     >
-      {/* {objectList.length > 0 ? interactionIndicator : null} */}
       <ul>{objectList && objectList}</ul>
     </div>
   );

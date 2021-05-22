@@ -9,12 +9,7 @@ import { resetGamePlay } from '../../helpers/game.helper';
 import {
   btnPressOne,
   btnPressTwo,
-  btnClickOne,
-  whooshOne,
-  bleepOneHover,
-  bleepTwo,
   bleepFiveConfirmation,
-  bleepSevenHover,
   cancelButton,
   handleBtnHoverEnter,
   handleBtnHoverLeave,

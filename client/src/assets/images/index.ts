@@ -163,36 +163,6 @@ export class ImageDirectory {
     this.ofdbroff = officeImgs.deskBROff;
     this.ofdtloff = officeImgs.deskTLOff;
     this.ofdtroff = officeImgs.deskTROff;
-
-    // this.bedo = bedImgs.dresserO;
-    // this.babc = bathImgs.bathC;
-    // this.baso = bathImgs.sinkO;
-    // this.ditbo = diningImgs.tableBolognese;
-    // this.ditce = diningImgs.tableCereal;
-    // this.ditdu = diningImgs.tableDuck;
-    // this.ditdo = diningImgs.tableDonut;
-    // this.diteg = diningImgs.tableEggs;
-    // this.ditfu = diningImgs.tableFryUp;
-    // this.dithd = diningImgs.tableHotdog;
-    // this.ditpi = diningImgs.tablePizza;
-    // this.ditri = diningImgs.tableRisotto;
-    // this.ditls = diningImgs.tableLeafSalad;
-    // this.ditsa = diningImgs.tableSandwich;
-    // this.ditta = diningImgs.tableTaco;
-    // this.ditts = diningImgs.tableTomSalad;
-    // this.ditwr = diningImgs.tableWrap;
-    // this.ditfw = diningImgs.foodWaste2;
-    // this.kic1p = kitchenImgs.dirtyPlates;
-    // this.kic2fw = kitchenImgs.foodWaste1;
-    // this.kifoe = kitchenImgs.fridgeOEmpty;
-    // this.kifof = kitchenImgs.fridgeOFull;
-    // this.kic1o = kitchenImgs.cab1O;
-    // this.kic2o = kitchenImgs.cab2O;
-    // this.kiso = kitchenImgs.sinkO;
-    // this.kioon = kitchenImgs.ovenOn;
-    // this.lrpd = livingImgs.plantDead;
-    // this.lrtvon = livingImgs.tvOn;
-    // this.ofdon = officeImgs.deskOn;
   }
 }
 

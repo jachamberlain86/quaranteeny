@@ -155,9 +155,6 @@ export const gameSlice = createSlice({
     },
     loadGameStateFromDb: (state, action: PayloadAction<GameState>) => {
       state.gameOver = action.payload.gameOver;
-      // Changing the game speed seems to break things, I think because
-      // gameTime.data.ts doesn't run again and re-export gameMinute
-      // if the gameSpeed changes.
       state.gameSpeed = action.payload.gameSpeed;
       state.startTime = action.payload.startTime;
       state.currClockTimeInGame = action.payload.currClockTimeInGame;

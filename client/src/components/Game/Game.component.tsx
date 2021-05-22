@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import './Game.styles.css';
 import Room from '../../scenes/Room/Room.scene';
@@ -27,19 +27,10 @@ import {
 import { checkMeterStates, decayMeters } from '../../helpers/meters.helper';
 import { meters } from '../../data/meters.data';
 import GameOverBtn from '../GameOverBtn/GameOverBtn.component';
-import MuteSoundBtn from '../MuteSoundBtn/MuteSoundBtn.component';
 import ObjectInteraction from '../ObjectInteraction/ObjectInteraction.component';
-import {
-  gameOverOne,
-  gameOverTwo,
-  gameOverThree,
-  gameOverFour,
-} from '../../audioControllers/gameOverSounds';
+import { gameOverTwo } from '../../audioControllers/gameOverSounds';
 import { gameOverMusic } from '../../audioControllers/gameOverMusic';
-import SoundBar from '../SoundBar/SoundBar.components';
-import musicContext from '../../contexts/music.context';
 import { musicController } from '../../audioControllers/musicController';
-import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
 
 const Game = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -78,8 +69,6 @@ const Game = (): JSX.Element => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userLoadingStatus]);
-  // TODO mention that this is causing the page to rerender every second
-  // }, [dispatch, userLoadingStatus]);
 
   useEffect(() => {
     let moveTimer: NodeJS.Timeout | undefined;
@@ -128,6 +117,7 @@ const Game = (): JSX.Element => {
         gameOverMusic.play();
       }, 200);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOver]);
 
   const roomLoading = isRoomLoading ? <Loading /> : '';
@@ -151,9 +141,6 @@ const Game = (): JSX.Element => {
 
             <div id="gover_panel">
               <GameOverBtn />
-              {/* <button type="button" onClick={() => stopObjectSound()}>
-                Stop EFX Loop
-              </button> */}
             </div>
           </div>
           <div>
