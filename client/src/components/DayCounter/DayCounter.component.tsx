@@ -28,14 +28,14 @@ const DayCounter = (): JSX.Element => {
   const clock = moment(currClockTime).format('h:mm a');
   return (
     <div className="conNum">
-      <div className="numHeader">
+      <div className="conNum__numHeader">
         <p>Quaranteeny has been locked down for:</p>
       </div>
-      <div className="numOfDays">
+      <div className="conNum__numOfDays">
         <h2>{timeSinceStart}</h2>
       </div>
-      <div className="date"> {date} </div>
-      <div className="clock"> {clock} </div>
+      <div className="conNum__date"> {date} </div>
+      <div className="conNum__clock"> {clock} </div>
     </div>
   );
 };

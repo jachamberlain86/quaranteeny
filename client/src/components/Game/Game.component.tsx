@@ -87,7 +87,7 @@ const Game = (): JSX.Element => {
   useEffect(() => {
     const id: NodeJS.Timeout = setTimeout(() => {
       if (currentGameScreen && gameOver) {
-        currentGameScreen.classList.add('grey');
+        currentGameScreen.classList.add('--greyscale');
       }
     }, 1000);
     return () => {
@@ -126,16 +126,19 @@ const Game = (): JSX.Element => {
   return (
     <div className="game-container">
       <div className="max-width-container">
-        <div ref={gameScreen} className={gameOver ? 'game fadeToGrey' : 'game'}>
+        <div
+          ref={gameScreen}
+          className={gameOver ? 'game --fadeToGrey' : 'game'}
+        >
           {gameOver && <GameOver />}
           {fastForwardIndicator}
           {roomLoading}
 
-          <div className="panel_space" id="left_panel_space">
-            <div className="panel-component-border" id="dcount_panel">
+          <div className="game__panel_space" id="left_panel_space">
+            <div className="game__panel-component-border" id="dcount_panel">
               <DayCounter />
             </div>
-            <div className="panel-component-border" id="hscore_panel">
+            <div className="game__panel-component-border" id="hscore_panel">
               <HighScores />
             </div>
 
@@ -147,8 +150,8 @@ const Game = (): JSX.Element => {
             <Room />
           </div>
 
-          <div className="panel_space" id="right_panel_space">
-            <div className="panel-component-border" id="mood_panel">
+          <div className="game__panel_space" id="right_panel_space">
+            <div className="game__panel-component-border" id="mood_panel">
               <MeterArea />
               <Mood />
               <ObjectInteraction />

@@ -67,20 +67,20 @@ const GameStats: FC = () => {
 
   return (
     <div className="game-container">
-      <div className="GameStats__page">
+      <div className="game-stats__page">
         <div className="max-width-container">
-          <div className="GameStats__main-container">
-            <div className="GameStats__content-container">
-              <div className="GameStats__column">
+          <div className="game-stats__main-container">
+            <div className="game-stats__content-container">
+              <div className="game-stats__column">
                 <h1>Oh no!</h1>
-                <div className="GameStats__why-lost-text">{gameOverText1}</div>
-                <div className="GameStats__why-lost-text">{gameOverText2}</div>
+                <div className="game-stats__why-lost-text">{gameOverText1}</div>
+                <div className="game-stats__why-lost-text">{gameOverText2}</div>
               </div>
-              <div className="GameStats__column GameStats__column-right">
+              <div className="game-stats__column game-stats__column-right">
                 {timeLastedPretty && <h1>Lasted for {timeLastedPretty}</h1>}
-                <div className="GameStats__high-scores">
+                <div className="game-stats__high-scores">
                   <h2>List of top times</h2>
-                  <ol className="GameStats__high-scores-list">
+                  <ol className="game-stats__high-scores-list">
                     {topFiveScores.map((score, index) => {
                       // eslint-disable-next-line react/no-array-index-key
                       return <li key={index}>{score}</li>;
@@ -89,10 +89,10 @@ const GameStats: FC = () => {
                 </div>
               </div>
             </div>
-            <div className="GameStats__btn-container">
+            <div className="game-stats__btn-container">
               <button
                 type="button"
-                className="GameStats__new-game-btn"
+                className="game-stats__new-game-btn"
                 onClick={handlePlayAgain}
                 onMouseEnter={handleBtnHoverEnter}
                 onMouseLeave={handleBtnHoverLeave}

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './GameOverBtn.styles.css';
 import { useAppDispatch } from '../../app/hooks';
 import {
@@ -26,7 +26,7 @@ const GameOverBtn = (): JSX.Element => {
         onClick={handleClick}
         onMouseEnter={handleBtnHoverEnter}
         onMouseLeave={handleBtnHoverLeave}
-        className="game_over_button"
+        className="game-over__button"
       >
         Give up? Go outside...
       </button>

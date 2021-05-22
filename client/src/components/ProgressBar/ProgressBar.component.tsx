@@ -11,9 +11,9 @@ const ProgressBar = (): JSX.Element => {
     renderedProgressBar = (
       <div className="meter-container">
         <div className=" meter-text">Progress: {interactionProgress}%</div>
-        <div className="Meter__progress-bar-wrap">
+        <div className="meter__progress-bar-wrap">
           <progress
-            className="Meter__progress-bar nes-progress is-success"
+            className="meter__progress-bar nes-progress is-success"
             value={interactionProgress || 0.1}
             max={100}
           />
@@ -24,7 +24,7 @@ const ProgressBar = (): JSX.Element => {
     renderedProgressBar = '';
   }
 
-  return <div className="ProgressBar">{renderedProgressBar}</div>;
+  return <div className="progress-bar">{renderedProgressBar}</div>;
 };
 
 export default ProgressBar;

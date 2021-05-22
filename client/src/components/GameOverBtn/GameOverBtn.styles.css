@@ -1,4 +1,4 @@
-.game_over_button{
+.game-over__button{
   border: var(--brown-border-frame);
   padding: 5px;
   margin: 10px 10px 10px 10px;
@@ -8,6 +8,6 @@
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
   transition: transform 200ms ease-in-out;
 } 
-.game_over_button:hover {
+.game-over__button:hover {
   transform: translateY(-5%) scale(1.02);
 }

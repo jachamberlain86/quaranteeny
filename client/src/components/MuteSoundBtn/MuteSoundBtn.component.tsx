@@ -11,14 +11,15 @@ const MuteSoundBtn = (): JSX.Element => {
     btnClickOne.play();
     dispatch(setAllSoundMuted());
   };
+  const handleFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
+    e.target.classList.add('sound-bar__btn--focus');
+  };
   return (
     <button
       type="button"
       onClick={handleMute}
       onMouseOver={() => btnClickOne.play()}
-      onFocus={() => {
-        console.log('focus');
-      }}
+      onFocus={() => handleFocus}
       className={areAllSoundsMuted ? 'mute-sound-btn' : ''}
     >
       {areAllSoundsMuted ? 'Unmute All Sounds' : 'Mute All Sounds'}
