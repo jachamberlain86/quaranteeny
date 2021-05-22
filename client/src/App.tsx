@@ -40,7 +40,7 @@ const App = (): JSX.Element => {
   };
 
   const location = useLocation();
-  const timeout = { enter: 800, exit: 400 };
+  const timeout = { enter: 600, exit: 400 };
 
   const [currentKey, setCurrentKey] = useState(
     location.pathname.split('/')[1] || '/'
@@ -62,7 +62,7 @@ const App = (): JSX.Element => {
         timeout={timeout}
         classNames="pageSlider"
         mountOnEnter={false}
-        mountOnExit
+        unmountOnExit
       >
         <div
           className={getPathDepth(location) - prevDepth >= 0 ? 'left' : 'right'}

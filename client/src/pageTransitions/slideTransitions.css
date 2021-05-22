@@ -8,10 +8,15 @@
 
 .pageSlider-enter.left > .game-container {
   transform: translate3d(100%, 0, 0);
+  animation-name: enter-right; 
+  animation-duration: 600;
+
 }
 
 .pageSlider-enter.right > .game-container {
   transform: translate3d(-100%, 0, 0);
+  animation-name: enter-right; 
+  animation-duration: 600;
 }
 
 .pageSlider-exit.left > .game-container {
@@ -24,5 +29,25 @@
 
 .pageSlider-enter.pageSlider-enter-active > .game-container {
   transform: translate3d(0, 0, 0);
-  transition: all 800ms ease-in-out
+  transition: all 600ms ease-in-out
+}
+
+@keyframes enter-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes enter-right {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
