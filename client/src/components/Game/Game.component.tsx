@@ -52,6 +52,17 @@ const Game = (): JSX.Element => {
   const currentGameScreen = gameScreen.current as HTMLDivElement;
 
   useEffect(() => {
+    /* main loop starts on game mount
+    calls functions to update game time,
+    start meter decay, check for conditions being
+    added or removed from the sprite, and whether
+    a lose state has been reached. Intervals are collected
+    in an array to be cleared up unmounting Game */
+
+    /* TODO move intervals into a single main loop
+    that listens to requestAnimationFrame,
+    following present, accept, interpret, calculate, repeat pattern */
+
     const timersArr: NodeJS.Timeout[] = [];
     if (userLoadingStatus === 'userLoaded' && !gameOver) {
       const clockTimer = startClock();
@@ -82,6 +93,9 @@ const Game = (): JSX.Element => {
   // }, [dispatch, userLoadingStatus]);
 
   useEffect(() => {
+    /* calls to change the player's position are throttled
+    by an interval. This interval is cleared if the game unmounts mid move */
+
     let moveTimer: NodeJS.Timeout | undefined;
     window.addEventListener('keydown', (event) => {
       moveTimer = downHandler(event);
@@ -119,6 +133,7 @@ const Game = (): JSX.Element => {
       }
     }
   }, []);
+
   useEffect(() => {
     if (gameOver) {
       const howlSongFile = musicController.findHowlFileFromTitle(currentSong);

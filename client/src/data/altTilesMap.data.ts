@@ -1,5 +1,8 @@
 import { AltTile } from '../interfaces/gameMap.interface';
 
+/* provides a layer for state changes in the flat be be visualised,
+e.g. dirt, haunted, hallucinating, etc... */
+
 export const altTilesMap: AltTile[] = [
   // Row 1
   { key: 'blank' },

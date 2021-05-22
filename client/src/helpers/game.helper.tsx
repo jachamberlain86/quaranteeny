@@ -87,6 +87,10 @@ export function calcPercentage(current: number, total: number): number {
   return Math.round(percentage * 100);
 }
 
+/* checks whether sprite is currently interacting and if so cancels it.
+If sprite is walking, the click is ignored. For interactable tiles,
+activates move and interact logic. For walkable tiles, activates move logic. */
+
 export function handleClickTile(
   event: Konva.KonvaEventObject<MouseEvent>
 ): void {
@@ -105,9 +109,6 @@ export function handleClickTile(
       if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
         console.log('That tickles!');
       } else if (clickedEntity !== null) {
-        // TODO move sound logic to sprite collision logic when in place.
-        // sound file logic
-        // might be more useful in spriteHelper line: 66
         if (checkNewInteraction(clickedEntity)) {
           spriteMoveSelfThenInteract(clickedEntity);
         }

@@ -31,12 +31,10 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentInteraction } from '../../features/sprite/spriteSlice';
 
 const Room = (): JSX.Element => {
-  const dayRef = useRef<any | null>(null);
-  const duskDawnRef = useRef<any | null>(null);
-  const nightRef = useRef<any | null>(null);
-
   const dispatch = useAppDispatch();
-  const { cols, tileSize, layers } = game;
+  const { cols, tileSize } = game;
+
+  // sets canvas size based on values given in gameMap
   const canvasWidth = cols * tileSize;
   const canvasHeight = cols * tileSize;
   const scale = tileSize / 32;
@@ -46,19 +44,14 @@ const Room = (): JSX.Element => {
   const [filterLayer, setFilterLayer] = useState<JSX.Element[]>([]);
   const [clickableLayer, setClickableLayer] = useState<JSX.Element[]>([]);
   const [imageAtlas, setImageAtlas] = useState<HTMLImageElement>();
-  const [tilesLoaded, setTilesLoaded] = useState<boolean>(false);
-  const [filtersLoaded, setFiltersLoaded] = useState<boolean>(false);
   const [filterAtlas, setFilterAtlas] = useState<HTMLImageElement>();
-  const [currentFilter, setCurrentFilter] = useState<string>('');
-
   const [interaction, setInteraction] = useState<string | null>(null);
-
   const currentInteraction = useAppSelector(selectCurrentInteraction);
   const curPos = useAppSelector(selectCurPos);
   const timeOfDay = useAppSelector(selectTimeOfDay);
   const lightOn = useAppSelector(selectLightOn);
-  const deskOn = useAppSelector(selectComputerOn);
-  const sofaOn = useAppSelector(selectTvOn);
+  const computerOn = useAppSelector(selectComputerOn);
+  const tvOn = useAppSelector(selectTvOn);
 
   function updateTileImage(
     tileKey: string,
@@ -84,6 +77,7 @@ const Room = (): JSX.Element => {
     );
     return newTile;
   }
+
   function updateFilterImage(tileKey: string): JSX.Element {
     const filter = filterDirectory[tileKey];
     const newTile = (
@@ -161,8 +155,8 @@ const Room = (): JSX.Element => {
     }
     if (timeOfDay === 'night') {
       if (lightOn) return 'night-light';
-      if (sofaOn) return 'night-tv';
-      if (deskOn) return 'night-computer';
+      if (tvOn) return 'night-tv';
+      if (computerOn) return 'night-computer';
       return 'night';
     }
     if (timeOfDay === 'dawn') return 'dawn';
@@ -228,7 +222,6 @@ const Room = (): JSX.Element => {
     setImageAtlas(img);
     img.crossOrigin = 'Anonymous';
     img.onload = () => {
-      setTilesLoaded(true);
       buildRoomLayer(img);
       buildAltTilesLayer(img);
     };
@@ -237,7 +230,6 @@ const Room = (): JSX.Element => {
     setFilterAtlas(filtImg);
     filtImg.crossOrigin = 'Anonymous';
     filtImg.onload = () => {
-      setFiltersLoaded(true);
       buildFilterLayer(filtImg);
     };
     filtImg.src = filters;
@@ -374,7 +366,7 @@ const Room = (): JSX.Element => {
     const filter = pickFilter();
     currFilter[0] = updateFilterImage(filter);
     setFilterLayer(currFilter);
-  }, [timeOfDay, lightOn, deskOn, sofaOn]);
+  }, [timeOfDay, lightOn, computerOn, tvOn]);
 
   return (
     <ReactReduxContext.Consumer>

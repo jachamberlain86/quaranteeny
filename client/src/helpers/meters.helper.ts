@@ -24,6 +24,7 @@ import {
   triggerRemoveConditions,
   setNewInteraction,
   updateInteractionProgress,
+  handleInteractionTriggers,
 } from './sprite.helper';
 import { Entity } from '../interfaces/entity.interface';
 import { stopObjectSound } from '../audioControllers/houseObjectsSounds';
@@ -40,7 +41,11 @@ function deductRent(): void {
   }
 }
 
-// On game init, all meters will state to decay at their defined decay rate. At faster game speeds, calls to decay the meter are reduced by updateInterval. Meters decay by greater amounts when there are greater intervals between function calls.
+/* On game init, all meters will start to decay at their defined decay rate.
+At faster game speeds, calls to decay the meter are reduced by updateInterval.
+Meters decay by greater amounts when there are greater intervals between function calls.
+If a meter is impacted by an interaction its natural decay is paused.
+Money works slightly differently and is reduced by a fixed amount every 7 game days. */
 
 export const decayMeters = (metersObj: Meters): NodeJS.Timeout[] => {
   const { gameMinute, gameDay, updateInterval } = selectGameTime(
@@ -84,7 +89,8 @@ export const decayMeters = (metersObj: Meters): NodeJS.Timeout[] => {
   return [minuteTimer, weekTimer, ...timersArr];
 };
 
-// Used to watch meters falling in an out of danger zones, adding and removing relevant conditions when necessary.
+/* Used to watch meters falling in an out of danger zones,
+adding and removing relevant conditions when necessary. */
 
 export const checkMeterStates = (): NodeJS.Timeout[] => {
   const { gameMinute, updateInterval } = selectGameTime(store.getState().game);
@@ -128,7 +134,12 @@ export function deductCost(cost: number): boolean {
   return true;
 }
 
-// Called when interacting with an interactable entity that does not have an immediate effect. Works out number of iterations based on intervals between function calls. Pauses meter decay for each meter on activation and unpauses if cancelled or complete. Also calls function to update interaction progress.
+/* Called when interacting with an interactable entity
+that does not have an immediate effect.
+Works out number of iterations based on intervals between function calls.
+Pauses meter decay for each meter on activation
+and unpauses if cancelled or complete.
+Also calls function to update interaction progress. */
 
 export function triggerIncrementalChange(
   entityData: Entity,
@@ -169,6 +180,7 @@ export function triggerIncrementalChange(
         stopObjectSound();
         clearInterval(timer);
         triggerRemoveConditions(entityData.conditions);
+        // Sending 0, 0 clears the current progress meter
         updateInteractionProgress(0, 0);
         pausedMeters.forEach((meter) =>
           store.dispatch(resetMeterPauseDecayToInit(meter))
@@ -180,7 +192,9 @@ export function triggerIncrementalChange(
         pausedMeters.forEach((meter) =>
           store.dispatch(resetMeterPauseDecayToInit(meter))
         );
+        // cancel ends the current interaction and terminates animation cycles
         store.dispatch(changeInteraction('cancel'));
+        handleInteractionTriggers(['clear']);
         updateInteractionProgress(0, 0);
       } else {
         updateInteractionProgress(interactionChangesRemaining, iterations);
@@ -212,6 +226,7 @@ function triggerImmediateChange(entityData: Entity): void {
   }
   setTimeout(() => {
     store.dispatch(changeInteraction('cancel'));
+    handleInteractionTriggers(['clear']);
   }, 200);
 }
 

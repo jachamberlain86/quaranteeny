@@ -64,6 +64,7 @@ export const metersSlice = createSlice({
     increaseValueScaled: (state, action: PayloadAction<MeterChange>) => {
       const meter = state[action.payload.name as keyof MetersState];
       const incRate = selectIncRate(state, action.payload.name);
+      /* inc rate is a percentage so adjusted here to act as multiplier */
       meter.value += Math.round(action.payload.amount * (incRate / 100));
       if (meter.value > meters[action.payload.name].max)
         meter.value = meters[action.payload.name].max;
@@ -71,6 +72,7 @@ export const metersSlice = createSlice({
     decreaseValueScaled: (state, action: PayloadAction<MeterChange>) => {
       const decRate = selectDecRate(state, action.payload.name);
       const meter = state[action.payload.name as keyof MetersState];
+      /* inc rate is a percentage so adjusted here to act as multiplier */
       meter.value += Math.round(action.payload.amount * (decRate / 100));
       if (meter.value < 0) meter.value = 0;
     },
@@ -83,6 +85,10 @@ export const metersSlice = createSlice({
     },
     addModifier: (state, action: PayloadAction<MeterModifier>) => {
       const meter = state[action.payload.meter as keyof MetersState];
+      /* modifiers are passed as either a pos or neg int to indicate
+      whether to apply pos or neg multiplier. rates cannot extend beyond
+      10x faster or 10x slower default of 100% */
+
       if (action.payload.incRateModifier) {
         const modifier = action.payload.incRateModifier;
         meter.incRate =
@@ -97,9 +103,9 @@ export const metersSlice = createSlice({
             ? meter.decRate * modifier
             : meter.decRate / Math.abs(modifier);
       }
-      if (meter.decRate <= 0) meter.decRate = 0.1;
+      if (meter.decRate < 10) meter.decRate = 10;
       if (meter.decRate > 1000) meter.decRate = 1000;
-      if (meter.incRate <= 0) meter.incRate = 0.1;
+      if (meter.incRate < 10) meter.incRate = 10;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
     removeModifier: (state, action: PayloadAction<MeterModifier>) => {
@@ -119,9 +125,9 @@ export const metersSlice = createSlice({
             ? meter.decRate / modifier
             : meter.decRate * Math.abs(modifier);
       }
-      if (meter.decRate <= 0) meter.decRate = 0.1;
+      if (meter.decRate < 10) meter.decRate = 10;
       if (meter.decRate > 1000) meter.decRate = 1000;
-      if (meter.incRate <= 0) meter.incRate = 0.1;
+      if (meter.incRate < 10) meter.incRate = 10;
       if (meter.incRate > 1000) meter.incRate = 1000;
     },
     loadMetersStateFromDb: (state, action: PayloadAction<MetersState>) => {

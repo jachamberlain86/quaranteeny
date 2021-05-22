@@ -28,25 +28,28 @@ import {
   startSpriteDecisions,
 } from '../../helpers/sprite.helper';
 
+/* TODO refactor to render movement more reliably across different machines.
+Currently jerky movement is worsened when correct types are assigned to refs. */
+
 const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [imgOptions, setImgOptions] = useState<any | null>({ img: null });
 
+  // Used to scale 32x32 assets correctly to current canvas size
   const { tileSize } = game;
   const scale = tileSize / 32;
 
+  // TODO correct type allocation is Konva.Sprite but this causes problems with animation
   const spriteRef = useRef<any | null>(null);
   const plantRef = useRef<any | null>(null);
   const musicRef = useRef<any | null>(null);
   const [direction, setDirection] = useState<string | null>(null);
-  const [idleStart, setIdleStart] = useState<number>(0);
+  const [idleStart, setIdleStart] = useState<number>(Date.now());
   const [timeNow, setTimeNow] = useState<number>(Date.now());
   const [makingDecision, setMakingDecision] = useState<boolean>(false);
   const [checkingTime, setCheckingTime] = useState<boolean>(false);
-
   const [interaction, setInteraction] = useState<string | null>(null);
-
   const [currentAnimation, setCurrentAnimation] = useState<string>('idling');
   const [musicAnimation, setMusicAnimation] = useState<string>('music');
 
@@ -77,6 +80,8 @@ const Player = (): JSX.Element => {
     setDirection(character.moveDir);
   }, [character.moveDir]);
 
+  /* Keeps track of whether sprite is currently doing anything
+  and starts or clears idleStart accordingly */
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
     setInteraction(currentInteraction);
@@ -98,6 +103,7 @@ const Player = (): JSX.Element => {
     };
   }, [currentInteraction]);
 
+  // Used to force idle check to refresh every second
   function checkTime(): NodeJS.Timeout | undefined {
     let timer: NodeJS.Timeout | undefined;
     if (!checkingTime) {
@@ -110,6 +116,8 @@ const Player = (): JSX.Element => {
     return timer;
   }
 
+  /* Calculates whether enough time has passed to allow
+  sprite to start making their own decisions */
   useEffect(() => {
     let decisionTimer: NodeJS.Timeout | undefined;
     let timeTimer: NodeJS.Timeout | undefined;
@@ -135,6 +143,7 @@ const Player = (): JSX.Element => {
     };
   }, [timeNow]);
 
+  // Triggers coordinates to move to correct location when interacting
   useEffect(() => {
     const ref = spriteRef.current;
     if (interaction === 'cancel') {
@@ -198,9 +207,9 @@ const Player = (): JSX.Element => {
     spriteRef.current.start();
   }, [direction, interaction]);
 
+  // activates interaction animations
   useEffect(() => {
     const ref = spriteRef.current;
-
     if (interaction === 'walking') {
       ref.to({
         x: character.curPos.x * tileSize,

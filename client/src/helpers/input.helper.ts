@@ -33,6 +33,7 @@ import {
   checkNewInteraction,
   triggerRemoveConditions,
   getEntityData,
+  handleInteractionTriggers,
 } from './sprite.helper';
 import {
   cuteWalkOne,
@@ -61,6 +62,8 @@ function calcNewPos(key: string): { x: number; y: number } {
   return curPosCopy;
 }
 
+/* converts current x and y coordinates into an index for room map array */
+
 export function checkIndex(x: number, y: number): number {
   const { cols } = game;
   return y * cols + x;
@@ -72,6 +75,9 @@ export function checkCanMove(newPos: { x: number; y: number }): boolean {
   const result = layers[0][mapIndex].walk;
   return result;
 }
+
+/* throttles calls to move while direction button is held down
+by using an interval */
 
 function handleMove(key: string): NodeJS.Timeout {
   store.dispatch(changeInteraction('walking'));
@@ -108,6 +114,7 @@ export function cancelCurrentInteraction(): void {
   const entityData = getEntityData(currentInteraction);
   triggerRemoveConditions(entityData.conditions);
   store.dispatch(changeInteraction('cancel'));
+  handleInteractionTriggers(['clear']);
   stopObjectSound();
 }
 
@@ -118,6 +125,15 @@ const runInteractionAnimations = (interaction: string): void => {
     if (interaction === 'jukebox') musicController.handlePause();
   }
 };
+
+/* if sprite is in middle of interaction other than walking,
+it is cancelled on the key down of any key other than k or l.
+k and l are handled on key up to be consistent with their
+interaction triggers. if sprite already being moved by keyboard, holding another
+direction key will cause them to change direction. */
+
+/* TODO add array that keeps track of order direction keys are pressed,
+so that key up events that cuase sprite to stop are calculated correctly */
 
 export function downHandler(event: KeyboardEvent): NodeJS.Timeout | undefined {
   const moveDir = selectMoveDir(store.getState());
@@ -130,6 +146,7 @@ export function downHandler(event: KeyboardEvent): NodeJS.Timeout | undefined {
   const ignoreKeys = ['k', 'l'];
   const isMovingSelf = selectMovingSelf(store.getState());
   let currentTimer;
+
   if (!isMovingSelf) {
     if (
       !untimedInteractions.includes(currentInteraction) &&
@@ -200,6 +217,7 @@ export function upHandler(event: KeyboardEvent): void {
   const downFired = selectDownFired(store.getState());
   store.dispatch(updateLastInput);
   const isMovingSelf = selectMovingSelf(store.getState());
+
   if (!isMovingSelf) {
     if (event.key === 'a') {
       if (leftFired) {
@@ -236,8 +254,13 @@ export function upHandler(event: KeyboardEvent): void {
 
     const untimedInteractions = ['walking', 'idle'];
     const currentInteraction = selectCurrentInteraction(store.getState());
+    const listenKeys = ['k', 'l'];
 
-    if (!untimedInteractions.includes(currentInteraction))
+    if (
+      !untimedInteractions.includes(currentInteraction) &&
+      listenKeys.includes(event.key) &&
+      currentInteraction
+    )
       cancelCurrentInteraction();
     else {
       if (event.key === 'k') {

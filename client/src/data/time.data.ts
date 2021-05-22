@@ -1,6 +1,5 @@
-// Kept separate from gameTime in order to avoid circular references in
-
-// Fixed time variables used to make setting meter sizes easier to calculate. For scalable units of time use gameTime.
+/* Fixed time variables used to make setting meter sizes easier to calculate.
+For scalable units of time use gameTime calculated in gameSlice */
 
 export const second = 1000;
 export const minute = second * 60;

@@ -2,15 +2,26 @@ import { Meter } from '../interfaces/meter.interface';
 import { Need } from '../interfaces/need.interface';
 import { minute, hour, day } from './time.data';
 
-// A reference for unchanging game data in relation to status meters. Generates a meters object based off hard coded meter names, a rate of decay, the size of the meter's safe zone, and arrays containing strings of conditions activated should the player allow meters to fall outside of that safe zone.
+/* A reference for unchanging game data in relation to status meters.
+Generates a meters object based off hard coded meter names, a rate of decay,
+the size of the meter's safe zone, and arrays containing strings of conditions
+activated should the player allow meters to fall outside of that safe zone.
 
-// Hunger, Energy, Health, and Money are all visiable to the player through the interface. All remaining meters are hidden. Only the results of their statuses are seen by the player.
+Hunger, Energy, Health, and Money are all visiable to the player through
+the interface. All remaining meters are hidden.
+Only the results of their statuses are seen by the player.
 
-// Meter decay rate is set using fixed time variables. This impacts the value by which the meter decays not the frequency.
+Meter decay rate is set using fixed time variables. This impacts the value
+by which the meter decays not the frequency.
 
-// Safe size values determine the overall size of a meter. Appropriate deficit and excess zones are calculate automatically. Fixed time variables from time.data.ts are used to set meter sizes to make calculations easier. Setting a meter's safe size to hour * 8 will mean that meter's safe zone will take 8 game hours to deplete if full.
+Safe size values determine the overall size of a meter.
+Appropriate deficit and excess zones are calculate automatically.
+Fixed time variables from time.data.ts are used to set meter sizes
+to make calculations easier. Setting a meter's safe size to hour * 8
+will mean that meter's safe zone will take 8 game hours to deplete if full.
 
-// The Meters class also generates a max value for each meter and a randomised initial value for that meter on starting a new game
+The Meters class also generates a max value for each meter and a randomised
+initial value for that meter on starting a new game */
 
 const calcDeficit = (safe: number): number => Math.ceil(safe / 2);
 const calcExcess = (safe: number): number => safe + calcDeficit(safe);

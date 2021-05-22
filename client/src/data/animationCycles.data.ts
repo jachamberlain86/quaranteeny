@@ -1,6 +1,7 @@
 import { imageDirectory, ImageDirectory } from '../assets/tiles/index';
-
 import { animationDirectory } from '../assets/animations/index';
+
+/* used to quickly access animation loops for sprites on game board */
 
 const {
   sleeping,
