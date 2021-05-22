@@ -28,15 +28,19 @@ Currently jerky movement is worsened when correct types are assigned to refs. */
 const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
+  // eslint-disable-next-line
   const [imgOptions, setImgOptions] = useState<any | null>({ img: null });
 
   // Used to scale 32x32 assets correctly to current canvas size
   const { tileSize } = game;
   const scale = tileSize / 32;
 
-  // TODO correct type allocation is Konva.Sprite but this causes problems with animation
+  // TODO correct type allocation is Konva.Sprite but this causes problems with animation framerate
+  // eslint-disable-next-line
   const spriteRef = useRef<any | null>(null);
+  // eslint-disable-next-line
   const plantRef = useRef<any | null>(null);
+  // eslint-disable-next-line
   const musicRef = useRef<any | null>(null);
   const [direction, setDirection] = useState<string | null>(null);
   const [idleStart, setIdleStart] = useState<number>(Date.now());

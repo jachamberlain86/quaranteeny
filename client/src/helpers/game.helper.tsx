@@ -107,7 +107,7 @@ export function handleClickTile(
   if (!isMovingSelf) {
     if (currentInteraction === 'idle' || currentInteraction === 'walking') {
       if (curIdxLegs === clickedIdx || curIdxHead === clickedIdx) {
-        console.log('That tickles!');
+        // TODO trigger click animation
       } else if (clickedEntity !== null) {
         if (checkNewInteraction(clickedEntity)) {
           spriteMoveSelfThenInteract(clickedEntity);

@@ -190,9 +190,9 @@ export const gameSlice = createSlice({
     },
     toggleDressed: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        console.log('You put clothes on');
+        // TODO put clothes on
       } else {
-        console.log("You're naked!");
+        // TODO took clothes off
       }
       state.dressed = action.payload;
     },
