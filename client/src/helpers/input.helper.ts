@@ -143,7 +143,6 @@ export function downHandler(event: KeyboardEvent): NodeJS.Timeout | undefined {
       !ignoreKeys.includes(event.key) &&
       currentInteraction
     ) {
-      console.log(currentInteraction);
       cancelCurrentInteraction();
     }
 
