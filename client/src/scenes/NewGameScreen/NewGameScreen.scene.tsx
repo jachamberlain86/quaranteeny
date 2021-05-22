@@ -78,11 +78,10 @@ const NewGameScreen = (): JSX.Element => {
                     id="easy"
                     value="easy"
                     name="gameSpeed"
-                    // checked
                     onChange={handleChange}
                     onMouseOver={() => btnClickOne.play()}
                     onFocus={() => {
-                      console.log('focus');
+                      //
                     }}
                   />
                 </div>
@@ -101,7 +100,7 @@ const NewGameScreen = (): JSX.Element => {
                     onChange={handleChange}
                     onMouseOver={() => btnClickOne.play()}
                     onFocus={() => {
-                      console.log('focus');
+                      //
                     }}
                   />
                 </div>
@@ -118,7 +117,7 @@ const NewGameScreen = (): JSX.Element => {
                     onChange={handleChange}
                     onMouseOver={() => btnClickOne.play()}
                     onFocus={() => {
-                      console.log('focus');
+                      //
                     }}
                   />
                 </div>
