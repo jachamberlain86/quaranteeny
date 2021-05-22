@@ -1,4 +1,4 @@
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 
 import btnPress1 from '../assets/audio/sound-efx/buttons/ok-1.mp3';
 import btnPress2 from '../assets/audio/sound-efx/buttons/ok-2.mp3';

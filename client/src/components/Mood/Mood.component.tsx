@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Mood.styles.css';
 import { useAppSelector } from '../../app/hooks';
-import { bubblePop } from '../../audioControllers/alerts';
 
 const Mood = (): JSX.Element => {
   const currentThought: string = useAppSelector(

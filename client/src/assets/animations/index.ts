@@ -1,5 +1,4 @@
 import { calcPixelPos, calcPixelSize } from '../../helpers/atlas.helper';
-import { AtlasRef } from '../../interfaces/atlasRef.interface';
 import { AnimationRef } from '../../interfaces/animationRef.interface';
 import { AniFrame } from '../../interfaces/aniFrame.interface';
 
