@@ -112,8 +112,8 @@ Start the client by running `npm start` from `/client`.
 
 
 ## Built By
-
-James Chamberlain - [LinkedIn](https://www.linkedin.com/in/chambermade/) || [GitHub](https://github.com/jachamberlain86)
-Roman Duda - [LinkedIn](https://www.linkedin.com/in/roman-duda-52287a52/) || [GitHub](https://github.com/romduda)
-Rosie Bullingdon - [LinkedIn](https://www.linkedin.com/in/romthomas/) || [GitHub](https://github.com/someonera)
-Ross Curry - [LinkedIn](https://www.linkedin.com/in/ross-curry/) || [GitHub](https://github.com/RossCurry)
+| <img src="https://avatars.githubusercontent.com/u/74981447?v=4" width="70" alt="James"/> | <img src="https://avatars.githubusercontent.com/u/5665940?v=4" width="70" alt="Roman" /> | <img src="https://avatars.githubusercontent.com/u/74319526?v=4" width="70" alt="Ro" /> | <img src="https://avatars.githubusercontent.com/u/78158497?v=4" width="70" alt="Ross" />
+--- | --- | --- | ---
+**James Chamberlain** | **Roman Duda** | **Rosie Bullingdon** | **Ross Curry**
+[LinkedIn](https://www.linkedin.com/in/chambermade/) | [LinkedIn](https://www.linkedin.com/in/roman-duda-52287a52/) | [LinkedIn](https://www.linkedin.com/in/romthomas/) | [LinkedIn](https://www.linkedin.com/in/ross-curry/)
+[GitHub](https://github.com/jachamberlain86) | [GitHub](https://github.com/romduda) | [GitHub](https://github.com/someonera) | [GitHub](https://github.com/RossCurry)
