@@ -24,6 +24,7 @@ const Home = (): JSX.Element => {
   const [isUserNameAlert, setIsUserNameAlert] = useState(false);
   const { userName } = useAppSelector((state) => state.user);
   const { isCurrentGameActive } = useAppSelector((state) => state.game);
+
   const handleNoUserName = (): void => {
     cancelButton.play();
     setIsUserNameAlert(true);
@@ -32,12 +33,14 @@ const Home = (): JSX.Element => {
     const input = e.currentTarget.value;
     setIsUserNameAlert(false);
     setNameInput(input.toUpperCase());
+    e.preventDefault();
   };
-  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLButtonElement | HTMLFormElement>
+  ): void => {
     e.preventDefault();
     if (!nameInput) {
       handleNoUserName();
-      return;
     }
     dispatch(setUserName(nameInput));
     btnPressOne.play();
@@ -65,10 +68,11 @@ const Home = (): JSX.Element => {
       }
     }
   }, []);
+
   const newUser = (
     <>
       <div className="home-form">
-        <form className="form" autoComplete="off">
+        <form className="form" autoComplete="off" onSubmit={handleSubmit}>
           <h2>You´re new!</h2>
           <label htmlFor="userName">
             Type your name
@@ -93,6 +97,7 @@ const Home = (): JSX.Element => {
       </div>
     </>
   );
+
   const returnUser = (
     <>
       <div className="returnGreeting">
