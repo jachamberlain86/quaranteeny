@@ -59,7 +59,8 @@ import {
 
 import { musicController } from '../audioControllers/musicController';
 
-// Calls functions to add condition strings to sprite state and then adjust inc and dec rates based on a modifier in meters state
+/* Calls functions to add condition strings to sprite state
+and then adjust inc and dec rates based on a modifier in meters state */
 
 export function triggerAddConditions(conditionsArr: string[]): void {
   const currentConditions = selectConditions(store.getState());
@@ -89,7 +90,10 @@ export function getEntityData(entity: string): Entity {
   return entities[entity];
 }
 
-function handleInteractionTriggers(triggers: string[]): void {
+/* executes necessary logic for any entity interaction
+with strings in their triggers array */
+
+export function handleInteractionTriggers(triggers: string[]): void {
   const music = selectMusicOn(store.getState());
   const light = selectLightOn(store.getState());
   const clothes = selectDressed(store.getState());
@@ -100,13 +104,14 @@ function handleInteractionTriggers(triggers: string[]): void {
     if (trigger === 'computer') store.dispatch(toggleComputerOn(true));
     if (trigger === 'tv') store.dispatch(toggleTvOn(true));
     if (trigger === 'clear') {
-      store.dispatch(toggleTvOn(true));
-      store.dispatch(toggleComputerOn(true));
+      store.dispatch(toggleTvOn(false));
+      store.dispatch(toggleComputerOn(false));
     }
   });
 }
 
-// On a player interacting with an interactable entity, this function is called
+/* On a player interacting with an interactable entity,
+this function is called */
 
 export const handleInteraction = (entity: string): void => {
   const entityData: Entity = getEntityData(entity);
@@ -119,13 +124,12 @@ export const handleInteraction = (entity: string): void => {
   }
 };
 
-// Set to null if not interacting with anything or to a string identifying current interaction
-
 export function checkNewInteraction(newInteraction: string): boolean {
   const currentInteraction = selectCurrentInteraction(store.getState());
   if (currentInteraction === newInteraction) return false;
   return true;
 }
+
 export function setNewInteraction(newInteraction: string): void {
   store.dispatch(changeInteraction(newInteraction));
   handleInteraction(newInteraction);
@@ -139,7 +143,8 @@ export const resumeInProgressInteraction = (): void => {
   }
 };
 
-// Used to check whether lose state conditions are present in the sprite's conditions array
+/* Used to check whether lose state conditions
+are present in the sprite's conditions array */
 
 export const checkConditionsState = (): NodeJS.Timeout => {
   const { gameHour, updateInterval } = selectGameTime(store.getState().game);
@@ -161,7 +166,10 @@ export const checkConditionsState = (): NodeJS.Timeout => {
   return timer;
 };
 
-// After specific periods of time with certain losing conditions in the sprite's conditions array different states are added and then a gave over is triggered if still unresolved.
+/* After specific periods of time, with certain
+losing conditions in the sprite's conditions array,
+further conditions are added. If still unresolved,
+a gave over is triggered and its cause is recorded. */
 
 export const checkLoseStates = (): NodeJS.Timeout => {
   const { gameHour, updateInterval } = selectGameTime(store.getState().game);
@@ -226,6 +234,10 @@ function checkIfClickable(newPos: { x: number; y: number }): boolean {
   return false;
 }
 
+/* provides a random walkable position on the game board.
+Is passed a boolean to specify whether to aslo include positions
+that are not walkable, but that can be interacted with. */
+
 export function generateRandomPos(incClick: boolean): { x: number; y: number } {
   let canMove = false;
   let validPos;
@@ -260,6 +272,11 @@ export function generateRandomPos(incClick: boolean): { x: number; y: number } {
   return newPos;
 }
 
+/* executes path finding logic for mouse navigation and
+sprite decision system. Returns array with key coordinates,
+where a change of direction occurs. Coordinates return as such:
+[y1, x1, y2, x2, y3, x3] */
+
 export function calcPath(newPos: { x: number; y: number }): number[] {
   const curPos = selectCurPos(store.getState());
   const tileArr: number[] = [];
@@ -276,6 +293,9 @@ export function calcPath(newPos: { x: number; y: number }): number[] {
 
   return path;
 }
+
+/* takes path array provided my pathfinding logic and calculates all
+necessary tile moves to reach target */
 
 export function spriteCalcMoves(newPos: {
   x: number;
@@ -306,10 +326,14 @@ export function spriteCalcMoves(newPos: {
 
   return movesArr;
 }
+
 export function updateSpritePos(direction: string): void {
   store.dispatch(setMoveDir(direction));
   store.dispatch(changeMovePos());
 }
+
+/* after calculating a path, sprite updates their own current position.
+Moves are executed on an interval, simulating inputs from keyboard */
 
 export function spriteMoveSelf(newPos: { x: number; y: number }): void {
   store.dispatch(setMovingSelf(true));
@@ -324,10 +348,15 @@ export function spriteMoveSelf(newPos: { x: number; y: number }): void {
       if (curPos.x < movesArr[i].x) direction = 'd';
       if (curPos.y < movesArr[i].y) direction = 's';
       updateSpritePos(direction);
-      if (i === movesArr.length - 1) store.dispatch(changeInteraction('idle'));
-    }, (i + 1) * 200);
+      if (i === movesArr.length - 1) setNewInteraction('idle');
+    }, (i + 1) * 210);
   }
 }
+
+/* after calculating a path to an interactable entity,
+sprite updates their own current position.
+Moves are executed on an interval, simulating inputs from keyboard.
+The final move triggers the interaction. */
 
 export function spriteMoveSelfThenInteract(interaction: string): void {
   store.dispatch(setMovingSelf(true));
@@ -409,6 +438,8 @@ export function spriteMoveSelfThenInteract(interaction: string): void {
     }, (i + 1) * 210);
   }
 }
+
+/* sprite decision system triggered after 10 seconds of inactivity */
 
 export function startSpriteDecisions(): void {
   const newPos = generateRandomPos(true);

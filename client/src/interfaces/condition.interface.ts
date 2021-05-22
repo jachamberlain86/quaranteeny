@@ -2,5 +2,5 @@ import { MeterModifier } from './meterModifier.interface';
 
 export interface Condition {
   readonly modifiers: MeterModifier[];
-  readonly impacts: [];
+  readonly triggers: string[];
 }

@@ -12,7 +12,7 @@ export interface SpriteState {
 }
 
 const initialState: SpriteState = {
-  currentInteraction: 'idle',
+  currentInteraction: 'cancel',
   interactionProgress: null,
   interactionChangesRemaining: 0,
   conditions: [],
@@ -43,7 +43,6 @@ export const spriteSlice = createSlice({
         (condition) => condition !== action.payload
       );
     },
-
     setInteractionProgress: (state, action: PayloadAction<number | null>) => {
       state.interactionProgress = action.payload;
     },
@@ -180,10 +179,13 @@ export const selectConditions = (state: RootState): string[] =>
 
 export const selectCurrentInteraction = (state: RootState): string =>
   state.sprite.currentInteraction;
+
 export const selectInteractionProgress = (state: RootState): number | null =>
   state.sprite.interactionProgress;
+
 export const selectInteractionChangesRemaining = (state: RootState): number =>
   state.sprite.interactionChangesRemaining;
+
 export const selectCurrentThought = (state: RootState): string =>
   state.sprite.currentThought;
 

@@ -32,6 +32,7 @@ const App = (): JSX.Element => {
     }
   }, [dispatch]);
 
+  // eslint-disable-next-line
   const getPathDepth = (location: any): number => {
     let pathArr = location.pathname.split('/');
     pathArr = pathArr.filter((n: string) => n !== '');

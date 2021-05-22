@@ -4,8 +4,8 @@ import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/character.interface';
 
 const initialState: Character = {
-  curPos: { x: 1, y: 4 },
-  movePos: { x: 1, y: 4 },
+  curPos: { x: 11, y: 15 },
+  movePos: { x: 11, y: 15 },
   leftFired: false,
   rightFired: false,
   upFired: false,
