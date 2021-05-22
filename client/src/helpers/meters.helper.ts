@@ -22,7 +22,6 @@ import { meters, Meters } from '../data/meters.data';
 import {
   triggerAddConditions,
   triggerRemoveConditions,
-  setNewInteraction,
   updateInteractionProgress,
   handleInteractionTriggers,
 } from './sprite.helper';

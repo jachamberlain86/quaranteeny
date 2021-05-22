@@ -1,7 +1,5 @@
 import { Howl } from 'howler';
-import { musicController } from './musicController';
 import sink from '../assets/audio/sound-efx/house-objects/sink-basin.mp3';
-import jukebox from '../assets/audio/sound-efx/house-objects/jukebox.mp3';
 import windows from '../assets/audio/sound-efx/house-objects/desk.mp3';
 import sofa from '../assets/audio/sound-efx/house-objects/sofa-hbo.mp3';
 import tvNetflix from '../assets/audio/sound-efx/house-objects/sofa-netflix.mp3';
@@ -22,7 +20,6 @@ import movie from '../assets/audio/sound-efx/house-objects/sofa-action-movie.mp3
 import dresser from '../assets/audio/sound-efx/house-objects/dresser-open.mp3';
 import eating from '../assets/audio/sound-efx/house-objects/loop-fridge-eating.mp3';
 import cooking from '../assets/audio/sound-efx/house-objects/loop-oven-boiling-water.mp3';
-// import fart from '../assets/audio/sound-efx/house-objects/wet-fart-one-shot.mp3';
 import fart from '../assets/audio/sound-efx/house-objects/onStop-toilet-wet-fart-one-shot.mp3';
 import closeTap from '../assets/audio/sound-efx/house-objects/onStop-sink-basin-tap.mp3';
 import closeFridge from '../assets/audio/sound-efx/house-objects/onStop-fridge-close.mp3';
@@ -56,7 +53,6 @@ export const houseInteractablesOneShot: string[] = [
   table,
   bin,
   noise,
-  fart,
   dresser,
 ];
 
@@ -70,11 +66,6 @@ const houseInteractablesOnStop: string[] = [
   hangUpTelephone,
   oven,
 ];
-
-const fartNoise = new Howl({
-  src: [fart],
-  volume: 0.05,
-});
 
 type howlObject = Record<string, Howl>;
 
@@ -132,7 +123,6 @@ export const playObjectSound = (object: string): void => {
           const soundTitleOnStop = houseSoundsOnStopArr[j][0];
           const soundFileOnStop = houseSoundsOnStopArr[j][1];
           if (soundTitleOnStop.includes(object)) {
-            console.log('onstop match found', soundTitleOnStop);
             soundFileOnStop.play();
           }
         }

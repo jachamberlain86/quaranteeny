@@ -1,15 +1,11 @@
-.new-game-page-animations-bar {
-  /* width: 100vw; */
+.new-game-page__animations-bar {
   margin-top: 0rem;
   height: 50vh;
   display: flex;
-  /* background-color: green; */
   z-index: 2;
-  /* position: absolute; */
-  /* bottom:  */
 }
 
-.sofa-ng-page {
+.new-game-page__sofa-ng-page {
   bottom: 5vh;
   height: 10vh;
   width: 30vw;
@@ -19,14 +15,11 @@
   position: absolute;
   bottom:4vh;
   left: 25vw
-
 }
 
-.desk-on-ng-page {
-  /* margin-top: vh; */
+.new-game-page__desk-on-ng-page {
   height:20vh;
   width:20vw;
-  /* background-color: pink; */
   margin-left: 30vw;
   margin-right: 0vw;
   background-image: url('../../assets/images/office/desk-on.png');
@@ -37,11 +30,9 @@
   right: -6vw
 }
 
-.desk-off-ng-page {
-  /* margin-top: vh; */
+.new-game-page__desk-off-ng-page {
   height:20vh;
   width:20vw;
-  /* background-color: pink; */
   margin-left: 30vw;
   margin-right: 0vw;
   background-image: url('../../assets/images/office/desk-off.png');
@@ -51,10 +42,9 @@
   bottom: -1vh; 
   right: -6vw;
   animation: blinker 8s linear infinite;
-
 }
 
-.fridge-ng-page{
+.new-game-page__fridge-ng-page{
   bottom: 5vh;
   height: 30vh;
   width: 8vh;
@@ -64,19 +54,15 @@
   position: absolute;
   bottom:-3vh; 
   left: 10vw
+}
 
-  /* margin-top: 3.5vh; */
-  }
-
-  .plant-ng-page{
-  height: 30vh;
-  width: 8vh;
-  background-image: url('../../assets/images/livingRoom/plant-alive.png');
-  background-repeat: no-repeat;
-  background-size: 6vh 13vh;
-  position: absolute;
-  bottom: -15vh
-  /* left: 2vw; */
-  ;
-  }
+.new-game-page__plant-ng-page{
+height: 30vh;
+width: 8vh;
+background-image: url('../../assets/images/livingRoom/plant-alive.png');
+background-repeat: no-repeat;
+background-size: 6vh 13vh;
+position: absolute;
+bottom: -15vh;
+}
 

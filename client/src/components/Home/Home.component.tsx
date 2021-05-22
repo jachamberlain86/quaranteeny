@@ -9,12 +9,7 @@ import { resetGamePlay } from '../../helpers/game.helper';
 import {
   btnPressOne,
   btnPressTwo,
-  btnClickOne,
-  whooshOne,
-  bleepOneHover,
-  bleepTwo,
   bleepFiveConfirmation,
-  bleepSevenHover,
   cancelButton,
   handleBtnHoverEnter,
   handleBtnHoverLeave,
@@ -29,6 +24,7 @@ const Home = (): JSX.Element => {
   const [isUserNameAlert, setIsUserNameAlert] = useState(false);
   const { userName } = useAppSelector((state) => state.user);
   const { isCurrentGameActive } = useAppSelector((state) => state.game);
+
   const handleNoUserName = (): void => {
     cancelButton.play();
     setIsUserNameAlert(true);
@@ -37,12 +33,14 @@ const Home = (): JSX.Element => {
     const input = e.currentTarget.value;
     setIsUserNameAlert(false);
     setNameInput(input.toUpperCase());
+    e.preventDefault();
   };
-  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLButtonElement | HTMLFormElement>
+  ): void => {
     e.preventDefault();
     if (!nameInput) {
       handleNoUserName();
-      return;
     }
     dispatch(setUserName(nameInput));
     btnPressOne.play();
@@ -70,10 +68,11 @@ const Home = (): JSX.Element => {
       }
     }
   }, []);
+
   const newUser = (
     <>
       <div className="home-form">
-        <form className="form" autoComplete="off">
+        <form autoComplete="off" onSubmit={handleSubmit}>
           <h2>You´re new!</h2>
           <label htmlFor="userName">
             Type your name
@@ -83,7 +82,6 @@ const Home = (): JSX.Element => {
                 name="userName"
                 id="userName"
                 placeholder="Type here..."
-                className=""
                 value={nameInput}
                 onChange={handleInput}
               />
@@ -98,13 +96,14 @@ const Home = (): JSX.Element => {
       </div>
     </>
   );
+
   const returnUser = (
     <>
-      <div className="returnGreeting">
+      <div className="return-greeting">
         <h2>Hey {userName}!</h2>
         <h2>Welcome Back</h2>
       </div>
-      <div className="home-btn-container">
+      <div className="home__btn-container">
         {isCurrentGameActive && (
           <button
             type="button"
@@ -131,13 +130,13 @@ const Home = (): JSX.Element => {
   return (
     <div className="home-background-color">
       <div className="max-width-container">
-        <div className="home-container">
-          <div className="home-title-row">
+        <div className="home__container">
+          <div className="home__title-row">
             <h1>Quaranteeny</h1>
           </div>
-          <div className="home-middle-row">
-            <div className="home-col-left">
-              <div className="home-story">
+          <div className="home__middle-row">
+            <div className="home__col-left">
+              <div className="home__story">
                 <h2>The story so far...</h2>
                 <p>
                   Giant crabs have overrun the world!
@@ -154,15 +153,15 @@ const Home = (): JSX.Element => {
                 </p>
               </div>
             </div>
-            <div className="home-col-right">
+            <div className="home__col-right">
               {userName ? returnUser : newUser}
             </div>
           </div>
           {!userName && (
-            <div className="home-bottom-row">
+            <div className="home__bottom-row">
               <button
                 type="button"
-                className="submit-btn"
+                className="home__submit-btn"
                 id="submit-btn"
                 onClick={handleSubmit}
                 onMouseEnter={handleBtnHoverEnter}

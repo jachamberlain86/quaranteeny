@@ -22,7 +22,6 @@ const musicSlice = createSlice({
   reducers: {
     resetMusic: () => initialState,
     setCurrentSong(state, action: PayloadAction<string>) {
-      // TODO ask TA why?!
       // eslint-disable-next-line no-param-reassign
       state.currentSong = action.payload;
     },

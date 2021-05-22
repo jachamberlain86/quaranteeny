@@ -1,28 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Rect, Sprite, Group, Layer } from 'react-konva';
+import { Sprite, Group, Layer } from 'react-konva';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   selectCharacter,
   changeCurPos,
-  selectCurPos,
   setMovingSelf,
 } from '../../features/character/characterSlice';
-import {
-  selectClockTimeReal,
-  selectMusicOn,
-} from '../../features/game/gameSlice';
+import { selectMusicOn } from '../../features/game/gameSlice';
 import {
   selectCurrentInteraction,
   changeInteraction,
 } from '../../features/sprite/spriteSlice';
-import { imageDirectory, ImageDirectory } from '../../assets/images/index';
 import {
   spriteAnimations,
   flatAnimations,
 } from '../../data/animationCycles.data';
 import game from '../../data/gameMap.data';
 import animationFrames from '../../assets/animations/atlas/quarantiny-animation-atlas.png';
-import { animationDirectory } from '../../assets/animations/index';
 import {
   generateRandomPos,
   startSpriteDecisions,
@@ -64,6 +58,7 @@ const Player = (): JSX.Element => {
     const startPos = generateRandomPos(false);
     dispatch(changeCurPos(startPos));
     plantRef.current.start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const character = useAppSelector(selectCharacter);
@@ -101,6 +96,7 @@ const Player = (): JSX.Element => {
     return () => {
       if (timer) clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentInteraction]);
 
   // Used to force idle check to refresh every second
@@ -141,6 +137,7 @@ const Player = (): JSX.Element => {
       if (decisionTimer) clearTimeout(decisionTimer);
       if (timeTimer) clearTimeout(timeTimer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeNow]);
 
   // Triggers coordinates to move to correct location when interacting
@@ -205,6 +202,7 @@ const Player = (): JSX.Element => {
       setCurrentAnimation('idling');
     }
     spriteRef.current.start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction, interaction]);
 
   // activates interaction animations
@@ -371,6 +369,7 @@ const Player = (): JSX.Element => {
       });
     }
     spriteRef.current.start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [character.curPos]);
 
   return (

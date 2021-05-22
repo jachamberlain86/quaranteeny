@@ -26,12 +26,12 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
   const meterValue = calcPercentage(currentValue, meter.max);
   const meterColor = (): string => {
     if (meterValue <= meterWarningValue) {
-      return 'Meter__progress-bar--low meter';
+      return 'meter__progress-bar--low meter';
     }
     if (meterValue > meterWarningValue && meterValue < meterExcellentValue) {
-      return 'Meter__progress-bar--normal meter';
+      return 'meter__progress-bar--normal meter';
     }
-    return 'Meter__progress-bar--high meter';
+    return 'meter__progress-bar--high meter';
   };
 
   const renderMeter =
@@ -54,11 +54,11 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
           className={
             meterValue <= meterWarningValue
               ? 'meter-warning Meter__progress-bar-wrap'
-              : 'Meter__progress-bar-wrap'
+              : 'meter__progress-bar-wrap'
           }
         >
           <progress
-            className={`Meter__progress-bar ${meterColor()}`}
+            className={`meter__progress-bar ${meterColor()}`}
             value={meterValue}
             max={100}
           />
@@ -69,5 +69,4 @@ const Meter = ({ meterName }: MeterProps): JSX.Element => {
   return <div>{renderMeter}</div>;
 };
 
-// value will come in through props and redux
 export default Meter;

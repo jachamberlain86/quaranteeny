@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './GameOverBtn.styles.css';
 import { useAppDispatch } from '../../app/hooks';
 import {
@@ -10,9 +10,8 @@ import {
   handleBtnHoverLeave,
 } from '../../audioControllers/buttonSounds';
 import { stopObjectSound } from '../../audioControllers/houseObjectsSounds';
-// import { setIsCurrentGameActive } from '../../features/user/userSlice';
 
-const GameOverBtn: FC = () => {
+const GameOverBtn = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {
@@ -27,7 +26,7 @@ const GameOverBtn: FC = () => {
         onClick={handleClick}
         onMouseEnter={handleBtnHoverEnter}
         onMouseLeave={handleBtnHoverLeave}
-        className="game_over_button"
+        className="game-over__button"
       >
         Give up? Go outside...
       </button>

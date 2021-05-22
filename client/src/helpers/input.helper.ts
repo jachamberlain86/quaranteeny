@@ -1,18 +1,13 @@
-import { Howl } from 'howler';
 import { store } from '../app/store';
 import {
   selectLeftFired,
   selectRightFired,
   selectUpFired,
   selectDownFired,
-  selectKFired,
-  selectLFired,
   toggleLeftFired,
   toggleRightFired,
   toggleUpFired,
   toggleDownFired,
-  toggleKFired,
-  toggleLFired,
   setMoveIntId,
   selectMoveIntId,
   setMoveDir,
@@ -28,7 +23,6 @@ import {
   updateObjectsNearBy,
 } from '../features/sprite/spriteSlice';
 import {
-  handleInteraction,
   setNewInteraction,
   checkNewInteraction,
   triggerRemoveConditions,
@@ -36,11 +30,7 @@ import {
   handleInteractionTriggers,
 } from './sprite.helper';
 import {
-  cuteWalkOne,
-  shuffleWalkOne,
   shuffleWalkShort,
-  collisionOne,
-  collisionTwo,
   howlCollisionsObj,
   collisionArray,
 } from '../audioControllers/playerSounds';

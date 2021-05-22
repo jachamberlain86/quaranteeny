@@ -6,15 +6,12 @@ import {
   selectClockTimeInGame,
   selectStartTime,
   setTimeLasted,
-  selectTimeLasted,
 } from '../../features/game/gameSlice';
 import { addNewScore } from '../../features/user/userSlice';
-import { day } from '../../data/time.data';
 
 const DayCounter = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { gameOver } = useAppSelector((state) => state.game);
-  const { userName } = useAppSelector((state) => state.user);
   const startTime = useAppSelector(selectStartTime);
   const currClockTime = useAppSelector(selectClockTimeInGame);
 
@@ -31,14 +28,14 @@ const DayCounter = (): JSX.Element => {
   const clock = moment(currClockTime).format('h:mm a');
   return (
     <div className="conNum">
-      <div className="numHeader">
+      <div className="conNum__numHeader">
         <p>Quaranteeny has been locked down for:</p>
       </div>
-      <div className="numOfDays">
+      <div className="conNum__numOfDays">
         <h2>{timeSinceStart}</h2>
       </div>
-      <div className="date"> {date} </div>
-      <div className="clock"> {clock} </div>
+      <div className="conNum__date"> {date} </div>
+      <div className="conNum__clock"> {clock} </div>
     </div>
   );
 };

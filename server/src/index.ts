@@ -42,13 +42,10 @@ createConnection()
       );
     });
 
-    // setup express app here
-    // ...
-
     // start express server
     app.listen(PORT || 3001);
     // eslint-disable-next-line no-console
-    console.log(`Express server listening on http://localhost:${PORT}`);
+    console.log(`Express server listening on port ${PORT || 3001}`);
   })
   // eslint-disable-next-line no-console
   .catch((error) => console.log(error));

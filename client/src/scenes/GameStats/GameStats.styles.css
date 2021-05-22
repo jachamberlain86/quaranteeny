@@ -1,12 +1,11 @@
-@import '../../../node_modules/nes.css/css/nes.css';
 
 
-.GameStats__page{
+.game-stats__page{
   background-color: var(--bg-color-offBlack);
   height: var(--game-height);
 }
 
-.GameStats__main-container{
+.game-stats__main-container{
   color: #eee;
   padding: 4rem 10rem;
   background-color: var(--bg-color-offBlack);
@@ -14,31 +13,31 @@
   flex-direction: column;
 }
 
-.GameStats__content-container {
+.game-stats__content-container {
   display: flex;
 }
 
-.GameStats__column {
+.game-stats__column {
   width: 100%;
   margin: 0 4rem;
   padding: 1rem;
 }
 
-.GameStats__column-right {
+.game-stats__column-right {
   border: 1px solid #eee;
 }
 
-.GameStats__high-scores {
+.game-stats__high-scores {
   margin-top: 2rem;
 }
 
-.GameStats__btn-container {
+.game-stats__btn-container {
   padding-top: 2rem;
   display: flex;
   justify-content: space-around;
 }
 
-.GameStats__new-game-btn {
+.game-stats__new-game-btn {
   border: var(--brown-border-frame);
   background-color: var(--header-dark-brown);
   color: white;
@@ -50,24 +49,60 @@
   border-image: url('../../assets/images/panel-borders/interface-border-1.png') 14 round;
 }
 
-.GameStats__new-game-btn:hover {
+.game-stats__new-game-btn:hover {
   background-color: var(--header-darkest-brown);
 }
 
-.GameStats__btn-container button {
+.game-stats__btn-container button {
   padding: 0.5rem 3rem;
   font-size: 1.5rem;
   transition: transform 200ms ease-in-out;
+  z-index: 2
 }
-.GameStats__btn-container button:hover {
+.game-stats__btn-container button:hover {
   background-color: var(--header-darkest-brown);
   color: white;
   transform: translateY(-5%) scale(1.02);
 }
 
 
-.GameStats__high-scores-list li {
+.game-stats__high-scores-list li {
   margin-bottom: 1rem;
   margin-left: 1.5rem;
 }
 
+.crab{
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../../assets/images/crab.png'); 
+  background-repeat: repeat;
+  background-size: 30vh 20vh;
+  position: relative;
+  z-index: 1;
+  -webkit-animation: floatBubble 10s infinite  normal ease-out;
+  animation: floatBubble 5s infinite  normal ease-out;
+
+}
+
+@-webkit-keyframes floatBubble {
+  0% {
+      top:0px;
+  }
+  50% {
+      top: 500px;
+  }
+  100% {
+    top: 0px;
+}
+}
+@keyframes floatBubble {
+  0% {
+      top:0px;
+  }
+50% {
+      top: 500px;
+  }
+  100% {
+    top: 0px;
+}
+}

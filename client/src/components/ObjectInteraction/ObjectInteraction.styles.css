@@ -1,5 +1,5 @@
 
-.object-interaction-container {
+.object-interaction__container {
   background-color: white;
   width: 90%;
   margin: 2rem auto;
@@ -7,7 +7,7 @@
   border: 2px solid black;
 }
 
-.key-press {
+.object-interaction__key-press {
   font-size: 1.2rem;
   color: white;
   background-color: var(--nes-blue);
@@ -18,7 +18,7 @@
   text-shadow: inset 0 0 2px 2px var(--nes-blue-dark) ;
 }
 
-.key-press-list-item{
+.object-interaction__list-item{
   display: flex;
   justify-content: space-between;
   margin: 1rem .5rem;

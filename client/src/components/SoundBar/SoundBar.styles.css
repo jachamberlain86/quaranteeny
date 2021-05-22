@@ -1,23 +1,24 @@
-.sound-bar-container {
+.sound-bar__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 80%;
 }
 
-.sound-bar-container button, .sound-bar-container .song-title {
+.sound-bar__container button, .sound-bar__song-title {
   font-size: .65rem;
 }
 
-.sound-bar-container button {
+.sound-bar__container button {
   margin: 0 .25rem 0 0;
   background-color: var(--header-shade-blue);
-  /* border: 1px solid var(--header-shade-brown); */
   padding: .15rem .5rem;
 }
-.sound-bar-container button:hover {
+.sound-bar__container button:hover {
   cursor: pointer;
   color: white;
   background-color: var(--nes-blue-dark);
-  /* border: 1px solid var(--header-shade-brown); */
+}
+.sound-bar__btn--focus{
+  border: 1px solid var(--header-dark-brown); 
 }

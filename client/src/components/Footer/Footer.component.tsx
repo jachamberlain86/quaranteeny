@@ -5,8 +5,8 @@ const Footer = (): JSX.Element => {
   return (
     <div>
       <footer>
-        <div className="footer-row-1" />
-        <div className="footer-row-2" />
+        <div className="footer__row-1" />
+        <div className="footer__row-2" />
       </footer>
     </div>
   );

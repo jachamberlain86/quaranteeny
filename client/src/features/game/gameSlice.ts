@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { RootState } from '../../app/store';
 import { GameTime } from '../../interfaces/gameTime.interface';

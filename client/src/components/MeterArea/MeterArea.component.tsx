@@ -4,7 +4,7 @@ import Meter from '../Meter/Meter.component';
 
 const MeterArea = (): JSX.Element => {
   return (
-    <div className="MeterArea">
+    <div className="meter-area">
       <Meter meterName="hunger" />
       <Meter meterName="energy" />
       <Meter meterName="health" />
