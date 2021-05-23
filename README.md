@@ -11,7 +11,7 @@
 <code><img alt="TypeORM" src="https://img.shields.io/badge/-TypeORM-E83524?logoColor=white&style=for-the-badge"></code>
 <code><img alt="Jest" src="https://img.shields.io/badge/-Jest-C21325?logo=jest&logoColor=white&style=for-the-badge"></code>
 
-# Quaranteeny: The lockdown Tamagotchi
+# Quaranteeny: Stay inside to survive!
 
 <a href="https://youtu.be/ODmWVrwjDgc">
        <p align="center">
@@ -30,7 +30,7 @@ Behind these three visible meters are many hidden ones. Players only get hints a
 <img width="700" alt="Quaranteeny night" src="https://github.com/jachamberlain86/content-assets/blob/931e879f0f98a738fa7ce967bd74ebbe0b72c1bb/quaranteeny-night.png">
 </p>
 
-Navigate quaranteeny's flat using either a mouse or keyboard and interact with the furniture within. You can even leave quaranteeny to make their own decisions, though they rarely know what's best for them. Play in real time and watch the days pass by or choose one of the increased speeds to make things a little more stressful.  0how long you can help quaranteeny survive!
+Navigate quaranteeny's flat using either a mouse or keyboard and interact with the furniture within. You can even leave quaranteeny to make their own decisions, though they rarely know what's best for them. Play in real time and watch the days pass by or choose one of the increased speeds to make things a little more stressful. How long can you help quaranteeny survive?
 
 Quaranteeny was built in under two weeks in lockdown conditions. We no longer remember what outside looks like...
 
