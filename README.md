@@ -32,7 +32,7 @@ Behind these three visible meters are many hidden ones. Players only get hints a
 
 Navigate quaranteeny's flat using either a mouse or keyboard and interact with the furniture within. You can even leave quaranteeny to make their own decisions, though they rarely know what's best for them. Play in real time and watch the days pass by or choose one of the increased speeds to make things a little more stressful. How long can you help quaranteeny survive?
 
-Quaranteeny was built in under two weeks in lockdown conditions. We no longer remember what outside looks like...
+Quaranteeny was built in lockdown conditions. We no longer remember what outside looks like...
 
 
 ## Tech Stack
