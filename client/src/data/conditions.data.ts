@@ -27,47 +27,69 @@ The triggers array is not currently used but will function in the same way
 that it does in the entitiesData object */
 
 // TODO add correct modifiers for each condition
-// TOTO add triggers for custom logic to fire while certain conditions are active
+// TODO add triggers for custom logic to fire while certain conditions are active
 
 export const conditionsData: ConditionDetails[] = [
   {
     name: 'asleep',
-    modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
+    modifiers: [
+      { meter: 'hunger', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'hygeine', incRateModifier: 0, decRateModifier: 1.5 },
+      { meter: 'fitness', incRateModifier: 0, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'washing',
-    modifiers: [{ meter: 'hunger', incRateModifier: 0, decRateModifier: -2 }],
+    modifiers: [
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'energy', incRateModifier: 0, decRateModifier: -1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'relaxing',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'health', incRateModifier: 0, decRateModifier: -1.5 },
+      { meter: 'mood', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'mind', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'motivation', incRateModifier: 0, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'working',
-    modifiers: [],
+    modifiers: [
+      { meter: 'motivation', incRateModifier: 2, decRateModifier: 0 },
+    ],
     triggers: [],
   },
   {
     name: 'cleaning',
-    modifiers: [],
+    modifiers: [{ meter: 'hygeine', incRateModifier: 0, decRateModifier: -2 }],
     triggers: [],
   },
   {
     name: 'cooking',
-    modifiers: [],
+    modifiers: [
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: -2 },
+    ],
     triggers: [],
   },
   {
     name: 'snacking',
-    modifiers: [],
+    modifiers: [
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: -2 },
+    ],
     triggers: [],
   },
   {
     name: 'watering',
-    modifiers: [],
+    modifiers: [
+      { meter: 'connection', incRateModifier: 0, decRateModifier: -2 },
+    ],
     triggers: [],
   },
   {
@@ -77,157 +99,260 @@ export const conditionsData: ConditionDetails[] = [
   },
   {
     name: 'hungry',
-    modifiers: [],
+    modifiers: [
+      { meter: 'appetite', incRateModifier: 2, decRateModifier: -2 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'comfort', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'overfed',
-    modifiers: [],
+    modifiers: [
+      { meter: 'appetite', incRateModifier: -2, decRateModifier: 2 },
+      { meter: 'comfort', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'starved',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'lethargic',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'exhausted',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'delirious',
-    modifiers: [],
+    modifiers: [{ meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 }],
     triggers: [],
   },
   {
     name: 'unwell',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'hardy',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'feverish',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'comfort', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'hygeine', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'broke',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'rich',
-    modifiers: [],
+    modifiers: [
+      { meter: 'connection', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'appetite', incRateModifier: 2, decRateModifier: 0 },
+    ],
     triggers: [],
   },
   {
     name: 'unfit',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'injured',
-    modifiers: [],
+    modifiers: [
+      { meter: 'comfort', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'depressed',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'appetite', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'engagement', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'freedom', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'ecstatic',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'mind', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'motivation', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'engagement', incRateModifier: 1.5, decRateModifier: -1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'filthy',
-    modifiers: [],
+    modifiers: [
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'comfort', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'anal',
-    modifiers: [],
+    modifiers: [
+      { meter: 'freedom', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'achey',
-    modifiers: [],
+    modifiers: [{ meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 }],
     triggers: [],
   },
   {
     name: 'cosy',
-    modifiers: [],
+    modifiers: [
+      { meter: 'energy', incRateModifier: 1.5, decRateModifier: -1.5 },
+      { meter: 'motivation', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'lonely',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'health', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'dependent',
-    modifiers: [],
+    modifiers: [{ meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 }],
     triggers: [],
   },
   {
     name: 'bored',
-    modifiers: [],
+    modifiers: [
+      { meter: 'appetite', incRateModifier: 2, decRateModifier: 0 },
+      { meter: 'energy', incRateModifier: -1.5, decRateModifier: 1.5 },
+      { meter: 'freedom', incRateModifier: -1.5, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'overstimulated',
-    modifiers: [],
+    modifiers: [{ meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 }],
     triggers: [],
   },
   {
     name: 'trapped',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mind', incRateModifier: -1.5, decRateModifier: 2 },
+      { meter: 'mood', incRateModifier: -1.5, decRateModifier: 2 },
+    ],
     triggers: [],
   },
   {
     name: 'wild',
-    modifiers: [],
+    modifiers: [
+      { meter: 'hygeine', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: 2 },
+      { meter: 'motivation', incRateModifier: 0, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'apathetic',
-    modifiers: [],
+    modifiers: [
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: 2 },
+      { meter: 'mood', incRateModifier: 0, decRateModifier: -1.5 },
+      { meter: 'freedom', incRateModifier: 0, decRateModifier: -1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'ambitious',
-    modifiers: [],
+    modifiers: [
+      { meter: 'engagement', incRateModifier: 0, decRateModifier: 2 },
+      { meter: 'freedom', incRateModifier: 0, decRateModifier: -1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'nauseous',
-    modifiers: [],
+    modifiers: [
+      { meter: 'hunger', incRateModifier: -2, decRateModifier: -2 },
+      { meter: 'health', incRateModifier: 0, decRateModifier: 1.5 },
+    ],
     triggers: [],
   },
   {
     name: 'greedy',
-    modifiers: [],
+    modifiers: [{ meter: 'hunger', incRateModifier: -2, decRateModifier: 2 }],
     triggers: [],
   },
   {
     name: 'unstable',
-    modifiers: [],
+    modifiers: [
+      { meter: 'mood', incRateModifier: 3, decRateModifier: 3 },
+      { meter: 'motivation', incRateModifier: 3, decRateModifier: 3 },
+      { meter: 'connection', incRateModifier: 3, decRateModifier: 3 },
+      { meter: 'freedom', incRateModifier: 3, decRateModifier: 3 },
+      { meter: 'energy', incRateModifier: 3, decRateModifier: 3 },
+    ],
     triggers: [],
   },
   {
     name: 'enlightened',
-    modifiers: [],
+    modifiers: [
+      { meter: 'connection', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'freedom', incRateModifier: 0, decRateModifier: -2 },
+      { meter: 'mood', incRateModifier: 0, decRateModifier: -2 },
+    ],
     triggers: [],
   },
 ];
