@@ -40,7 +40,7 @@ importArray.forEach((track) => {
 
 export const playListArr = Object.entries(playListObject);
 
-export const regExp = /(?<=\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
+export const regExp = /(?:\/static\/media\/)(.*)(?=\.(.*)\.mp3)/g;
 
 export const findSongTitleFromHowlFile = (song: Howl): string | null => {
   for (let i = 0; i < playListArr.length; i += 1) {
