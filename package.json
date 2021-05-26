@@ -1,4 +1,10 @@
 {
+  "name": "quaranteeny",
+  "description": "a lockdown-themed tamagotchi",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "commit": "npx cz",
     "format": "cd ./client && npm run format && cd ../server && npm run format",
