@@ -3,9 +3,9 @@ import { GameState } from '../game/gameSlice';
 import { SpriteState } from '../sprite/spriteSlice';
 import { UserStateInDb } from './userSlice';
 
-const { REACT_APP_SERVER_PORT, REACT_APP_SERVER_HOST } = process.env;
+const { REACT_APP_SERVER_URL } = process.env;
 
-const baseUrl = `http://${REACT_APP_SERVER_HOST}:${REACT_APP_SERVER_PORT}`;
+const baseUrl = REACT_APP_SERVER_URL;
 
 export async function fetchUserData(): Promise<{
   id: string;
