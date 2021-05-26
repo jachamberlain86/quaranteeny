@@ -1,6 +1,10 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "quaranteeny",
+  "description": "a lockdown-themed tamagotchi",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
