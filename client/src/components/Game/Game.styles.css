@@ -38,10 +38,13 @@
 .game__panel_space {
   display: flex;
   flex-direction: column;
-  height: 550px; 
-  margin-top: 45px;
-  margin-bottom: 45px;
-  flex: 1
+  align-items:center;
+  flex: 1;
+}
+
+.game__room-canvas {
+  display: flex;
+  align-items: center;
 }
 
 #left_panel_space{

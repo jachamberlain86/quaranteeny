@@ -161,7 +161,7 @@ const Game = (): JSX.Element => {
               <GameOverBtn />
             </div>
           </div>
-          <div>
+          <div className="game__room-canvas">
             <Room />
           </div>
 

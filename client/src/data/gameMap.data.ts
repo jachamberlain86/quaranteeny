@@ -5,10 +5,14 @@ import { roomMap } from './roomMap.data';
 
 // TODO connect tileSize to change dynamically based on window size
 
+const height = window.innerHeight;
+const boardMax = height * 0.8;
+const tileMax = boardMax / 20;
+
 const game: GameMap = {
   cols: 20,
   layers: [roomMap],
-  tileSize: 32,
+  tileSize: tileMax,
 };
 
 export default game;
