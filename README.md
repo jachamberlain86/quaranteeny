@@ -23,6 +23,8 @@
 
 Giant crabs have taken over and lockdown has been enforced! You must help Quaranteeny stay inside their flat and away from pinching claws. Keep them happy, healthy, and well-fed. Neglect quaranteeny's needs for too long and they will venture outdoors...
 
+**[Play Quaranteeny!](https://www.quaranteeny.life)**
+
 Players must keep quaranteeny's hunger, energy, and health meters within safe parameters. If any of these three meters are too low for too long, it's game over.
 Behind these three visible meters are many hidden ones. Players only get hints as to what they are, and must pay attention to quaranteeny's thoughts in order to react appropriately. Give quaranteeny too much or too little of anything and game changing conditions will be applied.
 
