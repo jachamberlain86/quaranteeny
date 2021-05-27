@@ -93,7 +93,7 @@ In the client folder, create a `.env` file based on `.env.example`.
 
 ### Start the app
 
-Start the server by running `npm start` from `/server`.
+Start the server by running `npm run start:dev` from `/server`.
 
 Start the client by running `npm start` from `/client`.
 
