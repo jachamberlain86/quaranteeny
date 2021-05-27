@@ -8,9 +8,10 @@ import dotenv = require('dotenv');
 // eslint-disable-next-line import/first
 import { Routes } from './routes';
 
+dotenv.config();
+
 createConnection()
   .then(async () => {
-    dotenv.config();
     const { PORT } = process.env;
 
     // create express app
