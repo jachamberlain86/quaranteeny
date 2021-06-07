@@ -9,6 +9,7 @@ import { btnClickOne } from '../../audioControllers/buttonSounds';
 const SoundBar = (): JSX.Element => {
   const currentSongTitle = useAppSelector((state) => state.music.currentSong);
   const currentSong = musicController.findHowlFileFromTitle(currentSongTitle);
+  const titleToDisplay = currentSongTitle.split('media/')[1];
   const handleFocus = (e: React.FocusEvent<HTMLButtonElement>): void => {
     e.target.classList.add('sound-bar__btn--focus');
   };
@@ -82,7 +83,7 @@ const SoundBar = (): JSX.Element => {
           Next
         </button>
       </div>
-      <div className="sound-bar__song-title">🎵 {currentSongTitle} </div>
+      <div className="sound-bar__song-title">🎵 {titleToDisplay} </div>
       <MuteSoundBtn />
     </div>
   );
